@@ -40,15 +40,15 @@ body {
     display: grid;
     grid-template-columns: 40% 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas: 'cad-log img';
+    grid-template-areas: 'log img';
     width: 100vw;
     height: 100vh;
     overflow: hidden;
     animation: 20s cores_fundo infinite;
 }
 
-#cad_log {
-    grid-area: cad-log;
+#login {
+    grid-area: log;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -194,6 +194,24 @@ body {
     scale: 1.1;
 }
 
+#mensagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 55px;
+    font-size: .8rem;
+    font-weight: bold;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 1rem;
+    box-shadow: var(--sombra--1);
+    color: #fff;
+}
+
+.erro {
+    background-color: rgba(255, 0, 0, .6);
+}
+
 #img-fundo {
     grid-area: img;
     height: 100vh;
@@ -210,11 +228,17 @@ body {
     }
 }
 
+@media screen and (max-width: 1400px) {
+    #mensagem {
+        margin-bottom: 5%;
+    }
+}
+
 @media screen and (max-width: 1200px) {
     body {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
-        grid-template-areas: 'cad-log';
+        grid-template-areas: 'log';
     }
 
     #img-fundo {

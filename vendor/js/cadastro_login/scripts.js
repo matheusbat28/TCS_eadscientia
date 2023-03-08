@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+    $('#mensagem').hide();
+
     $('#matricula').mask('0000000000');
 
     $("#olho-senha").mousedown(function () {
