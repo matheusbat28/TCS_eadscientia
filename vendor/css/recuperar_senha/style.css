@@ -1,0 +1,76 @@
+:root {
+    --width--cad: 700px;
+    --height--cad: 300px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    animation: 20s cores_fundo infinite;
+}
+
+#recuperar-texto h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--cor--fundo--3);
+    text-transform: capitalize;
+}
+
+#recuperar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: var(--width--cad);
+    height: var(--height--cad);
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 1rem;
+}
+
+#recuperar-texto {
+    height: calc(var(--height--cad) + 50px);
+}
+
+.recuperar-input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 300px;
+    height: 45px;
+}
+
+.recuperar-input input {
+    width: 90%;
+    height: 100%;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 1rem;
+    padding-left: .5rem;
+}
+
+.recuperar-input i {
+    font-size: 1.5rem;
+    color: var(--cor--fundo--3);
+
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --width--cad: 600px;
+    }
+}
+
+@media screen and (max-width: 610px) {
+    :root {
+        --width--cad: 550px;
+    }
+}
+@media screen and (max-width: 500px) {
+    :root {
+        --width--cad: 350px;
+    }
+}
