@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    list-style: none;
+    text-decoration: none;
+}
+
+:root {
+    --width--cad: 520px;
+    --height--cad: 519px;
+    --cor--fundo--1: #050c1e;
+    --cor--fundo--2: #a2c7db;
+    --cor--fundo--3: #30b1da;
+    --cor--fundo--4: #073e7b;
+    --cor--fundo--5: #0863a9;
+    --cor--fundo--6: #143180;
+    --sombra--1: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --espessura--cards--cad--log: 3px;
+}
+
+@keyframes cores_fundo {
+    0% {
+        background-color: var(--cor--fundo--4);
+    }
+    50% {
+        background-color: var(--cor--fundo--6);
+    }
+    100% {
+        background-color: var(--cor--fundo--4);
+    }
+}
+
+body {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'cad-log img';
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    animation: 20s cores_fundo infinite;
+}
+
+#cad_log {
+    grid-area: cad-log;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#log-perfil {
+    display: flex;
+    justify-content: center;
+    height: calc(var(--height--cad) + 50px);
+}
+
+#perfil-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 50%;
+    background-color: var(--cor--fundo--6);
+}
+
+#log-texto {
+    height: calc(var(--height--cad) + 50px);
+}
+
+#log-texto h2 {
+    color: var(--cor--fundo--3);
+    text-transform: capitalize;
+}
+
+#log {
+    width: var(--width--cad);
+    height: var(--height--cad);
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 2%;
+}
+
+#img-fundo {
+    grid-area: img;
+    height: 100vh;
+    opacity: .85;
+    border-left: 2px solid var(--cor--fundo--3);
+    border-radius: .5rem;
+    box-shadow: var(--sombra--1);
+}
+
+@media screen and (max-width: 1200px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 'cad-log';
+    }
+    #img-fundo {
+        display: none;
+    }
+}
