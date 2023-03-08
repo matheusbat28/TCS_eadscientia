@@ -14,22 +14,26 @@
 
 <body>
     <div id="cad_log">
-        <div id="log-seta">
-            <div id="botao-seta">
-                <i class="fa-solid fa-arrow-right"></i>
+        <div id="log-perfil">
+            <div id="perfil-img">
+                <i class="fa-solid fa-user"></i>
+                <img src="" alt="">
             </div>
-            <div id="log-perfil">
-                <div id="perfil-img">
-                    <i class="fa-solid fa-user"></i>
-                    <img src="" alt="">
-                </div>
-                <div id="log-texto">
-                    <h2 class="ms-4">login</h2>
-                    <form id="log">
+            <div id="log-texto">
+                <h2 class="ms-4">login</h2>
+                <form id="log">
+                    <div class="log-input">
                         <input id="matricula" type="text" placeholder="matricula">
-                        <input id="senha"  type="password" placeholder="senha">
-                    </form>
-                </div>
+                    </div>
+                    <div class="log-input">
+                        <input id="senha" type="password" placeholder="senha">
+                        <i id="olho-senha" class="fa-solid fa-eye"></i>
+                    </div>
+                    <div id="esqueci-senha"><a href="#">esqueci a senha</a></div>
+                    <div id="log-botao">
+                        <button id="btn-entrar" type="submit">entrar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -42,5 +46,6 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
 <script src="../vendor/js/cadastro_login/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 
 </html>
