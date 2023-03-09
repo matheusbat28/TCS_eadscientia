@@ -33,3 +33,7 @@
         background-color: var(--cor--fundo--4);
     }
 }
+
+.erro {
+    background-color: rgba(255, 0, 0, .6);
+}

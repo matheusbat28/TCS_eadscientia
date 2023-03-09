@@ -175,10 +175,6 @@ body {
     color: #fff;
 }
 
-.erro {
-    background-color: rgba(255, 0, 0, .6);
-}
-
 #img-fundo {
     grid-area: img;
     height: 100vh;

@@ -25,6 +25,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    gap: 1rem;
     width: var(--width--cad);
     height: var(--height--cad);
     border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
@@ -58,6 +59,46 @@ body {
 
 }
 
+#recuperar-botao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: 320px;
+    height: 70px;
+}
+
+#recuperar-botao button {
+    width: 40px;
+    height: 40px;
+    margin-right: 2.5%;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 50%;
+    background-color: var(--cor--fundo--6);
+    color: var(--cor--fundo--3);
+    font-size: 1.2rem;
+    opacity: .9;
+    box-shadow: var(--sombra--1);
+}
+
+#mensagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 55px;
+    font-size: .8rem;
+    font-weight: bold;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 1rem;
+    box-shadow: var(--sombra--1);
+    color: #fff;
+}
+
+#recuperar-botao button:hover {
+    scale: 1.1;
+}
+
 @media screen and (max-width: 768px) {
     :root {
         --width--cad: 600px;
@@ -69,6 +110,7 @@ body {
         --width--cad: 550px;
     }
 }
+
 @media screen and (max-width: 500px) {
     :root {
         --width--cad: 350px;
