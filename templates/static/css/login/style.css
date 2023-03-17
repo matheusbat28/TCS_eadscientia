@@ -1,0 +1,217 @@
+:root {
+    --width--cad: 520px;
+    --height--cad: 519px;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 'log img';
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    animation: 20s cores_fundo infinite;
+}
+
+#login {
+    grid-area: log;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#log-perfil {
+    display: flex;
+    justify-content: center;
+    height: calc(var(--height--cad) + 50px);
+}
+
+#perfil-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 1;
+    margin-top: 8px;
+    width: 80px;
+    height: 80px;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 50%;
+    background-color: var(--cor--fundo--6);
+}
+
+#perfil-img img {
+    display: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#perfil-img i {
+    font-size: 2.5rem;
+    color: var(--cor--fundo--3);
+}
+
+#log-texto {
+    height: calc(var(--height--cad) + 50px);
+}
+
+#log-texto h2 {
+    color: var(--cor--fundo--3);
+    text-transform: capitalize;
+}
+
+#log {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    width: var(--width--cad);
+    height: var(--height--cad);
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 2%;
+}
+
+.log-input input {
+    border-radius: 2rem;
+    padding-left: .5rem;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+}
+
+.log-input input::placeholder {
+    text-transform: capitalize;
+}
+
+
+.log-input:nth-child(1) {
+    margin-top: 30%;
+}
+
+.log-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 40px;
+}
+
+.log-input:nth-child(1) input {
+    width: 100%;
+    height: 100%;
+}
+
+.log-input:nth-child(2) input {
+    width: 100%;
+    height: 100%;
+}
+
+.log-input:nth-child(2) {
+    position: relative;
+    z-index: 3;
+}
+
+.log-input:nth-child(2) i {
+    position: absolute;
+    z-index: 3;
+    color: var(--cor--fundo--3);
+    right: 8px;
+    cursor: pointer;
+}
+
+#esqueci-senha {
+    width: 220px;
+    height: 20px;
+    font-size: .8rem;
+    font-weight: bold;
+}
+
+#esqueci-senha a {
+    color: var(--cor--fundo--3);
+    text-decoration: none;
+}
+
+#log-botao {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
+    width: 250px;
+    padding-top: 1%;
+    height: 70px;
+}
+
+#log-botao button {
+    width: 100px;
+    height: 40px;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 1rem;
+    background-color: var(--cor--fundo--6);
+    color: var(--cor--fundo--3);
+    font-weight: bold;
+    opacity: .9;
+    box-shadow: var(--sombra--1);
+    text-transform: capitalize;
+}
+
+#log-botao button:hover {
+    scale: 1.1;
+}
+
+#mensagem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 55px;
+    font-size: .8rem;
+    font-weight: bold;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    border-radius: 1rem;
+    box-shadow: var(--sombra--1);
+    color: #fff;
+}
+
+#img-fundo {
+    grid-area: img;
+    height: 100vh;
+    opacity: .85;
+    border-left: 2px solid var(--cor--fundo--3);
+    border-radius: .5rem;
+    box-shadow: var(--sombra--1);
+}
+
+@media screen and (max-width: 1600px) {
+    :root {
+        --width--cad: 420px;
+        --height--cad: 419px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    #mensagem {
+        margin-bottom: 5%;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: 'log';
+    }
+
+    #img-fundo {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    :root {
+        --width--cad: 350px;
+    }
+
+    .log-input {
+        width: 250px;
+    }
+}
