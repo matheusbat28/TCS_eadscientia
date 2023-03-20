@@ -11,4 +11,3 @@ class MatriculaBackend(ModelBackend):
                 return user
         except UserModel.DoesNotExist:
             return None
-        

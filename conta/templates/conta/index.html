@@ -3,38 +3,39 @@
 
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/login/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/login/style.css' %}">
 {% endblock %}
 
 {% block main %}
-    <div id="login">
-        <div id="log-perfil">
-            <div id="perfil-img">
-                <i class="fa-solid fa-user"></i>
-                <img src="" alt="">
-            </div>
-            <div id="log-texto">
-                <h2 class="ms-4">login</h2>
-                <form id="log">
-                    <div class="log-input">
-                        <input id="matricula" type="text" placeholder="matricula">
-                    </div>
-                    <div class="log-input">
-                        <input id="senha" type="password" placeholder="senha">
-                        <i id="olho-senha" class="fa-solid fa-eye"></i>
-                    </div>
-                    <div id="esqueci-senha"><a href="../recuperar_senha/index.html">esqueci a senha</a></div>
-                    <div id="log-botao">
-                        <button id="btn-entrar" type="submit">entrar</button>
-                    </div>
-                    {% include 'parciais/_mensagem.html' %}
-                </form>
-            </div>
+<div id="login">
+    <div id="log-perfil">
+        <div id="perfil-img">
+            <i class="fa-solid fa-user"></i>
+            <img src="" alt="">
+        </div>
+        <div id="log-texto">
+            <h2 class="ms-4">login</h2>
+            <form id="log" method="POST">
+                {% csrf_token %}
+                <div class="log-input">
+                    {{ form.matricula }}
+                </div>
+                <div id="input-senha" class="log-input">
+                    {{ form.senha }}
+                    <i id="olho-senha" class="fa-solid fa-eye"></i>
+                </div>
+                <div id="esqueci-senha"><a href="../recuperar_senha/index.html">esqueci a senha</a></div>
+                <div id="log-botao">
+                    <button id="btn-entrar" type="submit">entrar</button>
+                </div>
+            </form>
         </div>
     </div>
-    <img id="img-fundo" src="{% static 'img/img_fundo.png' %}" class="img-fluid" alt="">
+    {% include 'parciais/_mensagem.html' %}
+</div>
+<img id="img-fundo" src="{% static 'img/img_fundo.png' %}" class="img-fluid" alt="">
 {% endblock %}
 
 {% block js %}
-    <script defer src="{% static 'js/login/scripts.js' %}"></script>
+<script defer src="{% static 'js/login/scripts.js' %}"></script>
 {% endblock %}
