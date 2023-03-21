@@ -180,8 +180,13 @@ body {
 @media screen and (max-width: 1600px) {
     :root {
         --width--cad: 420px;
-        --height--cad: 419px;
+        --height--cad: 500px;
     }
+
+    #log-input:nth-child(1) {
+        margin-top: 5%;
+    }
+
 }
 
 @media screen and (max-width: 1400px) {

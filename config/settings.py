@@ -30,11 +30,15 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
+RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
 
 # Application definition
 
 INSTALLED_APPS = [
     'conta',
+    'captcha',
     'home',
     'cpf_field',
     'django.contrib.admin',
