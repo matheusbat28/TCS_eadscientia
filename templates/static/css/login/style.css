@@ -1,6 +1,6 @@
 :root {
     --width--cad: 520px;
-    --height--cad: 519px;
+    --height--cad: 500px;
 }
 
 body {
@@ -152,10 +152,7 @@ body {
 }
 
 .g-recaptcha {
-    position: absolute;
-    z-index: 90;
-    bottom: 10px;
-    right: 10px;
+    margin-top: 10px;
 }
 
 #mensagem {
@@ -187,13 +184,8 @@ body {
 @media screen and (max-width: 1600px) {
     :root {
         --width--cad: 420px;
-        --height--cad: 500px;
+        --height--cad: 400px;
     }
-
-    #log-input:nth-child(1) {
-        margin-top: 5%;
-    }
-
 }
 
 @media screen and (max-width: 1400px) {

@@ -17,7 +17,7 @@
             <h2 class="ms-4">login</h2>
             <form id="log" method="POST">
                 {% csrf_token %}
-                <div class="log-input">
+                <div class="log-input mt-5">
                     {{ form.matricula }}
                 </div>
                 <div id="input-senha" class="log-input">
@@ -28,10 +28,10 @@
                 <div id="log-botao">
                     <button id="btn-entrar" type="submit">entrar</button>
                 </div>
-                {{ form.captcha }}
             </form>
         </div>
     </div>
+    {{ form.captcha }}
     {% include 'parciais/_mensagem.html' %}
 </div>
 <img id="img-fundo" src="{% static 'img/img_fundo.png' %}" class="img-fluid" alt="">
