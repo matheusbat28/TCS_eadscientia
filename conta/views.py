@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from .forms import UsuarioForm
 
 def login(request):
@@ -13,11 +12,10 @@ def login(request):
 
         if not captcha:
             messages.error(request, 'Por favor, confirme o captcha.')
-            return render(request, 'conta/index.html', {'form': form})
         
-        usuarioVerificado = auth.authenticate(request, username=matricula, password=senha)
-        if usuarioVerificado is not None:
-            auth.login(request, usuarioVerificado)
+        usuario_verificado = auth.authenticate(request, username=matricula, password=senha)
+        if usuario_verificado is not None:
+            auth.login(request, usuario_verificado)
             return redirect('home')
         else:
             messages.error(request, 'Matrícula ou senha inválidos.')
