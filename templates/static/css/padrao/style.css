@@ -20,7 +20,7 @@
 }
 
 .cbx {
-    display: flex;
+    display: none;
 }
 
 @keyframes cores_fundo {

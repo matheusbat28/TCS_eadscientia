@@ -4,13 +4,16 @@ from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
 class FormLogin(forms.Form):
-    matricula = forms.CharField(widget=forms.TextInput(attrs={'id': 'matricula', 'placeholder': 'matrícula'}))
-    senha = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'senha', 'placeholder': 'senha'}))
+    matricula = forms.CharField(widget=forms.TextInput(attrs={'id': 'matricula', 'placeholder': 'matrícula'}), required=False)
+    senha = forms.CharField(widget=forms.PasswordInput(attrs={'id': 'senha', 'placeholder': 'senha'}), required=False)
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox(attrs={'data-theme': 'dark','name': 'captcha'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'id': 'email', 'placeholder': 'email'}), required=False)
 
     def clean_matricula(self):
         matricula = self.cleaned_data['matricula']
-        if not matricula.isdigit():
+        if len(matricula) == 0:
+            raise forms.ValidationError('Você deve informar a matrícula.')
+        elif not matricula.isdigit():
             raise forms.ValidationError('A matrícula deve conter apenas números.')
         elif Usuario.objects.filter(matricula=matricula).count() == 0:
             raise forms.ValidationError('Usuário não encontrado.')
@@ -18,7 +21,9 @@ class FormLogin(forms.Form):
 
     def clean_senha(self):
         senha = self.cleaned_data['senha']
-        if len(senha) < 6:
+        if len(senha) == 0:
+            raise forms.ValidationError('Você deve informar a senha.')
+        elif len(senha) < 6:
             raise forms.ValidationError('A senha deve conter pelo menos 6 caracteres.')
         return senha
     

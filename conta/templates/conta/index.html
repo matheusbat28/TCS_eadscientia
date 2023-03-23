@@ -7,7 +7,19 @@
 {% endblock %}
 
 {% block main %}
-<div id="modal" class="modal-sair"></div>
+<div id="modal" class="modal-sair">
+    <div id="modal-x">
+        <label for="cbx_modal" class="fa-solid fa-times"></label>
+    </div>
+    <div id="modal-texto">
+        <h2>verificar email</h2>
+    </div>
+    <form id="modal-corpo">
+        <div class="log-input">
+            {{ form.email }}
+        </div>
+    </form>
+</div>
 <div id="login">
     <div id="log-perfil">
         <div id="perfil-img">
@@ -29,7 +41,7 @@
                     <label for="cbx_modal">esqueci a senha</label>
                 </div>
                 <div id="log-botao">
-                    <button id="btn-entrar" type="submit">entrar</button>
+                    <button id="btn-entrar" name='btn-entrar' type="submit">entrar</button>
                 </div>
                 {{ form.captcha }}
             </form>

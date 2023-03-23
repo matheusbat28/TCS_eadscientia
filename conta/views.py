@@ -5,7 +5,7 @@ from .forms import FormLogin
 
 def login(request):
     form = FormLogin(request.POST)
-    if request.method == 'POST':
+    if request.method == 'POST' and 'btn-entrar' in request.POST:
         if form.is_valid():
             usuario = auth.authenticate(username=form.cleaned_data['matricula'], password=form.cleaned_data['senha'])
             if usuario is not None:
