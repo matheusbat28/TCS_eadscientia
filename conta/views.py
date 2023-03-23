@@ -1,25 +1,24 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib import messages
-from .forms import UsuarioForm
+from .forms import FormLogin
 
 def login(request):
-    form = UsuarioForm()
+    form = FormLogin(request.POST)
     if request.method == 'POST':
-        matricula = request.POST['matricula'].strip()
-        senha = request.POST['senha'].strip()
-        captcha = request.POST['g-recaptcha-response']
-
-        if not captcha:
-            messages.error(request, 'Por favor, confirme o captcha.')
-        
-        usuario_verificado = auth.authenticate(request, username=matricula, password=senha)
-        if usuario_verificado is not None:
-            auth.login(request, usuario_verificado)
-            return redirect('home')
+        if form.is_valid():
+            usuario = auth.authenticate(username=form.cleaned_data['matricula'], password=form.cleaned_data['senha'])
+            if usuario is not None:
+                auth.login(request, usuario)
+                return redirect('home')
         else:
-            messages.error(request, 'Matrícula ou senha inválidos.')
+            json = form.errors.as_json()
 
-        return render(request, 'conta/index.html', {'form': form})
-    else:
-        return render(request, 'conta/index.html', {'form': form})
+            if 'matricula' in json:
+                messages.error(request, form.errors['matricula'][0])
+            elif 'senha' in json:
+                messages.error(request, form.errors['senha'][0])
+            elif 'captcha' in json:
+                messages.error(request, form.errors['captcha'][0])
+    return render(request, 'conta/index.html', {'form': form})
+

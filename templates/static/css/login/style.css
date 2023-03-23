@@ -16,7 +16,7 @@ body {
 
 #login {
     position: relative;
-    z-index: 90;
+    z-index: 5;
     grid-area: log;
     display: flex;
     align-items: center;
@@ -99,7 +99,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 250px;
+    width: 300px;
     height: 40px;
 }
 
@@ -155,23 +155,6 @@ body {
     margin-top: 10px;
 }
 
-#mensagem {
-    top: 10px;
-    left: 10px;
-    position: absolute;
-    z-index: 90;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 250px;
-    height: 55px;
-    font-size: .8rem;
-    font-weight: bold;
-    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
-    border-radius: 1rem;
-    box-shadow: var(--sombra--1);
-}
-
 #img-fundo {
     grid-area: img;
     height: 100vh;
@@ -184,7 +167,7 @@ body {
 @media screen and (max-width: 1600px) {
     :root {
         --width--cad: 420px;
-        --height--cad: 400px;
+        --height--cad: 500px;
     }
 }
 

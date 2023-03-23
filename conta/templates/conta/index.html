@@ -28,10 +28,10 @@
                 <div id="log-botao">
                     <button id="btn-entrar" type="submit">entrar</button>
                 </div>
+                {{ form.captcha }}
             </form>
         </div>
     </div>
-    {{ form.captcha }}
     {% include 'parciais/_mensagem.html' %}
 </div>
 <img id="img-fundo" src="{% static 'img/img_fundo.png' %}" class="img-fluid" alt="">

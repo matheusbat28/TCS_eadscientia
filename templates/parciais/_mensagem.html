@@ -1,9 +1,10 @@
 {% load static %}
 
+
 {% if messages %}
     <br>
     {% for message in messages %}
-        <div id="mensagem" class="alert {{ message.tags }}" role="alert">
+        <div class="alert {{ message.tags }} position-absolute top-0 start-0 m-2" role="alert">
             {{ message }}
         </div>
     {% endfor %}
