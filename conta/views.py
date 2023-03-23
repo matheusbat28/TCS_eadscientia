@@ -11,6 +11,8 @@ def login(request):
             if usuario is not None:
                 auth.login(request, usuario)
                 return redirect('home')
+            else:
+                messages.error(request, 'Usuário ou senha inválidos.')
         else:
             json = form.errors.as_json()
 

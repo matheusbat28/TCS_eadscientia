@@ -1,6 +1,8 @@
 :root {
     --width--cad: 520px;
     --height--cad: 500px;
+    --width--modal: 500px;
+    --height--modal: 500px;
 }
 
 body {
@@ -119,9 +121,28 @@ body {
     font-weight: bold;
 }
 
-#esqueci-senha a {
+#esqueci-senha label {
     color: var(--cor--fundo--3);
     text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-mostrar {
+    display: flex;
+    position: absolute;
+    z-index: 6;
+    top: calc(50% - var(--height--modal) / 2);
+    left: calc(50% - var(--width--modal) / 2);
+    width: var(--width--modal);
+    height: var(--height--modal);
+    background-color: var(--cor--fundo--6);
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    box-shadow: var(--sombra--1);
+    border-radius: 2%;
+}
+
+.modal-sair {
+    display: none;
 }
 
 #log-botao {
@@ -131,7 +152,7 @@ body {
     gap: 20px;
     width: 250px;
     padding-top: 1%;
-    height: 70px;
+    height: 60px;
 }
 
 #log-botao button {

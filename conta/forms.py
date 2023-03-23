@@ -1,4 +1,5 @@
 from django import forms
+from .models import Usuario
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
@@ -11,6 +12,8 @@ class FormLogin(forms.Form):
         matricula = self.cleaned_data['matricula']
         if not matricula.isdigit():
             raise forms.ValidationError('A matrícula deve conter apenas números.')
+        elif Usuario.objects.filter(matricula=matricula).count() == 0:
+            raise forms.ValidationError('Usuário não encontrado.')
         return matricula
 
     def clean_senha(self):
