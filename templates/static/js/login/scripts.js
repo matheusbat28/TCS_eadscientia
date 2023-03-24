@@ -19,4 +19,9 @@ $(document).ready(function () {
         }
     });
 
+    $('#modal-x label').click(function () {
+        $('#modal').removeClass('modal-mostrar');
+        $('#modal').addClass('modal-sair');
+    });
+
 });
