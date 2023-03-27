@@ -22,5 +22,6 @@ def login(request):
                 messages.error(request, form.errors['senha'][0])
             elif 'captcha' in json:
                 messages.error(request, form.errors['captcha'][0])
-    return render(request, 'conta/index.html', {'form': form})
-
+            return render(request, 'conta/index.html', {'form': form})
+    else:
+        return render(request, 'conta/index.html', {'form': form})
