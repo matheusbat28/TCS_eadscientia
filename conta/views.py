@@ -23,6 +23,6 @@ def login(request):
                 messages.error(request, formLogin.errors['senha'][0])
             elif 'captcha' in json:
                 messages.error(request, formLogin.errors['captcha'][0])
-            return render(request, 'conta/index.html', {'formLogin': formLogin})
+        return render(request, 'conta/index.html', {'formLogin': formLogin})
     else:
         return render(request, 'conta/index.html', {'formLogin': formLogin, 'formRecuperarSenha': formRecuperarSenha})
