@@ -23,6 +23,14 @@ def login(request):
                 messages.error(request, formLogin.errors['senha'][0])
             elif 'captcha' in json:
                 messages.error(request, formLogin.errors['captcha'][0])
-        return render(request, 'conta/index.html', {'formLogin': formLogin})
-    else:
-        return render(request, 'conta/index.html', {'formLogin': formLogin, 'formRecuperarSenha': formRecuperarSenha})
+    
+    elif request.method == 'POST' and 'btn-recuperar-senha' in request.POST:
+        if formRecuperarSenha.is_valid():
+            messages.success(request, 'Sua senha foi enviada para o email cadastrado.')
+        else:
+            json = formRecuperarSenha.errors.as_json()
+
+            if 'email' in json:
+                messages.error(request, formRecuperarSenha.errors['email'][0])
+
+    return render(request, 'conta/index.html', {'formLogin': formLogin, 'formRecuperarSenha': formRecuperarSenha})

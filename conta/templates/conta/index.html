@@ -14,12 +14,15 @@
     <div id="modal-texto">
         <h2>verificar email</h2>
     </div>
-    <form id="modal-corpo">
+    <form id="modal-corpo" method="POST">
+        {% csrf_token %}
         <div class="log-input">
             {{ formRecuperarSenha.email }}
         </div>
         <div id="modal-botao">
-            <a id="btn-enviar" name='btn-enviar' type="submit"><i class="fa-solid fa-arrow-right"></i></a>
+            <button id="btn-recuperar-senha" name='btn-recuperar-senha' type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+            {{ formRecuperarSenha.captcha }}
+            <div id="modal-tempo"></div>
         </div>
     </form>
 </div>

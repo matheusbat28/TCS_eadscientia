@@ -35,12 +35,19 @@ class FormLogin(forms.Form):
 
 class FormRecuperarSenha(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'id': 'email', 'placeholder': 'email'}), required=False)
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox(attrs={'data-theme': 'dark','name': 'captcha'}))
     
     def clean_email(self):
         email = self.cleaned_data['email']
         if len(email) == 0:
-            raise forms.ValidationError('Você deve informar o email.')
-        elif Usuario.objects.filter(email=email).count() == 0:
+            raise forms.ValidationError('Você deve informar o email ao tentar recuperar a senha.')
+        elif Usuario.objects.get(email=email) is None:
             raise forms.ValidationError('Email não encontrado.')
         return email 
+    
+    def clean_captcha(self):
+        captcha = self.cleaned_data['captcha']
+        if not captcha:
+            raise forms.ValidationError('Você deve marcar a caixa de verificação.')
+        return captcha
     
