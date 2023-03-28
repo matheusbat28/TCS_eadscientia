@@ -16,7 +16,7 @@
     </div>
     <form id="modal-corpo">
         <div class="log-input">
-            {{ form.email }}
+            {{ formRecuperarSenha.email }}
         </div>
         <div id="modal-botao">
             <a id="btn-enviar" name='btn-enviar' type="submit"><i class="fa-solid fa-arrow-right"></i></a>
@@ -34,10 +34,10 @@
             <form id="log" method="POST">
                 {% csrf_token %}
                 <div class="log-input mt-5">
-                    {{ form.matricula }}
+                    {{ formLogin.matricula }}
                 </div>
                 <div id="input-senha" class="log-input">
-                    {{ form.senha }}
+                    {{ formLogin.senha }}
                     <i id="olho-senha" class="fa-solid fa-eye"></i>
                 </div>
                 <div id="esqueci-senha">
@@ -46,7 +46,7 @@
                 <div id="log-botao">
                     <button id="btn-entrar" name='btn-entrar' type="submit">entrar</button>
                 </div>
-                {{ form.captcha }}
+                {{ formLogin.captcha }}
             </form>
         </div>
     </div>

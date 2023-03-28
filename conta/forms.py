@@ -32,5 +32,15 @@ class FormLogin(forms.Form):
         if not captcha:
             raise forms.ValidationError('Você deve marcar a caixa de verificação.')
         return captcha
+
+class FormRecuperarSenha(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'id': 'email', 'placeholder': 'email'}), required=False)
     
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if len(email) == 0:
+            raise forms.ValidationError('Você deve informar o email.')
+        elif Usuario.objects.filter(email=email).count() == 0:
+            raise forms.ValidationError('Email não encontrado.')
+        return email 
     

@@ -1,27 +1,28 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib import messages
-from .forms import FormLogin
+from .forms import FormLogin, FormRecuperarSenha
 
 def login(request):
-    form = FormLogin(request.POST)
+    formLogin = FormLogin(request.POST)
+    formRecuperarSenha = FormRecuperarSenha(request.POST)
     if request.method == 'POST' and 'btn-entrar' in request.POST:
-        if form.is_valid():
-            usuario = auth.authenticate(username=form.cleaned_data['matricula'], password=form.cleaned_data['senha'])
+        if formLogin.is_valid():
+            usuario = auth.authenticate(username=formLogin.cleaned_data['matricula'], password=formLogin.cleaned_data['senha'])
             if usuario is not None:
                 auth.login(request, usuario)
                 return redirect('home')
             else:
                 messages.error(request, 'Usuário ou senha inválidos.')
         else:
-            json = form.errors.as_json()
+            json = formLogin.errors.as_json()
 
             if 'matricula' in json:
-                messages.error(request, form.errors['matricula'][0])
+                messages.error(request, formLogin.errors['matricula'][0])
             elif 'senha' in json:
-                messages.error(request, form.errors['senha'][0])
+                messages.error(request, formLogin.errors['senha'][0])
             elif 'captcha' in json:
-                messages.error(request, form.errors['captcha'][0])
-            return render(request, 'conta/index.html', {'form': form})
+                messages.error(request, formLogin.errors['captcha'][0])
+            return render(request, 'conta/index.html', {'formLogin': formLogin})
     else:
-        return render(request, 'conta/index.html', {'form': form})
+        return render(request, 'conta/index.html', {'formLogin': formLogin, 'formRecuperarSenha': formRecuperarSenha})
