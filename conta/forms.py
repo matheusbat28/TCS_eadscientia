@@ -41,7 +41,7 @@ class FormRecuperarSenha(forms.Form):
         email = self.cleaned_data['email'].strip()
         if len(email) == 0:
             raise forms.ValidationError('Você deve informar o email ao tentar recuperar a senha.')
-        elif Usuario.objects.get(email=email) is None:
+        elif not Usuario.objects.filter(email=email).exists():
             raise forms.ValidationError('Email não encontrado ao tentar recuperar a senha.')
         return email 
     

@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import FormLogin, FormRecuperarSenha
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
+from random import randint
 
 def login(request):
     formLogin = FormLogin(request.POST)
@@ -28,7 +29,8 @@ def login(request):
     
     elif request.method == 'POST' and 'btn-recuperar-senha' in request.POST:
         if formRecuperarSenha.is_valid():
-            mandar_email(formRecuperarSenha.cleaned_data['email'])
+            token = gerar_token()
+            mandar_email(formRecuperarSenha.cleaned_data['email'], token)
             messages.success(request, 'Sua senha foi enviada para o email cadastrado.')
         else:
             json = formRecuperarSenha.errors.as_json()
@@ -41,6 +43,9 @@ def login(request):
     return render(request, 'conta/index.html', {'formLogin': formLogin, 'formRecuperarSenha': formRecuperarSenha})
 
 
-def mandar_email(email):
-    email = EmailMultiAlternatives('Recuperação de Senha', 'teste', settings.EMAIL_HOST_USER, [email])
+def mandar_email(email, token):
+    email = EmailMultiAlternatives('Recuperação de Senha', f'token {token}', settings.EMAIL_HOST_USER, [email])
     email.send()
+
+def gerar_token():
+    return randint(100000, 999999)
