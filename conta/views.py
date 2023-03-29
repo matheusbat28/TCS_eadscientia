@@ -31,7 +31,7 @@ def login(request):
         if formRecuperarSenha.is_valid():
             token = gerar_token()
             mandar_email(formRecuperarSenha.cleaned_data['email'], token)
-            messages.success(request, 'Sua senha foi enviada para o email cadastrado.')
+            return redirect('verificar_codigo')
         else:
             json = formRecuperarSenha.errors.as_json()
 
@@ -41,6 +41,13 @@ def login(request):
                 messages.error(request, formRecuperarSenha.errors['captcha'][0])
 
     return render(request, 'conta/index.html', {'formLogin': formLogin, 'formRecuperarSenha': formRecuperarSenha})
+
+def logout(request):
+    auth.logout(request)
+    return redirect('login')
+
+def verificar_codigo(request):
+    return render(request, 'verificar_codigo/index.html')
 
 
 def mandar_email(email, token):
