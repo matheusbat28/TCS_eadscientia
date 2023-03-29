@@ -1,5 +1,5 @@
 from django import forms
-from .models import Usuario
+from .models import Usuario, Token
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
 
@@ -50,4 +50,66 @@ class FormRecuperarSenha(forms.Form):
         if not captcha:
             raise forms.ValidationError('Você deve marcar a caixa de verificação ao tentar recuperar a senha.')
         return captcha
+
+
+class FormVerificarCodigo(forms.Form):
+    codigo_1 = forms.CharField(widget=forms.TextInput(attrs={'class': 'codigo', 'placeholder': '0'}), required=False, max_length=1)
+    codigo_2 = forms.CharField(widget=forms.TextInput(attrs={'class': 'codigo', 'placeholder': '0'}), required=False, max_length=1)
+    codigo_3 = forms.CharField(widget=forms.TextInput(attrs={'class': 'codigo', 'placeholder': '0'}), required=False, max_length=1)
+    codigo_4 = forms.CharField(widget=forms.TextInput(attrs={'class': 'codigo', 'placeholder': '0'}), required=False, max_length=1)
+    codigo_5 = forms.CharField(widget=forms.TextInput(attrs={'class': 'codigo', 'placeholder': '0'}), required=False, max_length=1)
+    codigo_6 = forms.CharField(widget=forms.TextInput(attrs={'class': 'codigo', 'placeholder': '0'}), required=False, max_length=1)
+    
+    def clean_codigo_1(self):
+        codigo_1 = self.cleaned_data['codigo_1'].strip()
+        if len(codigo_1) == 0:
+            raise forms.ValidationError('Você deve informar o código.')
+        elif not codigo_1.isdigit():
+            raise forms.ValidationError('O código deve conter apenas números.')
+        return codigo_1
+    
+    def clean_codigo_2(self):
+        codigo_2 = self.cleaned_data['codigo_2'].strip()
+        if len(codigo_2) == 0:
+            raise forms.ValidationError('Você deve informar o código.')
+        elif not codigo_2.isdigit():
+            raise forms.ValidationError('O código deve conter apenas números.')
+        return codigo_2 
+    
+    def clean_codigo_3(self):
+        codigo_3 = self.cleaned_data['codigo_3'].strip()
+        if len(codigo_3) == 0:
+            raise forms.ValidationError('Você deve informar o código.')
+        elif not codigo_3.isdigit():
+            raise forms.ValidationError('O código deve conter apenas números.')
+        return codigo_3
+    
+    def clean_codigo_4(self):
+        codigo_4 = self.cleaned_data['codigo_4'].strip()
+        if len(codigo_4) == 0:
+            raise forms.ValidationError('Você deve informar o código.')
+        elif not codigo_4.isdigit():
+            raise forms.ValidationError('O código deve conter apenas números.')
+        return codigo_4
+    
+    def clean_codigo_5(self):
+        codigo_5 = self.cleaned_data['codigo_5'].strip()
+        if len(codigo_5) == 0:
+            raise forms.ValidationError('Você deve informar o código.')
+        elif not codigo_5.isdigit():
+            raise forms.ValidationError('O código deve conter apenas números.')
+        return codigo_5
+    
+    def clean_codigo_6(self):
+        codigo_6 = self.cleaned_data['codigo_6'].strip()
+        if len(codigo_6) == 0:
+            raise forms.ValidationError('Você deve informar o código.')
+        elif not codigo_6.isdigit():
+            raise forms.ValidationError('O código deve conter apenas números.')
+        return codigo_6
+
+        
+        
+        
+    
     

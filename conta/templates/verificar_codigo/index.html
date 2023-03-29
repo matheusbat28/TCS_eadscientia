@@ -1,2 +1,26 @@
-{% load static %}
 {% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/verificar_codigo/style.css' %}">
+{% endblock %}
+
+{% block main %}
+<form id="codigo-texto" method="POST">
+    {% csrf_token %}
+    <h2 class="ms-4">verificar codigo</h2>
+    <div id="cad-codigo">
+        <div id="cad-codigo-input">
+            {{ formVerificarCodigo }}
+        </div>
+        <div id="cad-codigo-btn">
+            <button type="submit">Verificar</button>
+        </div>
+    </form>
+    {% include 'parciais/_mensagem.html' %}
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/verificar_codigo/scripts.js' %}"></script>
+{% endblock %}
