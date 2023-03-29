@@ -1,0 +1,80 @@
+:root {
+    --menu-size: 120px;
+}
+
+
+
+body {
+    background-color: #eee;
+}
+
+header {
+    background-color: var(--cor--fundo--5);
+    padding: 10px;
+    text-align: center;
+}
+
+.content {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+#btnMenu {
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.5s;
+    padding: 15% 50%;
+}
+
+#btnMenu:hover {
+    border-radius: 5%;
+    cursor: pointer;
+    background-color: var(--cor--fundo--3);
+    
+}
+
+#btnMenu:active {
+    background-color: rgb(3, 4, 7);
+}
+
+.menu {
+    position: fixed;
+    top: 0;
+    width: var(--menu-size);
+    height: 100%;
+    background-color: var(--cor--fundo--5);
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu ul li {
+    display: block;
+}
+
+.menu ul li a {
+    transition: background 0.3s;
+    display: block;
+    color: #fff;
+    font-size: 19px;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px 15px;
+}
+
+.menu ul li a:hover {
+    background-color: rgb(49, 54, 85);
+}
+
+.effect {
+    transition: margin 0.4s;
+}
+
+@media (min-width: 768px) {
+    #btnClose {
+        display: none;
+    }
+}
