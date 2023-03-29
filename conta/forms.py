@@ -10,7 +10,7 @@ class FormLogin(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'id': 'email', 'placeholder': 'email'}), required=False)
 
     def clean_matricula(self):
-        matricula = self.cleaned_data['matricula']
+        matricula = self.cleaned_data['matricula'].strip()
         if len(matricula) == 0:
             raise forms.ValidationError('Você deve informar a matrícula.')
         elif not matricula.isdigit():
@@ -20,7 +20,7 @@ class FormLogin(forms.Form):
         return matricula
 
     def clean_senha(self):
-        senha = self.cleaned_data['senha']
+        senha = self.cleaned_data['senha'].strip()
         if len(senha) == 0:
             raise forms.ValidationError('Você deve informar a senha.')
         elif len(senha) < 6:
@@ -28,7 +28,7 @@ class FormLogin(forms.Form):
         return senha
     
     def clean_captcha(self):
-        captcha = self.cleaned_data['captcha']
+        captcha = self.cleaned_data['captcha'].strip()
         if not captcha:
             raise forms.ValidationError('Você deve marcar a caixa de verificação.')
         return captcha
@@ -38,16 +38,16 @@ class FormRecuperarSenha(forms.Form):
     captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox(attrs={'data-theme': 'dark','name': 'captcha'}))
     
     def clean_email(self):
-        email = self.cleaned_data['email']
+        email = self.cleaned_data['email'].strip()
         if len(email) == 0:
             raise forms.ValidationError('Você deve informar o email ao tentar recuperar a senha.')
         elif Usuario.objects.get(email=email) is None:
-            raise forms.ValidationError('Email não encontrado.')
+            raise forms.ValidationError('Email não encontrado ao tentar recuperar a senha.')
         return email 
     
     def clean_captcha(self):
-        captcha = self.cleaned_data['captcha']
+        captcha = self.cleaned_data['captcha'].strip()
         if not captcha:
-            raise forms.ValidationError('Você deve marcar a caixa de verificação.')
+            raise forms.ValidationError('Você deve marcar a caixa de verificação ao tentar recuperar a senha.')
         return captcha
     

@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib import messages
 from .forms import FormLogin, FormRecuperarSenha
+from django.core.mail import EmailMultiAlternatives
+from django.conf import settings
 
 def login(request):
     formLogin = FormLogin(request.POST)
@@ -26,11 +28,19 @@ def login(request):
     
     elif request.method == 'POST' and 'btn-recuperar-senha' in request.POST:
         if formRecuperarSenha.is_valid():
+            mandar_email(formRecuperarSenha.cleaned_data['email'])
             messages.success(request, 'Sua senha foi enviada para o email cadastrado.')
         else:
             json = formRecuperarSenha.errors.as_json()
 
             if 'email' in json:
                 messages.error(request, formRecuperarSenha.errors['email'][0])
+            elif 'captcha' in json:
+                messages.error(request, formRecuperarSenha.errors['captcha'][0])
 
     return render(request, 'conta/index.html', {'formLogin': formLogin, 'formRecuperarSenha': formRecuperarSenha})
+
+
+def mandar_email(email):
+    email = EmailMultiAlternatives('Recuperação de Senha', 'teste', settings.EMAIL_HOST_USER, [email])
+    email.send()
