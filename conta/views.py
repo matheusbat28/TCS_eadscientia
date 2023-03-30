@@ -6,6 +6,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from random import randint
 from .models import Usuario, Token
+from django.contrib.auth.hashers import make_password, check_password
 
 def login(request):
     formLogin = FormLogin(request.POST)
@@ -34,7 +35,7 @@ def login(request):
             
             if Token.objects.filter(usuario=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email'])).exists():
                 Token.objects.filter(usuario=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email'])).delete()           
-            Token.objects.create(token=token, usuario=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email']))
+            Token.objects.create(token=make_password(token), usuario=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email']))
                 
             mandar_email(formRecuperarSenha.cleaned_data['email'], token)
             return redirect('verificar_codigo', id=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email']).id)
@@ -57,8 +58,11 @@ def verificar_codigo(request, id):
     if request.method == 'POST':
         if formVerificarCodigo.is_valid():
             codigo = f'{formVerificarCodigo.cleaned_data["codigo_1"]}{formVerificarCodigo.cleaned_data["codigo_2"]}{formVerificarCodigo.cleaned_data["codigo_3"]}{formVerificarCodigo.cleaned_data["codigo_4"]}{formVerificarCodigo.cleaned_data["codigo_5"]}{formVerificarCodigo.cleaned_data["codigo_6"]}'
-            if Token.objects.filter(usuario=Usuario.objects.get(id=id), token=codigo).exists():
-                messages.success(request, 'Código verificado com sucesso.')
+            if Token.objects.filter(usuario=Usuario.objects.get(id=id)).exists():
+                if check_password(codigo, Token.objects.get(usuario=Usuario.objects.get(id=id)).token):
+                    messages.success(request, 'Código verificado com sucesso.')
+                    Token.objects.filter(usuario=Usuario.objects.get(id=id)).update(validou=True)
+                    print(Token.objects.get(usuario=Usuario.objects.get(id=id)).validou)
             else:
                 messages.error(request, 'Código inválido.')
         else:
@@ -78,7 +82,7 @@ def verificar_codigo(request, id):
                 messages.error(request, formVerificarCodigo.errors['codigo_6'][0])
                 
         return render(request, 'verificar_codigo/index.html', {'formVerificarCodigo': formVerificarCodigo})
-    if Token.objects.filter(usuario=Usuario.objects.get(id=id)).exists():
+    if Token.objects.filter(usuario=Usuario.objects.get(id=id), validou=False).exists():
         return render(request, 'verificar_codigo/index.html', {'formVerificarCodigo': formVerificarCodigo})
     else:
         messages.error(request, 'Não solicitou a recuperação de senha.')
@@ -89,4 +93,13 @@ def mandar_email(email, token):
     email.send()
 
 def gerar_token():
-    return randint(100000, 999999)
+    return str(randint(100000, 999999))
+
+def recuperar_senha(request, id):
+    
+    if Token.objects.filter(id=id, validou=True).exists():
+        return render(request, 'redefinir_senha/index.html')
+    else:
+        messages.error(request, 'Não solicitou a recuperação de senha.')
+        return redirect('login')
+    

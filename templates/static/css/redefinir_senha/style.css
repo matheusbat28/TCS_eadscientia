@@ -1,0 +1,22 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    animation: 20s cores_fundo infinite;
+}
+
+label {
+    display: none;
+}
+
+ul {
+    display: none;
+}
+
+:root {
+    --width--card: 700px;
+    --height--card: 350px;
+}

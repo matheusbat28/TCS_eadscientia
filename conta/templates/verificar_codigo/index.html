@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block main %}
-<form id="codigo-texto" method="POST">
+<form id="codigo-texto" method="POST" autocomplete="off">
     {% csrf_token %}
     <h2 class="ms-4">verificar codigo</h2>
     <div id="cad-codigo">
