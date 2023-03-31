@@ -37,3 +37,7 @@
 .erro {
     background-color: rgba(255, 0, 0, .6);
 }
+
+.cbx {
+    display: none;
+}
