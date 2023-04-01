@@ -7,8 +7,10 @@ body {
     height: 100vh;
 }
 
+/* css menu lateral */
 #menu-lateral {
     position: fixed;
+    z-index: 10;
     height: 100%;
     width: 85px;
     animation: cores_fundo 10s infinite;
@@ -81,4 +83,23 @@ body {
 #cbx-menu:checked~#menu-lateral {
     width: 250px;
     transition: 0.5s;
+}
+
+/* css sair */
+#sair {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+#sair i {
+    color: red;
+    font-size: 1.5rem;
 }
