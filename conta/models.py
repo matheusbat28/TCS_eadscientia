@@ -3,13 +3,25 @@ from django.contrib.auth.models import AbstractUser
 from cpf_field.models import CPFField
 from django.utils.timezone import now
 
+def gerar_matricula():
+    matricula = 0
+    try:
+        ultima_matricula = Usuario.objects.last().matricula
+    except:
+        pass
+    
+    if ultima_matricula:
+        matricula = int(ultima_matricula) + 1
+        
+    return str(matricula).zfill(6)
 class Usuario(AbstractUser):
 
-    matricula = models.CharField(max_length=10, unique=True)
+    matricula = models.CharField(max_length=10, unique=True, default=gerar_matricula)
     cpf = CPFField('CPF', unique=True)
 
     def __str__(self):
         return self.username
+
     
     class Meta:
         db_table = 'usuario'

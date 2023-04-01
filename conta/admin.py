@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Usuario
+from .models import Usuario, Token
 
 
 class UsuarioAdmin(UserAdmin):
@@ -19,3 +19,13 @@ class UsuarioAdmin(UserAdmin):
 
 
 admin.site.register(Usuario, UsuarioAdmin)
+
+
+class TokenAdmin(admin.ModelAdmin):
+    list_display = ('token', 'usuario', 'validou', 'data_criacao')
+    search_fields = ('token', 'usuario')
+    list_filter = ('validou',)
+    per_page = 10
+    
+    
+admin.site.register(Token, TokenAdmin)

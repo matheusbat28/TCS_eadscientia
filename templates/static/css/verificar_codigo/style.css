@@ -65,7 +65,7 @@ ul {
     font-weight: bold;
 }
 
-#cad-codigo-btn  {
+#cad-codigo-btn {
     margin-top: 20px;
     display: flex;
     justify-content: center;
@@ -90,6 +90,23 @@ ul {
 
 #cad-codigo-btn button:hover {
     scale: 1.1;
+}
+
+#cad-codigo-mandar {
+    width: 100%;
+    height: 40px;
+}
+
+#cad-codigo-mandar a {
+    width: auto;
+    height: 40px;
+    background-color: transparent;
+    text-transform: capitalize;
+    color: var(--cor--fundo--3);
+    font-weight: bold;
+    border: none;
+    margin-left: 10px;
+    text-decoration: none;
 }
 
 @media screen and (max-width: 800px) {

@@ -1,7 +1,8 @@
 from django import forms
-from .models import Usuario, Token
+from .models import Usuario
 from captcha.fields import ReCaptchaField
 from captcha.widgets import ReCaptchaV2Checkbox
+import re
 
 class FormLogin(forms.Form):
     matricula = forms.CharField(widget=forms.TextInput(attrs={'id': 'matricula', 'placeholder': 'matrícula'}), required=False)
@@ -109,7 +110,34 @@ class FormVerificarCodigo(forms.Form):
         return codigo_6
 
         
-        
-        
+class FormAlterarSenha(forms.Form):
+    senha1 = forms.CharField(widget=forms.PasswordInput(attrs={ 'placeholder': 'senha:'}), required=False)
+    senha2 = forms.CharField(widget=forms.PasswordInput(attrs={ 'placeholder': 'senha novamente:'}), required=False)
     
+    def clean_senha1(self):
+        senha1 = self.cleaned_data['senha1'].strip()
+        if len(senha1) == 0:
+            raise forms.ValidationError('Você deve informar a senha.')
+        elif len(senha1) < 6:
+            raise forms.ValidationError('A senha deve conter pelo menos 6 caracteres.')
+        elif re.search('[0-9]', senha1) is None:
+            raise forms.ValidationError('A senha deve conter pelo menos um número.')
+        elif re.search('[A-Z]', senha1) is None:
+            raise forms.ValidationError('A senha deve conter pelo menos uma letra maiúscula.')
+        elif re.search('[a-z]', senha1) is None:
+            raise forms.ValidationError('A senha deve conter pelo menos uma letra.')
+        return senha1
     
+    def clean_senha2(self):
+        senha2 = self.cleaned_data['senha2'].strip()
+        if len(senha2) == 0:
+            raise forms.ValidationError('Você deve informar a senha novamente.')
+        elif len(senha2) < 6:
+            raise forms.ValidationError('A senha deve conter pelo menos 6 caracteres.')
+        elif re.search('[0-9]', senha2) is None:
+            raise forms.ValidationError('A senha deve conter pelo menos um número.')
+        elif re.search('[A-Z]', senha2) is None:
+            raise forms.ValidationError('A senha deve conter pelo menos uma letra maiúscula.')
+        elif re.search('[a-z]', senha2) is None:
+            raise forms.ValidationError('A senha deve conter pelo menos uma letra.')
+        return senha2

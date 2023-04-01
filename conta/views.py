@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib import messages
-from .forms import FormLogin, FormRecuperarSenha, FormVerificarCodigo
+from .forms import FormLogin, FormRecuperarSenha, FormVerificarCodigo, FormAlterarSenha
 from django.core.mail import EmailMultiAlternatives
 from django.conf import settings
 from random import randint
@@ -38,6 +38,7 @@ def login(request):
             Token.objects.create(token=make_password(token), usuario=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email']))
                 
             mandar_email(formRecuperarSenha.cleaned_data['email'], token)
+            messages.success(request, f'Código enviado para o email {formRecuperarSenha.cleaned_data["email"]}')
             return redirect('verificar_codigo', id=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email']).id)
         else:
             json = formRecuperarSenha.errors.as_json()
@@ -55,14 +56,13 @@ def logout(request):
 
 def verificar_codigo(request, id):
     formVerificarCodigo = FormVerificarCodigo(request.POST)
-    if request.method == 'POST':
+    if request.method == 'POST' and 'btn-verificar-codigo' in request.POST:
         if formVerificarCodigo.is_valid():
             codigo = f'{formVerificarCodigo.cleaned_data["codigo_1"]}{formVerificarCodigo.cleaned_data["codigo_2"]}{formVerificarCodigo.cleaned_data["codigo_3"]}{formVerificarCodigo.cleaned_data["codigo_4"]}{formVerificarCodigo.cleaned_data["codigo_5"]}{formVerificarCodigo.cleaned_data["codigo_6"]}'
             if Token.objects.filter(usuario=Usuario.objects.get(id=id)).exists():
                 if check_password(codigo, Token.objects.get(usuario=Usuario.objects.get(id=id)).token):
-                    messages.success(request, 'Código verificado com sucesso.')
                     Token.objects.filter(usuario=Usuario.objects.get(id=id)).update(validou=True)
-                    print(Token.objects.get(usuario=Usuario.objects.get(id=id)).validou)
+                    return redirect('recuperar_senha', id=id)
             else:
                 messages.error(request, 'Código inválido.')
         else:
@@ -80,8 +80,7 @@ def verificar_codigo(request, id):
                 messages.error(request, formVerificarCodigo.errors['codigo_5'][0])
             elif 'codigo_6' in json:
                 messages.error(request, formVerificarCodigo.errors['codigo_6'][0])
-                
-        return render(request, 'verificar_codigo/index.html', {'formVerificarCodigo': formVerificarCodigo})
+                               
     if Token.objects.filter(usuario=Usuario.objects.get(id=id), validou=False).exists():
         return render(request, 'verificar_codigo/index.html', {'formVerificarCodigo': formVerificarCodigo})
     else:
@@ -93,13 +92,51 @@ def mandar_email(email, token):
     email.send()
 
 def gerar_token():
-    return str(randint(100000, 999999))
+    token = str(randint(100000, 999999))
+    while True:
+        if Token.objects.filter(token=make_password(token)).exists():
+            token = str(randint(100000, 999999))
+        else:
+            break
+    return token
 
 def recuperar_senha(request, id):
+    formAlterarSenha = FormAlterarSenha(request.POST)
     
-    if Token.objects.filter(id=id, validou=True).exists():
-        return render(request, 'redefinir_senha/index.html')
+    if request.method == 'POST':
+        if formAlterarSenha.is_valid():
+            if formAlterarSenha.cleaned_data['senha1'] == formAlterarSenha.cleaned_data['senha2']:
+                usuario = Usuario.objects.get(id=id)
+                usuario.set_password(formAlterarSenha.cleaned_data['senha1'])
+                usuario.save()
+                Token.objects.filter(usuario=Usuario.objects.get(id=id)).delete()
+                messages.success(request, 'Senha alterada com sucesso.')
+                return redirect('login')
+               
+            else:
+                messages.error(request, 'As senhas não são iguais.')
+        else:
+            json = formAlterarSenha.errors.as_json()
+            
+            if 'senha1' in json:
+                messages.error(request, formAlterarSenha.errors['senha1'][0])
+            elif 'senha2' in json:
+                messages.error(request, formAlterarSenha.errors['senha2'][0])
+                    
+    
+    if Token.objects.filter(usuario=Usuario.objects.get(id=id), validou=True).exists():
+        return render(request, 'redefinir_senha/index.html', {'formAlterarSenha': formAlterarSenha})
     else:
         messages.error(request, 'Não solicitou a recuperação de senha.')
         return redirect('login')
     
+def remandar_codigo(request, id):
+    if Token.objects.filter(usuario=Usuario.objects.get(id=id)).exists():
+        token = gerar_token()
+        Token.objects.filter(usuario=Usuario.objects.get(id=id)).update(token=make_password(token))
+        mandar_email(Usuario.objects.get(id=id).email, token)
+        messages.success(request, f'Código enviado para o email {Usuario.objects.get(id=id).email}')
+        return redirect('verificar_codigo', id=id)
+    else:
+        messages.error(request, 'Não solicitou a recuperação de senha.')
+        return redirect('login')

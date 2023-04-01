@@ -8,6 +8,22 @@
 
 {% block main %}
 
+<form id="cad-vef-senha-texto" method="POST">
+    {% csrf_token %}
+    <h2 class="ms-4">redefinir senha</h2>
+    <div id="cad-vef-senha">
+        <div class="cad-vef-senha-input">
+            {{ formAlterarSenha.senha1 }}
+        </div>
+        <div class="cad-vef-senha-input">
+            {{ formAlterarSenha.senha2 }}
+        </div>
+        <div id="cad-vef-senha-btn"></div>
+        <button class="btn-cad-vef-senha" type="submit">Redefinir</button>
+    </div>
+</form>
+{% include 'parciais/_mensagem.html' %}
+
 {% endblock %}
 
 {% block js %}

@@ -15,10 +15,14 @@
             {{ formVerificarCodigo }}
         </div>
         <div id="cad-codigo-btn">
-            <button type="submit">Verificar</button>
+            <button name="btn-verificar-codigo" type="submit">Verificar</button>
         </div>
-    </form>
-    {% include 'parciais/_mensagem.html' %}
+        <div id="cad-codigo-mandar">
+            <a href="{% url 'remandar_codigo' %}">Reenviar código?</a>
+        </div>
+    </div>
+</form>
+{% include 'parciais/_mensagem.html' %}
 {% endblock %}
 
 {% block js %}
