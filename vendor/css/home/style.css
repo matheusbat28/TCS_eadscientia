@@ -36,6 +36,11 @@ body {
     width: 100%;
     height: calc(100% - calc(var(--height-div-menu) * 2));
     padding-top: 70px;
+    overflow-y: auto;
+}
+
+#menu-conteudo::-webkit-scrollbar {
+    width: 0px;
 }
 
 #menu-conteudo a {
