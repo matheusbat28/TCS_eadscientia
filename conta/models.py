@@ -10,7 +10,7 @@ def gerar_matricula():
     except:
         pass
     
-    if ultima_matricula:
+    if ultima_matricula is not None:
         matricula = int(ultima_matricula) + 1
         
     return str(matricula).zfill(6)
@@ -18,6 +18,7 @@ class Usuario(AbstractUser):
 
     matricula = models.CharField(max_length=10, unique=True, default=gerar_matricula)
     cpf = CPFField('CPF', unique=True)
+    imagem_perfil = models.ImageField(upload_to='perfil_img/%Y/%m/%d')
 
     def __str__(self):
         return self.username
