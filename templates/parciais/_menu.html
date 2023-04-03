@@ -2,10 +2,16 @@
 
 <aside id="menu-lateral">
     <div id="logo-menu">
-        <div id="img-logo"></div>
+        <div id="img-logo">
+            {% if user.imagem_perfil %}
+                <img src="{{ user.imagem_perfil.url }}" alt="">
+            {% else %}
+            {% endif %}
+            
+        </div>
     </div>
     <div id="menu-conteudo">
-        <a href=""><i class="fa-solid fa-house"></i>
+        <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i>
             <h3>Home</h3>
         </a>
         <a href=""><i class="fa-solid fa-book"></i>
