@@ -15,16 +15,16 @@ def login(request):
     if request.method == 'POST' and 'btn-entrar' in request.POST:
         if formLogin.is_valid():
             usuario = auth.authenticate(username=formLogin.cleaned_data['matricula'], password=formLogin.cleaned_data['senha'])
-            if usuario is not None:
+            if usuario is not None and usuario.is_active and usuario.last_login is not None:
                 if usuario.is_active and usuario.last_login is not None:
                     auth.login(request, usuario)
                     return redirect('home')
-                elif usuario.is_active and usuario.last_login is None:
-                    auth.login(request, usuario)
-                    return redirect('recuperar_senha', id=usuario.id)
                 else:
                     messages.error(request, 'Usuário desativado.')
                     return redirect('login')
+            if usuario is not None and usuario.last_login is None:
+                auth.login(request, usuario)
+                return redirect('recuperar_senha', id=usuario.id)
             else:
                 messages.error(request, 'Usuário ou senha inválidos.')
                 return redirect('login')
@@ -156,10 +156,10 @@ def recuperar_senha(request, id):
                 messages.error(request, formAlterarSenha.errors['senha2'][0])
                 return redirect('recuperar_senha', id=id)
                     
-    
     if Token.objects.filter(usuario=Usuario.objects.get(id=id), validou=True).exists():
         return render(request, 'redefinir_senha/index.html', {'formAlterarSenha': formAlterarSenha})
-    elif Usuario.objects.filter(id=id).exists() and Usuario.objects.get(id=id).is_active == True and Usuario.objects.get(id=id).last_login is None:
+    elif Usuario.objects.filter(id=id, is_active=True, last_login__isnull=False).exists():
+        print('entrou')
         return render(request, 'redefinir_senha/index.html', {'formAlterarSenha': formAlterarSenha})
     else:
         messages.error(request, 'Não solicitou a recuperação de senha.')
