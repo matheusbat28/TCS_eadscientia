@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/socilitarMatricula/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+{% endblock %}
+
+{% block main %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/socilitarMatricula/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}

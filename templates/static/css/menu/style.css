@@ -2,6 +2,10 @@
     --height-div-menu: 80px;
 }
 
+body {
+    width: 100vw;
+    height: 100vh;
+}
 
 #menu-lateral {
     position: fixed;
@@ -47,7 +51,7 @@
     width: 0px;
 }
 
-#menu-conteudo a {
+.itens-conteudo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -59,11 +63,60 @@
     margin-bottom: 10px;
     transition: 0.5s;
     text-decoration: none;
+    cursor: pointer;
 }
 
-#menu-conteudo a h3 {
+.itens-conteudo:hover {
+    color: #fff;
+}
+
+.itens-conteudo h3 {
     display: none;
     margin-top: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.itens-subconteudo {
+    width: 100%;
+    height: auto;
+}
+
+.subconteudo-itens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    height: 50px;
+    color: #fff;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    transition: 0.5s;
+    text-decoration: none;
+    cursor: pointer;
+    padding-left: 30px;
+}
+
+.seta-baixo {
+    font-size: 1rem;
+}
+
+.subconteudo-itens:hover {
+    color: #fff;
+}
+
+.subconteudo-itens h3 {
+    display: none;
+    margin-top: 10px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.subconteudo-itens i {
+    font-size: 1.2rem;
 }
 
 #menu-rodape {
@@ -83,6 +136,6 @@
 }
 
 #cbx-menu:checked~#menu-lateral {
-    width: 250px;
+    width: 300px;
     transition: 0.5s;
 }

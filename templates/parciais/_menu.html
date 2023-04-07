@@ -7,22 +7,52 @@
                 <img src="{{ user.imagem_perfil.url }}" alt="">
             {% else %}
             {% endif %}
-            
         </div>
     </div>
     <div id="menu-conteudo">
-        <a href="{% url 'home' %}"><i class="fa-solid fa-house"></i>
+        <a id="home" class="itens-conteudo" href="{% url 'home' %}"><i class="fa-solid fa-house"></i>
             <h3>Home</h3>
         </a>
-        <a href=""><i class="fa-solid fa-book"></i>
+        <a id="curso" class="itens-conteudo" href=""><i class="fa-solid fa-book"></i>
             <h3>Cursos</h3>
         </a>
-        <a href=""><i class="fa-solid fa-folder"></i>
+        <a id="arquivo" class="itens-conteudo" href=""><i class="fa-solid fa-folder"></i>
             <h3>Arquivos</h3>
         </a>
-        <a href=""><i class="fa-solid fa-paperclip"></i>
+        <a id="historico" class="itens-conteudo" href=""><i class="fa-solid fa-paperclip"></i>
             <h3>Histórico</h3>
         </a>
+        <a id="Administracao" class="itens-conteudo"><i class="fa-solid fa-briefcase"></i>
+            <h3>Administração</h3>
+            <i id="seta-adm" class="fa-solid fa-angle-down seta-baixo"></i>
+        </a>
+        <div id="administracao-conteudo" class="itens-subconteudo">
+            <a href="" class="subconteudo-itens">
+                <i class="fa-solid fa-user-plus"></i>
+                <h3>Usuários</h3>
+            </a>
+        </div>
+        <a id="rh" class="itens-conteudo"><i class="fa-solid fa-id-card-clip"></i>
+            <h3>RH</h3>
+            <i id="seta-rh" class="fa-solid fa-angle-down seta-baixo"></i>
+        </a>
+        <div id="rh-conteudo" class="itens-subconteudo">
+            <a href="" class="subconteudo-itens">
+                <i class="fa-solid fa-check"></i>
+                <h3>Socilitações</h3>
+            </a>
+        </div>
+        <a id="gestao" class="itens-conteudo"><i class="fa-solid fa-bars-progress"></i>
+            <h3>gestão</h3>
+            <i id="seta-gestao" class="fa-solid fa-angle-down seta-baixo"></i>
+        </a>
+        <div id="gestao-conteudo" class="itens-subconteudo">
+            <a href="{% url 'solicitacaomMatricula' %}" class="subconteudo-itens">
+                <i class="fa-solid fa-square-plus"></i>
+                <h3>Socilitar matricula</h3>
+            </a>
+        </div>
+
     </div>
     <label for="cbx-menu" id="menu-rodape">
         <i id="expandir-menu" class="fa-solid fa-angle-right"></i>
