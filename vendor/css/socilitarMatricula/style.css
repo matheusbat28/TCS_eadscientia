@@ -1,6 +1,8 @@
 :root {
     --width--cad: 900px;
     --height--cad: 550px;
+    --width--input--mine: 350px;
+    --width--input--max: 800px;
 }
 
 body {
@@ -31,7 +33,7 @@ body {
     background-color: var(--cor--fundo--4);
     border-bottom: 3px solid var(--cor--fundo--6);
     color: #fff;
-    font-size: 2rem;
+    font-size: 1.5rem;
     text-transform: capitalize;
 }
 
@@ -49,12 +51,13 @@ body {
 }
 
 form div input {
-    width: 350px;
+    width: var(--width--input--mine);
     height: 50px;
     border: 3px solid var(--cor--fundo--6);
     border-radius: 5px;
     padding-left: 10px;
     font-size: 1.2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 #email {
@@ -71,7 +74,7 @@ form div input {
 
 form #email input,
 form #cpf input {
-    width: 800px;
+    width: var(--width--input--max);
 }
 
 #btn {
@@ -96,8 +99,80 @@ form #cpf input {
 
 @media screen and (max-width: 900px) {
     :root {
-        --width--cad: 600px;
+        --width--cad: 650px;
         --height--cad: 550px;
+        --width--input--mine: 300px;
+        --width--input--max: 600px;
     }
 
+}
+
+@media screen and (max-width: 650px) {
+    :root {
+        --width--cad: 550px;
+        --height--cad: 550px;
+        --width--input--mine: 250px;
+        --width--input--max: 500px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    :root {
+        --width--cad: 500px;
+        --height--cad: 650px;
+        --width--input--mine: 200px;
+        --width--input--max: 400px;
+    }
+
+    #nome-completo {
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    :root {
+        --width--cad: 400px;
+        --height--cad: 650px;
+        --width--input--mine: 200px;
+        --width--input--max: 300px;
+    }
+
+    #nome-completo {
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    :root {
+        --width--cad: 350px;
+        --height--cad: 650px;
+        --width--input--mine: 200px;
+        --width--input--max: 250px;
+    }
+
+    #nome-completo {
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+        margin-top: 10px;
+    }
 }
