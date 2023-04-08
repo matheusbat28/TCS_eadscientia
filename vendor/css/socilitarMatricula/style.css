@@ -1,6 +1,6 @@
 :root {
-    --width--cad: 700px;
-    --height--cad: 300px;
+    --width--cad: 900px;
+    --height--cad: 550px;
 }
 
 body {
@@ -10,4 +10,94 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+}
+
+#cad-sol-matricula {
+    width: var(--width--cad);
+    height: var(--height--cad);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 3px solid var(--cor--fundo--6);
+}
+
+#cad-sol-matricula h2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    padding-left: 20px;
+    background-color: var(--cor--fundo--4);
+    border-bottom: 3px solid var(--cor--fundo--6);
+    color: #fff;
+    font-size: 2rem;
+    text-transform: capitalize;
+}
+
+.campo-input {
+    width: 100%;
+    height: 100px;
+
+}
+
+#nome-completo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 40px;
+}
+
+form div input {
+    width: 350px;
+    height: 50px;
+    border: 3px solid var(--cor--fundo--6);
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 1.2rem;
+}
+
+#email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#cpf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form #email input,
+form #cpf input {
+    width: 800px;
+}
+
+#btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#btn button {
+    width: 200px;
+    height: 50px;
+    background-color: var(--cor--fundo--4);
+    border: 3px solid var(--cor--fundo--6);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 900px) {
+    :root {
+        --width--cad: 600px;
+        --height--cad: 550px;
+    }
+
 }
