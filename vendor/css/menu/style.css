@@ -34,6 +34,13 @@ body {
     border: 2px solid var(--cor--fundo--3);
 }
 
+#img-logo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 #menu-conteudo {
     width: 100%;
     height: calc(100% - calc(var(--height-div-menu) * 2));
