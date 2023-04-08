@@ -2,6 +2,7 @@
     --height-div-menu: 80px;
 }
 
+
 body {
     width: 100vw;
     height: 100vh;
@@ -9,7 +10,8 @@ body {
 
 #menu-lateral {
     position: fixed;
-    z-index: 10;
+    z-index: 102;
+    left: 0;
     height: 100%;
     width: 85px;
     animation: cores_fundo 10s infinite;
@@ -138,4 +140,24 @@ body {
 #cbx-menu:checked~#menu-lateral {
     width: 300px;
     transition: 0.5s;
+}
+
+@media screen and (max-width: 600px) {
+    #menu-lateral {
+        width: 70px;
+        transition: 0.5s;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #menu-lateral {
+        width: 0;
+        transition: 0.5s;
+    }
+
+    #img-logo {
+        width: 40px;
+        height: 40px;
+    }
+
 }

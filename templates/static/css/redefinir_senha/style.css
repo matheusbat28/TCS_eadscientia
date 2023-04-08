@@ -87,6 +87,10 @@ ul {
     text-transform: capitalize;
 }
 
+#mensagem {
+    left: 5px;
+}
+
 ul {
     display: none;
 }

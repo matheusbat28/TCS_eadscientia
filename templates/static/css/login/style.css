@@ -249,16 +249,14 @@ body {
     box-shadow: var(--sombra--1);
 }
 
+#mensagem {
+    left: 5px;
+}
+
 @media screen and (max-width: 1600px) {
     :root {
         --width--cad: 420px;
         --height--cad: 500px;
-    }
-}
-
-@media screen and (max-width: 1400px) {
-    #mensagem {
-        margin-bottom: 5%;
     }
 }
 

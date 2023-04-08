@@ -6,12 +6,32 @@
 <link rel="stylesheet" href="{% static 'css/socilitarMatricula/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
 {% endblock %}
 
 {% block main %}
+{% include 'parciais/_cabecalho.html' %}
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
+<form id="cad-sol-matricula" method="POST">
+    {% csrf_token %}
+    <h2>solicitação de matricula</h2>
+    <div id="nome-completo" class="campo-input">
+        {{formFormSolicitacaoMatricula.nome}}
+        {{formFormSolicitacaoMatricula.sobrenome}}
+    </div>
+    <div id="cpf" class="campo-input">
+       {{formFormSolicitacaoMatricula.cpf}}
+    </div>
+    <div id="email" class="campo-input">
+       {{formFormSolicitacaoMatricula.email}}
+    </div>
+    <div id="btn" class="campo-input">
+        <button type="submit">Solicitar</button>
+    </div>
+</form>
+{% include 'parciais/_mensagem.html' %}
 {% endblock %}
 
 {% block js %}

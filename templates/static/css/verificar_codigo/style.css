@@ -126,6 +126,10 @@ time {
     margin-left: 10px;
 }
 
+#mensagem {
+    left: 5px;
+}
+
 @media screen and (max-width: 800px) {
     :root {
         --width--card: 500px;

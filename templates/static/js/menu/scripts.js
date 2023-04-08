@@ -6,7 +6,7 @@ $(document).ready(function () {
 
     $('.itens-subconteudo, .seta-baixo').hide();
 
-    $('#menu-rodape').click(function () {
+    $('#menu-rodape, #menu-icon').click(function () {
 
         if ($('#cbx-menu').is(':checked')) {
             $('#menu-rodape').css('justify-content', 'center');
