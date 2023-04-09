@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/listarSolicitarMatricula/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+{% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<table class="container-sm h-auto">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Gestor</th>
+            <th>Curso</th>
+            <th>Opções</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for socilitacao in  solicitacoes %}
+        <tr>
+            <td>{{ socilitacao.nome.title }} {{ socilitacao.sobrenome.title }}</td>
+            <td>{{ socilitacao.cpf }}</td>
+            <td>{{ socilitacao.email }}</td>
+            <td>{{ socilitacao.usuario.get_full_name.title }}</td>
+            <td>{{ socilitacao.curso.nome.title }}</td>
+            <td id="opcoes">
+                <a href="{% url 'criarSolicitacao' socilitacao.id %}"><i class="fa-solid fa-check icons ms-2"></i></a>
+                <a href="{% url 'visualizarSolicitacao' socilitacao.id %}"><i class="fa-solid fa-eye icons ms-2"></i></a>
+                <a href="{% url 'deletarSolicitacao' socilitacao.id %}"><i class="fa-solid fa-trash-can icons ms-2"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% include 'parciais/_mensagem.html' %}
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/listarSolicitarMatricula/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}

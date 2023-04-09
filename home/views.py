@@ -4,6 +4,7 @@ from .forms import FormSolicitacaoMatricula
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
+from .models import Solicitacao
 
 @login_required
 def home(request):
@@ -42,9 +43,6 @@ def solicitacaomMatricula(request):
                 
     return render(request, 'socilitarMatricula/index.html', {'formFormSolicitacaoMatricula': formFormSolicitacaoMatricula})
 
-
-
-
 def mandar_email(email, solicitacao):
     email = EmailMultiAlternatives(f'solicitação de matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
                         Solicitação de matricula
@@ -56,3 +54,21 @@ def mandar_email(email, solicitacao):
             
                                    ''', settings.EMAIL_HOST_USER, [email])
     email.send()
+     
+@login_required
+def listarSolicitarMatricula(request):
+    solicitacoes = Solicitacao.objects.filter(criado=False)
+    return render(request, 'listarSolicitarMatricula/index.html', {'solicitacoes': solicitacoes})
+
+@login_required
+def visualizarSolicitacao(request, id):
+    return redirect('listarSolicitarMatricula')
+
+@login_required
+def criarSolicitacao(request, id):
+    return redirect('listarSolicitarMatricula')
+
+@login_required
+def deletarSolicitacao(request, id):
+    Solicitacao.objects.get(id=id).delete()
+    return redirect('listarSolicitarMatricula')

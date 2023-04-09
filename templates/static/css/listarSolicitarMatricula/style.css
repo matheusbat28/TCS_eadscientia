@@ -1,0 +1,57 @@
+:root {
+    --width--cad: 1400px;
+    --height--cad: 800px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+table {
+    margin-top: 100px;
+    max-height: 50%;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table thead tr {
+    background-color: var(--cor--fundo--6);
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+table tr td,
+table tr th {
+    padding-left: 10px;
+    border: 1px solid var(--cor--fundo--6);
+}
+
+.icons {
+    font-size: 1rem;
+}
+
+#opcoes {
+    text-align: center;
+
+}
+
+#opcoes a:nth-child(1) {
+    color: green;
+}
+
+#opcoes a:nth-child(2) {
+    color: var(--cor--fundo--6);
+}
+
+#opcoes a:nth-child(3) {
+    color: red;
+}
+
+#mensagem {
+    top: 64px;
+    right: 5px;
+}
