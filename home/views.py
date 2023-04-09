@@ -46,12 +46,12 @@ def solicitacaomMatricula(request):
 
 
 def mandar_email(email, solicitacao):
-    email = EmailMultiAlternatives(f'solicitação de matricula {solicitacao.nome.title} {solicitacao.sobrenome.title}', f'''
+    email = EmailMultiAlternatives(f'solicitação de matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
                         Solicitação de matricula
-            Nome: {solicitacao.nome.title} {solicitacao.sobrenome.title}
+            Nome: {solicitacao.nome.title()} {solicitacao.sobrenome.title()}
             cpf: {solicitacao.cpf}
             Email: {solicitacao.email}
-            Quem solicitou: {solicitacao.usuario.get_full_name().title()}
+            Quem solicitou: {solicitacao.usuario.get_full_name().title()} ({solicitacao.usuario.matricula})
             
                                    ''', settings.EMAIL_HOST_USER, [email])
     email.send()
