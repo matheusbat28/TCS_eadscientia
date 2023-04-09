@@ -1,5 +1,5 @@
 from django import forms
-from .models import Solicitacao
+from .models import Solicitacao, Curso
 from validate_cpf import validate_cpf
 
 class FormSolicitacaoMatricula(forms.Form):
@@ -7,6 +7,7 @@ class FormSolicitacaoMatricula(forms.Form):
     sobrenome = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Sobrenome:'}))
     cpf = forms.CharField(max_length=14, widget=forms.TextInput(attrs={'placeholder': 'CPF:', 'id': 'cpf-input'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'E-mail:'}))
+    curso = forms.ModelChoiceField(queryset=Curso.objects.all(), empty_label='Selecione um curso')
     
     def clean_nome(self):
         nome = self.cleaned_data['nome'].strip().lower()
@@ -30,6 +31,7 @@ class FormSolicitacaoMatricula(forms.Form):
             raise forms.ValidationError('E-mail já cadastrado!')
         return email
     
+    
     def save(self, usuario):
         try:
             soli = Solicitacao.objects.create(
@@ -37,6 +39,7 @@ class FormSolicitacaoMatricula(forms.Form):
                 sobrenome=self.cleaned_data['sobrenome'],
                 cpf=self.cleaned_data['cpf'],
                 email=self.cleaned_data['email'],
+                curso=self.cleaned_data['curso'],
                 usuario=usuario
             )
         except:

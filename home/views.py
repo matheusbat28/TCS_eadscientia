@@ -21,9 +21,6 @@ def solicitacaomMatricula(request):
                 messages.success(request, 'Solicitação enviada com sucesso.')
                 return redirect('solicitacaomMatricula')
             
-
-
-
         else:
             json = formFormSolicitacaoMatricula.errors.as_json()
 
@@ -39,6 +36,9 @@ def solicitacaomMatricula(request):
             elif 'email' in json:
                 messages.error(request, formFormSolicitacaoMatricula.errors['email'][0])
                 return redirect('solicitacaomMatricula')
+            elif 'curso' in json:
+                messages.error(request, formFormSolicitacaoMatricula.errors['curso'][0])
+                return redirect('solicitacaomMatricula')
                 
     return render(request, 'socilitarMatricula/index.html', {'formFormSolicitacaoMatricula': formFormSolicitacaoMatricula})
 
@@ -51,6 +51,7 @@ def mandar_email(email, solicitacao):
             Nome: {solicitacao.nome.title()} {solicitacao.sobrenome.title()}
             cpf: {solicitacao.cpf}
             Email: {solicitacao.email}
+            Curso: {solicitacao.curso.nome.title()}
             Quem solicitou: {solicitacao.usuario.get_full_name().title()} ({solicitacao.usuario.matricula})
             
                                    ''', settings.EMAIL_HOST_USER, [email])
