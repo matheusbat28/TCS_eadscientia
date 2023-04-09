@@ -1,0 +1,176 @@
+:root {
+    --height--cad: 75%;
+    --width--input--mine: 350px;
+    --width--input--max: 800px;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#formulario {
+    height: var(--height--cad);
+    border: 3px solid var(--cor--fundo--6);
+    border-radius: 10px;
+    overflow: auto;
+}
+
+#formulario::-webkit-scrollbar {
+    width: 0;
+}
+
+#formulario h2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    padding-left: 20px;
+    background-color: var(--cor--fundo--4);
+    border-bottom: 3px solid var(--cor--fundo--6);
+    color: #fff;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
+
+
+.campo-input {
+    width: 100%;
+    height: 100px;
+
+}
+
+#nome-completo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 40px;
+}
+
+form div input {
+    width: var(--width--input--mine);
+    height: 50px;
+    border: 3px solid var(--cor--fundo--6);
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 1.2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#curso,
+#email,
+#cpf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+form #email input,
+form #cpf input,
+form #curso input {
+    width: var(--width--input--max);
+}
+
+#btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#btn button {
+    width: 200px;
+    height: 50px;
+    background-color: var(--cor--fundo--4);
+    border: 3px solid var(--cor--fundo--6);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 900px) {
+    :root {
+        --width--cad: 650px;
+        --height--cad: 550px;
+        --width--input--mine: 300px;
+        --width--input--max: 600px;
+    }
+
+}
+
+@media screen and (max-width: 650px) {
+    :root {
+        --width--cad: 550px;
+        --height--cad: 550px;
+        --width--input--mine: 250px;
+        --width--input--max: 500px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    :root {
+        --width--cad: 500px;
+        --height--cad: 650px;
+        --width--input--mine: 200px;
+        --width--input--max: 400px;
+    }
+
+    #nome-completo {
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    :root {
+        --width--cad: 400px;
+        --height--cad: 650px;
+        --width--input--mine: 200px;
+        --width--input--max: 300px;
+    }
+
+    #nome-completo {
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    :root {
+        --width--cad: 350px;
+        --height--cad: 650px;
+        --width--input--mine: 200px;
+        --width--input--max: 250px;
+    }
+
+    #nome-completo {
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+        margin-top: 10px;
+    }
+}
