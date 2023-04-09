@@ -2,6 +2,7 @@
     --height--cad: 75%;
     --width--input--mine: 350px;
     --width--input--max: 800px;
+    --height--input: 50px;
 }
 
 body {
@@ -53,7 +54,7 @@ body {
 
 form div input {
     width: var(--width--input--mine);
-    height: 50px;
+    height: var(--height--input);
     border: 3px solid var(--cor--fundo--6);
     border-radius: 5px;
     padding-left: 10px;
@@ -68,6 +69,21 @@ form div input {
     align-items: center;
     justify-content: center;
 }
+
+.label-campo {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: calc(var(--height--input) + 40px);
+}
+
+label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: var(--cor--fundo--6);
+}
+
 
 form #email input,
 form #cpf input,
