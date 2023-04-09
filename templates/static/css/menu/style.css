@@ -149,7 +149,7 @@ body {
     }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 950px) {
     #menu-lateral {
         width: 0;
         transition: 0.5s;

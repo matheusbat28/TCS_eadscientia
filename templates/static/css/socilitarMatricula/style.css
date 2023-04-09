@@ -1,8 +1,7 @@
 :root {
-    --width--cad: 900px;
-    --height--cad: 550px;
-    --width--input--mine: 350px;
-    --width--input--max: 800px;
+    --height--cad: 50%;
+    --width--input--mine: 400px;
+    --width--input--max: 1000px;
 }
 
 body {
@@ -15,7 +14,6 @@ body {
 }
 
 #cad-sol-matricula {
-    width: var(--width--cad);
     height: var(--height--cad);
     background-color: #fff;
     border-radius: 10px;
@@ -107,166 +105,52 @@ form #cpf input {
     right: 5px;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1100px) {
     :root {
-        --width--cad: 800px;
-        --height--cad: 550px;
-        --width--input--mine: 300px;
-        --width--input--max: 700px;
+        --width--input--mine: 350px;
+        --width--input--max: 800px;
     }
-
 }
 
 @media screen and (max-width: 1000px) {
     :root {
-        --width--cad: 650px;
-        --height--cad: 550px;
-        --width--input--mine: 300px;
         --width--input--max: 600px;
     }
 
-}
-
-@media screen and (max-width: 820px) {
-    #cad-sol-matricula {
-        margin-left: 60px;
+    #nome-completo {
+        height: 200px;
+        flex-direction: column;
     }
 
+    #nome-completo input {
+        width: var(--width--input--max);
+    }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-height: 1000px) {
     :root {
-        --width--cad: 500px;
-        --height--cad: 550px;
-        --width--input--mine: 225px;
-        --width--input--max: 450px;
+        --height--cad: 60%;
     }
-
 }
 
-@media screen and (max-height: 700px) {
-
+@media screen and (max-width: 800px) {
     :root {
-        --height--cad: 500px;
-    }
-
-    #cad-sol-matricula {
-        margin-top: 50px;
-    }
-
-}
-
-@media screen and (max-width: 600px) {
-    :root {
-        --width--cad: 450px;
-        --height--cad: 650px;
-        --width--input--mine: 200px;
         --width--input--max: 400px;
     }
 
-    #nome-completo {
-        flex-direction: column;
-        height: 150px;
-        width: 100%;
-    }
 
-    #nome-completo input {
-        width: var(--width--input--max);
-        margin-top: 10px;
-    }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-height: 800px) {
     :root {
-        --width--cad: 450px;
-        --height--cad: 650px;
-        --width--input--mine: 200px;
-        --width--input--max: 400px;
-    }
-
-    #nome-completo {
-        flex-direction: column;
-        height: 150px;
-        width: 100%;
-    }
-
-    #nome-completo input {
-        width: var(--width--input--max);
-        margin-top: 10px;
+        --height--cad: 78%;
     }
 }
-
-@media screen and (max-height: 600px) {
-    :root {
-        --height--cad: 450px;
-    }
-
-}
-
-@media screen and (max-width: 500px) {
-    :root {
-        --width--cad: 400px;
-        --height--cad: 450px;
-        --width--input--mine: 200px;
-        --width--input--max: 300px;
-    }
-
-    #cad-sol-matricula {
-        margin-left: 0px;
-    }
-
-    #nome-completo {
-        flex-direction: column;
-        height: 150px;
-        width: 100%;
-    }
-
-    #nome-completo input {
-        width: var(--width--input--max);
-        margin-top: 10px;
-    }
-}
-
 
 @media screen and (max-width: 400px) {
     :root {
-        --width--cad: 350px;
-        --width--input--mine: 200px;
         --width--input--max: 250px;
     }
 
-    #nome-completo {
-        flex-direction: column;
-        height: 150px;
-        width: 100%;
-    }
 
-    #nome-completo input {
-        width: var(--width--input--max);
-        margin-top: 10px;
-    }
-}
-
-@media screen and (max-width: 350px) {
-    :root {
-        --width--cad: 300px;
-        --height--cad: 450px;
-        --width--input--mine: 200px;
-        --width--input--max: 200px;
-    }
-
-    #cad-sol-matricula h2 {
-        font-size: 1.2rem;
-    }
-
-    #nome-completo {
-        flex-direction: column;
-        height: 150px;
-        width: 100%;
-    }
-
-    #nome-completo input {
-        width: var(--width--input--max);
-        margin-top: 10px;
-    }
 }
