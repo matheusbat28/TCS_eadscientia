@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from cpf_field.models import CPFField
 from django.utils.timezone import now
-
+import re
 class Usuario(AbstractUser):
 
     email = models.EmailField(unique=True, verbose_name='E-mail', blank=True, null=True)
@@ -17,6 +17,8 @@ class Usuario(AbstractUser):
     def save(self, *args, **kwargs):
         if not self.matricula:
             self.matricula = self.gerar_matricula()
+        if not self.username:
+            self.username = self.gerar_username()
         super(Usuario, self).save(*args, **kwargs)
 
     def gerar_matricula(self):
@@ -30,6 +32,18 @@ class Usuario(AbstractUser):
             matricula = '0'
             
         return matricula.zfill(10)
+    
+    def gerar_username(self):
+        contador = 1
+        username = self.get_full_name().strip().lower().replace(' ', '')
+        while True:
+            if Usuario.objects.filter(username=username).exists():
+                username = re.sub(r'\d+', '', username)
+                username = username + str(contador)
+                contador += 1
+            else:
+                break
+        return username
     
     class Meta:
         db_table = 'usuario'

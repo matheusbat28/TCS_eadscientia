@@ -167,3 +167,4 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
 EMAIL_RH = config('EMAIL_RH')
+EMAIL_ADM = config('EMAIL_ADM')

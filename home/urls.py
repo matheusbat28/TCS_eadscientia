@@ -7,4 +7,5 @@ urlpatterns = [
     path('listarSolicitarMatricula/', views.listarSolicitarMatricula, name='listarSolicitarMatricula'),
     path('visualizarSolicitacao/<int:id>', views.visualizarSolicitacao, name='visualizarSolicitacao'),
     path('deletarSolicitacao/<int:id>', views.deletarSolicitacao, name='deletarSolicitacao'),
+    path('criarUsuario/', views.criarUsuario, name='criarUsuario'),
 ]

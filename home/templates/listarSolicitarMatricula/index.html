@@ -27,7 +27,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for socilitacao in  posts %}
+        {% for socilitacao in posts %}
         <tr>
             <td>{{ socilitacao.nome.title }} {{ socilitacao.sobrenome.title }}</td>
             <td>{{ socilitacao.cpf }}</td>
@@ -35,8 +35,12 @@
             <td>{{ socilitacao.usuario.get_full_name.title }}</td>
             <td>{{ socilitacao.curso.nome.title }}</td>
             <td id="opcoes">
-                <a href="{% url 'visualizarSolicitacao' socilitacao.id %}"><i class="fa-solid fa-eye icons ms-2"></i></a>
-                <a href="{% url 'deletarSolicitacao' socilitacao.id %}"><i class="fa-solid fa-trash-can icons ms-2"></i></a>
+                <a href="{% url 'visualizarSolicitacao' socilitacao.id %}"
+                    title="Visualizar o usuário {{ socilitacao.nome.title }} {{ socilitacao.sobrenome.title }}"><i
+                        class="fa-solid fa-eye icons ms-2"></i></a>
+                <a href="{% url 'deletarSolicitacao' socilitacao.id %}"
+                    title="Recusar o usuário {{ socilitacao.nome.title }} {{ socilitacao.sobrenome.title }}"><i
+                        class="fa-solid fa-trash-can icons ms-2"></i></a>
             </td>
         </tr>
         {% endfor %}

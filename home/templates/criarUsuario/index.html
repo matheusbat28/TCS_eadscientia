@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/criarUsuario/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+{% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<form id="cad-sol-matricula" class="container p-0" method="POST">
+    {% csrf_token %}
+    <h2>criar usuário</h2>
+    <div id="nome-completo" class="campo-input">
+        {{formCriacaoUsuario.nome}}
+        {{formCriacaoUsuario.sobrenome}}
+    </div>
+    <div id="cpf" class="campo-input">
+       {{formCriacaoUsuario.cpf}}
+    </div>
+    <div id="email" class="campo-input">
+       {{formCriacaoUsuario.email}}
+    </div>
+    <div id="cursos" class="campo-input">
+       {{formCriacaoUsuario.cursos}}
+    </div>
+    <div id="grupos" class="campo-input">
+       {{formCriacaoUsuario.grupos}}
+    </div>
+    <div id="btn" class="campo-input">
+        <button type="submit">Criar</button>
+    </div>
+</form>
+{% include 'parciais/_mensagem.html' %}
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/criarUsuario/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}

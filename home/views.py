@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .forms import FormSolicitacaoMatricula
+from .forms import FormSolicitacaoMatricula, FormCriacaoUsuario
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
@@ -17,6 +17,7 @@ def home(request):
     return render(request, 'home/index.html')
 
 @login_required
+@user_passes_test(lambda u:u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 @user_passes_test(lambda u: u.groups.filter(name='gestão').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def solicitacaomMatricula(request):
     formFormSolicitacaoMatricula = FormSolicitacaoMatricula(request.POST)
@@ -138,7 +139,7 @@ def gararSenhaAleatoria():
     senha = ''.join(random.choice(caracteres) for i in range(8))
     return senha
 
-def mandar_email(email,tipo, solicitacao=None, senha=None, usuario=None):
+def mandar_email(email,tipo, solicitacao=None, senha=None, usuario=None, usuarioADM=None):
     
     if tipo == 'solicitacao':
         email = EmailMultiAlternatives(f'solicitação de matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
@@ -182,3 +183,56 @@ def mandar_email(email,tipo, solicitacao=None, senha=None, usuario=None):
                 
                                     ''', settings.EMAIL_HOST_USER, [email])
         email.send()
+    elif tipo == 'criacaoADM':
+        email = EmailMultiAlternatives(f'Conta criada por {usuarioADM.get_full_name()}', f'''
+                            Bem vindo a empresa EadScientia           
+                Oi me chamo {usuarioADM.get_full_name()} e trabalho no cargo de {usuarioADM.groups.all()[0].name}
+                na empresa EadScientia e através desse email estou te enviando sua conta de acesso:
+                Nome: {usuario.get_full_name()}
+                cpf: {usuario.cpf}
+                Email: {usuario.email}
+                Cargo: {usuario.groups.all()[0].name}
+                matricula: {usuario.matricula}
+                Senha: {senha}                       
+                                       
+                                       ''', settings.EMAIL_HOST_USER, [email])
+        
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+def criarUsuario(request):
+    formCriacaoUsuario = FormCriacaoUsuario(request.POST)
+    if request.method == 'POST':
+        if formCriacaoUsuario.is_valid():
+            senha = gararSenhaAleatoria()
+            retono = formCriacaoUsuario.save(senha)
+            
+            if retono is not None:
+                mandar_email(email=retono.email, tipo='criacaoADM', usuario=retono, senha=senha, usuarioADM=request.user)
+                messages.success(request, 'Usuário criado com sucesso.')
+                return redirect('criarUsuario')
+            else:
+                messages.error(request, 'Erro ao criar o usuário.')
+                return redirect('criarUsuario')
+        else:
+            json = formCriacaoUsuario.errors.as_json()
+            
+            if 'nome' in json:
+                messages.error(request, formCriacaoUsuario.errors['nome'][0])
+                return redirect('criarUsuario')
+            elif 'sobrenome' in json:
+                messages.error(request, formCriacaoUsuario.errors['sobrenome'][0])
+                return redirect('criarUsuario')
+            elif 'cpf' in json:
+                messages.error(request, formCriacaoUsuario.errors['cpf'][0])
+                return redirect('criarUsuario')
+            elif 'email' in json:
+                messages.error(request, formCriacaoUsuario.errors['email'][0])
+                return redirect('criarUsuario')
+            elif 'cursos' in json:
+                messages.error(request, formCriacaoUsuario.errors['cursos'][0])
+                return redirect('criarUsuario')
+            elif 'grupos' in json:
+                messages.error(request, formCriacaoUsuario.errors['grupos'][0])
+                return redirect('criarUsuario')
+            
+    return render(request, 'criarUsuario/index.html', {'formCriacaoUsuario': formCriacaoUsuario})

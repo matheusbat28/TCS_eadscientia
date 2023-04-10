@@ -1,0 +1,165 @@
+:root {
+    --height--cad: 55%;
+    --width--input--mine: 350px;
+    --width--input--max: 900px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#cad-sol-matricula {
+    height: var(--height--cad);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 3px solid var(--cor--fundo--6);
+    overflow: auto;
+}
+
+#cad-sol-matricula::-webkit-scrollbar {
+    width: 0;
+}
+
+#cad-sol-matricula h2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    padding-left: 20px;
+    background-color: var(--cor--fundo--4);
+    border-bottom: 3px solid var(--cor--fundo--6);
+    color: #fff;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
+
+.campo-input {
+    width: 100%;
+    height: 90px;
+
+}
+
+#nome-completo {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 40px;
+}
+
+form div input,
+form div select {
+    width: var(--width--input--mine);
+    height: 50px;
+    border: 3px solid var(--cor--fundo--6);
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 1.2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+form div select {
+    width: var(--width--input--max);
+}
+
+#cpf,
+#grupos,
+#cursos,
+#email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+form #email input,
+form #cpf input {
+    width: var(--width--input--max);
+}
+
+#btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#btn button {
+    width: 200px;
+    height: 50px;
+    background-color: var(--cor--fundo--4);
+    border: 3px solid var(--cor--fundo--6);
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#mensagem {
+    top: 64px;
+    right: 5px;
+}
+
+@media screen and (max-width: 1400px) {
+    :root {
+        --width--input--mine: 400px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    :root {
+        --width--input--mine: 350px;
+        --width--input--max: 800px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    :root {
+        --width--input--max: 600px;
+    }
+
+    #nome-completo {
+        height: 200px;
+        flex-direction: column;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+    }
+}
+
+@media screen and (max-height: 1000px) {
+    :root {
+        --height--cad: 60%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    :root {
+        --width--input--max: 400px;
+    }
+
+
+}
+
+@media screen and (max-height: 800px) {
+    :root {
+        --height--cad: 78%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    :root {
+        --width--input--max: 250px;
+    }
+
+
+}
