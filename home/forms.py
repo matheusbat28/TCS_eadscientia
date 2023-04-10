@@ -1,5 +1,6 @@
 from django import forms
 from .models import Solicitacao, Curso
+from conta.models import Usuario
 from validate_cpf import validate_cpf
 
 class FormSolicitacaoMatricula(forms.Form):
@@ -20,6 +21,8 @@ class FormSolicitacaoMatricula(forms.Form):
     def clean_cpf(self):
         cpf = self.cleaned_data['cpf'].strip()
         if Solicitacao.objects.filter(cpf=cpf).exists():
+            raise forms.ValidationError('CPF já solicitou a matrícula!')
+        elif Usuario.objects.filter(cpf=cpf).exists():
             raise forms.ValidationError('CPF já cadastrado!')
         elif not validate_cpf.is_valid(cpf):
             raise forms.ValidationError('CPF inválido!')
@@ -28,6 +31,8 @@ class FormSolicitacaoMatricula(forms.Form):
     def clean_email(self):
         email = self.cleaned_data['email'].strip()
         if Solicitacao.objects.filter(email=email).exists():
+            raise forms.ValidationError('E-mail já solicitou a matricula!')
+        elif Usuario.objects.filter(email=email).exists():
             raise forms.ValidationError('E-mail já cadastrado!')
         return email
     

@@ -9,6 +9,10 @@
             <img src="{% static 'img/perfil.png' %}" alt="">
             {% endif %}
         </div>
+        <div id="matricula">
+            <p class="m-0 p-0">matricula</p>
+            <h4 class="m-0 p-0">{{ user.matricula }}</h4>
+        </div>
     </div>
     <div id="menu-conteudo">
         <a id="home" class="itens-conteudo" href="{% url 'home' %}"><i class="fa-solid fa-house"></i>

@@ -5,6 +5,7 @@ from django.utils.timezone import now
 
 class Usuario(AbstractUser):
 
+    email = models.EmailField(unique=True, verbose_name='E-mail', blank=True, null=True)
     matricula = models.CharField(max_length=10, unique=True)
     cpf = CPFField('CPF', unique=True)
     imagem_perfil = models.ImageField(upload_to='perfil_img/%Y/%m/%d', blank=True, null=True)

@@ -1,20 +1,23 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import FormSolicitacaoMatricula
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from .models import Solicitacao
 from conta.models import Usuario
+from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
 import random
 import string
+
 
 @login_required
 def home(request):
     return render(request, 'home/index.html')
 
 @login_required
+@user_passes_test(lambda u: u.groups.filter(name='gestão').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def solicitacaomMatricula(request):
     formFormSolicitacaoMatricula = FormSolicitacaoMatricula(request.POST)
     
@@ -22,7 +25,7 @@ def solicitacaomMatricula(request):
         if formFormSolicitacaoMatricula.is_valid():
             solicitacao = formFormSolicitacaoMatricula.save(request.user)
             if solicitacao is not None:
-                mandar_email(settings.EMAIL_RH, solicitacao, 'solicitacao')
+                mandar_email(email=settings.EMAIL_RH, solicitacao=solicitacao, tipo='solicitacao')
                 messages.success(request, 'Solicitação enviada com sucesso.')
                 return redirect('solicitacaomMatricula')
             
@@ -50,6 +53,7 @@ def solicitacaomMatricula(request):
 
      
 @login_required
+@user_passes_test(lambda u: u.groups.filter(name='rh').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def listarSolicitarMatricula(request):
     solicitacoes = Solicitacao.objects.filter(criado=False).order_by('sobrenome').order_by('nome')
     paginator = Paginator(solicitacoes, 10)
@@ -59,9 +63,20 @@ def listarSolicitarMatricula(request):
     return render(request, 'listarSolicitarMatricula/index.html', {'posts': posts})
 
 @login_required
+@user_passes_test(lambda u: u.groups.filter(name='rh').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def visualizarSolicitacao(request, id):
     if request.method == 'POST' and 'btnVoltar' in request.POST:
         return redirect('listarSolicitarMatricula')
+    elif request.method == 'POST' and 'btnRecusar' in request.POST:
+        try:
+            solicitacao = Solicitacao.objects.get(id=id)
+            solicitacao.delete()
+            mandar_email(email=solicitacao.email, solicitacao=solicitacao, tipo='recusacao')
+            messages.success(request, 'Solicitação recusada com sucesso.')
+            return redirect('listarSolicitarMatricula')
+        except Exception:
+            messages.error(request, 'Erro ao recusar a solicitação.')
+            return redirect('visualizarSolicitacao', id=id)
     elif request.method == 'POST' and 'btnAprovar' in request.POST:
         solicitacao = Solicitacao.objects.get(id=id)
         if solicitacao is not None:
@@ -82,9 +97,13 @@ def visualizarSolicitacao(request, id):
                                                             )
                     usuario.cursos.add(solicitacao.curso)
                     usuario.set_password(senha)
+                    usuario.groups.add(Group.objects.get(name='aluno'))
                     usuario.save()
                     solicitacao.criado = True
                     solicitacao.save()
+                    mandar_email(email=settings.EMAIL_RH, solicitacao=solicitacao, tipo='aprovacaoRH')
+                    mandar_email(email=usuario.email, usuario=usuario, tipo='aprovacao', senha=senha)
+                    Solicitacao.objects.get(id=id).delete()
                 
                 except Exception:
                     messages.error(request, 'Erro ao criar o usuário.')
@@ -100,9 +119,17 @@ def visualizarSolicitacao(request, id):
 
 
 @login_required
+@user_passes_test(lambda u: u.groups.filter(name='rh').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def deletarSolicitacao(request, id):
-    Solicitacao.objects.get(id=id).delete()
-    return redirect('listarSolicitarMatricula')
+    try:
+            solicitacao = Solicitacao.objects.get(id=id)
+            solicitacao.delete()
+            mandar_email(email=solicitacao.email, solicitacao=solicitacao, tipo='recusacao')
+            messages.success(request, 'Solicitação recusada com sucesso.')
+            return redirect('listarSolicitarMatricula')
+    except Exception:
+        messages.error(request, 'Erro ao recusar a solicitação.')
+        return redirect('visualizarSolicitacao', id=id)
 
 def gararSenhaAleatoria():
     letras = string.ascii_letters
@@ -111,7 +138,7 @@ def gararSenhaAleatoria():
     senha = ''.join(random.choice(caracteres) for i in range(8))
     return senha
 
-def mandar_email(email, solicitacao, tipo):
+def mandar_email(email,tipo, solicitacao=None, senha=None, usuario=None):
     
     if tipo == 'solicitacao':
         email = EmailMultiAlternatives(f'solicitação de matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
@@ -125,13 +152,33 @@ def mandar_email(email, solicitacao, tipo):
                                     ''', settings.EMAIL_HOST_USER, [email])
         email.send()
     elif tipo == 'aprovacao':
+        email = EmailMultiAlternatives(f'Aprovação da matricula {usuario.get_full_name()}', f'''
+                            Seu dados da matricula
+                Nome: {usuario.get_full_name()}
+                cpf: {usuario.cpf}
+                Email: {usuario.email}
+                matricula: {usuario.matricula}
+                Senha: {senha}
+                
+                                    ''', settings.EMAIL_HOST_USER, [email])
+        email.send()
+    elif tipo == 'aprovacaoRH':
         email = EmailMultiAlternatives(f'Aprovação da matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
                             Aprovação da matricula
                 Nome: {solicitacao.nome.title()} {solicitacao.sobrenome.title()}
                 cpf: {solicitacao.cpf}
                 Email: {solicitacao.email}
                 Curso: {solicitacao.curso.nome.title()}
-                Quem solicitou: {solicitacao.usuario.get_full_name().title()} ({solicitacao.usuario.matricula})
+                Quem Aprovou: {solicitacao.usuario.get_full_name().title()} ({solicitacao.usuario.matricula})
+                
+                                    ''', settings.EMAIL_HOST_USER, [email])
+        email.send()
+    elif tipo == 'recusacao':
+        email = EmailMultiAlternatives(f'Recusação da matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
+                            Recusação da matricula
+                Meu desculpa falar isso mas sua matricula foi recusada 
+                para o curso {solicitacao.curso.nome.title()}
+                caso tenha alguma duvida entre em contato com o RH
                 
                                     ''', settings.EMAIL_HOST_USER, [email])
         email.send()

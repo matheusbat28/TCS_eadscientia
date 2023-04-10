@@ -4,7 +4,7 @@ $(document).ready(function () {
     let rhStatus = true;
     let gestaoStatus = true;
 
-    $('.itens-subconteudo, .seta-baixo').hide();
+    $('.itens-subconteudo, .seta-baixo, #matricula').hide();
 
     $('#menu-rodape, #menu-icon').click(function () {
 
@@ -20,6 +20,7 @@ $(document).ready(function () {
             $('.itens-subconteudo').hide();
             $('.seta-baixo').hide();
             $('.seta-baixo').css('transform', 'rotate(0deg)');
+            $('#matricula').hide();
         } else {
             $('#menu-rodape').css('justify-content', 'flex-end');
             $('#menu-rodape i').css('margin-right', '40px');
@@ -30,6 +31,7 @@ $(document).ready(function () {
             $('#menu-conteudo a').css('margin-left', '20px');
             $('#menu-conteudo a h3').css('display', 'block');
             $('.seta-baixo').show();
+            $('#matricula').show();
         }
     });
 

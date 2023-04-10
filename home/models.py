@@ -20,7 +20,7 @@ class Solicitacao(models.Model):
     curso = models.ForeignKey('home.Curso', on_delete=models.DO_NOTHING)
     usuario = models.ForeignKey('conta.Usuario', on_delete=models.DO_NOTHING)
     data_solicitacao = models.DateTimeField(default=now)
-    criado = models.BooleanField(default=False)
+    criado = models.BooleanField(default=False, verbose_name='Validado')
 
     def __str__(self):
         return f'{self.nome} {self.sobrenome}'

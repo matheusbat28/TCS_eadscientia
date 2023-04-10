@@ -100,7 +100,7 @@ form #curso input {
 }
 
 #btn button {
-    width: 200px;
+    width: 90px;
     height: 50px;
     border: none;
     border-radius: 5px;
@@ -119,6 +119,11 @@ form #curso input {
 #btn button:nth-child(2) {
     background-color: red;
 }
+
+#btn button:nth-child(3) {
+    background-color: rgb(199, 41, 41);
+}
+
 
 #mensagem {
     top: 64px;
