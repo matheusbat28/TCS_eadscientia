@@ -21,7 +21,7 @@ class FormLogin(forms.Form):
         return matricula
 
     def clean_senha(self):
-        senha = self.cleaned_data['senha'].strip()
+        senha = self.cleaned_data['senha']
         if len(senha) == 0:
             raise forms.ValidationError('Você deve informar a senha.')
         elif len(senha) < 6:

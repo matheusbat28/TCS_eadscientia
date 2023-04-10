@@ -1,0 +1,211 @@
+:root {
+    --height--cad: 60%;
+    --width--input--mine: 350px;
+    --width--input--max: 800px;
+    --height--input: 50px;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+#formulario {
+    height: var(--height--cad);
+    border: 3px solid var(--cor--fundo--6);
+    border-radius: 10px;
+    overflow: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#formulario::-webkit-scrollbar {
+    width: 0;
+}
+
+#formulario h2 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 90px;
+    padding-left: 20px;
+    background-color: var(--cor--fundo--4);
+    border-bottom: 3px solid var(--cor--fundo--6);
+    color: #fff;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+}
+
+
+.campo-input {
+    width: 100%;
+    height: 100px;
+
+}
+
+#nome-completo {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 40px;
+}
+
+form div input {
+    width: var(--width--input--mine);
+    height: var(--height--input);
+    border: 3px solid var(--cor--fundo--6);
+    border-radius: 5px;
+    padding-left: 10px;
+    font-size: 1.2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #000;
+}
+
+#curso,
+#email,
+#cpf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.label-campo {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: calc(var(--height--input) + 40px);
+}
+
+label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    color: var(--cor--fundo--6);
+}
+
+
+form #email input,
+form #cpf input,
+form #curso input {
+    width: var(--width--input--max);
+}
+
+#btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#btn button {
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    cursor: pointer;
+    margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#btn button:nth-child(1) {
+    background-color: green;
+}
+
+#btn button:nth-child(2) {
+    background-color: red;
+}
+
+#mensagem {
+    top: 64px;
+    right: 5px;
+}
+
+@media screen and (max-width: 1100px) {
+    :root {
+        --height--cad: 75%;
+    }
+
+}
+
+@media screen and (max-width: 900px) {
+    :root {
+        --width--input--mine: 300px;
+        --width--input--max: 600px;
+    }
+
+}
+
+@media screen and (max-height: 800px) {
+    :root {
+        --height--cad: 80%;
+    }
+
+}
+
+@media screen and (max-width: 650px) {
+    :root {
+        --width--input--mine: 250px;
+        --width--input--max: 500px;
+    }
+
+}
+
+@media screen and (max-width: 600px) {
+    :root {
+        --width--input--mine: 200px;
+        --width--input--max: 400px;
+    }
+
+    #nome-completo {
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+        margin-top: 10px;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    :root {
+        --width--input--mine: 200px;
+        --width--input--max: 300px;
+    }
+
+    #nome-completo {
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    :root {
+        --width--input--mine: 200px;
+        --width--input--max: 250px;
+    }
+
+    #nome-completo {
+        flex-direction: column;
+        height: 150px;
+        width: 100%;
+    }
+
+    #nome-completo input {
+        width: var(--width--input--max);
+        margin-top: 10px;
+    }
+}

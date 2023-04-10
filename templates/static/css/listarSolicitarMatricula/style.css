@@ -40,14 +40,10 @@ table tr th {
 }
 
 #opcoes a:nth-child(1) {
-    color: green;
-}
-
-#opcoes a:nth-child(2) {
     color: var(--cor--fundo--6);
 }
 
-#opcoes a:nth-child(3) {
+#opcoes a:nth-child(2) {
     color: red;
 }
 

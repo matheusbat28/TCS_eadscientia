@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/visualizacaoSolicitacaoMatricula/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+{% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<form id="formulario" method="POST" class="container p-0">
+    {% csrf_token %}
+    <h2>visualizar socilicitação</h2>
+    <div id="nome-completo" class="campo-input">
+        <div class="label-campo">
+            <label for="nome">Nome:</label>
+            <input type="text" name="nome" id="nome" placeholder="Nome:" value="{{ solicitacao.nome.title }}" disabled>
+        </div>
+        <div class="label-campo">
+            <label for="sobrenome">Sobrenome:</label>
+            <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome:"
+                value="{{ solicitacao.sobrenome.title }}" disabled>
+        </div>
+    </div>
+    <div id="cpf" class="campo-input">
+        <div class="label-campo">
+            <label for="cpf">CPF:</label>
+            <input type="text" name="cpf" id="cpf-input" placeholder="CPF:" value="{{ solicitacao.cpf }}" disabled>
+        </div>
+    </div>
+    <div id="email" class="campo-input">
+        <div class="label-campo">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Email:" value="{{ solicitacao.email }}" disabled>
+        </div>
+    </div>
+    <div id="curso" class="campo-input">
+        <div class="label-campo">
+            <label for="curso">Curso:</label>
+            <input type="text" name="curso" id="curso" placeholder="Curso:" value="{{ solicitacao.curso.nome.title }}"
+                disabled>
+        </div>
+    </div>
+
+    <div id="btn" class="campo-input">
+        <button name="btnAprovar" type="submit">aprovar</button>
+        <button name="btnVoltar" type="submit">voltar</button>
+    </div>
+
+</form>
+
+{% include 'parciais/_mensagem.html' %}
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/visualizacaoSolicitacaoMatricula/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}

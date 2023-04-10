@@ -6,6 +6,7 @@
             {% if user.imagem_perfil %}
             <img src="{{ user.imagem_perfil.url }}" alt="">
             {% else %}
+            <img src="{% static 'img/perfil.png' %}" alt="">
             {% endif %}
         </div>
     </div>
