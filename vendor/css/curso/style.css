@@ -22,26 +22,31 @@
 .cursos li {
     margin: 10px;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    background-color: var(--cor--fundo--6);
+    border: 3px solid var(--cor--fundo--3);
+    border-radius: 10px;
+    box-shadow: var(--sombra--1);
     transition: all 0.3s ease-in-out;
     text-align: center;
-    min-width: 150px;
-    height: 100px;
+    min-width: 100px;
+    height: 200px;
     display: flex;
     flex-direction: column;
-    justify-content: aps;
+    justify-content: center;
 }
 .cursos li:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 10px rgba(0,0,0,0.3);
 }
 .cursos a {
-    color: #333;
+    color: #ffffff;
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
     text-transform: uppercase;
+    
+}
+
+.cursos div{
+    margin: 20px;
 }
