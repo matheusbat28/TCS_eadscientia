@@ -92,22 +92,63 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   transition: .8s;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  margin: 0 10px;
 }
 
 .seta:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .seta i {
   font-size: 1.4rem;
-  color: var(--cor--fundo--1);
+  color: #fff;
 }
 
 #pesquisa {
   width: 100%;
   height: 40%;
+}
+
+#input-pesquisa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+}
+
+#input-pesquisa input {
+  width: 600px;
+  height: 40px;
+  border: 2px solid var(--cor--fundo--4);
+  border-radius: 10px;
+  padding: 5px;
+}
+
+@media (max-width: 800px) {
+  #input-pesquisa input {
+    width: 400px;
+  }
+}
+
+@media (max-width: 500px) {
+  #carrocel {
+    height: 40%;
+  }
+
+  #card-carrocel {
+    height: 50%;
+  }
+}
+
+@media (max-width: 440px) {
+  .carrocel-descricao div p:nth-child(2) {
+    display: none;
+  }
 }
