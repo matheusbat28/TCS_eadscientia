@@ -1,0 +1,102 @@
+:root {
+    --height-titulo: 50px;
+    --height-img: 40%;
+    --height-conteudo: 50%;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+}
+
+#inicio {
+    margin-top: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+#cursos {
+    height: 100%;
+    width: 1000px;
+}
+
+#cursos h3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: var(--height-titulo);
+    text-transform: capitalize;
+    color: var(--cor--fundo--4);
+    font-weight: bold;
+}
+
+#carrocel-curso {
+    display: grid;
+    place-items: center;
+    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: 400px;
+    height: calc(100% - calc(var(--height-titulo) + 8px));
+    width: 100%;
+    padding: 5px 20px 0 20px;
+}
+
+.cad-curso {
+    height: 100%;
+    width: 100%;
+    background-color: var(--cor--fundo--6);
+    border: 2px solid var(--cor--fundo--3);
+    border-radius: 10px;
+    box-shadow: var(--sombra--1);
+    transition: .3s;
+}
+
+.img-curso {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    height: var(--height-img);
+    border-bottom: 2px solid var(--cor--fundo--3);
+}
+
+.conteudo-curso {
+    width: 100%;
+    height: var(--height-conteudo);
+    border-bottom: 2px solid var(--cor--fundo--3);
+}
+
+.progresso-curso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: calc(100% - calc(var(--height-img) + var(--height-conteudo)));
+    background-color: var(--cor--fundo--5);
+}
+
+.progresso-curso progress {
+    height: 10px;
+    border-radius: 10px;
+}
+
+.progresso-curso progress::-webkit-progress-bar {
+    background-color: var(--cor--fundo--2);
+}
+
+.progresso-curso progress::-webkit-progress-value {
+    background-color: var(--cor--fundo--6);
+}
+
+.img-curso img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#informacao {
+    height: 100%;
+    width: 400px;
+}
