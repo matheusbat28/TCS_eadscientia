@@ -1,47 +1,48 @@
-:root {
-    --height-header: 60px;
-
-}
-
 body {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
 
-header {
-    position: fixed;
-    z-index: 9;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: var(--height-header);
-    background: linear-gradient(90deg, var(--cor--fundo--5), var(--cor--fundo--6));
-    box-shadow: var(--sombra--1);
+#carrocel {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  height: 60%;
 }
 
-header h3 {
-    font-size: 1.2rem;
-    color: #fff;
-    font-weight: 500;
-    margin-left: 130px;
+#pesquisa {
+  width: 100%;
+  height: 40%;
 }
 
-time {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 65px;
-    height: 60%;
-    color: #fff;
-    font-weight: bold;
-    margin-right: 150px;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    box-shadow: var(--sombra--1);
+#card-carrocel {
+  background-color: blueviolet;
+  margin-bottom: 20px;
 }
 
-main {
-    width: 100%;
-    height: 100%;
+#seta-carrocel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+.seta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 80px;
+  transition: 1s;
+}
+
+.seta:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.seta i {
+  font-size: 2rem;
+  color: var(--cor--fundo--6);
 }
