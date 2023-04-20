@@ -15,7 +15,6 @@ body {
 
 #formulario {
     height: var(--height--cad);
-    border: 3px solid var(--cor--fundo--6);
     border-radius: 10px;
     overflow: auto;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);

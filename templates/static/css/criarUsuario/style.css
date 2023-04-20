@@ -18,7 +18,6 @@ body {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border: 3px solid var(--cor--fundo--6);
     overflow: auto;
 }
 
