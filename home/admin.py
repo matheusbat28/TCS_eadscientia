@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Solicitacao, Curso
+from .models import Solicitacao
 
 class SolicitacaoAdmin(admin.ModelAdmin):
     list_display = ('nome', 'sobrenome', 'cpf', 'email', 'usuario', 'data_solicitacao', 'criado', 'curso')
@@ -8,11 +8,3 @@ class SolicitacaoAdmin(admin.ModelAdmin):
     per_page = 10    
     
 admin.site.register(Solicitacao, SolicitacaoAdmin)
-
-class CursoAdmin(admin.ModelAdmin):
-    list_display = ('nome',)
-    search_fields = ('nome',)
-    list_filter = ('nome',)
-    per_page = 10
-    
-admin.site.register(Curso, CursoAdmin)

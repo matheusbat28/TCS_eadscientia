@@ -1,5 +1,6 @@
 from django import forms
-from .models import Solicitacao, Curso
+from .models import Solicitacao
+from curso.models import Curso
 from conta.models import Usuario
 from django.contrib.auth.models import Group
 from validate_cpf import validate_cpf
