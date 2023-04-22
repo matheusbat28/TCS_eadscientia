@@ -71,6 +71,24 @@ body {
   object-fit: cover;
 }
 
+.carrocel-animacao  {
+  animation-name: slide-left;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+
+
 #carrocel-img div img {
   width: 100%;
   height: 100%;
