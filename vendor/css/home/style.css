@@ -190,6 +190,15 @@ body {
   margin-top: 30px;
 }
 
-.cards-container {
-  background-color: var(--cor--fundo--4);
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  margin: 10px;
+  box-shadow: var(--sombra--1);
+  
 }
+
+
+
