@@ -182,7 +182,7 @@ body {
 #cards-container {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 600px));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 80%));
   grid-auto-rows: 200px;
   gap: 10px;
   width: 100%;
@@ -193,12 +193,30 @@ body {
 .card {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
   margin: 10px;
   box-shadow: var(--sombra--1);
   
 }
+
+.cad-img {
+  height: 100%;
+  width: 40%;
+}
+
+.cad-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-descricao {
+  width: 60%;
+  height: 100%;
+}
+
+
 
 
 
