@@ -80,6 +80,11 @@ body {
     box-shadow: var(--sombra--1);
 }
 
+#mensagem {
+    top: 100px;
+    right: 5px;
+}
+
 @media (max-width: 1100px) {
     :root {
         --width--input: 350px;

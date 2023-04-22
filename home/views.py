@@ -32,6 +32,7 @@ def solicitacaoMatricula(request):
             
         else:
             json = formFormSolicitacaoMatricula.errors.as_json()
+            print(json)
 
             if 'nome' in json:
                 messages.error(request, formFormSolicitacaoMatricula.errors['nome'][0])
@@ -147,7 +148,6 @@ def mandar_email(email,tipo, solicitacao=None, senha=None, usuario=None, usuario
                 Nome: {solicitacao.nome.title()} {solicitacao.sobrenome.title()}
                 cpf: {solicitacao.cpf}
                 Email: {solicitacao.email}
-                Curso: {solicitacao.curso.nome.title()}
                 Quem solicitou: {solicitacao.usuario.get_full_name().title()} ({solicitacao.usuario.matricula})
                 
                                     ''', settings.EMAIL_HOST_USER, [email])
@@ -169,7 +169,6 @@ def mandar_email(email,tipo, solicitacao=None, senha=None, usuario=None, usuario
                 Nome: {solicitacao.nome.title()} {solicitacao.sobrenome.title()}
                 cpf: {solicitacao.cpf}
                 Email: {solicitacao.email}
-                Curso: {solicitacao.curso.nome.title()}
                 Quem Aprovou: {solicitacao.usuario.get_full_name().title()} ({solicitacao.usuario.matricula})
                 
                                     ''', settings.EMAIL_HOST_USER, [email])
@@ -178,7 +177,6 @@ def mandar_email(email,tipo, solicitacao=None, senha=None, usuario=None, usuario
         email = EmailMultiAlternatives(f'Recusação da matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
                             Recusação da matricula
                 Meu desculpa falar isso mas sua matricula foi recusada 
-                para o curso {solicitacao.curso.nome.title()}
                 caso tenha alguma duvida entre em contato com o RH
                 
                                     ''', settings.EMAIL_HOST_USER, [email])

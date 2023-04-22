@@ -13,6 +13,7 @@
 {% include 'parciais/_cabecalho.html' %}
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
+{% include 'parciais/_mensagem.html' %}
 
 <form id="formulario" class="container-fluid p-0 h-50" method="POST">
     {% csrf_token %}
@@ -44,7 +45,6 @@
         <button type="submit">Enviar</button>
     </div>
 </form>
-{% include 'parciais/_mensagem.html' %}
 {% endblock %}
 
 {% block js %}
