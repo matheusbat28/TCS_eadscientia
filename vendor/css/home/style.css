@@ -182,7 +182,7 @@ body {
 #cards-container {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 600%));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 600px));
   grid-auto-rows: 200px;
   gap: 10px;
   width: 100%;
