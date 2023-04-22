@@ -182,7 +182,7 @@ body {
 #cards-container {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 80%));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 600%));
   grid-auto-rows: 200px;
   gap: 10px;
   width: 100%;
@@ -194,10 +194,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 3%;
   flex-direction: row;
   margin: 10px;
   box-shadow: var(--sombra--1);
   
+}
+
+.card .card-descricao {
+  padding: 10px 0;
 }
 
 .cad-img {
