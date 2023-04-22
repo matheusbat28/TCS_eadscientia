@@ -1,6 +1,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  overflow: auto;
 }
 
 #carrocel {
@@ -129,6 +130,8 @@ body {
   color: #fff;
 }
 
+/* -----------carrossel------------ */
+
 #pesquisa {
   width: 100%;
   height: 40%;
@@ -169,4 +172,52 @@ body {
   .carrocel-descricao div p:nth-child(2) {
     display: none;
   }
+}
+
+/* -----------Barra pesquisa------------ */
+
+#cards-container {
+display: flex;
+align-items: center;
+justify-content: center;
+width: 100%;
+height: 250px;
+
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 400px;
+  height: 200px;
+  margin: 10px;
+  box-shadow: var(--sombra--1);
+}
+
+.card img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-descricao {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+}
+
+.card-descricao h3 {
+  font-size: 1.2rem;
+  color: #000;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.card-descricao p {
+  font-size: 1rem;
+  color: #333;
 }
