@@ -15,39 +15,8 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-<table class="container-sm h-auto">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Email</th>
-            <th>Gestor</th>
-            <th>Curso</th>
-            <th>Opções</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for socilitacao in posts %}
-        <tr>
-            <td>{{ socilitacao.nome.title }} {{ socilitacao.sobrenome.title }}</td>
-            <td>{{ socilitacao.cpf }}</td>
-            <td>{{ socilitacao.email }}</td>
-            <td>{{ socilitacao.usuario.get_full_name.title }}</td>
-            <td>{{ socilitacao.curso.nome.title }}</td>
-            <td id="opcoes">
-                <a href="{% url 'visualizarSolicitacao' socilitacao.id %}"
-                    title="Visualizar o usuário {{ socilitacao.nome.title }} {{ socilitacao.sobrenome.title }}"><i
-                        class="fa-solid fa-eye icons ms-2"></i></a>
-                <a href="{% url 'deletarSolicitacao' socilitacao.id %}"
-                    title="Recusar o usuário {{ socilitacao.nome.title }} {{ socilitacao.sobrenome.title }}"><i
-                        class="fa-solid fa-trash-can icons ms-2"></i></a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
 
-{% include 'parciais/_paginacao.html' %}
+{% comment %} {% include 'parciais/_paginacao.html' %} {% endcomment %}
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}
 

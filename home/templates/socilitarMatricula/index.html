@@ -14,24 +14,34 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-<form id="cad-sol-matricula" class="container p-0" method="POST">
+<form id="formulario" class="container-fluid p-0 h-50" method="POST">
     {% csrf_token %}
-    <h2>solicitação de matricula</h2>
-    <div id="nome-completo" class="campo-input">
-        {{formFormSolicitacaoMatricula.nome}}
-        {{formFormSolicitacaoMatricula.sobrenome}}
+    <div id="area1">
+        <div>
+            <h5>Nome:</h5>
+            {{formFormSolicitacaoMatricula.nome}}
+        </div>
+        <div>
+            <h5>Sobrenome:</h5>
+            {{formFormSolicitacaoMatricula.sobrenome}}
+        </div>
+        <div>
+            <h5>CPF:</h5>
+            {{formFormSolicitacaoMatricula.cpf}}
+        </div>
+        <div>
+            <h5>E-mail:</h5>
+            {{formFormSolicitacaoMatricula.email}}
+        </div>
     </div>
-    <div id="cpf" class="campo-input">
-       {{formFormSolicitacaoMatricula.cpf}}
+    <div id="area2">
+        <div>
+            <h5>Motivo:</h5>
+            {{formFormSolicitacaoMatricula.motivo}}
+        </div>
     </div>
-    <div id="email" class="campo-input">
-       {{formFormSolicitacaoMatricula.email}}
-    </div>
-    <div id="email" class="campo-input">
-       {{formFormSolicitacaoMatricula.curso}}
-    </div>
-    <div id="btn" class="campo-input">
-        <button type="submit">Solicitar</button>
+    <div id="area3">
+        <button type="submit">Enviar</button>
     </div>
 </form>
 {% include 'parciais/_mensagem.html' %}

@@ -19,7 +19,7 @@ def home(request):
 @login_required
 @user_passes_test(lambda u:u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 @user_passes_test(lambda u: u.groups.filter(name='gestão').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
-def solicitacaomMatricula(request):
+def solicitacaoMatricula(request):
     formFormSolicitacaoMatricula = FormSolicitacaoMatricula(request.POST)
     
     if request.method == 'POST':
@@ -28,28 +28,28 @@ def solicitacaomMatricula(request):
             if solicitacao is not None:
                 mandar_email(email=settings.EMAIL_RH, solicitacao=solicitacao, tipo='solicitacao')
                 messages.success(request, 'Solicitação enviada com sucesso.')
-                return redirect('solicitacaomMatricula')
+                return redirect('solicitacaoMatricula')
             
         else:
             json = formFormSolicitacaoMatricula.errors.as_json()
 
             if 'nome' in json:
                 messages.error(request, formFormSolicitacaoMatricula.errors['nome'][0])
-                return redirect('solicitacaomMatricula')
+                return redirect('solicitacaoMatricula')
             elif 'sobrenome' in json:
                 messages.error(request, formFormSolicitacaoMatricula.errors['sobrenome'][0])
-                return redirect('solicitacaomMatricula')
+                return redirect('solicitacaoMatricula')
             elif 'cpf' in json:
                 messages.error(request, formFormSolicitacaoMatricula.errors['cpf'][0])
-                return redirect('solicitacaomMatricula')
+                return redirect('solicitacaoMatricula')
             elif 'email' in json:
                 messages.error(request, formFormSolicitacaoMatricula.errors['email'][0])
-                return redirect('solicitacaomMatricula')
-            elif 'curso' in json:
-                messages.error(request, formFormSolicitacaoMatricula.errors['curso'][0])
-                return redirect('solicitacaomMatricula')
+                return redirect('solicitacaoMatricula')
+            elif 'motivo' in json:
+                messages.error(request, formFormSolicitacaoMatricula.errors['motivo'][0])
+                return redirect('solicitacaoMatricula')
                 
-    return render(request, 'socilitarMatricula/index.html', {'formFormSolicitacaoMatricula': formFormSolicitacaoMatricula})
+    return render(request, 'socilitarMatricula/index.html', {'formFormSolicitacaoMatricula': formFormSolicitacaoMatricula, 'pagina': 'Solicitação de Matricula'})
 
 
      
@@ -61,7 +61,7 @@ def listarSolicitarMatricula(request):
     
     page = request.GET.get('page')
     posts = paginator.get_page(page)
-    return render(request, 'listarSolicitarMatricula/index.html', {'posts': posts})
+    return render(request, 'listarSolicitarMatricula/index.html', {'posts': posts, 'pagina': 'Solicitações de Matricula'})
 
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='rh').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
@@ -116,7 +116,7 @@ def visualizarSolicitacao(request, id):
         else:
             messages.error(request, 'Erro ao aprovar a solicitação.')
             return redirect('listarSolicitarMatricula')
-    return render(request, 'visualizacaoSolicitacaoMatricula/index.html', {'solicitacao': Solicitacao.objects.get(id=id)})
+    return render(request, 'visualizacaoSolicitacaoMatricula/index.html', {'solicitacao': Solicitacao.objects.get(id=id), 'pagina': 'visualizar Solicitação'})
 
 
 @login_required
@@ -235,4 +235,4 @@ def criarUsuario(request):
                 messages.error(request, formCriacaoUsuario.errors['grupos'][0])
                 return redirect('criarUsuario')
             
-    return render(request, 'criarUsuario/index.html', {'formCriacaoUsuario': formCriacaoUsuario})
+    return render(request, 'criarUsuario/index.html', {'formCriacaoUsuario': formCriacaoUsuario, 'pagina': 'Criar Usuário'})

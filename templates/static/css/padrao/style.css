@@ -5,7 +5,7 @@
     scroll-behavior: smooth;
     list-style: none;
     text-decoration: none;
-    overflow: hidden;
+    /* overflow: hidden; */
     outline: none;
 }
 

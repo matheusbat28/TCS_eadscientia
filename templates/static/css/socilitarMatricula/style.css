@@ -1,166 +1,113 @@
-:root {
-    --height--cad: 55%;
-    --width--input--mine: 350px;
-    --width--input--max: 900px;
-}
-
 body {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    justify-content: center;
 }
 
-#cad-sol-matricula {
-    height: var(--height--cad);
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    overflow: auto;
+:root {
+    --width--input: 500px;
+    --height--input: 40px;
 }
 
-#cad-sol-matricula::-webkit-scrollbar {
-    width: 0;
+
+#formulario {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 80px;
+    grid-template-areas: 'area1 area2' 'area3 area3';
 }
 
-#cad-sol-matricula h2 {
+#area3,
+#area2,
+#area1 {
     display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 30px;
+    flex-direction: column;
+    grid-area: area1;
+}
+
+#area2 div,
+#area1 div {
+    width: calc(var(--width--input) + 20px);
+}
+
+#area2 div h5,
+#area1 div h5 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--cor--fundo--5);
+}
+
+#area2 div select,
+#area2 div textarea,
+#area1 div input {
+    width: var(--width--input);
+    height: var(--height--input);
+    border: 1px solid var(--cor--fundo--5);
+    border-radius: 5px;
+    padding: 0 10px;
+    box-shadow: var(--sombra--1);
+}
+
+#area2 div textarea {
+    height: auto;
+}
+
+#area2 {
+    grid-area: area2;
+    margin-left: 50px;
+    align-items: flex-start;
+}
+
+#area3 {
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
-    height: 60px;
-    padding-left: 20px;
-    background-color: var(--cor--fundo--4);
-    border-bottom: 3px solid var(--cor--fundo--6);
-    color: #fff;
-    font-size: 1.5rem;
-    text-transform: capitalize;
+    grid-area: area3;
 }
 
-.campo-input {
-    width: 100%;
-    height: 90px;
-
-}
-
-#nome-completo {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 40px;
-}
-
-form div input,
-form div select {
-    width: var(--width--input--mine);
-    height: 50px;
-    border: 3px solid var(--cor--fundo--6);
-    border-radius: 5px;
-    padding-left: 10px;
-    font-size: 1.2rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-form div select {
-    width: var(--width--input--max);
-}
-
-#email {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#cpf {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-form #email input,
-form #cpf input {
-    width: var(--width--input--max);
-}
-
-#btn {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-#btn button {
+#area3 button {
     width: 200px;
     height: 50px;
-    background-color: var(--cor--fundo--4);
-    border: 3px solid var(--cor--fundo--6);
-    border-radius: 5px;
+    background-color: var(--cor--fundo--5);
     color: #fff;
     font-size: 1.2rem;
-    text-transform: capitalize;
-    cursor: pointer;
-    margin-right: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    border: 2px solid var(--cor--fundo--3);
+    border-radius: 5px;
+    box-shadow: var(--sombra--1);
 }
 
-#mensagem {
-    top: 64px;
-    right: 5px;
-}
-
-@media screen and (max-width: 1400px) {
+@media (max-width: 1100px) {
     :root {
-        --width--input--mine: 400px;
+        --width--input: 350px;
     }
 }
 
-@media screen and (max-width: 1100px) {
+@media (max-width: 800px) {
     :root {
-        --width--input--mine: 350px;
-        --width--input--max: 800px;
+        --width--input: 290px;
     }
 }
 
-@media screen and (max-width: 1000px) {
-    :root {
-        --width--input--max: 600px;
+@media (max-width: 800px) {
+    body {
+        display: flex;
+        align-items: flex-start;
     }
 
-    #nome-completo {
-        height: 200px;
-        flex-direction: column;
+    #formulario {
+        margin-top: 120px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 60px;
+        grid-template-areas: 'area1' 'area2' 'area3';
     }
 
-    #nome-completo input {
-        width: var(--width--input--max);
+    #area1,
+    #area2 {
+        margin-left: 0;
+        align-items: center;
     }
-}
-
-@media screen and (max-height: 1000px) {
-    :root {
-        --height--cad: 60%;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    :root {
-        --width--input--max: 400px;
-    }
-
-
-}
-
-@media screen and (max-height: 800px) {
-    :root {
-        --height--cad: 78%;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    :root {
-        --width--input--max: 250px;
-    }
-
-
 }

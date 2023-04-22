@@ -1,11 +1,34 @@
 #cabecalho {
-    border-bottom: 1px solid #e5e5e5;
-    height: 60px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100px;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
+}
+
+#conteudo_cabecalho {
+    width: 100%;
+    height: 60px;
     animation: cores_fundo 10s infinite;
+}
+
+#informacao-tela {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 350px;
+    height: 40px;
+    animation: cores_fundo 10s infinite;
+    border-radius: 0 0px 10px 10px;
+    border-bottom: 3px solid var(--cor--fundo--3);
+    border-left: 3px solid var(--cor--fundo--3);
+    border-right: 3px solid var(--cor--fundo--3);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 400;
 }
 
 #menu-icon {
@@ -37,5 +60,12 @@
 
     #menu-icon {
         display: flex;
+    }
+}
+
+@media screen and (max-width: 4000px) {
+
+    #informacao-tela {
+        width: 300px;
     }
 }

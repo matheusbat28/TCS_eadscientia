@@ -8,10 +8,10 @@ class Solicitacao(models.Model):
     sobrenome = models.CharField(max_length=100)
     cpf = CPFField('CPF', unique=True)
     email = models.EmailField()
-    curso = models.ForeignKey('curso.Curso', on_delete=models.DO_NOTHING)
     usuario = models.ForeignKey('conta.Usuario', on_delete=models.DO_NOTHING)
     data_solicitacao = models.DateTimeField(default=now)
     criado = models.BooleanField(default=False, verbose_name='Validado')
+    motivo = models.TextField()
 
     def __str__(self):
         return f'{self.nome} {self.sobrenome}'

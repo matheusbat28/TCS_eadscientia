@@ -10,7 +10,7 @@ class FormSolicitacaoMatricula(forms.Form):
     sobrenome = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'placeholder': 'Sobrenome:'}))
     cpf = forms.CharField(max_length=14, widget=forms.TextInput(attrs={'placeholder': 'CPF:', 'id': 'cpf-input'}))
     email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'E-mail:'}))
-    curso = forms.ModelChoiceField(queryset=Curso.objects.all(), empty_label='Selecione um curso')
+    motivo = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Motivo:', 'cols': '30', 'rows': '7'}))
     
     def clean_nome(self):
         nome = self.cleaned_data['nome'].strip().lower()
@@ -38,6 +38,12 @@ class FormSolicitacaoMatricula(forms.Form):
             raise forms.ValidationError('E-mail já cadastrado!')
         return email
     
+    def clean_motivo(self):
+        motivo = self.cleaned_data['motivo'].strip()
+        if len(motivo) == 0:
+            raise forms.ValidationError('Motivo não pode ser vazio!')
+        return motivo
+    
     
     def save(self, usuario):
         try:
@@ -46,8 +52,8 @@ class FormSolicitacaoMatricula(forms.Form):
                 sobrenome=self.cleaned_data['sobrenome'],
                 cpf=self.cleaned_data['cpf'],
                 email=self.cleaned_data['email'],
-                curso=self.cleaned_data['curso'],
-                usuario=usuario
+                usuario=usuario,
+                motivo=self.cleaned_data['motivo'],
             )
         except:
             raise forms.ValidationError('Erro ao salvar solicitação!')
