@@ -170,3 +170,19 @@ EMAIL_USE_SSL = False
 
 EMAIL_RH = config('EMAIL_RH')
 EMAIL_ADM = config('EMAIL_ADM')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+    },
+}

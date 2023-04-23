@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load filtros %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/visualizacaoSolicitacaoMatricula/style.css' %}">
@@ -35,6 +35,17 @@
         </div>
     </div>
     <div id="area2">
+        {% if user|in_grups:'desenvolvedor' or user|in_grups:'administrativo' %}
+        <div>
+            <h5>Setor:</h5>
+            <select name="" id="">
+                <option value="0">selecione um grupo</option>
+                {% for grupo in grupos %}
+                <option value="{{ grupo.id }}">{{ grupo.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
         <div>
             <h5>Motivo:</h5>
             <textarea name="" id="" cols="30" rows="10" readonly>

@@ -69,8 +69,9 @@ def listarSolicitarMatricula(request):
 @user_passes_test(lambda u: u.groups.filter(name='rh').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def visualizarSolicitacao(request, id):
     solicitacao = Solicitacao.objects.get(id=id)
+    grupos = Group.objects.all()
         
-    return render(request, 'visualizacaoSolicitacaoMatricula/index.html', { 'solicitacao': solicitacao,'pagina': 'visualizar Solicitação'})
+    return render(request, 'visualizacaoSolicitacaoMatricula/index.html', { 'solicitacao': solicitacao, 'pagina': 'visualizar Solicitação', 'grupos': grupos})
 
 
 @login_required
