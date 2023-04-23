@@ -14,45 +14,39 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-<form id="formulario" method="POST" class="container p-0">
+<form id="formulario" class="container-fluid p-0 h-50" method="POST">
     {% csrf_token %}
-    <h2>visualizar socilicitação</h2>
-    <div id="nome-completo" class="campo-input">
-        <div class="label-campo">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" id="nome" placeholder="Nome:" value="{{ solicitacao.nome.title }}" disabled>
+    <div id="area1">
+        <div>
+            <h5>Nome:</h5>
+            <input type="text" value="{{ solicitacao.nome }}" readonly>
         </div>
-        <div class="label-campo">
-            <label for="sobrenome">Sobrenome:</label>
-            <input type="text" name="sobrenome" id="sobrenome" placeholder="Sobrenome:"
-                value="{{ solicitacao.sobrenome.title }}" disabled>
+        <div>
+            <h5>Sobrenome:</h5>
+            <input type="text" value="{{ solicitacao.sobrenome }}" readonly>
         </div>
-    </div>
-    <div id="cpf" class="campo-input">
-        <div class="label-campo">
-            <label for="cpf">CPF:</label>
-            <input type="text" name="cpf" id="cpf-input" placeholder="CPF:" value="{{ solicitacao.cpf }}" disabled>
+        <div>
+            <h5>CPF:</h5>
+            <input type="text" value="{{ solicitacao.cpf }}" readonly>
         </div>
-    </div>
-    <div id="email" class="campo-input">
-        <div class="label-campo">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" placeholder="Email:" value="{{ solicitacao.email }}" disabled>
+        <div>
+            <h5>E-mail:</h5>
+            <input type="text" value="{{ solicitacao.email }}" readonly>
         </div>
     </div>
-    <div id="curso" class="campo-input">
-        <div class="label-campo">
-            <label for="curso">Curso:</label>
-            <input type="text" name="curso" id="curso" placeholder="Curso:" value="{{ solicitacao.curso.nome.title }}"
-                disabled>
+    <div id="area2">
+        <div>
+            <h5>Motivo:</h5>
+            <textarea name="" id="" cols="30" rows="10" readonly>
+                {{ solicitacao.motivo }}
+                </textarea>
         </div>
     </div>
-
-    <div id="btn" class="campo-input">
-        <button name="btnAprovar" type="submit">aprovar</button>
-        <button name="btnRecusar" type="submit">recusar</button>
-        <button name="btnVoltar" type="submit">voltar</button>
+    <div id="area3">
+        <button name="btnAprovar" type="submit">Aprovar</button>
+        <button name="btnAprovar" type="submit">Recusar</button>
     </div>
+</form>
 
 </form>
 

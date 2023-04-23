@@ -67,57 +67,9 @@ def listarSolicitarMatricula(request):
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='rh').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def visualizarSolicitacao(request, id):
-    if request.method == 'POST' and 'btnVoltar' in request.POST:
-        return redirect('listarSolicitarMatricula')
-    elif request.method == 'POST' and 'btnRecusar' in request.POST:
-        try:
-            solicitacao = Solicitacao.objects.get(id=id)
-            solicitacao.delete()
-            mandar_email(email=solicitacao.email, solicitacao=solicitacao, tipo='recusacao')
-            messages.success(request, 'Solicitação recusada com sucesso.')
-            return redirect('listarSolicitarMatricula')
-        except Exception:
-            messages.error(request, 'Erro ao recusar a solicitação.')
-            return redirect('visualizarSolicitacao', id=id)
-    elif request.method == 'POST' and 'btnAprovar' in request.POST:
-        solicitacao = Solicitacao.objects.get(id=id)
-        if solicitacao is not None:
-            if Usuario.objects.filter(matricula=solicitacao.cpf).exists():
-                messages.error(request, 'Já existe um usuário com esse CPF.')
-                return redirect('visualizarSolicitacao', id=id)
-            elif Usuario.objects.filter(email=solicitacao.email).exists():
-                messages.error(request, 'Já existe um usuário com esse email.')
-                return redirect('visualizarSolicitacao', id=id)
-            else:
-                try:
-                    senha = gararSenhaAleatoria()
-                    usuario = Usuario.objects.create_user( email=solicitacao.email, 
-                                                            cpf=solicitacao.cpf, 
-                                                            first_name=solicitacao.nome, 
-                                                            last_name=solicitacao.sobrenome, 
-                                                            username=solicitacao.nome.lower().replace(' ', '') + solicitacao.sobrenome.lower().replace(' ', ''),
-                                                            )
-                    usuario.cursos.add(solicitacao.curso)
-                    usuario.set_password(senha)
-                    usuario.groups.add(Group.objects.get(name='aluno'))
-                    usuario.save()
-                    solicitacao.criado = True
-                    solicitacao.save()
-                    mandar_email(email=settings.EMAIL_RH, solicitacao=solicitacao, tipo='aprovacaoRH')
-                    mandar_email(email=usuario.email, usuario=usuario, tipo='aprovacao', senha=senha)
-                    Solicitacao.objects.get(id=id).delete()
-                
-                except Exception:
-                    messages.error(request, 'Erro ao criar o usuário.')
-                    return redirect('visualizarSolicitacao', id=id)
-                    
-                messages.success(request, 'Solicitação aprovada com sucesso.')
-                return redirect('listarSolicitarMatricula')
-
-        else:
-            messages.error(request, 'Erro ao aprovar a solicitação.')
-            return redirect('listarSolicitarMatricula')
-    return render(request, 'visualizacaoSolicitacaoMatricula/index.html', {'solicitacao': Solicitacao.objects.get(id=id), 'pagina': 'visualizar Solicitação'})
+    solicitacao = Solicitacao.objects.get(id=id)
+        
+    return render(request, 'visualizacaoSolicitacaoMatricula/index.html', { 'solicitacao': solicitacao,'pagina': 'visualizar Solicitação'})
 
 
 @login_required

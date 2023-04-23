@@ -1,215 +1,132 @@
-:root {
-    --height--cad: 60%;
-    --width--input--mine: 350px;
-    --width--input--max: 800px;
-    --height--input: 50px;
-}
-
 body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100vw;
-    height: 100vh;
+}
+
+:root {
+    --width--input: 500px;
+    --height--input: 40px;
 }
 
 #formulario {
-    height: var(--height--cad);
-    border-radius: 10px;
-    overflow: auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr 80px;
+    gap: 10px;
+    grid-template-areas: 'area1 area2' 'area3 area3';
 }
 
-#formulario::-webkit-scrollbar {
-    width: 0;
-}
-
-#formulario h2 {
+#area3,
+#area2,
+#area1 {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    height: 90px;
-    padding-left: 20px;
-    background-color: var(--cor--fundo--4);
-    border-bottom: 3px solid var(--cor--fundo--6);
-    color: #fff;
-    font-size: 1.5rem;
-    text-transform: capitalize;
-}
-
-
-.campo-input {
-    width: 100%;
-    height: 100px;
-
-}
-
-#nome-completo {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 40px;
-}
-
-form div input {
-    width: var(--width--input--mine);
-    height: var(--height--input);
-    border: 3px solid var(--cor--fundo--6);
-    border-radius: 5px;
-    padding-left: 10px;
-    font-size: 1.2rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    color: #000;
-}
-
-#curso,
-#email,
-#cpf {
-    display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-}
-
-.label-campo {
-    display: flex;
-    justify-content: flex-start;
+    gap: 30px;
     flex-direction: column;
-    height: calc(var(--height--input) + 40px);
+    grid-area: area1;
 }
 
-label {
+#area2 div,
+#area1 div {
+    width: calc(var(--width--input) + 20px);
+}
+
+#area2 div h5,
+#area1 div h5 {
+    margin: 0;
     font-size: 1.2rem;
     font-weight: bold;
-    text-transform: capitalize;
-    color: var(--cor--fundo--6);
+    color: var(--cor--fundo--5);
 }
 
-
-form #email input,
-form #cpf input,
-form #curso input {
-    width: var(--width--input--max);
-}
-
-#btn {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-#btn button {
-    width: 90px;
-    height: 50px;
-    border: none;
+#area2 div select,
+#area2 div textarea,
+#area1 div input {
+    width: var(--width--input);
+    height: var(--height--input);
+    border: 1px solid var(--cor--fundo--5);
     border-radius: 5px;
+    padding: 0 10px;
+    box-shadow: var(--sombra--1);
+}
+
+#area2 div textarea {
+    height: auto;
+}
+
+#area2 {
+    grid-area: area2;
+    margin-left: 50px;
+    align-items: flex-start;
+}
+
+#area3 {
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+    grid-area: area3;
+}
+
+#area3 button {
+    width: 200px;
+    height: 50px;
+    background-color: var(--cor--fundo--5);
     color: #fff;
     font-size: 1.2rem;
-    text-transform: capitalize;
-    cursor: pointer;
-    margin-right: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    border: 2px solid var(--cor--fundo--3);
+    border-radius: 5px;
+    box-shadow: var(--sombra--1);
 }
 
-#btn button:nth-child(1) {
-    background-color: green;
+#area3 button:nth-child(1) {
+    background-color: rgb(5, 139, 5);
 }
 
-#btn button:nth-child(2) {
-    background-color: red;
+#area3 button:nth-child(2) {
+    background-color: rgb(139, 5, 5);
 }
-
-#btn button:nth-child(3) {
-    background-color: rgb(199, 41, 41);
-}
-
 
 #mensagem {
-    top: 64px;
+    top: 100px;
     right: 5px;
 }
 
-@media screen and (max-width: 1100px) {
+@media (max-width: 1100px) {
     :root {
-        --height--cad: 75%;
+        --width--input: 350px;
     }
-
 }
 
-@media screen and (max-width: 900px) {
+@media (max-width: 800px) {
     :root {
-        --width--input--mine: 300px;
-        --width--input--max: 600px;
+        --width--input: 290px;
     }
-
 }
 
-@media screen and (max-height: 800px) {
-    :root {
-        --height--cad: 80%;
+@media (max-width: 800px) {
+    body {
+        display: flex;
+        align-items: flex-start;
     }
 
-}
-
-@media screen and (max-width: 650px) {
-    :root {
-        --width--input--mine: 250px;
-        --width--input--max: 500px;
+    #formulario {
+        margin-top: 120px;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 150px;
+        grid-template-areas: 'area1' 'area2' 'area3';
     }
 
-}
-
-@media screen and (max-width: 600px) {
-    :root {
-        --width--input--mine: 200px;
-        --width--input--max: 400px;
+    #area1,
+    #area2 {
+        margin-left: 0;
+        align-items: center;
     }
 
-    #nome-completo {
+    #area3 {
         flex-direction: column;
-        height: 150px;
-        width: 100%;
-    }
-
-    #nome-completo input {
-        width: var(--width--input--max);
-        margin-top: 10px;
-    }
-}
-
-
-@media screen and (max-width: 500px) {
-    :root {
-        --width--input--mine: 200px;
-        --width--input--max: 300px;
-    }
-
-    #nome-completo {
-        flex-direction: column;
-        height: 150px;
-        width: 100%;
-    }
-
-    #nome-completo input {
-        width: var(--width--input--max);
-        margin-top: 10px;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    :root {
-        --width--input--mine: 200px;
-        --width--input--max: 250px;
-    }
-
-    #nome-completo {
-        flex-direction: column;
-        height: 150px;
-        width: 100%;
-    }
-
-    #nome-completo input {
-        width: var(--width--input--max);
-        margin-top: 10px;
     }
 }

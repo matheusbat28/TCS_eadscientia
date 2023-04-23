@@ -9,11 +9,11 @@ body {
     --height--input: 40px;
 }
 
-
 #formulario {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 1fr 80px;
+    gap: 10px;
     grid-template-areas: 'area1 area2' 'area3 area3';
 }
 
