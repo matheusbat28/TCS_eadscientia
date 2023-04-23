@@ -1,0 +1,27 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#tabela {
+    width: 1100px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+}
+
+table thead tr {
+    animation: 20s cores_fundo infinite;
+    color: #fff;
+}
+
+table thead tr th {
+    padding: 8px;
+    text-align: center;
+}

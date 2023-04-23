@@ -15,8 +15,21 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
+<div id="tabela" class="h-50">
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>CPF</th>
+                <th>E-mail</th>
+                <th>Opções</th>
+            </tr>
+        </thead>
+    </table>
+</div>
 
-{% comment %} {% include 'parciais/_paginacao.html' %} {% endcomment %}
+{% include 'parciais/_paginacao.html' %}
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}
 

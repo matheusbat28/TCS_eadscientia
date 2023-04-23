@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    let tempo = 5000;
+    let tempo = 10000;
     if ($('#mensagem')) {
         $('#mensagem').delay(tempo).fadeOut();
     }
