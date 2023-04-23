@@ -3,6 +3,8 @@ from django.contrib import auth
 from django.contrib import messages
 from .forms import FormLogin, FormRecuperarSenha, FormVerificarCodigo, FormAlterarSenha
 from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.conf import settings
 from random import randint
 from .models import Usuario, Token
@@ -119,7 +121,10 @@ def verificar_codigo(request, id):
         return redirect('login')
 
 def mandar_email(email, token):
-    email = EmailMultiAlternatives('Recuperação de Senha', f'token {token}', settings.EMAIL_HOST_USER, [email])
+    html_contexto = render_to_string('email/token.html', {'token': token})
+    texto_contexto = strip_tags(html_contexto)
+    email = EmailMultiAlternatives('Recuperação de Senha', texto_contexto, settings.EMAIL_HOST_USER, [email])
+    email.attach_alternative(html_contexto, 'text/html')
     email.send()
 
 def gerar_token():
