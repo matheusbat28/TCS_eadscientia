@@ -4,6 +4,8 @@ from .forms import FormSolicitacaoMatricula, FormCriacaoUsuario
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from .models import Solicitacao
 from conta.models import Usuario
 from django.contrib.auth.models import Group
@@ -20,13 +22,12 @@ def home(request):
 @user_passes_test(lambda u:u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 @user_passes_test(lambda u: u.groups.filter(name='gestão').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def solicitacaoMatricula(request):
-    formFormSolicitacaoMatricula = FormSolicitacaoMatricula(request.POST)
-    
+    formFormSolicitacaoMatricula = FormSolicitacaoMatricula(request.POST)    
     if request.method == 'POST':
         if formFormSolicitacaoMatricula.is_valid():
             solicitacao = formFormSolicitacaoMatricula.save(request.user)
             if solicitacao is not None:
-                mandar_email(email=settings.EMAIL_RH, solicitacao=solicitacao, tipo='solicitacao')
+                mandar_email(email=settings.EMAIL_RH, solicitacao=solicitacao, tipo='solicitacao', usuario=request.user)
                 messages.success(request, 'Solicitação enviada com sucesso.')
                 return redirect('solicitacaoMatricula')
             
@@ -92,60 +93,19 @@ def gararSenhaAleatoria():
     senha = ''.join(random.choice(caracteres) for i in range(8))
     return senha
 
-def mandar_email(email,tipo, solicitacao=None, senha=None, usuario=None, usuarioADM=None):
-    
+def mandar_email(email, solicitacao=None, tipo=None, usuario=None, senha=None, usuarioADM=None):
     if tipo == 'solicitacao':
-        email = EmailMultiAlternatives(f'solicitação de matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
-                            Solicitação de matricula
-                Nome: {solicitacao.nome.title()} {solicitacao.sobrenome.title()}
-                cpf: {solicitacao.cpf}
-                Email: {solicitacao.email}
-                Quem solicitou: {solicitacao.usuario.get_full_name().title()} ({solicitacao.usuario.matricula})
-                
-                                    ''', settings.EMAIL_HOST_USER, [email])
+        html_contexto = render_to_string('email/solicitacaoMatricula.html', {'solicitacao': solicitacao, 'usuario': usuario})
+        texto_contexto = strip_tags(html_contexto)
+        
+        email = EmailMultiAlternatives(
+            'Solicitação de Matricula',
+            texto_contexto,
+            settings.EMAIL_HOST_USER,
+            [email]
+        )
+        email.attach_alternative(html_contexto, "text/html")
         email.send()
-    elif tipo == 'aprovacao':
-        email = EmailMultiAlternatives(f'Aprovação da matricula {usuario.get_full_name()}', f'''
-                            Seu dados da matricula
-                Nome: {usuario.get_full_name()}
-                cpf: {usuario.cpf}
-                Email: {usuario.email}
-                matricula: {usuario.matricula}
-                Senha: {senha}
-                
-                                    ''', settings.EMAIL_HOST_USER, [email])
-        email.send()
-    elif tipo == 'aprovacaoRH':
-        email = EmailMultiAlternatives(f'Aprovação da matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
-                            Aprovação da matricula
-                Nome: {solicitacao.nome.title()} {solicitacao.sobrenome.title()}
-                cpf: {solicitacao.cpf}
-                Email: {solicitacao.email}
-                Quem Aprovou: {solicitacao.usuario.get_full_name().title()} ({solicitacao.usuario.matricula})
-                
-                                    ''', settings.EMAIL_HOST_USER, [email])
-        email.send()
-    elif tipo == 'recusacao':
-        email = EmailMultiAlternatives(f'Recusação da matricula {solicitacao.nome.title()} {solicitacao.sobrenome.title()}', f'''
-                            Recusação da matricula
-                Meu desculpa falar isso mas sua matricula foi recusada 
-                caso tenha alguma duvida entre em contato com o RH
-                
-                                    ''', settings.EMAIL_HOST_USER, [email])
-        email.send()
-    elif tipo == 'criacaoADM':
-        email = EmailMultiAlternatives(f'Conta criada por {usuarioADM.get_full_name()}', f'''
-                            Bem vindo a empresa EadScientia           
-                Oi me chamo {usuarioADM.get_full_name()} e trabalho no cargo de {usuarioADM.groups.all()[0].name}
-                na empresa EadScientia e através desse email estou te enviando sua conta de acesso:
-                Nome: {usuario.get_full_name()}
-                cpf: {usuario.cpf}
-                Email: {usuario.email}
-                Cargo: {usuario.groups.all()[0].name}
-                matricula: {usuario.matricula}
-                Senha: {senha}                       
-                                       
-                                       ''', settings.EMAIL_HOST_USER, [email])
         
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')

@@ -1,4 +1,5 @@
 {% load static %}
+{% load filtros %}
 
 <aside id="menu-lateral">
     <div id="logo-menu">
@@ -26,7 +27,8 @@
         </a>
         <a id="historico" class="itens-conteudo" href=""><i class="fa-solid fa-paperclip"></i>
             <h3>Histórico</h3>
-        </a>
+        </a>   
+        {% if user|in_grups:'desenvolvedor' or user|in_grups:'administrativo' %}
         <a id="Administracao" class="itens-conteudo"><i class="fa-solid fa-briefcase"></i>
             <h3>Administração</h3>
             <i id="seta-adm" class="fa-solid fa-angle-down seta-baixo"></i>
@@ -37,6 +39,8 @@
                 <h3>Usuários</h3>
             </a>
         </div>
+        {% endif %} 
+        {% if user|in_grups:'desenvolvedor' or user|in_grups:'rh' %}
         <a id="rh" class="itens-conteudo"><i class="fa-solid fa-id-card-clip"></i>
             <h3>RH</h3>
             <i id="seta-rh" class="fa-solid fa-angle-down seta-baixo"></i>
@@ -47,6 +51,8 @@
                 <h3>aprovar matricula</h3>
             </a>
         </div>
+        {% endif %} 
+        {% if user|in_grups:'desenvolvedor' or user|in_grups:'gestão' %}
         <a id="gestao" class="itens-conteudo"><i class="fa-solid fa-bars-progress"></i>
             <h3>gestão</h3>
             <i id="seta-gestao" class="fa-solid fa-angle-down seta-baixo"></i>
@@ -57,6 +63,7 @@
                 <h3>Socilitar matricula</h3>
             </a>
         </div>
+        {% endif %} 
 
     </div>
     <label for="cbx-menu" id="menu-rodape">

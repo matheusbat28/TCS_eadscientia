@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'captcha',
     'home',
     'curso',
+    'filtros',
     'cpf_field', 
     'django.contrib.admin',
     'django.contrib.auth',
