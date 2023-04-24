@@ -1,0 +1,17 @@
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 60px;
+
+}
+
+.carregando {
+    animation: is-rotating 1s infinite;
+    width: 50px;
+    height: 50px;
+    border: 6px solid var(--cor--fundo--3);
+    border-top: 6px solid var(--cor--fundo--4);
+    border-radius: 50%;
+}

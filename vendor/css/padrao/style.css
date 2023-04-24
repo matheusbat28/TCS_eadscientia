@@ -40,3 +40,9 @@
 .cbx {
     display: none;
 }
+
+@keyframes is-rotating {
+    to {
+        transform: rotate(1turn);
+    }
+}
