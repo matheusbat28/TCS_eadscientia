@@ -20,7 +20,10 @@
             {{ formRecuperarSenha.email }}
         </div>
         <div id="modal-botao">
-            <button id="btn-recuperar-senha" name='btn-recuperar-senha' type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+            <button id="btn-recuperar-senha" name='btn-recuperar-senha' type="submit">
+                <div id="carregando-senha" class="carregando"></div>
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
             {{ formRecuperarSenha.captcha }}
             <div id="modal-tempo"></div>
         </div>
@@ -47,11 +50,14 @@
                     <label for="cbx_modal">esqueci a senha</label>
                 </div>
                 <div id="log-botao">
-                    <button id="btn-entrar" name='btn-entrar' type="submit">entrar</button>
+                    <button id="btn-entrar" name='btn-entrar' type="submit">
+                        <div id="carregando-log" class="carregando"></div>
+                        <h5 id="texto-log">Enviar</h5>
+                    </button>
                 </div>
                 {{ formLogin.captcha }}
             </form>
-        </div> 
+        </div>
     </div>
     {% include 'parciais/_mensagem.html' %}
 </div>

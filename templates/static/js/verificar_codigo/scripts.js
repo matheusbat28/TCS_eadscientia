@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('.codigo').mask('0');
+    $('.carregando').hide();
 
     localStorage.setItem('status', true);
     localStorage.setItem('tempo', 60);
@@ -33,9 +34,12 @@ $(document).ready(function () {
             $('time').text(tempo);
         }
     }
-    // tempo();
-    // setInterval(tempo, 1000);
 
+
+    $('#btn-verificar-codigo').click(function () {
+        $('#carregando-verificar').show();
+        $('#texto-verificar').hide();
+    });
 
 
     $('#btn-reenviar-codigo').click(function () {

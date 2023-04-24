@@ -36,3 +36,9 @@
         background-color: var(--cor--fundo--4);
     }
 }
+
+@keyframes is-rotating {
+    to {
+        transform: rotate(1turn);
+    }
+}

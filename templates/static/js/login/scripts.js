@@ -1,5 +1,7 @@
 $(document).ready(function () {
     $('#matricula').mask('0000000000');
+    $('.carregando').hide();
+
 
     $("#olho-senha").mousedown(function () {
         $("#senha").attr("type", "text");
@@ -22,6 +24,18 @@ $(document).ready(function () {
     $('#modal-x label').click(function () {
         $('#modal').removeClass('modal-mostrar');
         $('#modal').addClass('modal-sair');
+    });
+
+    $('#btn-entrar').click(function (e) {
+        $('#texto-log').hide();
+        $('#carregando-log').show();
+
+    });
+
+    $('#btn-recuperar-senha').click(function (e) {
+        $('#btn-recuperar-senha i').hide();
+        $('#carregando-senha').show();
+
     });
 
 });

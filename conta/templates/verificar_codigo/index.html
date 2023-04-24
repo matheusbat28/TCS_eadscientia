@@ -15,7 +15,10 @@
             {{ formVerificarCodigo }}
         </div>
         <div id="cad-codigo-btn">
-            <button name="btn-verificar-codigo" type="submit">Verificar</button>
+            <button id="btn-verificar-codigo" name="btn-verificar-codigo" type="submit">
+                <div id="carregando-verificar" class="carregando"></div>
+                <h5 id="texto-verificar">Enviar</h5>
+            </button>
         </div>
         <div id="cad-codigo-mandar">
             <button id="btn-reenviar-codigo" name="btn-reenviar-codigo" ">Reenviar código?</button>
@@ -27,5 +30,5 @@
 {% endblock %}
 
 {% block js %}
-<script defer src="{% static 'js/verificar_codigo/scripts.js' %}"></script>
-{% endblock %}
+<script defer src=" {% static 'js/verificar_codigo/scripts.js' %}"></script>
+                {% endblock %}

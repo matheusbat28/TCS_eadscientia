@@ -76,6 +76,9 @@ ul {
 }
 
 #cad-codigo-btn button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100px;
     height: 40px;
     border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
@@ -128,6 +131,26 @@ time {
 
 #mensagem {
     left: 5px;
+}
+
+#texto-verificar {
+    padding-top: 3px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.carregando {
+    animation: is-rotating 1s infinite;
+    width: 20px;
+    height: 20px;
+    border: 6px solid var(--cor--fundo--3);
+    border-top: 6px solid var(--cor--fundo--4);
+    border-radius: 50%;
 }
 
 @media screen and (max-width: 800px) {
