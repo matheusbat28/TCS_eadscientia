@@ -47,3 +47,13 @@ $(document).ready(function () {
         localStorage.setItem('tempo', 60);
     });
 });
+
+$(window).on('load', function () {
+    $('#carregando-verificar').hide();
+    $('#texto-verificar').show();
+});
+
+$(window).on('unload', function () {
+    $('#carregando-verificar').hide();
+    $('#texto-verificar').show();
+});

@@ -71,6 +71,9 @@ body {
 }
 
 #area3 button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 200px;
     height: 50px;
     background-color: var(--cor--fundo--5);
@@ -93,6 +96,36 @@ body {
 #mensagem {
     top: 100px;
     right: 5px;
+}
+
+#texto-formulario {
+    padding-top: 3px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#carregando-aprovar {
+    border: 4px solid rgb(13, 121, 13);
+    border-top: 6px solid rgb(126, 199, 18);
+
+}
+
+#carregando-recusar {
+    border: 4px solid rgb(121, 13, 13);
+    border-top: 6px solid rgb(199, 18, 18);
+
+}
+
+.carregando {
+    animation: is-rotating 1s infinite;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
 }
 
 @media (max-width: 1100px) {

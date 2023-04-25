@@ -19,7 +19,10 @@
             {{ formAlterarSenha.senha2 }}
         </div>
         <div id="cad-vef-senha-btn"></div>
-        <button class="btn-cad-vef-senha" type="submit">Redefinir</button>
+        <button id="btn-cad-vef-senha" class="btn-cad-vef-senha" type="submit">
+            <div id="carregando-vef" class="carregando"></div>
+            <h5 id="texto-vef">Redefinir</h5>
+        </button>
     </div>
 </form>
 {% include 'parciais/_mensagem.html' %}

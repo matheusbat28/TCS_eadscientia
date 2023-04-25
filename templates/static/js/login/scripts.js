@@ -39,3 +39,17 @@ $(document).ready(function () {
     });
 
 });
+
+$(window).on('load', function () {
+    $('#texto-log').show();
+    $('#carregando-log').hide();
+    $('#btn-recuperar-senha i').show();
+    $('#carregando-senha').hide();
+});
+
+$(window).on('unload', function () {
+    $('#texto-log').show();
+    $('#carregando-log').hide();
+    $('#btn-recuperar-senha i').show();
+    $('#carregando-senha').hide();
+});

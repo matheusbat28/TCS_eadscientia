@@ -15,34 +15,37 @@
 {% include 'parciais/_sair.html' %}
 
 <form id="formulario" class="container-fluid p-0 h-50" method="POST">
-   {% csrf_token %}
-   <div id="area1">
-       <div>
-           <h5>Nome:</h5>
-           {{formCriacaoUsuario.nome}}
-       </div>
-       <div>
-           <h5>Sobrenome:</h5>
-           {{formCriacaoUsuario.sobrenome}}
-       </div>
-       <div>
-           <h5>CPF:</h5>
-           {{formCriacaoUsuario.cpf}}
-       </div>
-       <div>
-           <h5>E-mail:</h5>
-           {{formCriacaoUsuario.email}}
-       </div>
-   </div>
-   <div id="area2">
-       <div>
-           <h5>Setores:</h5>
-           {{formCriacaoUsuario.grupos}}
-       </div>
-   </div>
-   <div id="area3">
-       <button type="submit">Enviar</button>
-   </div>
+    {% csrf_token %}
+    <div id="area1">
+        <div>
+            <h5>Nome:</h5>
+            {{formCriacaoUsuario.nome}}
+        </div>
+        <div>
+            <h5>Sobrenome:</h5>
+            {{formCriacaoUsuario.sobrenome}}
+        </div>
+        <div>
+            <h5>CPF:</h5>
+            {{formCriacaoUsuario.cpf}}
+        </div>
+        <div>
+            <h5>E-mail:</h5>
+            {{formCriacaoUsuario.email}}
+        </div>
+    </div>
+    <div id="area2">
+        <div>
+            <h5>Setores:</h5>
+            {{formCriacaoUsuario.grupos}}
+        </div>
+    </div>
+    <div id="area3">
+        <button type="submit">
+            <div id="carregando-formulario" class="carregando"></div>
+            <h5 id="texto-formulario">Enviar</h5>
+        </button>
+    </div>
 </form>
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}
