@@ -1,57 +1,90 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="../vendor/css/exibirCurso/style.css" />
-    <link rel="stylesheet" href="../vendor/css/padrao/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"/>
-    <title>Video aula</title>
 
-  </head>
-  <body>
-    <header>
-        <h1>Nome do Curso</h1>
-     </header>
-     <main class="section-main">
-      <section class="video-section">
-        <video src="nome-do-video.mp4" controls></video>
-      </section>
-      <section class="segmentacao-curso">
-         <h2>Segmentação do curso</h2>
-         <ul>
-            <li><a href="#">Próximo vídeo</a></li>
-            <li><a href="#">Tópico 1</a></li>
-            <li><a href="#">Tópico 2</a></li>
-            <li><a href="#">Tópico 3</a></li>
-          </ul>
-      </section>
-     </main>
-     <aside>
-        <h3>Recursos Adicionais</h3>
-        <ul>
-           <li><a href="#">Link para outro curso</a></li>
-           <li><a href="#">Arquivos para download</a></li>
-        </ul>
-     </aside>
-     <footer>
-        <p>&copy; 2023 EadScientia</p>
-     </footer>
-          
-          
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
+  <link rel="stylesheet" href="../vendor/css/exibirCurso/style.css" />
+  <link rel="stylesheet" href="../vendor/css/padrao/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css" />
+  <title>Video aula</title>
 
-  </body>
+</head>
 
-  <script src="https://code.jquery.com/jquery-3.6.3.js"
-    integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-    crossorigin="anonymous">
-    </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-    crossorigin="anonymous">
-    </script>
-  <script defer src="../vendor/js/home/scripts.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+<body>
+  <form id="conteudo">
+    <div id="video">
+      <div id="titulo-video">
+        <img src="../vendor/img/logo.png" alt="">
+        <hr>
+        <h2>python - html - css</h2>
+      </div>
+      <video src="gabriel.mp4" controls></video>
+    </div>
+    <div id="aulas_video">
+      <div id="titulo-aula-video">
+        <div id="progresso">
+          <div id="icon-progresso">
+            <i class="fa-solid fa-trophy"></i>
+          </div>
+          <P>Obter certificado</P>
+          <div id="progresso-seta">
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+      </div>
+      <div id="topico">
+        <div class="topicos">
+          <div class="topico-titulo">
+            <h3>Titulo-Video</h3>
+            <p>2/2 | 30m</p>
+          </div>
+          <div class="topico-titulo">
+            <h3>Titulo-Video</h3>
+            <p>2/2 | 30m</p>
+          </div>
+          <div class="topico-titulo">
+            <h3>Titulo-Video</h3>
+            <p>2/2 | 30m</p>
+          </div>
+          <div class="topico-titulo">
+            <h3>Titulo-Video</h3>
+            <p>2/2 | 30m</p>
+          </div>
+          <div class="topico-titulo">
+            <h3>Titulo-Video</h3>
+            <p>2/2 | 30m</p>
+          </div>
+          <div class="topico-titulo">
+            <h3>Titulo-Video</h3>
+            <p>2/2 | 30m</p>
+          </div>
+          <div class="topico-titulo">
+            <h3>Titulo-Video</h3>
+            <p>2/2 | 30m</p>
+          </div>
+          <div class="topico-titulo">
+            <h3>Titulo-Video</h3>
+            <p>2/2 | 30m</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div id="descricao-video"></div>
+  </form>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+  crossorigin="anonymous">
+  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+  </script>
+<script defer src="../vendor/js/home/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
 </html>
