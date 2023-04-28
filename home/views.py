@@ -56,7 +56,7 @@ def solicitacaoMatricula(request):
 
      
 @login_required
-@user_passes_test(lambda u: u.groups.filter(name='rh').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def listarSolicitarMatricula(request):
     solicitacoes = Solicitacao.objects.filter(criado=False).order_by('sobrenome').order_by('nome')
     paginator = Paginator(solicitacoes, 10)
@@ -66,16 +66,17 @@ def listarSolicitarMatricula(request):
     return render(request, 'listarSolicitarMatricula/index.html', {'posts': posts, 'pagina': 'Solicitações de Matricula'})
 
 @login_required
-@user_passes_test(lambda u: u.groups.filter(name='rh').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def visualizarSolicitacao(request, id):
+    
+    
     solicitacao = Solicitacao.objects.get(id=id)
     grupos = Group.objects.all()
-        
     return render(request, 'visualizacaoSolicitacaoMatricula/index.html', { 'solicitacao': solicitacao, 'pagina': 'visualizar Solicitação', 'grupos': grupos})
 
 
 @login_required
-@user_passes_test(lambda u: u.groups.filter(name='rh').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def deletarSolicitacao(request, id):
     try:
             solicitacao = Solicitacao.objects.get(id=id)

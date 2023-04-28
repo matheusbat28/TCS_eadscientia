@@ -53,6 +53,11 @@ body {
 }
 
 #area2 div textarea {
+    max-height: 300px;
+    min-height: 100px;
+}
+
+#area2 div textarea {
     height: auto;
 }
 
