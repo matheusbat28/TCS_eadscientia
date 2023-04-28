@@ -13,37 +13,6 @@ class Usuario(AbstractUser):
 
     def __str__(self):
         return self.username
-
-    def save(self, *args, **kwargs):
-        if not self.matricula:
-            self.matricula = self.gerar_matricula()
-        if not self.username:
-            self.username = self.gerar_username()
-        super(Usuario, self).save(*args, **kwargs)
-
-    def gerar_matricula(self):
-        ultima_matricula = Usuario.objects.all().order_by('matricula').last()
-       
-        if ultima_matricula:
-           matricula = ultima_matricula.matricula
-           matricula = int(matricula) + 1
-           matricula = str(matricula)
-        else:
-            matricula = '0'
-            
-        return matricula.zfill(10)
-    
-    def gerar_username(self):
-        contador = 1
-        username = self.get_full_name().strip().lower().replace(' ', '')
-        while True:
-            if Usuario.objects.filter(username=username).exists():
-                username = re.sub(r'\d+', '', username)
-                username = username + str(contador)
-                contador += 1
-            else:
-                break
-        return username
     
     class Meta:
         db_table = 'usuario'
