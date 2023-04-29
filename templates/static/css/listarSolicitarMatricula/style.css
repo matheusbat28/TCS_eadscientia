@@ -43,3 +43,9 @@ table tbody tr td a:nth-child(2) {
     top: 100px;
     right: 5px;
 }
+
+@media screen and (max-width: 1200px) {
+    #tabela {
+        width: 700px;
+    }
+}
