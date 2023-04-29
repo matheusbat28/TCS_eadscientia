@@ -73,6 +73,34 @@ def visualizarSolicitacao(request, id):
     grupos = Group.objects.all()
     
     if request.method == 'POST' and 'btnAprovar' in request.POST:
+        try:
+            grupo = request.POST.get('grupo')
+        except Exception:
+            grupo = Group.objects.get(name='aluno').id
+        
+        if not Group.objects.filter(id=grupo).exists():
+            messages.error(request, 'Grupo não existe.')
+            return redirect('visualizarSolicitacao', id=id)
+        elif Usuario.objects.filter(email=solicitacao.email).exists():
+            messages.error(request, 'Email já cadastrado.')
+            return redirect('visualizarSolicitacao', id=id)
+        elif Usuario.objects.filter(cpf=solicitacao.cpf).exists():
+            messages.error(request, 'cpf já cadastrado.')
+            return redirect('visualizarSolicitacao', id=id)
+        else:
+            senha = gararSenhaAleatoria()
+            usuario = Usuario.objects.create(
+                first_name=solicitacao.nome,
+                last_name=solicitacao.sobrenome,
+                password=senha,
+                email=solicitacao.email,
+                cpf=solicitacao.cpf, 
+            )
+            usuario.groups.add(grupo)
+            usuario.save()
+            
+            
+        
         return redirect('visualizarSolicitacao', id=id)
     elif request.method == 'POST' and 'btnRecusar' in request.POST:
         return redirect('visualizarSolicitacao', id=id)
@@ -84,11 +112,11 @@ def visualizarSolicitacao(request, id):
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def deletarSolicitacao(request, id):
     try:
-            solicitacao = Solicitacao.objects.get(id=id)
-            solicitacao.delete()
-            mandar_email(email=solicitacao.email, solicitacao=solicitacao, tipo='recusacao')
-            messages.success(request, 'Solicitação recusada com sucesso.')
-            return redirect('listarSolicitarMatricula')
+        solicitacao = Solicitacao.objects.get(id=id)
+        solicitacao.delete()
+        mandar_email(email=solicitacao.email, solicitacao=solicitacao, tipo='recusacao')
+        messages.success(request, 'Solicitação recusada com sucesso.')
+        return redirect('listarSolicitarMatricula')
     except Exception:
         messages.error(request, 'Erro ao recusar a solicitação.')
         return redirect('visualizarSolicitacao', id=id)

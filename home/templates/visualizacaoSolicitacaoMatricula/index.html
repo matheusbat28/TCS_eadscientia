@@ -38,7 +38,7 @@
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'administrativo' %}
         <div>
             <h5>Setor:</h5>
-            <select name="" name="grupo" id="">
+            <select name="grupo" id="">
                 <option value="0">selecione um grupo</option>
                 {% for grupo in grupos %}
                 <option value="{{ grupo.id }}">{{ grupo.name }}</option>
