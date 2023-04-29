@@ -69,9 +69,14 @@ def listarSolicitarMatricula(request):
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def visualizarSolicitacao(request, id):
     
-    
     solicitacao = Solicitacao.objects.get(id=id)
     grupos = Group.objects.all()
+    
+    if request.method == 'POST' and 'btnAprovar' in request.POST:
+        return redirect('visualizarSolicitacao', id=id)
+    elif request.method == 'POST' and 'btnRecusar' in request.POST:
+        return redirect('visualizarSolicitacao', id=id)
+     
     return render(request, 'visualizacaoSolicitacaoMatricula/index.html', { 'solicitacao': solicitacao, 'pagina': 'visualizar Solicitação', 'grupos': grupos})
 
 
@@ -102,6 +107,19 @@ def mandar_email(email, solicitacao=None, tipo=None, usuario=None, senha=None, u
         
         email = EmailMultiAlternatives(
             'Solicitação de Matricula',
+            texto_contexto,
+            settings.EMAIL_HOST_USER,
+            [email]
+        )
+        email.attach_alternative(html_contexto, "text/html")
+        email.send()
+    
+    elif tipo == 'recusacao':
+        html_contexto = render_to_string('email/deletar.html', {'solicitacao': solicitacao})
+        texto_contexto = strip_tags(html_contexto)
+        
+        email = EmailMultiAlternatives(
+            'Recusa de Matricula',
             texto_contexto,
             settings.EMAIL_HOST_USER,
             [email]

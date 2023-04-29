@@ -19,26 +19,26 @@
     <div id="area1">
         <div>
             <h5>Nome:</h5>
-            <input type="text" value="{{ solicitacao.nome }}" readonly>
+            <input type="text" name="nome" value="{{ solicitacao.nome }}" readonly>
         </div>
         <div>
             <h5>Sobrenome:</h5>
-            <input type="text" value="{{ solicitacao.sobrenome }}" readonly>
+            <input type="text" name="sobrenome" value="{{ solicitacao.sobrenome }}" readonly>
         </div>
         <div>
             <h5>CPF:</h5>
-            <input type="text" value="{{ solicitacao.cpf }}" readonly>
+            <input type="text" name="cpf" value="{{ solicitacao.cpf }}" readonly>
         </div>
         <div>
             <h5>E-mail:</h5>
-            <input type="text" value="{{ solicitacao.email }}" readonly>
+            <input type="text" name="email" value="{{ solicitacao.email }}" readonly>
         </div>
     </div>
     <div id="area2">
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'administrativo' %}
         <div>
             <h5>Setor:</h5>
-            <select name="" id="">
+            <select name="" name="grupo" id="">
                 <option value="0">selecione um grupo</option>
                 {% for grupo in grupos %}
                 <option value="{{ grupo.id }}">{{ grupo.name }}</option>
@@ -48,7 +48,7 @@
         {% endif %}
         <div>
             <h5>Motivo:</h5>
-            <textarea name="" id="" cols="30" rows="10" readonly>
+            <textarea name="motivo" id="" cols="30" rows="10" readonly>
                 {{ solicitacao.motivo }}
                 </textarea>
         </div>
