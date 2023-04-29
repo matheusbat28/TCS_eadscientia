@@ -3,23 +3,21 @@ from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from .models import Usuario
 import re
+from unidecode import unidecode
 
 @receiver(post_save, sender=Usuario)
 def gerar_usuario(sender, instance, created, **kwargs):
     if created:
         if instance.username == None or instance.username == '':
-            username = instance.get_full_name()
-            contador = 1
+            usuario = unidecode(instance.get_full_name().lower().replace(' ', ''))
             
-            while True:
-                if User.objects.filter(username=username).exists():
-                    username = re.sub(r'\d+$', '', username)
-                    username = username + str(contador)
-                    contador += 1
-                else:
-                    break
-            instance.username = username
-
+            count = 1
+            while Usuario.objects.filter(username=usuario).exists():
+                usuario = re.sub(r'\d+', '', usuario)
+                usuario = usuario + str(count)
+                count += 1
+            instance.username = usuario
+            instance.save()
  
 @receiver(post_save, sender=Usuario)
 def criar_matricula(sender, instance, created, **kwargs):

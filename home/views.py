@@ -76,8 +76,10 @@ def visualizarSolicitacao(request, id):
         try:
             grupo = request.POST.get('grupo')
         except Exception:
-            grupo = Group.objects.get(name='aluno').id
+            pass
         
+        if grupo == None:
+            grupo = Group.objects.get(name='aluno').id
         if not Group.objects.filter(id=grupo).exists():
             messages.error(request, 'Grupo não existe.')
             return redirect('visualizarSolicitacao', id=id)
@@ -92,16 +94,17 @@ def visualizarSolicitacao(request, id):
             usuario = Usuario.objects.create(
                 first_name=solicitacao.nome,
                 last_name=solicitacao.sobrenome,
-                password=senha,
                 email=solicitacao.email,
                 cpf=solicitacao.cpf, 
             )
             usuario.groups.add(grupo)
+            usuario.set_password(senha)
             usuario.save()
-            
-            
-        
-        return redirect('visualizarSolicitacao', id=id)
+            mandar_email(email=usuario.email, senha=senha, tipo='aprovar', solicitacao=usuario)
+            solicitacao.delete()
+            messages.success(request, f'Usuário {usuario.get_full_name()} criado com sucesso.')
+            return redirect('listarSolicitarMatricula')
+                    
     elif request.method == 'POST' and 'btnRecusar' in request.POST:
         return redirect('visualizarSolicitacao', id=id)
      
@@ -140,14 +143,25 @@ def mandar_email(email, solicitacao=None, tipo=None, usuario=None, senha=None, u
             [email]
         )
         email.attach_alternative(html_contexto, "text/html")
-        email.send()
-    
+        email.send()   
     elif tipo == 'recusacao':
         html_contexto = render_to_string('email/deletar.html', {'solicitacao': solicitacao})
         texto_contexto = strip_tags(html_contexto)
         
         email = EmailMultiAlternatives(
             'Recusa de Matricula',
+            texto_contexto,
+            settings.EMAIL_HOST_USER,
+            [email]
+        )
+        email.attach_alternative(html_contexto, "text/html")
+        email.send()   
+    elif tipo == 'aprovar':
+        html_contexto = render_to_string('email/aprovar.html', {'usuario': solicitacao, 'senha': senha})
+        texto_contexto = strip_tags(html_contexto)
+        
+        email = EmailMultiAlternatives(
+            'Aprovação de Matricula',
             texto_contexto,
             settings.EMAIL_HOST_USER,
             [email]
