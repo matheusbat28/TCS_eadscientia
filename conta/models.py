@@ -32,3 +32,4 @@ class Token(models.Model):
         db_table = 'token'
         verbose_name = 'Token'
         verbose_name_plural = 'Tokens'
+        

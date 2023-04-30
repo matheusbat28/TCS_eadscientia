@@ -26,6 +26,7 @@
                 <th>Opções</th>
             </tr>
         </thead>
+        {% if posts %}
         {% for solicitacao in posts %}
         <tr>
             <td>{{ solicitacao.nome }}</td>
@@ -40,6 +41,11 @@
             </td>
         </tr>
         {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="5">Não há solicitações de matrícula</td>
+        </tr>
+        {% endif %}
         </tbody>
     </table>
 </div>

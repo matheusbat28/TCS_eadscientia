@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .models import Usuario, Token
+from django.contrib.auth.models import  Group
 from faker import Faker
 from cpf_generator import CPF
 
