@@ -43,6 +43,7 @@ body {
 
 #area2 div select,
 #area2 div textarea,
+#area2 div input,
 #area1 div input {
     width: var(--width--input);
     height: var(--height--input);
@@ -53,7 +54,7 @@ body {
 }
 
 #area2 div textarea {
-    max-height: 220px;
+    max-height: 130px;
     min-height: 100px;
 }
 

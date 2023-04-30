@@ -52,6 +52,10 @@
                 {{ solicitacao.motivo }}
                 </textarea>
         </div>
+        <div>
+            <h5>Que solicitou:</h5>
+            <input type="text" name="usario" value="{{ solicitacao.usuario.get_full_name }}" readonly>
+        </div>
     </div>
     <div id="area3">
         <button id="btnAprovar" name="btnAprovar" type="submit">

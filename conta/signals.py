@@ -1,7 +1,6 @@
-from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
-from .models import Usuario
+from .models import Usuario, Token
 import re
 from unidecode import unidecode
 
@@ -25,4 +24,5 @@ def criar_matricula(sender, instance, created, **kwargs):
         if instance.matricula == None or instance.matricula == '':
             instance.matricula = instance.id.__str__().zfill(6)
             instance.save()
+        
                 

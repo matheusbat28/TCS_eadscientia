@@ -106,7 +106,10 @@ def visualizarSolicitacao(request, id):
             return redirect('listarSolicitarMatricula')
                     
     elif request.method == 'POST' and 'btnRecusar' in request.POST:
-        return redirect('visualizarSolicitacao', id=id)
+        mandar_email(email=solicitacao.email, solicitacao=solicitacao, tipo='recusacao')
+        solicitacao.delete()
+        messages.success(request, 'Solicitação recusada com sucesso.')
+        return redirect('listarSolicitarMatricula')
      
     return render(request, 'visualizacaoSolicitacaoMatricula/index.html', { 'solicitacao': solicitacao, 'pagina': 'visualizar Solicitação', 'grupos': grupos})
 
