@@ -170,3 +170,6 @@ def recuperar_senha(request, id):
         messages.error(request, 'Não solicitou a recuperação de senha.')
         return redirect('login')
     
+def verPerfil(request):
+    return render(request, 'verPerfil/index.html', {'pagina': 'Visualizar seu perfil'})
+    

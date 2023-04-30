@@ -3,13 +3,15 @@
 
 <aside id="menu-lateral">
     <div id="logo-menu">
-        <div id="img-logo">
-            {% if user.imagem_perfil %}
-            <img src="{{ user.imagem_perfil.url }}" alt="">
-            {% else %}
-            <img src="{% static 'img/perfil.png' %}" alt="">
-            {% endif %}
-        </div>
+        <a href="{% url 'verPerfil' %}" title="Ver seu perfil">
+            <div id="img-logo">
+                {% if user.imagem_perfil %}
+                <img src="{{ user.imagem_perfil.url }}" alt="">
+                {% else %}
+                <img src="{% static 'img/perfil.png' %}" alt="">
+                {% endif %}
+            </div>
+        </a>
         <div id="matricula">
             <p class="m-0 p-0">matricula</p>
             <h4 class="m-0 p-0">{{ user.matricula }}</h4>
@@ -27,7 +29,7 @@
         </a>
         <a id="historico" class="itens-conteudo" href=""><i class="fa-solid fa-paperclip"></i>
             <h3>Histórico</h3>
-        </a>   
+        </a>
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'administrativo' %}
         <a id="Administracao" class="itens-conteudo"><i class="fa-solid fa-briefcase"></i>
             <h3>Administração</h3>
@@ -39,7 +41,7 @@
                 <h3>Usuários</h3>
             </a>
         </div>
-        {% endif %} 
+        {% endif %}
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'recuso humano' %}
         <a id="rh" class="itens-conteudo"><i class="fa-solid fa-id-card-clip"></i>
             <h3>RH</h3>
@@ -51,7 +53,7 @@
                 <h3>aprovar matricula</h3>
             </a>
         </div>
-        {% endif %} 
+        {% endif %}
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'gestão' %}
         <a id="gestao" class="itens-conteudo"><i class="fa-solid fa-bars-progress"></i>
             <h3>gestão</h3>
@@ -63,7 +65,7 @@
                 <h3>Socilitar matricula</h3>
             </a>
         </div>
-        {% endif %} 
+        {% endif %}
 
     </div>
     <label for="cbx-menu" id="menu-rodape">
