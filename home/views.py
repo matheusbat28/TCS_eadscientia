@@ -59,7 +59,7 @@ def solicitacaoMatricula(request):
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def listarSolicitarMatricula(request):
     solicitacoes = Solicitacao.objects.filter(criado=False).order_by('sobrenome').order_by('nome')
-    paginator = Paginator(solicitacoes, 10)
+    paginator = Paginator(solicitacoes, 20)
     
     page = request.GET.get('page')
     posts = paginator.get_page(page)

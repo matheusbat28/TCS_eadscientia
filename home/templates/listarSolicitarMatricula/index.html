@@ -16,6 +16,12 @@
 {% include 'parciais/_sair.html' %}
 
 <div id="tabela" class="h-auto">
+    <form id="campo-pesquisa" action="">
+        <div id="pequisa">
+            <button title="Pesquisar" type="submit"><i class="fa-solid fa-search"></i></button>
+            <input type="text" placeholder="Pesquisar">
+        </div>
+    </form>
     <table>
         <thead>
             <tr>
@@ -34,8 +40,8 @@
             <td>{{ solicitacao.cpf }}</td>
             <td>{{ solicitacao.email }}</td>
             <td>
-                <a href="{% url 'visualizarSolicitacao' solicitacao.id %}" title="Ver a solicitação de {{ solicitacao.nome }}"><i
-                        class="fa-solid fa-users-viewfinder"></i></a>
+                <a href="{% url 'visualizarSolicitacao' solicitacao.id %}"
+                    title="Ver a solicitação de {{ solicitacao.nome }}"><i class="fa-solid fa-users-viewfinder"></i></a>
                 <a href="{% url 'deletarSolicitacao' solicitacao.id %}"
                     title="Negar a solicitação de {{ solicitacao.nome }}"><i class="fa-solid fa-trash-can"></i></a>
             </td>
