@@ -1,5 +1,4 @@
 asgiref==3.6.0
-cpf-generator==2.1.4
 deprecation==2.1.0
 Django==4.1.7
 django-cpf==0.1.0
