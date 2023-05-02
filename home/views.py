@@ -71,7 +71,7 @@ def listarSolicitarMatricula(request):
     paginator = Paginator(query, 20)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
-    return render(request, 'listarSolicitarMatricula/index.html', {'posts': posts, 'pagina': 'Solicitações de Matricula'})
+    return render(request, 'listarSolicitarMatricula/index.html', {'posts': posts, 'pagina': 'Solicitações de Matricula', 'quantidade': query.count()})
 
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')

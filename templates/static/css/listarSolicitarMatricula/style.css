@@ -14,7 +14,10 @@ body {
 }
 
 #filtro {
-    width: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: auto;
     height: 30px;
 }
 
@@ -90,6 +93,15 @@ table tbody tr td a:nth-child(1) {
 
 table tbody tr td a:nth-child(2) {
     color: #d81313;
+}
+
+#quantidade {
+    width: auto;
+    height: 30px;
+    margin: 0 10px;
+    color: var(--cor--fundo--4);
+    font-size: 16px;
+    font-weight: bold;
 }
 
 #mensagem {
