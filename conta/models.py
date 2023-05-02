@@ -12,7 +12,7 @@ class Usuario(AbstractUser):
     cursos = models.ManyToManyField('curso.Curso', related_name='cursos', blank=True)
 
     def __str__(self):
-        return self.username
+        return self.get_full_name()
     
     class Meta:
         db_table = 'usuario'

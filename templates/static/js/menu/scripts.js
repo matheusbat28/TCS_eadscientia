@@ -3,6 +3,7 @@ $(document).ready(function () {
     let admStatus = true;
     let rhStatus = true;
     let gestaoStatus = true;
+    let criacaoStatus = true;
 
     $('.itens-subconteudo, .seta-baixo, #matricula').hide();
 
@@ -35,7 +36,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#Administracao').click(function () {
+    $('#administracao').click(function () {
         if (admStatus && $('#cbx-menu').is(':checked')) {
             $('#administracao-conteudo').show();
             $('#seta-adm').css('transform', 'rotate(180deg)');
@@ -68,6 +69,18 @@ $(document).ready(function () {
             $('#gestao-conteudo').hide();
             $('#seta-gestao').css('transform', 'rotate(0deg)');
             gestaoStatus = true;
+        }
+    });
+
+    $('#criacao').click(function () {
+        if (criacaoStatus && $('#cbx-menu').is(':checked')) {
+            $('#criacao-conteudo').show();
+            $('#seta-criacao').css('transform', 'rotate(180deg)');
+            criacaoStatus = false;
+        } else {
+            $('#criacao-conteudo').hide();
+            $('#seta-criacao').css('transform', 'rotate(0deg)');
+            criacaoStatus = true;
         }
     });
 

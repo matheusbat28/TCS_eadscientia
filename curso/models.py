@@ -1,11 +1,15 @@
 from django.db import models
 from django.utils import timezone
 
-
+class Video(models.Model):
+    titulo = models.CharField(max_length=100)
+    video = models.FileField(upload_to='videos/%Y/%m/%d')
+    data_criacao = models.DateTimeField(default=timezone.now)
+    autor = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)
 
 class Curso(models.Model):
     nome = models.CharField(max_length=100)
-    autor = models.ManyToManyField('conta.Usuario', related_name='autor')
+    autor = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)
     data_criacao = models.DateTimeField(default=timezone.now)
     
     
