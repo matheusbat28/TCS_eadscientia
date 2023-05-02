@@ -16,7 +16,8 @@
 
 <body>
   <form id="conteudo">
-    <div id="video">
+    <div class="container">
+    <div id="video" class="video">
       <div id="titulo-video">
         <img src="../vendor/img/logo.png" alt="">
         <hr>
@@ -24,10 +25,10 @@
       </div>
       <video src="gabriel.mp4" controls></video>
     </div>
-    <div id="aulas_video">
+    <div id="aulas_video" class="aulas_video">
       <div id="titulo-aula-video">
-        <div id="progresso">
-          <div id="icon-progresso">
+        <div id="progresso" onclick="seek(event)">
+          <div id="icon-progresso" class="icon-progresso">
             <i class="fa-solid fa-trophy"></i>
           </div>
           <P>Obter certificado</P>
@@ -38,42 +39,53 @@
       </div>
       <div id="topico">
         <div class="topicos">
+          <a href="">
           <div class="topico-titulo">
             <h3>Titulo-Video</h3>
             <p>2/2 | 30m</p>
           </div>
+        </a>
+        <a href="">
           <div class="topico-titulo">
             <h3>Titulo-Video</h3>
             <p>2/2 | 30m</p>
           </div>
+        </a><a href="">
           <div class="topico-titulo">
             <h3>Titulo-Video</h3>
             <p>2/2 | 30m</p>
           </div>
+        </a><a href="">
           <div class="topico-titulo">
             <h3>Titulo-Video</h3>
             <p>2/2 | 30m</p>
           </div>
+        </a><a href="">
           <div class="topico-titulo">
             <h3>Titulo-Video</h3>
             <p>2/2 | 30m</p>
           </div>
+        </a><a href="">
           <div class="topico-titulo">
             <h3>Titulo-Video</h3>
             <p>2/2 | 30m</p>
           </div>
+        </a><a href="">
           <div class="topico-titulo">
             <h3>Titulo-Video</h3>
             <p>2/2 | 30m</p>
           </div>
+        </a><a href="">
           <div class="topico-titulo">
             <h3>Titulo-Video</h3>
             <p>2/2 | 30m</p>
           </div>
+        </a>
 
         </div>
       </div>
     </div>
+  </div>
     <div id="descricao-video"></div>
   </form>
 </body>
@@ -84,7 +96,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
   </script>
-<script defer src="../vendor/js/home/scripts.js"></script>
+<script defer src="../vendor/js/exibirCurso/scripts.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 
 </html>
