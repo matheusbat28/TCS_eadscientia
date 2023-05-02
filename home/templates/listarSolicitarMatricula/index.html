@@ -16,10 +16,13 @@
 {% include 'parciais/_sair.html' %}
 
 <div id="tabela" class="h-auto">
-    <form id="campo-pesquisa" action="">
+    <form id="campo-pesquisa" method="GET">
+        <div id="filtro">
+            <button type="submit">Limpar</button>
+        </div>
         <div id="pequisa">
-            <button title="Pesquisar" type="submit"><i class="fa-solid fa-search"></i></button>
-            <input type="text" placeholder="Pesquisar">
+            <button title="Pesquisar" name="btnPesquisar" type="submit"><i class="fa-solid fa-search"></i></button>
+            <input type="text" name="pesquisar" placeholder="Pesquisar">
         </div>
     </form>
     <table>

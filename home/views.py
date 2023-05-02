@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import FormSolicitacaoMatricula, FormCriacaoUsuario
 from django.contrib import messages
@@ -10,6 +10,8 @@ from .models import Solicitacao
 from conta.models import Usuario
 from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
+from django.urls import reverse
+from django.db.models import Q
 import random
 import string
 
@@ -58,9 +60,15 @@ def solicitacaoMatricula(request):
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def listarSolicitarMatricula(request):
-    solicitacoes = Solicitacao.objects.filter(criado=False).order_by('sobrenome').order_by('nome')
-    paginator = Paginator(solicitacoes, 20)
+    termo = request.GET.get('pesquisar')
+    query = Solicitacao.objects.all().order_by('sobrenome').order_by('nome')
     
+    if termo:
+        query = query.filter(
+            Q(nome__icontains=termo) | Q(sobrenome__icontains=termo) | Q(email__icontains=termo)
+        ).order_by('sobrenome').order_by('nome')
+      
+    paginator = Paginator(query, 20)
     page = request.GET.get('page')
     posts = paginator.get_page(page)
     return render(request, 'listarSolicitarMatricula/index.html', {'posts': posts, 'pagina': 'Solicitações de Matricula'})
@@ -69,7 +77,7 @@ def listarSolicitarMatricula(request):
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def visualizarSolicitacao(request, id):
     
-    solicitacao = Solicitacao.objects.get(id=id)
+    solicitacao = get_object_or_404(Solicitacao, id=id)
     grupos = Group.objects.all()
     
     if request.method == 'POST' and 'btnAprovar' in request.POST:

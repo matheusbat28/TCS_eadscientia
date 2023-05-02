@@ -3,7 +3,7 @@
 <div class="pagination">
     <span class="step-links">
         {% if posts.has_previous %}
-            <a href="?page={{ posts.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a>
+            <a href="?pesquisar={{ request.GET.pesquisar }}&page={{ posts.previous_page_number }}"><i class="fa-solid fa-angle-left"></i></a>
         {% endif %}
     
         <span class="current">
@@ -11,7 +11,7 @@
         </span>
     
         {% if posts.has_next %}
-            <a href="?page={{ posts.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a>
+            <a href="?pesquisar={{ request.GET.pesquisar }}&page={{ posts.next_page_number }}"><i class="fa-solid fa-angle-right"></i></a>
         {% endif %}
     </span>
 </div>
