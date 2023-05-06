@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-def adicionarVideo(request):
-    return render(request, 'adicionarVideo/index.html')
+def adicionarCurso(request):
+    return render(request, 'adicionarCurso/index.html')

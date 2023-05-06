@@ -3,12 +3,14 @@
 
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/adicionarVideo/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/adicionarCurso/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/paginacao/style.css' %}">
 {% endblock %}
+
+{% block title %}Adicionar Curso{% endblock %}
 
 {% block main %}
 {% include 'parciais/_cabecalho.html' %}

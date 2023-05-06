@@ -6,6 +6,8 @@
 <link rel="stylesheet" href="{% static 'css/verificar_codigo/style.css' %}">
 {% endblock %}
 
+{% block title %} Verificar Código {% endblock %}
+
 {% block main %}
 <form id="codigo-texto" method="POST" autocomplete="off">
     {% csrf_token %}

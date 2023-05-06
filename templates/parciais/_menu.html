@@ -27,17 +27,18 @@
         <a id="arquivo" class="itens-conteudo" href=""><i class="fa-solid fa-folder"></i>
             <h3>Arquivos</h3>
         </a>
-        
+        {% if user|in_grups:'desenvolvedor' or user|in_grups:'autor' %}
         <a id="criacao" class="itens-conteudo"><i class="fa-solid fa-book-medical"></i>
             <h3>Criação Curso</h3>
             <i id="seta-criacao" class="fa-solid fa-angle-down seta-baixo"></i>
         </a>
         <div id="criacao-conteudo" class="itens-subconteudo">
-            <a href="{% url 'adicionarVideo' %}" class="subconteudo-itens">
+            <a href="{% url 'adicionarCurso' %}" class="subconteudo-itens">
                 <i class="fa-solid fa-file-video"></i>
-                <h3>Adicionar Videos</h3>
+                <h3>Adicionar Curso</h3>
             </a>
         </div>
+        {% endif %}
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'administrativo' %}
         <a id="administracao" class="itens-conteudo"><i class="fa-solid fa-briefcase"></i>
             <h3>Administração</h3>
