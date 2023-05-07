@@ -1,102 +1,138 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../vendor/css/exibirCurso/style.css" />
+    <link rel="stylesheet" href="../vendor/css/padrao/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <title>Video aula</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" />
-  <link rel="stylesheet" href="../vendor/css/exibirCurso/style.css" />
-  <link rel="stylesheet" href="../vendor/css/padrao/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css" />
-  <title>Video aula</title>
-
-</head>
-
-<body>
-  <form id="conteudo">
-    <div class="container">
-    <div id="video" class="video">
-      <div id="titulo-video">
-        <img src="../vendor/img/logo.png" alt="">
-        <hr>
-        <h2>python - html - css</h2>
-      </div>
-      <video src="gabriel.mp4" controls></video>
-    </div>
-    <div id="aulas_video" class="aulas_video">
-      <div id="titulo-aula-video">
-        <div id="progresso" onclick="seek(event)">
-          <div id="icon-progresso" class="icon-progresso">
-            <i class="fa-solid fa-trophy"></i>
+  <body>
+    <form id="conteudo">
+      <div class="container">
+        <div id="video" class="video">
+          <div id="titulo-video">
+            <img src="../vendor/img/logo.png" alt="" />
+            <hr />
+            <h2>PYTHON-HTML-CSS</h2>
           </div>
-          <P>Obter certificado</P>
-          <div id="progresso-seta">
-            <i class="fa-solid fa-chevron-down"></i>
+          <video src="gabriel.mp4" controls></video>
+          <div class="sobre-video">
+            <h2>Sobre o Vídeo</h2>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet quia
+              eveniet quisquam. Est eveniet, ut numquam accusamus corporis
+              explicabo saepe nesciunt officia esse atque rerum error molestias
+              quasi expedita optio!
+            </p>
+          </div>
+        </div>
+        <div id="aulas_video" class="aulas_video">
+          <div id="header-certificado">
+            <div id="progresso">
+              <div id="barra-progresso" class="barra-progresso">
+                <div
+                  class="percent-progresso"
+                  style="--clr: #04fc43; --num: 80">
+                  <div class="dot"></div>
+                  <svg width="40" height="40">
+                    <circle cx="20" cy="20" r="20"></circle>
+                    <circle cx="20" cy="20" r="20"></circle>
+                  </svg>
+                  <i class="fa-solid fa-trophy"></i>
+                </div>
+              </div>
+              <p>Obter certificado</p>
+              <div id="progresso-seta">
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+
+          <div id="topico" class="topicos">
+            <a href="">
+              <div class="topico-titulo">
+                <h3>Titulo-Video</h3>
+                <p>2/2 | 20m</p>
+              </div>
+            </a>
+            <a href="">
+              <div class="topico-titulo">
+                <h3>Titulo-Video</h3>
+                <p>2/2 | 20m</p>
+              </div> </a
+            ><a href="">
+              <div class="topico-titulo">
+                <h3>Titulo-Video</h3>
+                <p>2/2 | 20m</p>
+              </div> </a
+            ><a href="">
+              <div class="topico-titulo">
+                <h3>Titulo-Video</h3>
+                <p>2/2 | 20m</p>
+              </div> </a
+            ><a href="">
+              <div class="topico-titulo">
+                <h3>Titulo-Video</h3>
+                <p>2/2 | 20m</p>
+              </div> </a
+            ><a href="">
+              <div class="topico-titulo">
+                <h3>Titulo-Video</h3>
+                <p>2/2 | 20m</p>
+              </div> </a
+            ><a href="">
+              <div class="topico-titulo">
+                <h3>Titulo-Video</h3>
+                <p>2/2 | 20m</p>
+              </div> </a
+            ><a href="">
+              <div class="topico-titulo">
+                <h3>Titulo-Video</h3>
+                <p>2/2 | 20m</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
-      <div id="topico">
-        <div class="topicos">
-          <a href="">
-          <div class="topico-titulo">
-            <h3>Titulo-Video</h3>
-            <p>2/2 | 30m</p>
-          </div>
-        </a>
-        <a href="">
-          <div class="topico-titulo">
-            <h3>Titulo-Video</h3>
-            <p>2/2 | 30m</p>
-          </div>
-        </a><a href="">
-          <div class="topico-titulo">
-            <h3>Titulo-Video</h3>
-            <p>2/2 | 30m</p>
-          </div>
-        </a><a href="">
-          <div class="topico-titulo">
-            <h3>Titulo-Video</h3>
-            <p>2/2 | 30m</p>
-          </div>
-        </a><a href="">
-          <div class="topico-titulo">
-            <h3>Titulo-Video</h3>
-            <p>2/2 | 30m</p>
-          </div>
-        </a><a href="">
-          <div class="topico-titulo">
-            <h3>Titulo-Video</h3>
-            <p>2/2 | 30m</p>
-          </div>
-        </a><a href="">
-          <div class="topico-titulo">
-            <h3>Titulo-Video</h3>
-            <p>2/2 | 30m</p>
-          </div>
-        </a><a href="">
-          <div class="topico-titulo">
-            <h3>Titulo-Video</h3>
-            <p>2/2 | 30m</p>
-          </div>
-        </a>
 
-        </div>
-      </div>
-    </div>
-  </div>
-    <div id="descricao-video"></div>
-  </form>
-</body>
+      
+    </form>
+  </body>
 
-<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
-  crossorigin="anonymous">
-  </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
-  </script>
-<script defer src="../vendor/js/exibirCurso/scripts.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
-
+  <script
+    src="https://code.jquery.com/jquery-3.6.3.js"
+    integrity="sha206-nQLuAZGRRcILA+6dMBOvcRh5Pe320sBpanc6+QBmyVM="
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h440rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"
+  ></script>
+  <script defer src="../vendor/js/exibirCurso/scripts.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.20/jquery.mask.js"></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E40Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"
+  ></script>
 </html>
