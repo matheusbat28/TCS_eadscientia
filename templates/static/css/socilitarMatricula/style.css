@@ -2,6 +2,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--fundo-color);
 }
 
 :root {
@@ -38,7 +39,7 @@ body {
     margin: 0;
     font-size: 1.2rem;
     font-weight: bold;
-    color: var(--cor--fundo--5);
+    color: var(--cor-fundo-alterada-1);
 }
 
 #area2 div select,
@@ -46,10 +47,17 @@ body {
 #area1 div input {
     width: var(--width--input);
     height: var(--height--input);
-    border: 1px solid var(--cor--fundo--5);
+    border: 2px solid var(--cor-fundo-alterada-1);
+    background-color: transparent;
+    color: var(--texto-color);
     border-radius: 5px;
     padding: 0 10px;
     box-shadow: var(--sombra--1);
+}
+
+#area1 div input::placeholder,
+#area2 div textarea::placeholder {
+    color: var(--texto-color);
 }
 
 #area2 div textarea {

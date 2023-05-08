@@ -12,19 +12,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
     <link rel="stylesheet" href="{% static 'css/padrao/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/mensagem/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modo_tela/style.css' %}">
     {% block css %}
     {% endblock %}
     <title>{{user.username}} | {% block title %}{% endblock %}</title>
 </head>
 <input type="checkbox" id="cbx-menu" class="cbx">
 <input id="cbx_modal" class="cbx" type="checkbox">
-<body>
+<body class="modo-claro">
     {% block main %}
     {% endblock %}
+    {% include 'parciais/_modo_tela.html' %}
 </body>
 
 {% block js %}
 {% endblock %}
+<script defer src="{% static 'js/modo_tela/scripts.js' %}"></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
