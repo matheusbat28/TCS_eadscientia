@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<link rel="stylesheet" href="../vendor/css/padrao/style.css">
+	<link rel="stylesheet" href="../vendor/css/adicionarCurso/style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.css">
+	<title>EadScientia</title>
+</head>
+
+<body>
+	<form id="formulario-curso">
+		<div id="cabecalho-curso">
+			<div id="titulo-curso">
+				<input type="text" placeholder="Titulo do curso:">
+			</div>
+			<div id="operacao-curso">
+				<a id="add-capitulo" title="Adicionar capítulo"><i class="fa-solid fa-plus"></i></a>
+				<button title="Criar curso" type="submit" id="btn-criar"><i class="fa-solid fa-check"></i></button>
+			</div>
+		</div>
+		<div id="conteudo-curso">
+			<div class="caixa-suspensa">
+				<div class="cabecalho-caixa-suspensa">
+					<div class="titulo-cabecalho-caixa-suspensa">
+						<input name="inputNomeCapitulo" type="text" placeholder="Titulo do capítulo:">
+					</div>
+					<div class="operacao-cabecalho-caixa-suspensa">
+						<i title="Expandir capítulo" class="fa-solid fa-caret-down expandir-capitulo"></i>
+						<i title="Adicionar video" class="fa-solid fa-plus add-video"></i>
+						<i title="Deletar capitulo" class="fa-solid fa-trash deletar-capitulo"></i>
+					</div>
+				</div>
+				<div class="conteudo-caixa-suspensa">
+					<div class="video-capitulo-curso">
+						<div class="cabecalho-video-capitulo-curso">
+							<input type="text" placeholder="Titulo do video:">
+						</div>
+						<div class="operacao-video-capitulo-curso">
+							<input type="file" name="" id="">
+							<i title="Deletar capitulo" class="fa-solid fa-trash deletar-video"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script>
+<script defer src="../vendor/js/adicionarCurso/scripts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+
+</html>
