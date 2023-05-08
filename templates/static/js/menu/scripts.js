@@ -1,9 +1,5 @@
 $(document).ready(function () {
 
-    let admStatus = true;
-    let rhStatus = true;
-    let gestaoStatus = true;
-    let criacaoStatus = true;
 
     $('.itens-subconteudo, .seta-baixo, #matricula').hide();
 
@@ -36,52 +32,15 @@ $(document).ready(function () {
         }
     });
 
-    $('#administracao').click(function () {
-        if (admStatus && $('#cbx-menu').is(':checked')) {
-            $('#administracao-conteudo').show();
-            $('#seta-adm').css('transform', 'rotate(180deg)');
-            admStatus = false;
-        } else {
-            $('#administracao-conteudo').hide();
-            $('#seta-adm').css('transform', 'rotate(0deg)');
-            admStatus = true;
-        }
-    });
+});
 
-    $('#rh').click(function () {
-        if (rhStatus && $('#cbx-menu').is(':checked')) {
-            $('#rh-conteudo').show();
-            $('#seta-rh').css('transform', 'rotate(180deg)');
-            rhStatus = false;
-        } else {
-            $('#rh-conteudo').hide();
-            $('#seta-rh').css('transform', 'rotate(0deg)');
-            rhStatus = true;
-        }
-    });
-
-    $('#gestao').click(function () {
-        if (gestaoStatus && $('#cbx-menu').is(':checked')) {
-            $('#gestao-conteudo').show();
-            $('#seta-gestao').css('transform', 'rotate(180deg)');
-            gestaoStatus = false;
-        } else {
-            $('#gestao-conteudo').hide();
-            $('#seta-gestao').css('transform', 'rotate(0deg)');
-            gestaoStatus = true;
-        }
-    });
-
-    $('#criacao').click(function () {
-        if (criacaoStatus && $('#cbx-menu').is(':checked')) {
-            $('#criacao-conteudo').show();
-            $('#seta-criacao').css('transform', 'rotate(180deg)');
-            criacaoStatus = false;
-        } else {
-            $('#criacao-conteudo').hide();
-            $('#seta-criacao').css('transform', 'rotate(0deg)');
-            criacaoStatus = true;
-        }
-    });
-
+$(document).on('click', '.itens-conteudo', function (e) {
+    var sub_conteudo = $(this).next('.itens-subconteudo');
+    if (sub_conteudo.is(':visible')) {
+        sub_conteudo.hide();
+        $(this).find('.seta-baixo').css('transform', 'rotate(0deg)');
+    } else {
+        sub_conteudo.show();
+        $(this).find('.seta-baixo').css('transform', 'rotate(180deg)');
+    }
 });

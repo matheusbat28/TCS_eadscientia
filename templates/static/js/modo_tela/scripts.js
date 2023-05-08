@@ -1,9 +1,11 @@
 if (localStorage.getItem('modo_tela') == 'false') {
     $('body').removeClass('modo-claro');
     $('body').addClass('modo-escuro');
+    $(this).parent().find('#modo_tela i').removeClass('fa-cloud-moon');
 } else {
     $('body').removeClass('modo-escuro');
     $('body').addClass('modo-claro');
+    $(this).parent().find('#modo_tela i').removeClass('fa-cloud-sun');
 }
 
 $(document).on('click', '#modo_tela', function (e) {
