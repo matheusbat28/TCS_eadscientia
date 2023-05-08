@@ -98,7 +98,6 @@ def visualizarSolicitacao(request, id):
             messages.error(request, 'cpf já cadastrado.')
             return redirect('visualizarSolicitacao', id=id)
         else:
-            senha = gararSenhaAleatoria()
             usuario = Usuario.objects.create(
                 first_name=solicitacao.nome,
                 last_name=solicitacao.sobrenome,
@@ -106,9 +105,7 @@ def visualizarSolicitacao(request, id):
                 cpf=solicitacao.cpf, 
             )
             usuario.groups.add(grupo)
-            usuario.set_password(senha)
             usuario.save()
-            mandar_email(email=usuario.email, senha=senha, tipo='aprovar', solicitacao=usuario)
             solicitacao.delete()
             messages.success(request, f'Usuário {usuario.get_full_name()} criado com sucesso.')
             return redirect('listarSolicitarMatricula')

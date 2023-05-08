@@ -4,7 +4,7 @@ from .models import Usuario, Token
 
 
 class UsuarioAdmin(UserAdmin):
-    list_display = ('username','matricula', 'cpf', 'first_name', 'last_name', 'is_staff')
+    list_display = ('username','matricula', 'email', 'first_name', 'last_name', 'is_staff')
     search_fields = ('username', 'matricula', 'cpf', 'first_name', 'last_name')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
     per_page = 10
