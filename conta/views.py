@@ -45,13 +45,13 @@ def login(request):
     
     elif request.method == 'POST' and 'btn-recuperar-senha' in request.POST:
         if formRecuperarSenha.is_valid():
-            token = gerar_token()
+            # token = gerar_token()
             
             if Token.objects.filter(usuario=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email'])).exists():
                 Token.objects.filter(usuario=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email'])).delete()           
-            Token.objects.create(token=make_password(token), usuario=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email']))
+            Token.objects.create(usuario=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email']))
                 
-            mandar_email(formRecuperarSenha.cleaned_data['email'], token)
+            # mandar_email(formRecuperarSenha.cleaned_data['email'], token)
             messages.success(request, f'Código enviado para o email {formRecuperarSenha.cleaned_data["email"]}')
             return redirect('verificar_codigo', id=Usuario.objects.get(email=formRecuperarSenha.cleaned_data['email']).id)
         else:
@@ -107,9 +107,7 @@ def verificar_codigo(request, id):
                 
     elif request.method == 'POST' and 'btn-reenviar-codigo' in request.POST:
         Token.objects.filter(usuario=Usuario.objects.get(id=id)).delete()
-        token = gerar_token()
-        Token.objects.create(token=make_password(token), usuario=Usuario.objects.get(id=id))
-        mandar_email(Usuario.objects.get(id=id).email, token)
+        Token.objects.create( usuario=Usuario.objects.get(id=id))
         messages.success(request, f'Código enviado para o email {Usuario.objects.get(id=id).email}') 
         return redirect('verificar_codigo', id=id)
         
@@ -119,22 +117,6 @@ def verificar_codigo(request, id):
     else:
         messages.error(request, 'Não solicitou a recuperação de senha.')
         return redirect('login')
-
-def mandar_email(email, token):
-    html_contexto = render_to_string('email/token.html', {'token': token})
-    texto_contexto = strip_tags(html_contexto)
-    email = EmailMultiAlternatives('Recuperação de Senha', texto_contexto, settings.EMAIL_HOST_USER, [email])
-    email.attach_alternative(html_contexto, 'text/html')
-    email.send()
-
-def gerar_token():
-    token = str(randint(100000, 999999))
-    while True:
-        if Token.objects.filter(token=make_password(token)).exists():
-            token = str(randint(100000, 999999))
-        else:
-            break
-    return token
 
 def recuperar_senha(request, id):
     formAlterarSenha = FormAlterarSenha(request.POST)

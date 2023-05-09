@@ -26,7 +26,7 @@ def popular_solicitacao():
             continue
         
     if quantidade is not None:  
-        for _ in range(quantidade):
+        for x in range(quantidade):
             nome = fake.first_name()
             sobrenome = fake.last_name()
             cpf = fake.cpf()
@@ -54,7 +54,7 @@ def popular_solicitacao():
                 usuario=usuario
             )
             
-            print(f'Solicitação {solicitacao} criada com sucesso!')
+            print(f'N° {x+1} Solicitação {solicitacao} criada com sucesso!')
         
 popular_solicitacao()
 

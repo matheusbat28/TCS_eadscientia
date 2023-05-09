@@ -20,7 +20,7 @@ class Usuario(AbstractUser):
         verbose_name_plural = 'Usuários'
 
 class Token(models.Model):
-    token = models.CharField(max_length=255, unique=True)
+    token = models.CharField(max_length=255, unique=True, blank=True, null=True)
     usuario = models.OneToOneField(Usuario, on_delete=models.CASCADE)
     validou = models.BooleanField(default=False)
     data_criacao = models.DateTimeField(default=now)
