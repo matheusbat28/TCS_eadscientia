@@ -1,4 +1,3 @@
-
 body {
    overflow-x: hidden;
    background: #191919;
@@ -72,6 +71,7 @@ body {
    width: 100%;
    height: 70px;
    border-bottom: 1px solid rgba(255, 255, 255, .5);
+
 }
 
 #progresso {
@@ -83,13 +83,14 @@ body {
    margin-right: 10px;
    cursor: pointer;
 }
+
 /* ------------animação progresso------------ */
 
 .percent-progresso {
    position: relative;
-    width: 50px;
-    height: 50px;  
-   color: var(--cor--fundo--3) ;
+   width: 50px;
+   height: 50px;
+   color: var(--cor--fundo--3);
 }
 
 .percent-progresso svg {
@@ -118,12 +119,11 @@ body {
 }
 
 @keyframes fadeIn {
-   0%
-   {
+   0% {
       opacity: 0;
    }
-   100%
-   {
+
+   100% {
       opacity: 1;
    }
 }
@@ -138,12 +138,11 @@ body {
 }
 
 @keyframes dotAnimado {
-   0%
-   {
+   0% {
       transform: rotate(0deg);
    }
-   100%
-   {
+
+   100% {
       transform: rotate(calc(3.6deg*var(--num)));
    }
 }
@@ -159,7 +158,7 @@ body {
    border-radius: 50%;
    background: var(--cor--fundo--3);
    box-shadow: 0 0 10px var(--cor--fundo--3),
-   0 0 30px var(--cor--fundo--3);
+      0 0 30px var(--cor--fundo--3);
 }
 
 .percent-progresso i {
@@ -227,7 +226,7 @@ a {
    justify-content: center;
    align-items: flex-start;
    flex-direction: column;
-   
+
 }
 
 
@@ -238,21 +237,30 @@ a {
       flex-direction: column;
    }
 
-   .container #aulas_video {
-      margin-top: 0;
+   #header-certificado {
+      border-radius: 10px 10px 0 0;
+      justify-content: center;
+
+   }
+
+   #topico {
+      margin-bottom: 200px;
+   }
+
+   #topico a:last-child {
+      border-radius: 0 0 10px 10px;
+
    }
 
    #video {
-     width: 100%;
-     height: auto;
-     margin-left: 0;
+      width: 100%;
+      height: auto;
+      margin-left: 0;
    }
- 
-   #aulas_video {
-     width: 100%;
-     height: auto;
-     max-height: none;
-   }
- }
- 
 
+   #aulas_video {
+      width: 100%;
+      height: auto;
+      max-height: none;
+   }
+}
