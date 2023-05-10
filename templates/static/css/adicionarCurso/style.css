@@ -91,6 +91,7 @@ body {
     width: 100%;
     height: 60px;
     animation: cores_fundo 10s infinite;
+    border-radius: 5px;
 }
 
 .titulo-cabecalho-caixa-suspensa {
@@ -187,4 +188,29 @@ body {
 
 .operacao-video-capitulo-curso input[type="file"]::-webkit-file-upload-button:hover {
     background-color: var(--cor--fundo--4);
+}
+
+@media screen and (max-width: 900px) {
+    #formulario-curso {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #formulario-curso {
+        width: 100%;
+    }
+
+    #conteudo-curso {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    #titulo-curso input,
+    .titulo-cabecalho-caixa-suspensa input,
+    .cabecalho-video-capitulo-curso input {
+        font-size: 0.7rem;
+    }
 }
