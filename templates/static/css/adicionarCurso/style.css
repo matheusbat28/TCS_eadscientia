@@ -1,0 +1,190 @@
+body {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+#formulario-curso {
+    margin-top: 130px;
+    width: 80%;
+    max-height: 80vh;
+}
+
+#cabecalho-curso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    border: 2px solid var(--cor--fundo--4);
+    border-radius: 10px;
+    box-shadow: var(--sombra--1);
+    animation: cores_fundo 10s infinite;
+    padding: 0 20px;
+}
+
+#cabecalho-curso input {
+    border: none;
+    font-weight: bold;
+    background-color: transparent;
+    color: #fff;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--cor--fundo--5);
+}
+
+#cabecalho-curso input::placeholder {
+    color: #fff;
+}
+
+#operacao-curso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: auto;
+    height: 100%;
+}
+
+#operacao-curso button,
+#operacao-curso a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--cor--fundo--5);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#titulo-curso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 100%;
+}
+
+#conteudo-curso {
+    margin: 10px auto;
+    width: 85%;
+    height: auto;
+}
+
+.caixa-suspensa {
+    width: 100%;
+    height: auto;
+    border: 2px solid var(--cor--fundo--4);
+    border-radius: 10px;
+    box-shadow: var(--sombra--1);
+    margin-bottom: 10px;
+}
+
+.cabecalho-caixa-suspensa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    animation: cores_fundo 10s infinite;
+}
+
+.titulo-cabecalho-caixa-suspensa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 100%;
+    margin: 0 30px;
+}
+
+.titulo-cabecalho-caixa-suspensa input {
+    border: none;
+    font-weight: bold;
+    background-color: transparent;
+    color: #fff;
+    font-size: 1rem;
+    border-bottom: 2px solid var(--cor--fundo--5);
+}
+
+.titulo-cabecalho-caixa-suspensa input::placeholder {
+    color: #fff;
+}
+
+.operacao-cabecalho-caixa-suspensa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    margin: 0 30px;
+    color: #fff;
+}
+
+.operacao-cabecalho-caixa-suspensa i {
+    cursor: pointer;
+}
+
+.expandir-capitulo {
+    font-size: 1.6rem;
+}
+
+.deletar-video,
+.deletar-capitulo {
+    color: #ff0000;
+}
+
+.conteudo-caixa-suspensa {
+    margin: 10px auto;
+    width: 100%;
+    height: auto;
+}
+
+.video-capitulo-curso {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 0 20px;
+}
+
+.cabecalho-video-capitulo-curso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: 100%;
+}
+
+.cabecalho-video-capitulo-curso input {
+    border: none;
+    font-size: 1rem;
+    border-bottom: 2px solid var(--cor--fundo--5);
+}
+
+.operacao-video-capitulo-curso {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+    width: auto;
+}
+
+.operacao-video-capitulo-curso input[type="file"]::-webkit-file-upload-button {
+    background-color: var(--cor--fundo--5);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.operacao-video-capitulo-curso input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: var(--cor--fundo--4);
+}

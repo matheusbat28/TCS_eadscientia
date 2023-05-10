@@ -9,27 +9,29 @@
 {% block title %}login{% endblock %}
 
 {% block main %}
-<div id="modal" class="modal-sair">
-    <div id="modal-x">
-        <label for="cbx_modal" class="fa-solid fa-times"></label>
-    </div>
-    <div id="modal-texto">
-        <h2>verificar email</h2>
-    </div>
-    <form id="modal-corpo" method="POST">
-        {% csrf_token %}
-        <div class="log-input">
-            {{ formRecuperarSenha.email }}
+<div id="fundo_modal">
+    <div id="modal">
+        <div id="modal-x">
+            <label class="fa-solid fa-times"></label>
         </div>
-        <div id="modal-botao">
-            <button id="btn-recuperar-senha" name='btn-recuperar-senha' type="submit">
-                <div id="carregando-senha" class="carregando"></div>
-                <i class="fa-solid fa-arrow-right"></i>
-            </button>
-            {{ formRecuperarSenha.captcha }}
-            <div id="modal-tempo"></div>
+        <div id="modal-texto">
+            <h2>verificar email</h2>
         </div>
-    </form>
+        <form id="modal-corpo" method="POST">
+            {% csrf_token %}
+            <div class="log-input">
+                {{ formRecuperarSenha.email }}
+            </div>
+            <div id="modal-botao">
+                <button id="btn-recuperar-senha" name='btn-recuperar-senha' type="submit">
+                    <div id="carregando-senha" class="carregando"></div>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                {{ formRecuperarSenha.captcha }}
+                <div id="modal-tempo"></div>
+            </div>
+        </form>
+    </div>
 </div>
 <div id="login">
     <div id="log-perfil">
@@ -49,7 +51,7 @@
                     <i id="olho-senha" class="fa-solid fa-eye"></i>
                 </div>
                 <div id="esqueci-senha">
-                    <label for="cbx_modal">esqueci a senha</label>
+                    <label>esqueci a senha</label>
                 </div>
                 <div id="log-botao">
                     <button id="btn-entrar" name='btn-entrar' type="submit">

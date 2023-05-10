@@ -17,11 +17,47 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-{% include 'parciais/_paginacao.html' %}
+<form id="formulario-curso">
+    <div id="cabecalho-curso">
+        <div id="titulo-curso">
+            <input type="text" name="inputTituloCurso" placeholder="Titulo do curso:">
+        </div>
+        <div id="operacao-curso">
+            <a id="add-capitulo" title="Adicionar capítulo"><i class="fa-solid fa-plus"></i></a>
+            <button title="Criar curso" type="submit" id="btn-criar"><i class="fa-solid fa-check"></i></button>
+        </div>
+    </div>
+    <div id="conteudo-curso">
+        <div class="caixa-suspensa">
+            <div class="cabecalho-caixa-suspensa">
+                <div class="titulo-cabecalho-caixa-suspensa">
+                    <input name="inputNomeCapitulo" type="text" placeholder="Titulo do capítulo:">
+                </div>
+                <div class="operacao-cabecalho-caixa-suspensa">
+                    <i title="Expandir capítulo" class="fa-solid fa-caret-down expandir-capitulo"></i>
+                    <i title="Adicionar video" class="fa-solid fa-plus add-video"></i>
+                    <i title="Deletar capitulo" class="fa-solid fa-trash deletar-capitulo"></i>
+                </div>
+            </div>
+            <div class="conteudo-caixa-suspensa">
+                <div class="video-capitulo-curso">
+                    <div class="cabecalho-video-capitulo-curso">
+                        <input type="text" name="inputNomeVideo" placeholder="Titulo do video:">
+                    </div>
+                    <div class="operacao-video-capitulo-curso">
+                        <input type="file" name="inputArquivo" id="">
+                        <i title="Deletar capitulo" class="fa-solid fa-trash deletar-video"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}
 
 {% block js %}
-<script defer src="{% static 'js/listarSolicitarMatricula/scripts.js' %}"></script>
+<script defer src="{% static 'js/adicionarCurso/scripts.js' %}"></script>
 <script defer src="{% static 'js/menu/scripts.js' %}"></script>
 {% endblock %}
