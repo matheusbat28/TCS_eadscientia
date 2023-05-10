@@ -32,7 +32,6 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Sobrenome</th>
                 <th>CPF</th>
                 <th>E-mail</th>
                 <th>Opções</th>
@@ -41,8 +40,7 @@
         {% if posts %}
         {% for solicitacao in posts %}
         <tr>
-            <td>{{ solicitacao.nome }}</td>
-            <td>{{ solicitacao.sobrenome }}</td>
+            <td>{{ solicitacao.nome }} {{ solicitacao.sobrenome }}</td>
             <td>{{ solicitacao.cpf }}</td>
             <td>{{ solicitacao.email }}</td>
             <td>

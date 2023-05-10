@@ -1,11 +1,12 @@
 {% load static %}
+{% load filtros %}
 
 <header id="cabecalho">
     <div id="conteudo_cabecalho">
         <label for="cbx-menu" id="menu-icon">
             <i class="fa-solid fa-bars"></i>
         </label>
-        <h3>Bem vindo, {{user.get_full_name.title}}</h3>
+        <h3>{{ user|massage_in_time }}</h3>
     </div>
     {% if pagina %}
     <div id="informacao-tela">

@@ -86,9 +86,11 @@ table thead tr {
     color: #fff;
 }
 
-table thead tr th,
-table tbody tr td {
+table thead tr th {
     text-align: center;
+}
+table tbody tr td {
+    padding-left: 20px;
 }
 
 table thead tr th {

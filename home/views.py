@@ -29,7 +29,6 @@ def solicitacaoMatricula(request):
         if formFormSolicitacaoMatricula.is_valid():
             solicitacao = formFormSolicitacaoMatricula.save(request.user)
             if solicitacao is not None:
-                mandar_email(email=settings.EMAIL_RH, solicitacao=solicitacao, tipo='solicitacao', usuario=request.user)
                 messages.success(request, 'Solicitação enviada com sucesso.')
                 return redirect('solicitacaoMatricula')
             
@@ -111,7 +110,6 @@ def visualizarSolicitacao(request, id):
             return redirect('listarSolicitarMatricula')
                     
     elif request.method == 'POST' and 'btnRecusar' in request.POST:
-        mandar_email(email=solicitacao.email, solicitacao=solicitacao, tipo='recusacao')
         solicitacao.delete()
         messages.success(request, 'Solicitação recusada com sucesso.')
         return redirect('listarSolicitarMatricula')
@@ -125,57 +123,12 @@ def deletarSolicitacao(request, id):
     try:
         solicitacao = Solicitacao.objects.get(id=id)
         solicitacao.delete()
-        mandar_email(email=solicitacao.email, solicitacao=solicitacao, tipo='recusacao')
         messages.success(request, 'Solicitação recusada com sucesso.')
         return redirect('listarSolicitarMatricula')
     except Exception:
         messages.error(request, 'Erro ao recusar a solicitação.')
         return redirect('visualizarSolicitacao', id=id)
 
-def gararSenhaAleatoria():
-    letras = string.ascii_letters
-    numeros = string.digits
-    caracteres = letras + numeros
-    senha = ''.join(random.choice(caracteres) for i in range(8))
-    return senha
-
-def mandar_email(email, solicitacao=None, tipo=None, usuario=None, senha=None, usuarioADM=None):
-    if tipo == 'solicitacao':
-        html_contexto = render_to_string('email/solicitacaoMatricula.html', {'solicitacao': solicitacao, 'usuario': usuario})
-        texto_contexto = strip_tags(html_contexto)
-        
-        email = EmailMultiAlternatives(
-            'Solicitação de Matricula',
-            texto_contexto,
-            settings.EMAIL_HOST_USER,
-            [email]
-        )
-        email.attach_alternative(html_contexto, "text/html")
-        email.send()   
-    elif tipo == 'recusacao':
-        html_contexto = render_to_string('email/deletar.html', {'solicitacao': solicitacao})
-        texto_contexto = strip_tags(html_contexto)
-        
-        email = EmailMultiAlternatives(
-            'Recusa de Matricula',
-            texto_contexto,
-            settings.EMAIL_HOST_USER,
-            [email]
-        )
-        email.attach_alternative(html_contexto, "text/html")
-        email.send()   
-    elif tipo == 'aprovar':
-        html_contexto = render_to_string('email/aprovar.html', {'usuario': solicitacao, 'senha': senha})
-        texto_contexto = strip_tags(html_contexto)
-        
-        email = EmailMultiAlternatives(
-            'Aprovação de Matricula',
-            texto_contexto,
-            settings.EMAIL_HOST_USER,
-            [email]
-        )
-        email.attach_alternative(html_contexto, "text/html")
-        email.send()
         
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
@@ -187,7 +140,6 @@ def criarUsuario(request):
             retono = formCriacaoUsuario.save(senha)
             
             if retono is not None:
-                mandar_email(email=retono.email, tipo='criacaoADM', usuario=retono, senha=senha, usuarioADM=request.user)
                 messages.success(request, 'Usuário criado com sucesso.')
                 return redirect('criarUsuario')
             else:
