@@ -1,13 +1,21 @@
 from django.contrib import admin
-from .models import Curso, Video
+from .models import Curso, Video, Capitulo
 
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'autor', 'data_criacao')
-    search_fields = ('titulo', 'autor')
-    list_filter = ('titulo', 'autor')
+    list_display = ('titulo', 'data_criacao')
+    search_fields = ('titulo',)
+    list_filter = ('titulo',)
     per_page = 10
     
 admin.site.register(Video, VideoAdmin)
+
+class CapituloAdmin(admin.ModelAdmin):
+    list_display = ('titulo',)
+    search_fields = ('titulo',)
+    list_filter = ('titulo',)
+    per_page = 10
+    
+admin.site.register(Capitulo, CapituloAdmin)
 
 class CursoAdmin(admin.ModelAdmin):
     list_display = ('nome',)

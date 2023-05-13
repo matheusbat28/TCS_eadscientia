@@ -206,6 +206,13 @@ body {
     }
 }
 
+@media screen and (max-width: 500px) {
+
+    .operacao-video-capitulo-curso input[type="file"] {
+        font-size: 0.5rem;
+    }
+}
+
 @media screen and (max-width: 400px) {
 
     #titulo-curso input,
