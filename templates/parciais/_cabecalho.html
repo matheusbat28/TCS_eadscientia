@@ -6,7 +6,7 @@
         <label for="cbx-menu" id="menu-icon">
             <i class="fa-solid fa-bars"></i>
         </label>
-        <h3>{{ user|massage_in_time }}</h3>
+        <h3>{% if user %}{{ user|massage_in_time }}{% endif %}</h3>
     </div>
     {% if pagina %}
     <div id="informacao-tela">

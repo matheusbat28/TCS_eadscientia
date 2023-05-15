@@ -5,6 +5,73 @@ body {
     overflow-x: hidden;
 }
 
+.fundo-modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 105;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.603);
+}
+
+#cabecalho-modal-foto {
+    width: 50%;
+    height: 50%;
+    animation: cores_fundo 10s infinite;
+    border: var(--espessura--cards--cad--log) solid var(--cor--fundo--3);
+    box-shadow: var(--sombra--1);
+    border-radius: 10px;
+}
+
+#titulo-modal-foto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    color: var(--cor--fundo--3);
+    font-weight: bold;
+
+}
+
+#conteudo-modal-foto {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100% - 60px);
+}
+
+#conteudo-modal-foto input[type="file"] {
+    color: var(--cor--fundo--3);
+    font-weight: bold;
+}
+
+#conteudo-modal-foto input[type="file"]::-webkit-file-upload-button {
+    color: var(--cor--fundo--3);
+    font-weight: bold;
+    background-color: var(--cor--fundo--6);
+    border: 1px solid var(--cor--fundo--3);
+    border-radius: 5px;
+}
+
+#img-conteudo-modal-foto {
+    max-width: 100%;
+    max-height: 70%;
+    border-radius: 10px;
+    box-shadow: var(--sombra--1);
+    object-fit: cover;
+}
+
+#titulo-modal-foto i {
+    cursor: pointer;
+    color: red;
+    font-size: 2rem;
+}
+
 #formulario-curso {
     margin-top: 130px;
     width: 80%;
@@ -59,6 +126,15 @@ body {
     color: #fff;
     font-weight: bold;
     cursor: pointer;
+}
+
+.carregamento {
+    width: 70%;
+    height: 70%;
+    border-radius: 10px;
+    border: 3px solid var(--cor--fundo--3);
+    border-top: 3px solid var(--cor--fundo--4);
+    animation: is-rotating 1s infinite;
 }
 
 #titulo-curso {
@@ -177,18 +253,17 @@ body {
     width: auto;
 }
 
-.operacao-video-capitulo-curso input[type="file"]::-webkit-file-upload-button {
-    background-color: var(--cor--fundo--5);
-    color: #fff;
+.operacao-video-capitulo-curso input {
     border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    cursor: pointer;
+    font-size: 1rem;
+    border-bottom: 2px solid var(--cor--fundo--5);
 }
 
-.operacao-video-capitulo-curso input[type="file"]::-webkit-file-upload-button:hover {
-    background-color: var(--cor--fundo--4);
+#mensagem {
+    top: 70px;
+    right: 5px;
 }
+
 
 @media screen and (max-width: 900px) {
     #formulario-curso {
@@ -217,7 +292,8 @@ body {
 
     #titulo-curso input,
     .titulo-cabecalho-caixa-suspensa input,
-    .cabecalho-video-capitulo-curso input {
+    .cabecalho-video-capitulo-curso input,
+    .operacao-video-capitulo-curso input {
         font-size: 0.7rem;
     }
 }

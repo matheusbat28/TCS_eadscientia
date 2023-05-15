@@ -3,7 +3,7 @@ from django.utils import timezone
 
 class Video(models.Model):
     titulo = models.CharField(max_length=100)
-    video = models.FileField(upload_to='videos/%Y/%m/%d')
+    video = models.URLField(max_length=200)
     data_criacao = models.DateTimeField(default=timezone.now)
     
     def __str__(self):

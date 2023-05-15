@@ -17,21 +17,38 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-<form id="formulario-curso">
+<div id="modal-foto" class="fundo-modal ">
+    <div id="cabecalho-modal-foto">
+        <div id="titulo-modal-foto">
+            <h3 class="mx-4">Adicionar foto de fundo</h3>
+            <i class="fa-solid fa-times fechar-modal-foto mx-4"></i>
+        </div>
+        <div id="conteudo-modal-foto">
+            <input name="inuptFotoCurso" type="file" name="" id="inuptFotoCurso">
+            <img id="img-conteudo-modal-foto" src="" alt="">
+        </div>
+    </div>
+</div>
+<form method="POST" id="formulario-curso">
+    {% csrf_token %}
     <div id="cabecalho-curso">
         <div id="titulo-curso">
-            <input type="text" name="inputTituloCurso" placeholder="Titulo do curso:">
+            <input type="text" required name="inputTituloCurso" placeholder="Titulo do curso:">
         </div>
         <div id="operacao-curso">
+            <a id="add-foto-fundo" title="Adicionar a foto do curso"><i class="fa-solid fa-image"></i></a>
             <a id="add-capitulo" title="Adicionar capítulo"><i class="fa-solid fa-plus"></i></a>
-            <button title="Criar curso" type="submit" id="btn-criar"><i class="fa-solid fa-check"></i></button>
+            <button title="Criar curso" type="submit" id="btn-criar">
+                <i class="fa-solid fa-check"></i>
+                <div class="carregamento"></div>
+            </button>
         </div>
     </div>
     <div id="conteudo-curso">
         <div class="caixa-suspensa">
             <div class="cabecalho-caixa-suspensa">
                 <div class="titulo-cabecalho-caixa-suspensa">
-                    <input name="inputNomeCapitulo" type="text" placeholder="Titulo do capítulo:">
+                    <input required name="inputNomeCapitulo" type="text" placeholder="Titulo do capítulo:">
                 </div>
                 <div class="operacao-cabecalho-caixa-suspensa">
                     <i title="Expandir capítulo" class="fa-solid fa-caret-down expandir-capitulo"></i>
@@ -42,10 +59,10 @@
             <div class="conteudo-caixa-suspensa">
                 <div class="video-capitulo-curso">
                     <div class="cabecalho-video-capitulo-curso">
-                        <input type="text" name="inputNomeVideo" placeholder="Titulo do video:">
+                        <input required type="text" name="inputNomeVideo" placeholder="Titulo do video:">
                     </div>
                     <div class="operacao-video-capitulo-curso">
-                        <input type="file" name="inputArquivo" id="">
+                        <input required type="text" name="inputUrlVideo" placeholder="Url do video:">
                         <i title="Deletar video" class="fa-solid fa-trash deletar-video"></i>
                     </div>
                 </div>
@@ -53,6 +70,10 @@
         </div>
     </div>
 </form>
+
+
+<div id="mensagem" class="alert " role="alert">
+</div>
 
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}

@@ -127,7 +127,7 @@ body {
     cursor: pointer;
 }
 
-#fundo_modal {
+.fundo_modal-estilo {
     display: flex;
     align-items: center;
     justify-content: center;

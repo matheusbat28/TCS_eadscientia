@@ -1,4 +1,4 @@
-$('.carregando, #fundo_modal').hide();
+$('.carregando').hide();
 
 let modalStatus = false;
 
@@ -43,11 +43,5 @@ $(window).on('unload', function () {
 });
 
 $(document).on('click', '#esqueci-senha label, #modal-x', function () {
-    if (modalStatus == false) {
-        $('#fundo_modal').show();
-        modalStatus = true;
-    } else {
-        $('#fundo_modal').hide();
-        modalStatus = false;
-    }
+        $('#fundo_modal').toggleClass('fundo_modal-estilo');
 });

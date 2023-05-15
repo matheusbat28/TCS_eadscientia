@@ -61,7 +61,7 @@ def solicitacaoMatricula(request):
 def listarSolicitarMatricula(request):
     termo = request.GET.get('pesquisar')
     query = Solicitacao.objects.all().order_by('sobrenome').order_by('nome')
-    
+     
     if termo:
         query = query.filter(
             Q(nome__icontains=termo) | Q(sobrenome__icontains=termo) | Q(email__icontains=termo)
