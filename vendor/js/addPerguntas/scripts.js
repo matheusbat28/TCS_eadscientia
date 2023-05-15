@@ -12,12 +12,13 @@ $(document).on('click', '#add-pergunta', function (e) {
         <div class="operacao-cabecalho-resposta">
             <i title="Expandir resposta" class="fa-solid fa-caret-down expandir-resposta"></i>
             <i title="Adicionar resposta" class="fa-solid fa-plus add-resposta"></i>
-            <i title="Deletar resposta" class="fa-solid fa-trash deletar-resposta"></i>
+            <i title="Deletar pergunta" class="fa-solid fa-trash deletar-pergunta"></i>
         </div>
     </div>
     <div class="conteudo-resposta">
         <div class="resposta-pergunta">
             <div class="cabecalho-resposta">
+                <input type="radio">
                 <input type="text" placeholder="Resposta:">
             </div>
             <div class="deletar-resposta">
@@ -51,7 +52,7 @@ $(document).on('click', '.add-resposta', function (e) {
     html_img = `<div class="resposta-pergunta">
     <div class="cabecalho-resposta">
         <input type="radio">
-        <input type="text" placeholder="resposta">
+        <input type="text" placeholder="Resposta">
     </div>
     <div class="deletar-resposta">
         <i title="Deletar Resposta" class="fa-solid fa-trash deletar-resposta"></i>
