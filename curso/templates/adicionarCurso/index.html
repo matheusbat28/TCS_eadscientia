@@ -17,20 +17,21 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-<div id="modal-foto" class="fundo-modal ">
-    <div id="cabecalho-modal-foto">
-        <div id="titulo-modal-foto">
-            <h3 class="mx-4">Adicionar foto de fundo</h3>
-            <i class="fa-solid fa-times fechar-modal-foto mx-4"></i>
-        </div>
-        <div id="conteudo-modal-foto">
-            <input name="inuptFotoCurso" type="file" name="" id="inuptFotoCurso">
-            <img id="img-conteudo-modal-foto" src="" alt="">
-        </div>
-    </div>
-</div>
+
 <form method="POST" id="formulario-curso">
     {% csrf_token %}
+    <div id="modal-foto" class="fundo-modal ">
+        <div id="cabecalho-modal-foto">
+            <div id="titulo-modal-foto">
+                <h3 class="mx-4">Adicionar foto de fundo</h3>
+                <i class="fa-solid fa-times fechar-modal-foto mx-4"></i>
+            </div>
+            <div id="conteudo-modal-foto">
+                <input name="inuptFotoCurso" type="file" name="" id="inuptFotoCurso">
+                <img id="img-conteudo-modal-foto" src="" alt="">
+            </div>
+        </div>
+    </div>
     <div id="cabecalho-curso">
         <div id="titulo-curso">
             <input type="text" required name="inputTituloCurso" placeholder="Titulo do curso:">

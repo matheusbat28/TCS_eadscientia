@@ -33,6 +33,7 @@ class Curso(models.Model):
     autor = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)
     data_criacao = models.DateTimeField(default=timezone.now)
     capitulos = models.ManyToManyField('curso.Capitulo')
+    img = models.ImageField(upload_to='curso/img', default='curso/img/curso.png')
     
     
     def __str__(self):

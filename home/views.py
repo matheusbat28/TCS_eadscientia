@@ -136,9 +136,7 @@ def criarUsuario(request):
     formCriacaoUsuario = FormCriacaoUsuario(request.POST)
     if request.method == 'POST':
         if formCriacaoUsuario.is_valid():
-            senha = gararSenhaAleatoria()
-            retono = formCriacaoUsuario.save(senha)
-            
+            retono = formCriacaoUsuario.save()
             if retono is not None:
                 messages.success(request, 'Usuário criado com sucesso.')
                 return redirect('criarUsuario')

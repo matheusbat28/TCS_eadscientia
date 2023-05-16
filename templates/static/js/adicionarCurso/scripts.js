@@ -5,32 +5,6 @@ var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 
 $("#mensagem").hide();
 
-function separadorDadoJson(dataForm) {
-    let = capitulo = [];
-
-    for (let i = 2; i < dataForm.length; i++) {
-        if (dataForm[i].name == 'inputNomeCapitulo') {
-            let nomeCapitulo = dataForm[i].value;
-            let video = [];
-            capitulo.push({ 'nomeCapitulo': nomeCapitulo, 'video': video });
-        }
-        if (dataForm[i].name == 'inputNomeVideo') {
-            let nomeVideo = dataForm[i].value;
-            let urlVideo = dataForm[i + 1].value;
-            capitulo[capitulo.length - 1].video.push({ 'nomeVideo': nomeVideo, 'urlVideo': urlVideo });
-        }
-    }
-
-
-
-    let dados = {
-        'nomeCurso': dataForm[1].value,
-        'capitulos': capitulo
-    };
-
-    return JSON.stringify(dados);
-};
-
 
 $(document).ready(function (e) {
 
@@ -41,13 +15,14 @@ $(document).ready(function (e) {
         $('#mensagem, #btn-criar i').hide();
         $('.carregamento').show();
 
-        let dataForm = $(this).serializeArray();
+        let dataForm = new FormData(this);
         $.ajax({
             url: '/curso/adicionarCurso/',
-            type: 'POST',
+            type: $(this).attr('method'),
             headers: { 'X-CSRFToken': crf_token },
-            contentType: 'application/json; charset=utf-8',
-            data: separadorDadoJson(dataForm),
+            processData: false,
+            contentType: false,
+            data: dataForm,
             success: function (data) {
                 if (data.status == 'successo') {
                     $('#mensagem').show();
@@ -63,6 +38,8 @@ $(document).ready(function (e) {
             },
             error: function (data) {
                 console.log(data);
+                $('.carregamento').hide();
+                $('#btn-criar i').show();
             },
 
         });
