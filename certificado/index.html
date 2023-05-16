@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../vendor/css/certificado/style.css">
+    <link rel="stylesheet" href="../vendor/css/padrao/style.css">
+    <title>Gerar certificado</title>
+</head>
+<body>
+    <h1>Geração de Certificado</h1>
+  <form id="certificado-form">
+    <!-- Campos do formulário -->
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" required>
+    
+    <label for="curso">Curso:</label>
+    <input type="text" id="curso" name="curso" required>
+    
+    <button type="submit">Gerar Certificado</button>
+  </form>
+
+  <div id="certificado-container">
+    <!-- Certificado gerado será exibido aqui -->
+  </div>
+    
+</body>
+
+<script src="../vendor/js/certificado/scripts.js"></script>
+</html>

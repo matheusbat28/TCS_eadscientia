@@ -38,5 +38,42 @@ form.addEventListener('submit', (event) => {
   alert(`Você acertou ${numCorreto} de ${totalQuestoes} questões (${percentCorreto.toFixed(2)}%). ${message}`);
 });
 
+// ---------------------------------------------------------------------------------------------
+
+const timerElement = document.getElementById('tempo');
+
+const timeLimit = 30; // 30 segundos
+
+let remainingTime = timeLimit;
+
+function updateTimer() {
+  const minutos = Math.floor(remainingTime / 60);
+  const segundos = remainingTime % 60;
+
+  const formattedTime = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+
+  timerElement.textContent = formattedTime;
+
+  remainingTime--;
+
+  if (remainingTime < 0) {
+    form.submit();
+  }
+}
+
+updateTimer();
+
+const timerInterval = setInterval(updateTimer, 1000);
+
+form.addEventListener('submit', function (event) {
+  event.preventDefault(); 
+
+
+  clearInterval(timerInterval);
+
+  form.submit();
+});
+
+
 
   

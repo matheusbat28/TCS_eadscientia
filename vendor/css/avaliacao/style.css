@@ -23,12 +23,29 @@ flex-direction: column;
 
 }  
 
+.tempo-prova {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.tempo-prova p {
+    margin: 0;
+    padding: 10px;
+}
+
 fieldset {
     border: 2px solid var(--cor--fundo--3);
     padding: 10px;
     margin-bottom: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 2);
     background-color: #fff;
+    border-radius: 5px;
   }
   
   legend {
@@ -53,6 +70,7 @@ fieldset {
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
   }
   
   button:hover {
