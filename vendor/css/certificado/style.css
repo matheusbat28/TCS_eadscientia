@@ -1,5 +1,6 @@
 h1 {
     text-align: center;
+    margin-top: 50px;
   }
   
   form {
@@ -11,6 +12,8 @@ h1 {
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 2);
+    margin-top: 50px;
   }
   
   label, input, button {
@@ -26,18 +29,95 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
   }
+
+  button:hover {
+    background-color: #45a049;
+  }
   
   #certificado-container {
-    max-width: 600px;
+    /* max-width: 600px;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
-  }
-
-  #certifcado-container{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 2);
     font-size: 24px;
     margin-bottom: 20px;
+    margin-top: 50px;
+    background-color: #fff; */
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #2980b9;
+    border-radius: 10px;
+    background-color: #ecf0f1;
   }
+
+  .header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .logo {
+    width: 100px;
+  }
+
+  h2 {
+    font-size: 32px;
+    margin: 10px 0;
+    color: #333;
+  }
+
+  .content {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+
+  }
+  
+  p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #666;
+  }
+
+  .nome-aluno {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .nome-curso {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  .assinaturas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+
+  .assinatura {
+    margin: 0 20px;
+  }
+
+  .assinatura-img {
+    width: 120px;
+    margin-bottom: 10px;
+  }
+  
+  .assinatura-nome {
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+  }
+
+
+
   

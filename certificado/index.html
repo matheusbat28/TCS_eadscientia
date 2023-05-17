@@ -1,31 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../vendor/css/certificado/style.css">
-    <link rel="stylesheet" href="../vendor/css/padrao/style.css">
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../vendor/css/certificado/style.css" />
+    <link rel="stylesheet" href="../vendor/css/padrao/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/puppeteer@10.2.0/dist/puppeteer.min.js"></script>
     <title>Gerar certificado</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Geração de Certificado</h1>
-  <form id="certificado-form">
-    <!-- Campos do formulário -->
-    <label for="nome">Nome:</label>
-    <input type="text" id="nome" name="nome" required>
-    
-    <label for="curso">Curso:</label>
-    <input type="text" id="curso" name="curso" required>
-    
-    <button type="submit">Gerar Certificado</button>
-  </form>
+    <form id="certificado-form">
+      <!-- Campos do formulário -->
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required />
 
-  <div id="certificado-container">
-    <!-- Certificado gerado será exibido aqui -->
-  </div>
-    
-</body>
+      <label for="curso">Curso:</label>
+      <input type="text" id="curso" name="curso" required />
 
-<script src="../vendor/js/certificado/scripts.js"></script>
+      <button type="submit">Gerar Certificado</button>
+    </form>
+
+    <div id="certificado-container">
+      <div class="header">
+      <img src="logo.png" alt="Logo da Instituição" class="logo" />
+      <h2>Certificado de Conclusão</h2>
+      </div>
+      <div class="content">
+      <p>Este certificado é concedido a:</p>
+      <h3 class="nome-aluno"></h3>
+      <p>Pela conclusão do curso:</p>
+      <h4 class="nome-curso"></h4>
+      <p>Data: </p>
+      </div>
+      <div class="footer">
+        <div class="assinaturas">
+          <img
+            src="assinatura1.png"
+            alt="Assinatura do Diretor"
+            class="assinatura"
+          />
+          <img
+            src="assinatura2.png"
+            alt="Assinatura do Instrutor"
+            class="assinatura"
+          />
+        </div>
+      </div>
+    </div>
+    <button id="btn-gerar-pdf">Gerar PDF</button>
+
+  </body>
+
+  <script src="../vendor/js/certificado/scripts.js"></script>
 </html>
