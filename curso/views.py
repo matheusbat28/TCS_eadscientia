@@ -11,15 +11,17 @@ import json
 @user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def adicionarCurso(request):
     if request.method == 'POST':
-        img = request.FILES.get('inuptFotoCurso')  
-        nome = request.POST.get('inputTituloCurso')
-        capitulos = []
+        nome_curso = request.POST.get('nome-curso').strip()
+        json_capitulo = request.POST.get('capitulos')
+        foto_curso = request.FILES.get('inuptFotoCurso')
         
-        dadosDicionario = {key: value for key, value in request.POST.items()}
+        curso = Curso.objects.create(
+            nome = nome_curso,
+            img = foto_curso,
+            autor = request.user
+        )
         
-        # separar os videos por capitulos
-        for key, value in dadosDicionario.items():
-            print(key, value)
+        print(curso)
                 
 
         return JsonResponse({'status': 'successo', 'message': 'Curso adicionado com sucesso!'})

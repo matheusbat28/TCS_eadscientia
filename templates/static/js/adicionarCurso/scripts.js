@@ -5,6 +5,39 @@ var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 
 $("#mensagem").hide();
 
+function separarDados(dataForm) {
+    let data = dataForm;
+    let capitulos = [];
+
+    $('.caixa-suspensa').each(function () {
+
+        let tituloCapitulo = $(this).find('.cabecalho-caixa-suspensa').find('#inputNomeCapitulo').val();
+        capitulo = {
+            'nome-capitulo': tituloCapitulo,
+            'videos': []
+        }
+
+        $(this).find('.conteudo-caixa-suspensa').each(function () {
+            $(this).find('.video-capitulo-curso').children().each(function () {
+                video = {};
+                if ($(this).hasClass('cabecalho-video-capitulo-curso')) {
+                    video['nome-video'] = $(this).children().val()
+                } else if ($(this).hasClass('operacao-video-capitulo-curso')) {
+                    video['url-video'] = $(this).children().val()
+                };
+                capitulo.videos.push(video);
+            });
+        });
+        capitulos.push(capitulo)
+
+    });
+
+    data.append('nome-curso', $('#inputTituloCurso').val());
+    data.append('capitulos', JSON.stringify(capitulos));
+    return data;
+
+}
+
 
 $(document).ready(function (e) {
 
@@ -15,14 +48,13 @@ $(document).ready(function (e) {
         $('#mensagem, #btn-criar i').hide();
         $('.carregamento').show();
 
-        let dataForm = new FormData(this);
         $.ajax({
             url: '/curso/adicionarCurso/',
             type: $(this).attr('method'),
             headers: { 'X-CSRFToken': crf_token },
             processData: false,
             contentType: false,
-            data: dataForm,
+            data: separarDados(new FormData(this)),
             success: function (data) {
                 if (data.status == 'successo') {
                     $('#mensagem').show();
@@ -31,9 +63,10 @@ $(document).ready(function (e) {
                     $('#mensagem').show();
                     $('#mensagem').html(data.message).addClass('alert-danger').removeClass('alert-success');
                 }
+
+
                 $('.carregamento').hide();
                 $('#btn-criar i').show();
-
                 $('#mensagem').delay(10000).fadeOut('slow');
             },
             error: function (data) {
@@ -42,7 +75,9 @@ $(document).ready(function (e) {
                 $('#btn-criar i').show();
             },
 
+
         });
+
     });
 
 });
@@ -59,7 +94,7 @@ $(document).on('click', '#add-capitulo', function (e) {
     let caixa_suspensao_html = `<div class="caixa-suspensa">
     <div class="cabecalho-caixa-suspensa">
         <div class="titulo-cabecalho-caixa-suspensa">
-            <input required name="inputNomeCapitulo" type="text" placeholder="Titulo do capítulo:">
+            <input required id="inputNomeCapitulo" name="inputNomeCapitulo" type="text" placeholder="Titulo do capítulo:">
         </div>
         <div class="operacao-cabecalho-caixa-suspensa">
             <i title="Expandir capítulo" class="fa-solid fa-caret-down expandir-capitulo"></i>
@@ -70,10 +105,10 @@ $(document).on('click', '#add-capitulo', function (e) {
     <div class="conteudo-caixa-suspensa">
         <div class="video-capitulo-curso">
             <div class="cabecalho-video-capitulo-curso">
-                <input required type="text" name="inputNomeVideo" placeholder="Titulo do video:">
+                <input required type="text" id="inputNomeVideo" name="inputNomeVideo" placeholder="Titulo do video:">
             </div>
             <div class="operacao-video-capitulo-curso">
-                <input required type="text" name="inputUrlVideo" placeholder="Url do video:">
+                <input required type="text" id="inputUrlVideo" name="inputUrlVideo" placeholder="Url do video:">
                 <i title="Deletar capitulo" class="fa-solid fa-trash deletar-video"></i>
             </div>
         </div>
@@ -103,10 +138,10 @@ $(document).on('click', '.deletar-capitulo', function (e) {
 $(document).on('click', '.add-video', function (e) {
     html_img = `<div class="video-capitulo-curso">
         <div class="cabecalho-video-capitulo-curso">
-            <input required type="text" name="inputNomeVideo" placeholder="Titulo do video:">
+            <input required type="text" id="inputNomeVideo" name="inputNomeVideo" placeholder="Titulo do video:">
         </div>
         <div class="operacao-video-capitulo-curso">
-            <input required type="text" name="inputUrlVideo" placeholder="Url do video:">
+            <input required type="text" id="inputUrlVideo" name="inputUrlVideo" placeholder="Url do video:">
             <i title="Deletar capitulo" class="fa-solid fa-trash deletar-video"></i>
         </div>
     </div>`;
