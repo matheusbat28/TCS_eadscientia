@@ -12,16 +12,21 @@ import json
 def adicionarCurso(request):
     if request.method == 'POST':
         nome_curso = request.POST.get('nome-curso').strip()
-        json_capitulo = request.POST.get('capitulos')
+        json_capitulo = json.loads(request.POST.get('capitulos'))
         foto_curso = request.FILES.get('inuptFotoCurso')
         
-        curso = Curso.objects.create(
-            nome = nome_curso,
-            img = foto_curso,
-            autor = request.user
-        )
+        if not nome_curso:
+            return JsonResponse({'status': 'erro', 'message': 'Insira um nome para o curso'})
+        elif not foto_curso:
+            return JsonResponse({'status': 'erro', 'message': 'Insira um foto para o curso'})
         
-        print(curso)
+        # curso = Curso.objects.create(
+        #     nome = nome_curso,
+        #     img = foto_curso,
+        #     autor = request.user
+        # )
+        
+        # print(curso)
                 
 
         return JsonResponse({'status': 'successo', 'message': 'Curso adicionado com sucesso!'})
