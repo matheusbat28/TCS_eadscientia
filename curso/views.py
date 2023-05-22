@@ -5,6 +5,7 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Curso, Capitulo, Video
+from .apis import validar_youtube_url
 import json
 
 @login_required
@@ -20,6 +21,13 @@ def adicionarCurso(request):
         elif not foto_curso:
             return JsonResponse({'status': 'erro', 'message': 'Insira um foto para o curso'})
         
+        for capitulo in json_capitulo:
+            for video in capitulo['videos']:
+                for chave, valor in video.items():
+                    if chave == 'url-video':
+                        if not validar_youtube_url(valor):
+                            return JsonResponse({'status': 'erro', 'message': f'A url {valor} não é valida'})
+                            
         # curso = Curso.objects.create(
         #     nome = nome_curso,
         #     img = foto_curso,
