@@ -92,7 +92,7 @@ class FormCriacaoUsuario(forms.Form):
            raise forms.ValidationError('E-mail já solicitou a matrícula espere a aprovação pelo RH!')
        return email
    
-   def save(self, senha):
+   def save(self):
        try:
            usuario = Usuario.objects.create(
                first_name=self.cleaned_data['nome'],
@@ -100,8 +100,6 @@ class FormCriacaoUsuario(forms.Form):
                cpf=self.cleaned_data['cpf'],
                email=self.cleaned_data['email'],
            )
-           usuario.set_password(senha)
-           usuario.save()
        except:
            raise forms.ValidationError('Erro ao salvar usuário!')
        return usuario

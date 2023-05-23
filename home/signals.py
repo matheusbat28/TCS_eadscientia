@@ -22,12 +22,16 @@ def mandar_email_criacao(sender, instance, created, **kwargs):
         
 @receiver(post_delete, sender=Solicitacao)
 def mandar_email_exclusao(sender, instance, **kwargs):
-    html_content = render_to_string('email/deletar.html', {'solicitacao': instance})
-    text_content = strip_tags(html_content)
-    email = EmailMultiAlternatives(
-        'solicitação de matrícula excluída',
-        text_content,
-        settings.EMAIL_HOST_USER,
-        [instance.email])
-    email.attach_alternative(html_content, "text/html")
-    email.send()
+    if instance.criado:
+        pass
+    else:
+        html_content = render_to_string('email/deletar.html', {'solicitacao': instance})
+        text_content = strip_tags(html_content)
+        email = EmailMultiAlternatives(
+            'solicitação de matrícula excluída',
+            text_content,
+            settings.EMAIL_HOST_USER,
+            [instance.email]
+        )
+        email.attach_alternative(html_content, "text/html")
+        email.send()

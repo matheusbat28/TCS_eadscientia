@@ -4,6 +4,7 @@ body {
     justify-content: center;
     width: 100vw;
     overflow-x: hidden;
+    background-color: var(--fundo-color);
 }
 
 .fundo-modal {
@@ -239,10 +240,18 @@ body {
     height: 100%;
 }
 
+.operacao-video-capitulo-curso input,
 .cabecalho-video-capitulo-curso input {
     border: none;
     font-size: 1rem;
+    background-color: transparent;
     border-bottom: 2px solid var(--cor--fundo--5);
+    color: var(--texto-color);
+}
+
+.operacao-video-capitulo-curso input::placeholder,
+.cabecalho-video-capitulo-curso input::placeholder {
+    color: var(--texto-color);
 }
 
 .operacao-video-capitulo-curso {
@@ -254,17 +263,18 @@ body {
     width: auto;
 }
 
-.operacao-video-capitulo-curso input {
-    border: none;
-    font-size: 1rem;
-    border-bottom: 2px solid var(--cor--fundo--5);
-}
 
 #mensagem {
     top: 70px;
     right: 5px;
 }
 
+
+@media screen and (max-width: 1100px) {
+    #cabecalho-modal-foto {
+        width: 80%;
+    }
+}
 
 @media screen and (max-width: 900px) {
     #formulario-curso {
@@ -278,6 +288,10 @@ body {
     }
 
     #conteudo-curso {
+        width: 100%;
+    }
+
+    #cabecalho-modal-foto {
         width: 100%;
     }
 }

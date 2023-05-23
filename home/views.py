@@ -105,6 +105,8 @@ def visualizarSolicitacao(request, id):
             )
             usuario.groups.add(grupo)
             usuario.save()
+            solicitacao.criado = True
+            solicitacao.save()
             solicitacao.delete()
             messages.success(request, f'Usuário {usuario.get_full_name()} criado com sucesso.')
             return redirect('listarSolicitarMatricula')
