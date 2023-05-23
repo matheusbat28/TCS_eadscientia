@@ -9,10 +9,36 @@
 <link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
 {% endblock %}
 
+{% block title %} Ver Perfil {% endblock %}
+
 {% block main %}
 {% include 'parciais/_cabecalho.html' %}
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
+
+<div id="borda-perfil">
+    <div id="img-perfil">
+        <img src="{% if user.imagem_perfil.url %} {{ user.imagem_perfil.url }}  {% else %} {% static 'img/perfil.png' %} {% endif %}" alt="">
+    </div>
+    <div id="dado-perfil">
+        <div class="label-input">
+            <h5>Nome completo:</h5>
+            <input type="text" value="{{ user.get_full_name }}" readonly>
+        </div>
+        <div class="label-input">
+            <h5>Usuário:</h5>
+            <input type="text" value="{{ user.username }}" readonly>
+        </div>
+        <div class="label-input">
+            <h5>Cpf:</h5>
+            <input type="text" value="{{ user.cpf }}" readonly>
+        </div>
+        <div class="label-input">
+            <h5>E-mail:</h5>
+            <input type="text" value="{{ user.email }}" readonly>
+        </div>
+    </div>
+</div>
 
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}

@@ -1,0 +1,80 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--fundo-color);
+    --width--perfil: 40%;
+    --height--perfil: 75%;
+}
+
+#borda-perfil {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    width: var(--width--perfil);
+    height: var(--height--perfil);
+
+}
+
+#img-perfil {
+    width: 140px;
+    height: 140px;
+    border: 2px solid var(--cor--fundo--3);
+    box-shadow: var(--sombra--1);
+    border-radius: 50%;
+}
+
+#img-perfil img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+#dado-perfil {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 60%;
+}
+
+.label-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 70%;
+    height: 60px;
+}
+
+.label-input h5 {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--cor-fundo-alterada-1);
+}
+
+.label-input input {
+    width: 300px;
+    border: 2px solid var(--cor-fundo-alterada-1);
+    background-color: transparent;
+    color: var(--texto-color);
+    border-radius: 5px;
+    padding: 0 5px;
+    box-shadow: var(--sombra--1);
+    text-align: center;
+}
+
+@media screen and (max-width: 700px) {
+    #dado-perfil {
+        width: 100%;
+    }
+
+    .label-input {
+        width: 100%;
+    }
+}
