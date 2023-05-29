@@ -41,7 +41,7 @@ document.getElementById('certificado-form').addEventListener('submit', function(
 });
 
 
-  // ------------------------------------------------------------------------------------
+  // -------------------------------gerar certificado--------------------------------------
 
   window.onload = function() {
     document.getElementById('btn-gerar-pdf').addEventListener('click', function() {

@@ -28,6 +28,13 @@ h1 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+
+  }
+
+  .btn-gerar-pdf{
+    display: flex;
+    justify-content: center;
+    
   }
 
   button:hover {
@@ -35,23 +42,14 @@ h1 {
   }
   
   #certificado-container {
-    /* max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 2);
-    font-size: 24px;
-    margin-bottom: 20px;
-    margin-top: 50px;
-    background-color: #fff; */
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    border: 2px solid #2980b9;
+    border: 3px solid var(--cor--fundo--3);
+    animation: 20s cores_fundo infinite;
     border-radius: 10px;
     background-color: #ecf0f1;
+    
   }
 
   .header {
@@ -66,7 +64,7 @@ h1 {
   h2 {
     font-size: 32px;
     margin: 10px 0;
-    color: #333;
+    color: #00ffbf;
   }
 
   .content {
@@ -81,19 +79,23 @@ h1 {
   p {
     font-size: 18px;
     margin-bottom: 10px;
-    color: #666;
+    color: var(--cor--fundo--3);
   }
 
   .nome-aluno {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    color:  #ffffff;
+    
+    
   }
 
   .nome-curso {
     font-size: 22px;
     font-weight: bold;
     margin-bottom: 20px;
+    color: #ffffff;
   }
 
   .assinaturas {
