@@ -48,7 +48,7 @@ venv\Scripts\activate.bat
 * Na raiz do projeto tem um arquivo chamado requirements.txt (onde tem todas as dependências do projetos)
 * Para baixar as dependências tem que executar esse comando, porém tem q estar na venv
 ~~~
-pip freeze -r requirements.txt
+pip install -r requirements.txt
 ~~~
 
 * Após baixar as dependências tem um arquivo **.env** na raiz do projeto para ter as variaveis de segurança do sistema
