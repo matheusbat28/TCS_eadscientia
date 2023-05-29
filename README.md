@@ -7,12 +7,12 @@ Projeto voltado para educação continuada com intuito conclusão do curso anali
 * Primeramente escolhemos onde vamos criar o arquivo 
 * Depois acessamos esse local no ternimal do PC e digitamos o seguinte comando: 
 ~~~
-git commit -b back https://github.com/matheusbat28/TCS.git
+git clone -b back https://github.com/matheusbat28/TCS.git
 ~~~ 
 
 
 * Abra o codigo na IDE de sua preferência (IDE usado no projeto VsCode)
-* Após abrir crie um venv (gereciado de pacote do python) para criar a venv digite esse comando:
+* Após abrir crie um venv (ambiente virtuais do python) para criar a venv digite esse comando:
 
 *Comado no linux*
 ~~~
