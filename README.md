@@ -74,3 +74,16 @@ EMAIL_RH = 'email do recurso humano'
 EMAIL_ADM = 'email da administração'
 KEY_YOUTUBE = 'chave da api do google'
 ~~~
+
+* Depois abra o terminal da IDE e faça a migração do banco de dado 
+~~~
+python manage.py makemrigations
+~~~
+~~~
+python manage.py migrate
+~~~
+
+* Após a migração do banco pode iniciar o servidor
+~~~
+python manage.py runserver
+~~~
