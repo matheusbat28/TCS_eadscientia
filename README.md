@@ -44,6 +44,10 @@ venv\Scripts\Activate.ps1
 ~~~
 venv\Scripts\activate.bat
 ~~~
+*Comado no window (Git Bash)*
+~~~
+. venv\Scripts\activate
+~~~
 
 * Na raiz do projeto tem um arquivo chamado requirements.txt (onde tem todas as dependências do projetos)
 * Para baixar as dependências tem que executar esse comando, porém tem q estar na venv
