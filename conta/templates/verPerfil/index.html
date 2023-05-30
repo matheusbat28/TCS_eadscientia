@@ -18,7 +18,11 @@
 
 <div id="borda-perfil">
     <div id="img-perfil">
-        <img src="{% if user.imagem_perfil.url %} {{ user.imagem_perfil.url }}  {% else %} {% static 'img/perfil.png' %} {% endif %}" alt="">
+        {% if user.imagem_perfil %}
+            <img src="{{ user.imagem_perfil.url }}" alt="">
+        {% else %}
+            <img src="{% static 'img/perfil.png' %}" alt="">
+        {% endif %}
     </div>
     <div id="dado-perfil">
         <div class="label-input">

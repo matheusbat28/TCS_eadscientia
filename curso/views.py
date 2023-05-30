@@ -12,21 +12,22 @@ import json
 @user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def adicionarCurso(request):
     if request.method == 'POST':
-        nome_curso = request.POST.get('nome-curso').strip()
+        print(request.POST)
+        # nome_curso = request.POST.get('nome-curso').strip()
         json_capitulo = json.loads(request.POST.get('capitulos'))
-        foto_curso = request.FILES.get('inuptFotoCurso')
+        # foto_curso = request.FILES.get('inuptFotoCurso')
         
-        if not nome_curso:
-            return JsonResponse({'status': 'erro', 'message': 'Insira um nome para o curso'})
-        elif not foto_curso:
-            return JsonResponse({'status': 'erro', 'message': 'Insira um foto para o curso'})
+        # if not nome_curso:
+        #     return JsonResponse({'status': 'erro', 'message': 'Insira um nome para o curso'})
+        # elif not foto_curso:
+        #     return JsonResponse({'status': 'erro', 'message': 'Insira um foto para o curso'})
         
-        for capitulo in json_capitulo:
-            for video in capitulo['videos']:
-                for chave, valor in video.items():
-                    if chave == 'url-video':
-                        if not validar_youtube_url(valor):
-                            return JsonResponse({'status': 'erro', 'message': f'A url {valor} não é valida'})
+        # for capitulo in json_capitulo:
+        #     for video in capitulo['videos']:
+        #         for chave, valor in video.items():
+        #             if chave == 'url-video':
+        #                 if not validar_youtube_url(valor):
+        #                     return JsonResponse({'status': 'erro', 'message': f'A url {valor} não é valida'})
                             
         # curso = Curso.objects.create(
         #     nome = nome_curso,
@@ -35,6 +36,10 @@ def adicionarCurso(request):
         # )
         
         # print(curso)
+        
+        for capitulo in json_capitulo:
+            for video in capitulo['videos']:
+                print(video)
                 
 
         return JsonResponse({'status': 'successo', 'message': 'Curso adicionado com sucesso!'})

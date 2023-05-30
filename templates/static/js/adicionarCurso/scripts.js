@@ -12,23 +12,22 @@ function separarDados(dataForm) {
     $('.caixa-suspensa').each(function () {
 
         let tituloCapitulo = $(this).find('.cabecalho-caixa-suspensa').find('#inputNomeCapitulo').val();
-        capitulo = {
+        var capitulo = {
             'nome-capitulo': tituloCapitulo,
             'videos': []
         }
 
         $(this).find('.conteudo-caixa-suspensa').each(function () {
+            console.log($(this).find('.video-capitulo-curso').children())
             $(this).find('.video-capitulo-curso').children().each(function () {
-                video = {};
+                console.log($(this));
                 if ($(this).hasClass('cabecalho-video-capitulo-curso')) {
-                    video['nome-video'] = $(this).children().val()
+                    video[$(this).children().val()] = ''
                 } else if ($(this).hasClass('operacao-video-capitulo-curso')) {
-                    video['url-video'] = $(this).children().val()
+                    video[$(this).children().val()] = $(this).children().val()
                 };
-                capitulo.videos.push(video);
             });
         });
-        capitulos.push(capitulo)
 
     });
 
@@ -48,35 +47,39 @@ $(document).ready(function (e) {
         $('#mensagem, #btn-criar i').hide();
         $('.carregamento').show();
 
-        $.ajax({
-            url: '/curso/adicionarCurso/',
-            type: $(this).attr('method'),
-            headers: { 'X-CSRFToken': crf_token },
-            processData: false,
-            contentType: false,
-            data: separarDados(new FormData(this)),
-            success: function (data) {
-                if (data.status == 'successo') {
-                    $('#mensagem').show();
-                    $('#mensagem').html(data.message).addClass('alert-success').removeClass('alert-danger');
-                } else {
-                    $('#mensagem').show();
-                    $('#mensagem').html(data.message).addClass('alert-danger').removeClass('alert-success');
-                }
+        separarDados(new FormData(this))
+
+        // $.ajax({
+        //     url: '/curso/adicionarCurso/',
+        //     type: $(this).attr('method'),
+        //     headers: { 'X-CSRFToken': crf_token },
+        //     processData: false,
+        //     contentType: false,
+        //     data: separarDados(new FormData(this)),
+        //     success: function (data) {
+        //         if (data.status == 'successo') {
+        //             $('#mensagem').show();
+        //             $('#mensagem').html(data.message).addClass('alert-success').removeClass('alert-danger');
+        //         } else {
+        //             $('#mensagem').show();
+        //             $('#mensagem').html(data.message).addClass('alert-danger').removeClass('alert-success');
+        //         }
 
 
-                $('.carregamento').hide();
-                $('#btn-criar i').show();
-                $('#mensagem').delay(10000).fadeOut('slow');
-            },
-            error: function (data) {
-                console.log(data);
-                $('.carregamento').hide();
-                $('#btn-criar i').show();
-            },
+        //         $('.carregamento').hide();
+        //         $('#btn-criar i').show();
+        //         $('#mensagem').delay(10000).fadeOut('slow');
+        //     },
+        //     error: function (data) {
+        //         console.log(data);
+        //         $('.carregamento').hide();
+        //         $('#btn-criar i').show();
+        //     },
 
 
-        });
+        // });
+        $('.carregamento').hide();
+        $('#btn-criar i').show();
 
     });
 
