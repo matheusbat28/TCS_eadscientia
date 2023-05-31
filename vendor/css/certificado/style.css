@@ -22,10 +22,10 @@ h1 {
   }
   
   button {
-    background-color: #4CAF50;
+    background-color: rgb(5, 139, 5);
     color: white;
     padding: 10px;
-    border: none;
+    border: 2px solid var(--cor--fundo--3);
     border-radius: 5px;
     cursor: pointer;
 
