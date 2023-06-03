@@ -17,18 +17,20 @@ function separarDados(dataForm) {
             'videos': []
         }
 
+
         $(this).find('.conteudo-caixa-suspensa').each(function () {
-            console.log($(this).find('.video-capitulo-curso').children())
+            let = video = {};
+            // console.log($(this).find('.video-capitulo-curso').children())
             $(this).find('.video-capitulo-curso').children().each(function () {
-                console.log($(this));
                 if ($(this).hasClass('cabecalho-video-capitulo-curso')) {
-                    video[$(this).children().val()] = ''
+                    video['nome'] = $(this).children().val()
                 } else if ($(this).hasClass('operacao-video-capitulo-curso')) {
-                    video[$(this).children().val()] = $(this).children().val()
+                    video['url'] = $(this).children().val()
+                    capitulo['videos'].push(video)
                 };
             });
-        });
-
+        })
+        capitulos.push(capitulo)
     });
 
     data.append('nome-curso', $('#inputTituloCurso').val());
@@ -49,35 +51,35 @@ $(document).ready(function (e) {
 
         separarDados(new FormData(this))
 
-        // $.ajax({
-        //     url: '/curso/adicionarCurso/',
-        //     type: $(this).attr('method'),
-        //     headers: { 'X-CSRFToken': crf_token },
-        //     processData: false,
-        //     contentType: false,
-        //     data: separarDados(new FormData(this)),
-        //     success: function (data) {
-        //         if (data.status == 'successo') {
-        //             $('#mensagem').show();
-        //             $('#mensagem').html(data.message).addClass('alert-success').removeClass('alert-danger');
-        //         } else {
-        //             $('#mensagem').show();
-        //             $('#mensagem').html(data.message).addClass('alert-danger').removeClass('alert-success');
-        //         }
+        $.ajax({
+            url: '/curso/adicionarCurso/',
+            type: $(this).attr('method'),
+            headers: { 'X-CSRFToken': crf_token },
+            processData: false,
+            contentType: false,
+            data: separarDados(new FormData(this)),
+            success: function (data) {
+                if (data.status == 'successo') {
+                    $('#mensagem').show();
+                    $('#mensagem').html(data.message).addClass('alert-success').removeClass('alert-danger');
+                } else {
+                    $('#mensagem').show();
+                    $('#mensagem').html(data.message).addClass('alert-danger').removeClass('alert-success');
+                }
 
 
-        //         $('.carregamento').hide();
-        //         $('#btn-criar i').show();
-        //         $('#mensagem').delay(10000).fadeOut('slow');
-        //     },
-        //     error: function (data) {
-        //         console.log(data);
-        //         $('.carregamento').hide();
-        //         $('#btn-criar i').show();
-        //     },
+                $('.carregamento').hide();
+                $('#btn-criar i').show();
+                $('#mensagem').delay(10000).fadeOut('slow');
+            },
+            error: function (data) {
+                console.log(data);
+                $('.carregamento').hide();
+                $('#btn-criar i').show();
+            },
 
 
-        // });
+        });
         $('.carregamento').hide();
         $('#btn-criar i').show();
 
