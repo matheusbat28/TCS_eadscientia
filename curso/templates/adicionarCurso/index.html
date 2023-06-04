@@ -18,9 +18,9 @@
 {% include 'parciais/_sair.html' %}
 
 
-<form method="POST" id="formulario-curso">
+<form method="POST" id="formulario-curso" enctype="multipart/form-data">
     {% csrf_token %}
-    <div id="modal-foto" class="fundo-modal ">
+    <div id="modal-foto" class="fundo-modal">
         <div id="cabecalho-modal-foto">
             <div id="titulo-modal-foto">
                 <h3 class="mx-4">Adicionar foto de fundo</h3>

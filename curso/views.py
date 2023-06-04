@@ -13,12 +13,43 @@ import json
 def adicionarCurso(request):
     if request.method == 'POST':
         nome_curso = request.POST.get('nome-curso')
-        foto_curso = request.POST.get('inuptFotoCurso')
+        foto_curso = request.FILES.get('inuptFotoCurso')
         capitulos = json.loads(request.POST.get('capitulos'))
+        valido = False
         
-        print(request.POST)
-        # for capitulo in capitulos:
-        #     print(capitulo)
-
-        return JsonResponse({'status': 'successo', 'message': 'Curso adicionado com sucesso!'})
+        if foto_curso is None:
+            return JsonResponse({'status': 404, 'message': 'Insira uma foto para a capa do curso'})
+        elif nome_curso is None:
+            return JsonResponse({'status': 404, 'message': 'Insira uma nome para curso'})
+        elif capitulos == []: 
+            return JsonResponse({'status': 404, 'message': 'Insira uma capitulo para o curso'})
+        elif capitulos != []:
+            for capitulo in capitulos:
+                for video in capitulo['videos']:
+                    if not validar_youtube_url(video['url']):
+                        return JsonResponse({'status': 404, 'message': f'a url {video["url"]} do video {video["nome"]} não é uma valida no youtube'})
+            valido = True
+        if  capitulos != [] and valido:
+            curso = Curso.objects.create(
+                nome = nome_curso,
+                autor = request.user,
+                img = foto_curso
+            )   
+            
+            for capitulo in capitulos: 
+                capitulo_db = Capitulo.objects.create(
+                   titulo = capitulo['nome-capitulo'],
+                   autor = request.user,
+                )
+                for video in capitulo['videos']:
+                    video_db = Video.objects.create(
+                        titulo = video["nome"],
+                        video = video["url"],
+                        autor = request.user,
+                    )
+                    capitulo_db.videos.add(video_db)
+                curso.capitulos.add(capitulo_db)
+                
+            
+        return JsonResponse({'status': 200, 'message': 'Curso adicionado com sucesso!'})
     return render(request, 'adicionarCurso/index.html')

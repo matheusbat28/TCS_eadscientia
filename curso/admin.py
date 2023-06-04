@@ -18,9 +18,9 @@ class CapituloAdmin(admin.ModelAdmin):
 admin.site.register(Capitulo, CapituloAdmin)
 
 class CursoAdmin(admin.ModelAdmin):
-    list_display = ('nome',)
+    list_display = ('nome', 'aprovado')
     search_fields = ('nome',)
-    list_filter = ('nome',)
+    list_filter = ('nome', 'aprovado')
     per_page = 10
     
 admin.site.register(Curso, CursoAdmin)

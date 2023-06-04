@@ -6,7 +6,6 @@ var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 $("#mensagem").hide();
 
 function separarDados(dataForm) {
-    let data = dataForm;
     let capitulos = [];
 
     $('.caixa-suspensa').each(function () {
@@ -20,7 +19,6 @@ function separarDados(dataForm) {
 
         $(this).find('.conteudo-caixa-suspensa').each(function () {
             let = video = {};
-            // console.log($(this).find('.video-capitulo-curso').children())
             $(this).find('.video-capitulo-curso').children().each(function () {
                 if ($(this).hasClass('cabecalho-video-capitulo-curso')) {
                     video['nome'] = $(this).children().val()
@@ -33,9 +31,9 @@ function separarDados(dataForm) {
         capitulos.push(capitulo)
     });
 
-    data.append('nome-curso', $('#inputTituloCurso').val());
-    data.append('capitulos', JSON.stringify(capitulos));
-    return data;
+    dataForm.append('nome-curso', $('#inputTituloCurso').val());
+    dataForm.append('capitulos', JSON.stringify(capitulos));
+    return dataForm;
 
 }
 
@@ -49,8 +47,6 @@ $(document).ready(function (e) {
         $('#mensagem, #btn-criar i').hide();
         $('.carregamento').show();
 
-        separarDados(new FormData(this))
-
         $.ajax({
             url: '/curso/adicionarCurso/',
             type: $(this).attr('method'),
@@ -59,14 +55,13 @@ $(document).ready(function (e) {
             contentType: false,
             data: separarDados(new FormData(this)),
             success: function (data) {
-                if (data.status == 'successo') {
+                if (data.status == 200) {
                     $('#mensagem').show();
                     $('#mensagem').html(data.message).addClass('alert-success').removeClass('alert-danger');
-                } else {
+                } else if (data.status == 404) {
                     $('#mensagem').show();
                     $('#mensagem').html(data.message).addClass('alert-danger').removeClass('alert-success');
                 }
-
 
                 $('.carregamento').hide();
                 $('#btn-criar i').show();
@@ -80,8 +75,6 @@ $(document).ready(function (e) {
 
 
         });
-        $('.carregamento').hide();
-        $('#btn-criar i').show();
 
     });
 
