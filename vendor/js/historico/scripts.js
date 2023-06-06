@@ -41,3 +41,10 @@ document.getElementById("campo-pesquisa").addEventListener("submit", function(ev
   
     document.getElementById("campo-pesquisa").dispatchEvent(new Event("submit"));
   });
+
+  document.getElementById("pesquisar").addEventListener("keydown", function(event) {
+    if (event.keyCode === 13) {
+      event.preventDefault(); 
+      document.getElementById("campo-pesquisa").dispatchEvent(new Event("submit"));
+    }
+  });
