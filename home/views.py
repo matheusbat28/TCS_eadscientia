@@ -8,6 +8,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from .models import Solicitacao
 from conta.models import Usuario
+from curso.models import Categoria
 from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
 from django.urls import reverse
@@ -18,7 +19,8 @@ import string
 
 @login_required
 def home(request):
-    return render(request, 'home/index.html')
+    categorias = Categoria.objects.all()[:8]
+    return render(request, 'home/index.html', {'pesquisa': True, 'categorias': categorias})
 
 @login_required
 @user_passes_test(lambda u:u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')

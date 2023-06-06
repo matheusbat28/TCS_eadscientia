@@ -153,5 +153,5 @@ def recuperar_senha(request, id):
         return redirect('login')
     
 def verPerfil(request):
-    return render(request, 'verPerfil/index.html', {'pagina': 'Visualizar seu perfil'})
+    return render(request, 'verPerfil/index.html')
     

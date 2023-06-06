@@ -36,20 +36,23 @@ def adicionarCurso(request):
                 img = foto_curso
             )   
             
-            for capitulo in capitulos: 
-                capitulo_db = Capitulo.objects.create(
-                   titulo = capitulo['nome-capitulo'],
-                   autor = request.user,
-                )
-                for video in capitulo['videos']:
-                    video_db = Video.objects.create(
-                        titulo = video["nome"],
-                        video = video["url"],
+            try:
+                for capitulo in capitulos: 
+                    capitulo_db = Capitulo.objects.create(
+                        titulo = capitulo['nome-capitulo'],
                         autor = request.user,
                     )
-                    capitulo_db.videos.add(video_db)
-                curso.capitulos.add(capitulo_db)
-                
+                    for video in capitulo['videos']:
+                        video_db = Video.objects.create(
+                            titulo = video["nome"],
+                            video = video["url"],
+                            autor = request.user,
+                        )
+                        capitulo_db.videos.add(video_db)
+                    curso.capitulos.add(capitulo_db)
+            except Exception:
+                return JsonResponse({'status': 404, 'message': 'erro ao gerar o curso'})
+                    
             
         return JsonResponse({'status': 200, 'message': 'Curso adicionado com sucesso!'})
     return render(request, 'adicionarCurso/index.html')

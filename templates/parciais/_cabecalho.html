@@ -7,6 +7,12 @@
             <i class="fa-solid fa-bars"></i>
         </label>
         <h3>{% if user %}{{ user|massage_in_time }}{% endif %}</h3>
+        {% if pesquisa %}
+            <div id="pesquisar">
+                <input type="text" name="pesquisar_curso" placeholder="Pesquisar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        {% endif %}
     </div>
     {% if pagina %}
     <div id="informacao-tela">

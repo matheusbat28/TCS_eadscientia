@@ -10,6 +10,9 @@
 }
 
 #conteudo_cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 60px;
     animation: cores_fundo 10s infinite;
@@ -55,11 +58,45 @@
     margin-left: 100px;
 }
 
+#pesquisar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-right: 20%;
+    width: 50%;
+    height: 70%;
+}
+
+#pesquisar input {
+    width: 100%;
+    height: 100%;
+    border-radius: 50px;
+    padding: .5rem;
+    border: 2px solid var(--cor--fundo--3);
+    background-color: var(--fundo-color);
+    color: var(--texto-color);
+}
+
+#pesquisar input::placeholder {
+    color: var(--texto-color);
+}
+
+#pesquisar i {
+    position: absolute;
+    right: 10px;
+    color: var(--cor--fundo--3);
+}
+
+
 
 @media screen and (max-width: 950px) {
 
     #menu-icon {
         display: flex;
+    }
+
+    #cabecalho h3 {
+        display: none;
     }
 }
 
