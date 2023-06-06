@@ -16,6 +16,27 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
+<div id="categoria-img">
+    {% for categoria in categorias %}
+    <div class="card-categoria">
+        <a href="" class="card-categoria-img">
+            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+                <use xlink:href="{{ categoria.img.url }}"></use>
+            </svg>
+        </a>
+        <p>{{ categoria.nome }}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<div id="categoria-texto">
+    {% for categoria in categorias %}
+    <div class="card-categoria-text">
+        <img src="{{ categoria.img_mini.url }}" alt="">
+    </div>
+    {% endfor %}
+</div>
+
 {% endblock %}
 
 {% block js %}
