@@ -19,12 +19,18 @@
     <title>Historico</title>
   </head>
   <body>
-    <div id="tabela" class="h-auto">
+    <div id="conteudo">
     <form id="campo-pesquisa">
       <div id="filtro">
         <div id="quantidade"></div>
         <button name="btnlimpar" type="submit">Limpar</button>
       </div>
+      <select id="status" name="status">
+        <option value="">Todos</option>
+        <option value="finalizado">Finalizado</option>
+        <option value="andamento">Em andamento</option>
+        <option value="reprovado">Reprovado</option>
+      </select>
       <div id="pequisa">
         <button title="Pesquisar" name="btnPesquisar" type="submit">
           <i class="fa-solid fa-search"></i>
@@ -33,7 +39,7 @@
       </div>
     </form>
 
-    <table class="container-sm h-auto">
+    <table id="tabela" class="container-sm h-auto">
       <thead>
         <tr>
           <th>Curso</th>
@@ -42,7 +48,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>Curso</td>
+          <td>ADS</td>
           <td class="finalizado" id="status">
             <a href=""
               >Finalizado<i class="fa-solid fa-check icons ms-2"></i
@@ -50,7 +56,7 @@
           </td>
         </tr>
         <tr>
-          <td>Curso</td>
+          <td>Enfermagem</td>
           <td class="andamento" id="status">
             <a href=""
               >Em andamento<i class="fa-regular fa-clock icons ms-2"></i
@@ -58,7 +64,7 @@
           </td>
         </tr>
         <tr>
-          <td>Curso</td>
+          <td>Psicologia</td>
           <td class="reprovado" id="status">
             <a href="">Reprovado<i class="fa-solid fa-ban icons ms-2"></i></a>
           </td>
