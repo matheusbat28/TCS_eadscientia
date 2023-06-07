@@ -16,10 +16,41 @@ body {
     gap: 50px;
     width: var(--width--perfil);
     height: var(--height--perfil);
+    ;
+}
 
+#img-perfil:hover #alterar_foto {
+    display: flex;
+}
+
+#alterar_foto {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    border-radius: 50%;
+    color: #fff;
+    gap: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#alterar_foto i {
+    font-size: 1.5rem;
+}
+
+#arquivo {
+    display: none;
 }
 
 #img-perfil {
+    position: relative;
+    z-index: 1;
     width: 140px;
     height: 140px;
     border: 2px solid var(--cor--fundo--3);

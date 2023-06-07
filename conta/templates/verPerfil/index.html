@@ -18,10 +18,15 @@
 
 <div id="borda-perfil">
     <div id="img-perfil">
+        <label for="arquivo" id="alterar_foto">
+            <i class="fa-solid fa-image"></i>
+            <p>Alterar foto</p>
+        </label>
+        <input id="arquivo" name="arquivo" type="file">
         {% if user.imagem_perfil %}
-            <img src="{{ user.imagem_perfil.url }}" alt="">
+        <img src="{{ user.imagem_perfil.url }}" alt="">
         {% else %}
-            <img src="{% static 'img/perfil.png' %}" alt="">
+        <img src="{% static 'img/perfil.png' %}" alt="">
         {% endif %}
     </div>
     <div id="dado-perfil">
