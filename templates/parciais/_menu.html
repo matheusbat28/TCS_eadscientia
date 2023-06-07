@@ -61,6 +61,10 @@
                 <i class="fa-solid fa-check"></i>
                 <h3>aprovar matricula</h3>
             </a>
+            <a href="{% url 'aprovarCurso' %}" class="subconteudo-itens">
+                <i class="fa-solid fa-file-video"></i>
+                <h3>aprovar Curso</h3>
+            </a>
         </div>
         {% endif %}
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'gestão' %}

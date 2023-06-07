@@ -5,8 +5,10 @@ from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Curso, Capitulo, Video
+from conta.models import Usuario
 from .apis import validar_youtube_url
 import json
+from django.core import serializers
 
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
@@ -27,7 +29,7 @@ def adicionarCurso(request):
             for capitulo in capitulos:
                 for video in capitulo['videos']:
                     if not validar_youtube_url(video['url']):
-                        return JsonResponse({'status': 404, 'message': f'a url {video["url"]} do video {video["nome"]} não é uma valida no youtube'})
+                        return JsonResponse({'status': 404, 'message': f'a url {video["url"]} do video {video["nome"]} não é uma valida no youtube'}, status=200)
             valido = True
         if  capitulos != [] and valido:
             curso = Curso.objects.create(
@@ -51,8 +53,31 @@ def adicionarCurso(request):
                         capitulo_db.videos.add(video_db)
                     curso.capitulos.add(capitulo_db)
             except Exception:
-                return JsonResponse({'status': 404, 'message': 'erro ao gerar o curso'})
+                return JsonResponse({'status': 404, 'message': 'erro ao gerar o curso'}, status=200)
                     
             
-        return JsonResponse({'status': 200, 'message': 'Curso adicionado com sucesso!'})
+        return JsonResponse({'status': 200, 'message': 'Curso adicionado com sucesso!'}, status=200)
     return render(request, 'adicionarCurso/index.html')
+
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+def aprovarCurso(request):
+        return render(request, 'aprovarCurso/index.html', {'pagina': 'Aprovar curso'})
+
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+def buscarCursoAutor(request):
+    if request.method == 'GET':
+        cursos = Curso.objects.all()
+        serialized_cursos = []
+        for curso in cursos:
+            curso_data = {
+                'id_curso': curso.id,
+                'curso': curso.nome,
+                'autor': curso.autor.get_full_name(),
+                'email': curso.autor.email
+            }
+            serialized_cursos.append(curso_data)
+        return JsonResponse({'status': 200, 'cursos': serialized_cursos}, safe=False)
+    else:
+        return JsonResponse({'status': 405, 'message': 'metodo não implementado'}, status=405)
