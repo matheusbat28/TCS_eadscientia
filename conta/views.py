@@ -153,5 +153,18 @@ def recuperar_senha(request, id):
         return redirect('login')
     
 def verPerfil(request):
+    if request.method == 'POST':
+        arquivo = request.FILES.get('arquivo')
+        if not arquivo: 
+            messages.error(request, 'insira uma foto para alterar') 
+            return redirect('verPerfil')
+        else:
+            try:
+                request.user.imagem_perfil = arquivo
+                request.user.save()
+            except Exception:
+                messages.error(request, 'erro ao alterar a foto')
+            messages.success(request, 'foto alterado com sucesso')
+        return redirect('verPerfil')
     return render(request, 'verPerfil/index.html')
     

@@ -16,13 +16,14 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-<div id="borda-perfil">
+<form id="borda-perfil" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
     <div id="img-perfil">
-        <label for="arquivo" id="alterar_foto">
+        <label for="idarquivo" id="alterar_foto">
             <i class="fa-solid fa-image"></i>
             <p>Alterar foto</p>
         </label>
-        <input id="arquivo" name="arquivo" type="file">
+        <input id="idarquivo" name="arquivo" type="file" accept="image/*">
         {% if user.imagem_perfil %}
         <img src="{{ user.imagem_perfil.url }}" alt="">
         {% else %}
@@ -46,8 +47,12 @@
             <h5>E-mail:</h5>
             <input type="text" value="{{ user.email }}" readonly>
         </div>
+        <button type="submit">
+            <div class="carregamento"></div>
+            <p>Salvar</p>
+        </button>
     </div>
-</div>
+</form>
 
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}
