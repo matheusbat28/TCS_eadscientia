@@ -59,6 +59,10 @@
             <img src="{{ curso.img.url }}" alt="{{ curso.nome }}">
             <div class="curso-desc">
                 <h4>{{ curso.nome }}</h4>
+                <p>Autor(a): <span>{{ curso.autor.get_full_name }}</span></p>
+            </div>
+            <div id="soliCurso">
+                <i class="fa-solid fa-plus"></i>
             </div>
         </a>
         {% endfor %}

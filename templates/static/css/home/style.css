@@ -76,7 +76,7 @@ body::-webkit-scrollbar {
 
 .card-carrocel img {
     width: 100%;
-    max-height: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -174,6 +174,7 @@ body::-webkit-scrollbar {
 #curso-card {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-flow: row wrap;
     gap: 10px;
     flex-shrink: 0;
@@ -184,32 +185,68 @@ body::-webkit-scrollbar {
 
 
 .curso-card {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    justify-content: row;
-    width: 500px;
-    height: 150px;
+    flex-direction: column;
+    width: 250px;
+    height: 300px;
     text-decoration: none;
-    background-color: var(--cor--fundo--2);
+    background-color: var(--cor--fundo--5);
+    border: 3px solid var(--texto-color);
+    box-shadow: var(--sombra--1);
+    border-radius: 10px;
 }
 
 .curso-card img {
-    max-width: 40%;
-    height: 95%;
+    max-width: 100%;
+    height: 50%;
     object-fit: cover;
     margin: 5px;
     border: 3px solid var(--cor-fundo-alterada-1);
 }
 
 .curso-desc {
-    height: 95%;
-    width: 50%;
+    height: 50%;
+    width: 95%;
 }
 
 .curso-card h4 {
+    text-align: center;
     color: var(--texto-color);
     font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.curso-card p {
+    text-align: center;
+    color: var(--texto-color);
+    font-weight: bold;
+}
+
+.curso-card span {
+    color: var(--cor--fundo--2);
+}
+
+#soliCurso {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--cor--fundo--6);
+    box-shadow: var(--sombra--1);
+    border: 2px solid var(--cor--fundo--3);
+    color: #fff;
+}
+
+#soliCurso:hover {
+    scale: 1.1;
 }
 
 #vermais {
