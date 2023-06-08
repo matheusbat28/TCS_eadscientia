@@ -49,7 +49,7 @@ class Curso(models.Model):
         
 class Categoria(models.Model):
     nome = models.CharField(max_length=100)
-    img = models.FileField(upload_to='categoria/%Y/%m/%d', default='curso/img/curso.png')
+    img = models.TextField()
     cursos = models.ManyToManyField('curso.Curso')
     
     def __str__(self):

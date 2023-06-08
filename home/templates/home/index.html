@@ -16,25 +16,39 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-<div id="categoria-img">
-    {% for categoria in categorias %}
-    <div class="card-categoria">
-        <a href="" class="card-categoria-img">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
-                <use xlink:href="{{ categoria.img.url }}"></use>
-            </svg>
+<div id="carrocel-curso">
+    <div id="card-carrocel">
+        {% for curso in curso_carrocel %}
+        <a href="" class="card-carrocel">
+            <div class="card-carrocel-desc">
+                <h3>{{ curso.nome }}</h3>
+                <p>Autor(a): <span>{{ curso.autor.get_full_name }}</span></p>
+            </div>
+            <img src="{{ curso.img.url }}" alt="{{ curso.nome }}">
         </a>
-        <p>{{ categoria.nome }}</p>
+        {% endfor %}
     </div>
-    {% endfor %}
+    <div id="seta-esqueda" class="seta">
+        <i class="fa-solid fa-chevron-left"></i>
+    </div>
+    <div id="seta-direita" class="seta">
+        <i class="fa-solid fa-chevron-right"></i>
+    </div>
 </div>
 
-<div id="categoria-texto">
-    {% for categoria in categorias %}
-    <div class="card-categoria-text">
-        <img src="{{ categoria.img_mini.url }}" alt="">
+<div id="categoria">
+    <h2>Categoria</h2>
+    <div id="categoria-img">
+        {% for categoria in categorias %}
+        <a href="" class="card-categoria">
+            {{ categoria.img|safe }}
+            <p>
+                {{ categoria.nome }}
+            </p>
+
+        </a>
+        {% endfor %}
     </div>
-    {% endfor %}
 </div>
 
 {% endblock %}

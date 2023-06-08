@@ -32,6 +32,22 @@ $(document).ready(function () {
         }
     });
 
+    $('.seta').click(function (e) {
+
+        if ((this).id === 'seta-esqueda') {
+            $('#card-carrocel').children().last().prependTo('#card-carrocel')
+
+        } else if ((this).id === 'seta-direita') {
+            $('#card-carrocel').children().first().appendTo('#card-carrocel')
+        }
+    });
+
+    function carrocelAnimacao() {
+        $('#card-carrocel').children().first().appendTo('#card-carrocel')
+    }
+
+    setInterval(carrocelAnimacao, 10000)
+
 });
 
 $(document).on('click', '.itens-conteudo', function (e) {
