@@ -50,7 +50,7 @@ venv\Scripts\activate.bat
 ~~~
 
 * Na raiz do projeto tem um arquivo chamado requirements.txt (onde tem todas as dependências do projetos)
-* Para baixar as dependências tem que executar esse comando, porém tem q estar na venv
+* Para baixar as dependências tem que executar esse comando, (lembrando que para isso precisa estar na venv)
 ~~~
 pip install -r requirements.txt
 ~~~
@@ -79,7 +79,7 @@ EMAIL_ADM = 'email da administração'
 KEY_YOUTUBE = 'chave da api do google'
 ~~~
 
-* Depois abra o terminal da IDE e faça a migração do banco de dado 
+* Depois abra o terminal da IDE e faça a migração do banco de dados 
 ~~~
 python manage.py makemrigations
 ~~~
