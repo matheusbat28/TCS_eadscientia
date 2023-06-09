@@ -80,6 +80,10 @@ body {
     overflow: auto;
 }
 
+#pagina-proxima, #pagina-anterior {
+    cursor: pointer;
+}
+
 form {
     margin-bottom: -90px;
 }
