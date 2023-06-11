@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filtros %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/curso/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+{% endblock %}
+
+{% block title %} Curso {% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<div id="container-curso">
+    {% for curso in curso_fazer %}
+    <div class="card-curso">
+        <img src="{{curso.curso.img.url}}" alt="">
+        <div class="dado-curso">
+            <div class="info-curso">
+                <h3>{{curso.curso.nome}}</h3>
+                <p>{{curso.curso.autor.get_full_name}}</p>
+                <div class="controle-curso">
+                    <a title="continuar assistido" id="continuar" href="">
+                        <i class="fa-solid fa-play"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="progresso-curso">
+                <div class="container-progressao">
+                    <h6 class="titulo-progressao">
+                        Progresso do curso
+                    </h6>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped" role="progressbar"
+                            style="width: {{curso|proc_video_in_curso}}%" aria-valuenow="0" aria-valuemin="0"
+                            aria-valuemax="{{curso.curso|count_video_in_curso}}">{{curso|proc_video_in_curso}}%</div>
+                    </div>
+                    <div class="dado-progresso">
+                        {% if curso|proc_video_in_curso is not 100 %}
+                            <h6>{{curso.data_termino|falta_dia}}</h6>
+                        {% endif %}
+                        {% if curso|proc_video_in_curso is 100 %}
+                            <a title="emitir curriculo" href=""><i class="fa-solid fa-scroll"></i></a>
+                            <a title="fazer o teste" href=""><i class="fa-solid fa-receipt"></i></i></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/curso/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}

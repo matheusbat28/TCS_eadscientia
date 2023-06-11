@@ -21,7 +21,7 @@
         <a id="home" class="itens-conteudo" href="{% url 'home' %}"><i class="fa-solid fa-house"></i>
             <h3>Home</h3>
         </a>
-        <a id="curso" class="itens-conteudo" href=""><i class="fa-solid fa-book"></i>
+        <a id="curso" class="itens-conteudo" href="{% url 'curso' %}"><i class="fa-solid fa-book"></i>
             <h3>Cursos</h3>
         </a>
         <a id="arquivo" class="itens-conteudo" href=""><i class="fa-solid fa-folder"></i>
@@ -36,6 +36,10 @@
             <a href="{% url 'adicionarCurso' %}" class="subconteudo-itens">
                 <i class="fa-solid fa-file-video"></i>
                 <h3>Adicionar Curso</h3>
+            </a>
+            <a href="{% url 'meusCursos' %}" class="subconteudo-itens">
+                <i class="fa-solid fa-clapperboard"></i>
+                <h3>Meus Curso</h3>
             </a>
         </div>
         {% endif %}

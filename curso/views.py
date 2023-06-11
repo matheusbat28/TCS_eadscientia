@@ -81,3 +81,8 @@ def buscarCursoAutor(request):
         return JsonResponse({'status': 200, 'cursos': serialized_cursos}, safe=False)
     else:
         return JsonResponse({'status': 405, 'message': 'metodo não implementado'}, status=405)
+    
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+def meuCurso(request):
+    return render(request, 'meuCurso/index.html')

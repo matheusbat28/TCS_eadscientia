@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Curso, Video, Capitulo, Categoria
+from .models import Curso, Video, Capitulo, Categoria, AprovadoCursoUsuario
 
 class VideoAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'data_criacao')
@@ -25,7 +25,6 @@ class CursoAdmin(admin.ModelAdmin):
     
 admin.site.register(Curso, CursoAdmin)
 
-
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ('nome',)
     search_fields = ('nome',)
@@ -34,3 +33,12 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Categoria, CategoriaAdmin)
+
+class AprovadoCursoUsuarioAdmin(admin.ModelAdmin):
+    list_display = ('aluno', 'curso', 'data_termino', 'quantidade_assitido')
+    search_fields = ('aluno', 'curso')
+    list_filter = ('aluno', 'curso', 'data_termino')
+    per_page = 10
+
+
+admin.site.register(AprovadoCursoUsuario, AprovadoCursoUsuarioAdmin)

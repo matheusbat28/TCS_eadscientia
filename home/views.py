@@ -13,13 +13,14 @@ from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
 from django.urls import reverse
 from django.db.models import Q
+from curso.models import AprovadoCursoUsuario
 import random
 import string
 
 
 @login_required
 def home(request):
-    return render(request, 'home/index.html', {'pesquisa': True, 'categorias': Categoria.objects.all().order_by('?').order_by('nome')[:8], 'cursos_recomendados': Curso.objects.all(), 'curso_carrocel': Curso.objects.all().order_by('?')[:3]})
+    return render(request, 'home/index.html', {'pesquisa': True, 'categorias': Categoria.objects.all().order_by('?').order_by('nome')[:8], 'cursos_recomendados': Curso.objects.filter(aprovado = True), 'curso_carrocel': Curso.objects.filter(aprovado = True).order_by('?')[:3]})
 
 @login_required
 @user_passes_test(lambda u:u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
@@ -169,3 +170,7 @@ def criarUsuario(request):
                 return redirect('criarUsuario')
             
     return render(request, 'criarUsuario/index.html', {'formCriacaoUsuario': formCriacaoUsuario, 'pagina': 'Criar Usuário'})
+
+@login_required
+def curso(request):
+    return render(request, 'curso/index.html', {'pagina': 'Cursos a fazer', 'curso_fazer': AprovadoCursoUsuario.objects.filter(aluno = request.user)})

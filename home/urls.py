@@ -8,4 +8,5 @@ urlpatterns = [
     path('visualizarSolicitacao/<int:id>', views.visualizarSolicitacao, name='visualizarSolicitacao'),
     path('deletarSolicitacao/<int:id>', views.deletarSolicitacao, name='deletarSolicitacao'),
     path('criarUsuario/', views.criarUsuario, name='criarUsuario'),
+    path('curso/', views.curso, name='curso'),
 ]

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import datetime, timedelta
 
 class Video(models.Model):
     titulo = models.CharField(max_length=100)
@@ -50,7 +51,7 @@ class Curso(models.Model):
 class Categoria(models.Model):
     nome = models.CharField(max_length=100)
     img = models.TextField()
-    cursos = models.ManyToManyField('curso.Curso')
+    cursos = models.ManyToManyField('curso.Curso', blank=True)
     
     def __str__(self):
         return self.nome
@@ -59,3 +60,19 @@ class Categoria(models.Model):
         db_table = 'categoria'
         verbose_name = 'categoria'
         verbose_name_plural = 'categoria'
+
+ 
+class AprovadoCursoUsuario(models.Model):
+    aluno = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)   
+    curso = models.ForeignKey('curso.Curso', on_delete=models.CASCADE)
+    data_termino = models.DateTimeField(default=datetime.now() + timedelta(days=15))
+    quantidade_assitido = models.IntegerField()
+    
+    def __str__(self):
+        return self.aluno.get_full_name()
+    
+    class Meta:
+        db_table = 'aprovadoCursoUsuario'
+        verbose_name = 'acesso de curso aluno'
+        verbose_name_plural = 'acessos de cursos alunos'
+        

@@ -18,3 +18,23 @@ def massage_in_time(usuario):
     else:
         return f'Boa noite, {usuario.get_full_name().title()}'
     
+    
+@register.filter
+def count_video_in_curso(curso):  
+    cont = 0
+    for video in curso.capitulos.all():
+        cont += video.videos.all().count()  
+    return cont
+
+@register.filter
+def proc_video_in_curso(curso):  
+    quant = curso.quantidade_assitido
+    cont = 0
+    for video in curso.curso.capitulos.all():
+        cont += video.videos.all().count()  
+    return round((quant / cont) * 100)
+
+@register.filter
+def falta_dia(data):
+    diferenca = data - datetime.now().replace(tzinfo=data.tzinfo)
+    return f'Falta: {diferenca.days} dias'
