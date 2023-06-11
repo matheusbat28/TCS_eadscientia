@@ -1,5 +1,5 @@
 from django import template
-from datetime import datetime
+from datetime import datetime, time, timedelta
 
 
 register = template.Library()
@@ -38,3 +38,17 @@ def proc_video_in_curso(curso):
 def falta_dia(data):
     diferenca = data - datetime.now().replace(tzinfo=data.tzinfo)
     return f'Falta: {diferenca.days} dias'
+
+@register.filter
+def duracao_video_in_curso(curso):
+    total_duracao = timedelta()
+
+    for capitulo in curso.capitulos.all():
+        for video in capitulo.videos.all():
+            if video.duracao:
+                duracao = video.duracao
+                duracao_segundos = duracao.hour * 3600 + duracao.minute * 60 + duracao.second
+                duracao_timedelta = timedelta(seconds=duracao_segundos)
+                total_duracao += duracao_timedelta
+
+    return total_duracao

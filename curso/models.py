@@ -63,17 +63,18 @@ class Categoria(models.Model):
         verbose_name_plural = 'categoria'
 
  
-class AprovadoCursoUsuario(models.Model):
+class AcessoCursoUsuario(models.Model):
     aluno = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)   
     curso = models.ForeignKey('curso.Curso', on_delete=models.CASCADE)
     data_termino = models.DateTimeField(default=datetime.now() + timedelta(days=15))
     quantidade_assitido = models.IntegerField()
+    status_prova = models.BooleanField(default=False)
     
     def __str__(self):
         return self.aluno.get_full_name()
     
     class Meta:
-        db_table = 'aprovadoCursoUsuario'
+        db_table = 'acessoCursoUsuario'
         verbose_name = 'acesso de curso aluno'
         verbose_name_plural = 'acessos de cursos alunos'
         

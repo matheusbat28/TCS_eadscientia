@@ -13,7 +13,7 @@ from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
 from django.urls import reverse
 from django.db.models import Q
-from curso.models import AprovadoCursoUsuario
+from curso.models import AcessoCursoUsuario
 import random
 import string
 
@@ -173,4 +173,4 @@ def criarUsuario(request):
 
 @login_required
 def curso(request):
-    return render(request, 'curso/index.html', {'pagina': 'Cursos a fazer', 'curso_fazer': AprovadoCursoUsuario.objects.filter(aluno = request.user)})
+    return render(request, 'curso/index.html', {'pagina': 'Cursos a fazer', 'curso_fazer': AcessoCursoUsuario.objects.filter(aluno = request.user)})

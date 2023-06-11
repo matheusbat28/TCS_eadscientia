@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filtros %}
 
 
 {% block css %}
@@ -60,6 +61,7 @@
             <div class="curso-desc">
                 <h4>{{ curso.nome }}</h4>
                 <p>Autor(a): <span>{{ curso.autor.get_full_name }}</span></p>
+                <p>Duração: <span>{{ curso|duracao_video_in_curso }}</span> min</p>
             </div>
             <div id="soliCurso">
                 <i class="fa-solid fa-plus"></i>
