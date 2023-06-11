@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Curso, Capitulo, Video
 from conta.models import Usuario
-from .apis import validar_youtube_url
+from .apis import validar_youtube_url, tempo_video_youtube
 import json
 from django.core import serializers
 
@@ -31,6 +31,7 @@ def adicionarCurso(request):
                     if not validar_youtube_url(video['url']):
                         return JsonResponse({'status': 404, 'message': f'a url {video["url"]} do video {video["nome"]} não é uma valida no youtube'}, status=200)
             valido = True
+            
         if  capitulos != [] and valido:
             curso = Curso.objects.create(
                 nome = nome_curso,
@@ -49,6 +50,7 @@ def adicionarCurso(request):
                             titulo = video["nome"],
                             video = video["url"],
                             autor = request.user,
+                            duracao = tempo_video_youtube(video["url"])
                         )
                         capitulo_db.videos.add(video_db)
                     curso.capitulos.add(capitulo_db)

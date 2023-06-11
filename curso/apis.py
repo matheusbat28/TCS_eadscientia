@@ -2,6 +2,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from decouple import config
 from urllib.parse import urlparse, parse_qs
+from pytube import YouTube
 
 def validar_youtube_url(url):
     dadoUrl = urlparse(url)
@@ -18,3 +19,13 @@ def validar_youtube_url(url):
         except:
             pass
         return False
+    
+def tempo_video_youtube(url):
+    try:
+        video = YouTube(url)
+        duracao = video.length
+        minuto, secondo = divmod(duracao, 60)
+        hora, minuto = divmod(minuto, 60)
+        return f'{hora:02d}:{minuto:02d}:{secondo:02d}'
+    except Exception as e:
+        return e
