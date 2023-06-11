@@ -10,7 +10,7 @@ class UsuarioAdmin(UserAdmin):
     per_page = 10
     fieldsets = (
         (None, {
-            'fields': ('username', 'matricula', 'password', 'first_name', 'last_name', 'email', 'cpf', 'imagem_perfil', 'cursos_aprovados')
+            'fields': ('username', 'matricula', 'password', 'first_name', 'last_name', 'email', 'cpf', 'imagem_perfil')
         }),
         ('Permissôes', {
             'fields': (

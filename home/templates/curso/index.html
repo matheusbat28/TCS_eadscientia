@@ -18,6 +18,7 @@
 {% include 'parciais/_sair.html' %}
 
 <div id="container-curso">
+    {% if curso_fazer %}
     {% for curso in curso_fazer %}
     <div class="card-curso">
         <img src="{{curso.curso.img.url}}" alt="">
@@ -58,6 +59,12 @@
         </div>
     </div>
     {% endfor %}
+    {% else %}
+        <div id="semResultado">
+            <h4>não possui nenhum curso ...<h4>
+            <a href="{% url 'home' %}" title="ver os curso" href="">ver os curso</a>
+        </div>
+    {% endif %}
 </div>
 
 

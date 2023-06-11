@@ -104,19 +104,55 @@ body {
     font-weight: bold;
 }
 
+#semResultado {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 1100px;
+    text-align: center;
+}
+
+#semResultado h4 {
+    color: var(--texto-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+#semResultado a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--cor--fundo--5);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
 @media screen and (max-width: 1200px) {
+
+    #semResultado,
     #container-curso {
         width: 900px;
     }
 }
 
 @media screen and (max-width: 1000px) {
+
+    #semResultado,
     #container-curso {
         width: 800px;
     }
 }
 
 @media screen and (max-width: 900px) {
+
+    #semResultado,
     #container-curso {
         width: 100%;
         grid-auto-rows: 120px;
