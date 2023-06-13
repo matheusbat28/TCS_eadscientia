@@ -64,7 +64,8 @@ def adicionarCurso(request):
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def aprovarCurso(request):
-        return render(request, 'aprovarCurso/index.html', {'pagina': 'Aprovar curso'})
+        cursos = Curso.objects.filter(aprovado=False)
+        return render(request, 'aprovarCurso/index.html', {'pagina': 'Aprovar curso', 'cursos': cursos})
 
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')

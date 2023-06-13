@@ -1,0 +1,179 @@
+
+
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
+    background-color: var(--fundo-color);
+    color: var(--texto-color);
+}
+
+#campo-pesquisa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1100px;
+    height: 50px;
+    padding: 0 15px;
+    margin-top: 120px;
+}
+
+#filtro {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    width: auto;
+    height: 30px;
+}
+
+#filtro button {
+    height: 100%;
+    padding: 0 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    box-shadow: var(--sombra--1);
+    background-color: rgb(139, 5, 5);
+    color: #fff;
+}
+
+#pequisa {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row-reverse;
+    width: 200px;
+    height: 30px;
+}
+
+#pequisa button {
+    position: absolute;
+    right: 3px;
+    color: var(--cor-fundo-alterada-1);
+    border: none;
+    background-color: transparent;
+}
+
+#pequisa input {
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    border: 2px solid var(--cor-fundo-alterada-1);
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: var(--sombra--1);
+    background-color: transparent;
+    color: var(--texto-color);
+}
+
+#pequisa input::placeholder {
+    color: var(--texto-color);
+}
+
+  
+
+
+#conteudo {
+    margin-top: 130px;
+    width: 1100px;
+    overflow: auto;
+}
+
+#pagina-proxima, #pagina-anterior {
+    cursor: pointer;
+}
+
+form {
+    margin-bottom: -90px;
+}
+
+table {
+    margin-top: 100px;
+    max-height: 50%;
+    border-collapse: collapse;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table thead tr {
+    animation: 20s cores_fundo infinite;
+    color: #fff;
+}
+
+table thead tr th {
+    text-align: center;
+}
+
+table tr td,
+table tr th {
+    padding-left: 10px;
+    border: 1px solid var(--cor--fundo--6);
+}
+
+#opcoes {
+    text-align: center;
+}
+
+#quantidade {
+    width: auto;
+    height: 30px;
+    margin: 0 10px;
+    color: var(--cor-fundo-alterada-1);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#mensagem {
+    top: 100px;
+    right: 5px;
+}
+
+.icons {
+    font-size: 1rem;
+}
+
+#status {
+    text-align: center;
+
+}
+
+table tbody tr td a:nth-child(1) {
+    padding-right: 8px;
+    color: #52d813;
+}
+
+table tbody tr td a:nth-child(2) {
+    color: #d81313;
+}
+
+@media screen and (max-width: 1200px) {
+    #conteudo {
+        width: 800px;
+    }
+
+    #campo-pesquisa {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 800px;
+        height: 50px;
+    }
+
+}
+
+@media screen and (max-width: 767px){
+    #campo-pesquisa {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 100%;
+        height: 50px;
+    }
+
+    #conteudo {
+        width: 100%;
+    }
+    
+}

@@ -17,6 +17,50 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
+<form id="campo-pesquisa">
+    <div id="filtro">
+      <div id="quantidade"></div>
+      <button id="limpar" name="btnlimpar" type="submit">Limpar</button>
+    </div>
+    <div id="pequisa">
+      <button title="Pesquisar" name="btnPesquisar" type="submit">
+        <i class="fa-solid fa-search"></i>
+      </button>
+      <input type="text" id="pesquisar" name="pesquisar" placeholder="Pesquisar" />
+    </div>
+  </form>
+
+<table id="tabela" class="container-sm h-auto">
+    <thead>
+        <tr>
+            <th>Curso</th>
+            <th>Autor</th>
+            <th>E-mail</th>
+            <th>Opções</th>
+            
+        </tr>
+    </thead>
+    <div id="paginacao">
+    <tbody id="tabela-corpo">
+        {% for curso in cursos %}
+        <tr>
+            <td>{{curso.nome}}</td>
+            <td>{{curso.autor.get_full_name}}</td>
+            <td>{{curso.autor.email}}</td>
+            <td id="opcoes">
+                <a href=""><i class="fa-solid fa-users-viewfinder""></i></a>
+                <a href=""><i class="fa-solid fa-trash-can icons ms-2"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </div>
+</table>
+<div id="pagination">
+    <span id="pagina-anterior">&lt;</span>
+    <span id="info-paginas"></span>
+    <span id="pagina-proxima">&gt;</span>
+  </div>
 
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}
