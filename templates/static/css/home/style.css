@@ -149,15 +149,20 @@ body::-webkit-scrollbar {
     border-radius: 10px;
 }
 
+#categoria-img a {
+    color: var(--texto-color);
+}
+
 
 .card-categoria:hover {
-    color: var(--fundo-color);
+    scale: 1.1;
+    transition: 0.5s;   
 }
 
 .card-categoria svg {
     width: 50%;
     height: 50%;
-    fill: var(--cor--fundo--1);
+    fill: var(--texto-color);
 
 }
 
