@@ -27,7 +27,7 @@
                 <h3>{{curso.curso.nome}}</h3>
                 <p>{{curso.curso.autor.get_full_name}}</p>
                 <div class="controle-curso">
-                    <a title="continuar assistido" id="continuar" href="">
+                    <a title="continuar assistido" id="continuar" href="{% url 'assistirVideo' curso.curso.id %}">
                         <i class="fa-solid fa-play"></i>
                     </a>
                 </div>

@@ -100,6 +100,7 @@ class FormCriacaoUsuario(forms.Form):
                cpf=self.cleaned_data['cpf'],
                email=self.cleaned_data['email'],
            )
+           usuario.groups.add(self.cleaned_data['grupos'])
        except:
            raise forms.ValidationError('Erro ao salvar usuário!')
        return usuario

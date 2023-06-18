@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Curso, Capitulo, Video
+from .models import Curso, Capitulo, Video, AcessoCursoUsuario
 from conta.models import Usuario
 from .apis import validar_youtube_url, tempo_video_youtube
 import json
@@ -89,3 +89,13 @@ def buscarCursoAutor(request):
 @user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def meuCurso(request):
     return render(request, 'meuCurso/index.html')
+
+@login_required
+def assistirVideo(request, id):
+    if AcessoCursoUsuario.objects.filter(aluno = request.user, curso = id).exists():
+        return render(request, 'assistirCurso/index.html')
+    else:
+        curso = Curso.objects.get(id = id)
+        messages.error(request, f'Não tem acesso ao curso {curso.nome}')
+        return redirect('home')
+    

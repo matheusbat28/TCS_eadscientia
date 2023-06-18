@@ -56,7 +56,7 @@
     <h2>Cursos</h2>
     <div id="curso-card">
         {% for curso in cursos_recomendados%}
-        <a href="" class="curso-card">
+        <a href="{% url 'assistirVideo' curso.id %}" class="curso-card">
             <img src="{{ curso.img.url }}" alt="{{ curso.nome }}">
             <div class="curso-desc">
                 <h4>{{ curso.nome }}</h4>
@@ -71,6 +71,8 @@
     </div>
     <div id="vermais">ver mais</div>
 </div>
+
+{% include 'parciais/_mensagem.html' %}
 
 {% endblock %}
 

@@ -272,6 +272,11 @@ body::-webkit-scrollbar {
     cursor: pointer;
 }
 
+#mensagem {
+    top: 70px;
+    right: 5px;
+}
+
 @media screen and (max-width: 1200px) {
 
     #cursos,

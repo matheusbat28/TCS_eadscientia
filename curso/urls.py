@@ -6,4 +6,5 @@ urlpatterns = [
     path('aprovarCurso/', views.aprovarCurso, name='aprovarCurso'),
     path('buscarCursoAutor/', views.buscarCursoAutor, name='buscarCursoAutor'),
     path('meusCursos/', views.meuCurso, name='meusCursos'),
+    path('assistirVideo/<int:id>', views.assistirVideo, name='assistirVideo'),
 ]
