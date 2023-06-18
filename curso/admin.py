@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Curso, Video, Capitulo, Categoria, AcessoCursoUsuario
 
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'data_criacao', 'duracao')
+    list_display = ('titulo', 'data_criacao', 'duracao', 'video')
     search_fields = ('titulo',)
     list_filter = ('titulo',)
     per_page = 10

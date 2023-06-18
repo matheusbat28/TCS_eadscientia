@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filtros %}
 
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/meuCurso/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/assistirCurso/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
@@ -17,12 +18,34 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-
+<div id="container-curso">
+    <div id="cabecalho-curso">
+        <h2>{{curso.nome}}</h2>
+        <div id="opcao-curso">
+            <div id="barra-progresso" class="barra-progresso">
+                <div class="percent-progresso" style="--num: {{ statusCurso|proc_video_in_curso }}">
+                    <div class="dot"></div>
+                    <svg width="40" height="40">
+                        <circle cx="20" cy="20" r="20"></circle>
+                        <circle cx="20" cy="20" r="20"></circle>
+                    </svg>
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+            </div>
+            <a title="emitir cerificado" href=""><i class="fa-solid fa-scroll"></i></a>
+        </div>
+    </div>
+    <div id="corpo-curso">
+        <embed src="https://www.youtube.com/embed/sFKlxGZlaRo" title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+    </div>
+</div>
 
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}
 
 {% block js %}
-<script defer src="{% static 'js/meuCurso/scripts.js' %}"></script>
+<script defer src="{% static 'js/assistirCurso/scripts.js' %}"></script>
 <script defer src="{% static 'js/menu/scripts.js' %}"></script>
 {% endblock %}

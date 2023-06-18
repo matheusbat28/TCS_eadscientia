@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Curso, Capitulo, Video, AcessoCursoUsuario
 from conta.models import Usuario
-from .apis import validar_youtube_url, tempo_video_youtube
+from .apis import validar_youtube_url, tempo_video_youtube, obter_id_video_youtube
 import json
 from django.core import serializers
 
@@ -48,7 +48,7 @@ def adicionarCurso(request):
                     for video in capitulo['videos']:
                         video_db = Video.objects.create(
                             titulo = video["nome"],
-                            video = video["url"],
+                            video = obter_id_video_youtube(video["url"]),
                             autor = request.user,
                             duracao = tempo_video_youtube(video["url"])
                         )
@@ -93,7 +93,7 @@ def meuCurso(request):
 @login_required
 def assistirVideo(request, id):
     if AcessoCursoUsuario.objects.filter(aluno = request.user, curso = id).exists():
-        return render(request, 'assistirCurso/index.html')
+        return render(request, 'assistirCurso/index.html', {'curso': Curso.objects.get(id = id), 'statusCurso': AcessoCursoUsuario.objects.get(aluno = request.user, curso = id)})
     else:
         curso = Curso.objects.get(id = id)
         messages.error(request, f'Não tem acesso ao curso {curso.nome}')

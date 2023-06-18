@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 class Video(models.Model):
     titulo = models.CharField(max_length=100)
-    video = models.URLField(max_length=200)
+    video = models.CharField(max_length=100)
     data_criacao = models.DateTimeField(default=timezone.now)
     duracao = models.TimeField(blank=True, null=True)
     autor = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)

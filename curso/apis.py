@@ -29,3 +29,10 @@ def tempo_video_youtube(url):
         return f'{hora:02d}:{minuto:02d}:{secondo:02d}'
     except Exception as e:
         return e
+    
+    
+def obter_id_video_youtube(url):
+    dado_url = urlparse(url)
+    query_dado_url = parse_qs(dado_url.query)
+    video_id = query_dado_url.get('v', [None])[0]
+    return video_id
