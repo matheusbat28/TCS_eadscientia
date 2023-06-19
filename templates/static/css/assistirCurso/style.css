@@ -4,11 +4,17 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: var(--fundo-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 0;
 }
 
 #container-curso {
-    margin-top: 120px;
-    width: 80%;
+    margin-top: 90px;
+    width: 85%;
     height: auto;
 }
 
@@ -153,10 +159,11 @@ body {
 #corpo-curso embed {
     width: 85%;
     height: 600px;
+    margin-bottom: 30px;
+    box-shadow: var(--sombra--1);
 }
 
 #progresso-curso {
-    display: block;
     width: 20%;
     height: auto;
     background-color: var(--fundo-color);
@@ -164,7 +171,7 @@ body {
 
 .topico-curso {
     width: 100%;
-    height: 80px;
+    height: auto;
     margin-bottom: 5px;
     border-bottom: 2px solid var(--cor-fundo-alterada-1);
 }
@@ -193,9 +200,55 @@ body {
 
 }
 
-
-
 .titulo-topico h6 {
+    font-weight: bold;
+}
+
+.corpo-topico {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+.cabecalho-video {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 5px;
+}
+
+#cbx_video {
+    border-radius: 50%;
+}
+
+.titulo-video {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    color: var(--texto-color);
+    cursor: pointer;
+}
+
+.titulo-video h6 {
+    font-weight: bold;
+    color: var(--texto-color);
+}
+
+#desc-curso {
+    width: 80%;
+    color: var(--texto-color);
+}
+
+#id-video {
+    display: none;
+}
+
+#desc-curso p span {
     font-weight: bold;
 }
 
@@ -234,7 +287,17 @@ body {
     #corpo-curso embed {
         width: 100%;
         height: 500px;
+        margin-bottom: 30px;
     }
+
+    #desc-curso {
+        width: 100%;
+    }
+
+    #desc-curso h5 {
+        font-weight: bold;
+    }
+
 }
 
 @media screen and (max-width: 500px) {

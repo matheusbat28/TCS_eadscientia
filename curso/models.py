@@ -39,6 +39,7 @@ class Curso(models.Model):
     capitulos = models.ManyToManyField('curso.Capitulo')
     img = models.ImageField(upload_to='curso/%Y/%m/%d', default='curso/img/curso.png')
     aprovado = models.BooleanField(default=False)
+    descricao = models.TextField()
     
     
     def __str__(self):

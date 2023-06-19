@@ -45,7 +45,7 @@
         </div>
     </div>
     <div id="corpo-curso">
-        <embed src="https://www.youtube.com/embed/sFKlxGZlaRo" title="YouTube video player" frameborder="0"
+        <embed src="https://www.youtube.com/embed/{{curso.capitulos.first.videos.first.video}}" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
         <div id="progresso-curso">
@@ -58,9 +58,28 @@
                     </div>
                     <i class="fa-solid fa-caret-down"></i>
                 </div>
+                <div class="corpo-topico">
+                    {% for video in capitulo.videos.all %}
+                    <div class="cabecalho-video">
+                        <input type="checkbox" name="cbx_video" id="cbx_video">
+                        <div class="titulo-video">
+                            <h6>{{ video.titulo }}</h6>
+                            <p><span>duração: </span>{{ video.duracao }} min</p>
+                            <p id="id-video">{{ video.video }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
             {% endfor %}
         </div>
+    </div>
+    <div id="desc-curso">
+        <h5>Descrição:</h5>
+        <p>{{curso.descricao}}</p>
+        <p class="m-0"><span>Autor(a): </span>{{curso.autor.get_full_name}}</p>
+        <p class="m-0"><span>Duração: </span>{{curso|duracao_video_in_curso}}</p>
+        <p class="m-0"><span>Data de criação: </span>{{curso.data_criacao|date}}</p>
     </div>
 </div>
 
