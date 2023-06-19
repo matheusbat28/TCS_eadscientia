@@ -74,6 +74,16 @@ ul {
     height: 60px;
 }
 
+#cad-vef-senha p {
+    text-align: center;
+    color: #fff;
+    font-size: .8rem;
+}
+
+#cad-vef-senha p span {
+    font-weight: bold;
+}
+
 .btn-cad-vef-senha {
     display: flex;
     align-items: center;
@@ -116,4 +126,34 @@ ul {
 
 ul {
     display: none;
+}
+
+@media screen and (max-width: 750px) {
+    :root {
+        --width--card: 600px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    :root {
+        --width--card: 500px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    :root {
+        --width--card: 450px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    :root {
+        --width--card: 400px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    :root {
+        --width--card: 350px;
+    }
 }
