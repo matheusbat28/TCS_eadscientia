@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="{% static 'css/paginacao/style.css' %}">
 {% endblock %}
 
-{% block title %}Adicionar Curso{% endblock %}
+{% block title %}Curso: {{ curso.nome }}{% endblock %}
 
 {% block main %}
 {% include 'parciais/_cabecalho.html' %}
@@ -32,13 +32,35 @@
                     <i class="fa-solid fa-trophy"></i>
                 </div>
             </div>
-            <a title="emitir cerificado" href=""><i class="fa-solid fa-scroll"></i></a>
+            {% if statusCurso|proc_video_in_curso is 100 %}
+            {% if statusCurso.status_prova is True %}
+            <a title="emitir certificado" href=""><i class="fa-solid fa-scroll"></i></a>
+            {% else %}
+            <a title="fazer o teste" href=""><i class="fa-solid fa-receipt"></i></i></a>
+            {% endif %}
+            {% endif %}
+            <div id="menu-video">
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+            </div>
         </div>
     </div>
     <div id="corpo-curso">
         <embed src="https://www.youtube.com/embed/sFKlxGZlaRo" title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen>
+        <div id="progresso-curso">
+            {% for capitulo in curso.capitulos.all %}
+            <div class="topico-curso">
+                <div class="cabecalho-topico">
+                    <div class="titulo-topico">
+                        <h6>{{ capitulo.titulo }}</h6>
+                        <p>qtd video: {{capitulo.videos.count}}</p>
+                    </div>
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 

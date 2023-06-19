@@ -1,6 +1,5 @@
 body {
     display: flex;
-    align-items: center;
     justify-content: center;
     width: 100vw;
     height: 100vh;
@@ -8,9 +7,9 @@ body {
 }
 
 #container-curso {
+    margin-top: 120px;
     width: 80%;
     height: auto;
-    /* border: 2px solid var(--cor-fundo-alterada-1); */
 }
 
 #cabecalho-curso {
@@ -33,9 +32,18 @@ body {
     align-items: center;
     justify-content: space-evenly;
     height: 100%;
-    width: 120px;
+    width: 140px;
 }
 
+#menu-video {
+    display: none;
+}
+
+#menu-video i {
+    font-size: 1.8rem;
+    color: #fff;
+    cursor: pointer;
+}
 
 .percent-progresso {
     position: relative;
@@ -136,10 +144,111 @@ body {
 }
 
 #corpo-curso {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
     width: 100%;
 }
 
 #corpo-curso embed {
-    width: 80%;
-    height: 700px;
+    width: 85%;
+    height: 600px;
+}
+
+#progresso-curso {
+    display: block;
+    width: 20%;
+    height: auto;
+    background-color: var(--fundo-color);
+}
+
+.topico-curso {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 5px;
+    border-bottom: 2px solid var(--cor-fundo-alterada-1);
+}
+
+.cabecalho-topico {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    color: var(--texto-color);
+}
+
+.cabecalho-topico i {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.titulo-topico {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 85%;
+    height: 100%;
+
+}
+
+
+
+.titulo-topico h6 {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1300px) {
+    #container-curso {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #container-curso {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #container-curso {
+        position: relative;
+    }
+
+    #progresso-curso {
+        position: absolute;
+        right: 0;
+        display: none;
+        width: 300px;
+    }
+
+    #menu-video {
+        width: 30px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #corpo-curso embed {
+        width: 100%;
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    #corpo-curso embed {
+        width: 100%;
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    #corpo-curso embed {
+        width: 100%;
+        height: 300px;
+    }
 }
