@@ -7,11 +7,16 @@ body {
     background-color: var(--fundo-color);
 }
 
+body::-webkit-scrollbar {
+    width: 0;
+}
+
 #container-categoria {
     margin-top: 100px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
     grid-template-rows: 200px;
+    gap: 5px;
     width: 85%;
     height: auto;
 }
@@ -59,4 +64,38 @@ body {
     box-shadow: var(--sombra--1);
     border: 2px solid var(--cor--fundo--3);
     color: #fff;
+}
+
+@media screen and (max-width: 900px) {
+    #container-categoria {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #container-categoria {
+        width: 95%;
+    }
+
+    .card-categoria img {
+        width: 50%;
+    }
+
+    .info-curso {
+        width: 50%;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+
+    .card-categoria img {
+        width: 40%;
+        height: 50%;
+    }
+
+    .info-curso {
+        width: 60%;
+    }
+
 }

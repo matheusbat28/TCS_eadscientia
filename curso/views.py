@@ -66,24 +66,6 @@ def adicionarCurso(request):
 def aprovarCurso(request):
         cursos = Curso.objects.filter(aprovado=False)
         return render(request, 'aprovarCurso/index.html', {'pagina': 'Aprovar curso', 'cursos': cursos})
-
-@login_required
-@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
-def buscarCursoAutor(request):
-    if request.method == 'GET':
-        cursos = Curso.objects.all()
-        serialized_cursos = []
-        for curso in cursos:
-            curso_data = {
-                'id_curso': curso.id,
-                'curso': curso.nome,
-                'autor': curso.autor.get_full_name(),
-                'email': curso.autor.email
-            }
-            serialized_cursos.append(curso_data)
-        return JsonResponse({'status': 200, 'cursos': serialized_cursos}, safe=False)
-    else:
-        return JsonResponse({'status': 405, 'message': 'metodo não implementado'}, status=405)
     
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
@@ -98,4 +80,10 @@ def assistirVideo(request, id):
         curso = Curso.objects.get(id = id)
         messages.error(request, f'Não tem acesso ao curso {curso.nome}')
         return redirect('home')
+    
+@login_required
+def todoCurso(request):
+    cursos = Curso.objects.filter(aprovado = True)
+    cursos_serialized = serializers.serialize('json', cursos)
+    return JsonResponse({'status': 200, 'curso': cursos_serialized}, safe=False)
     

@@ -11,4 +11,19 @@ $(document).ready(function () {
             verStatus = true;
         }
     })
+
+    $.ajax({
+        url: '/curso/todoCurso/',
+        type: 'GET',
+        success: function (data) {
+            var cursos = JSON.parse(data.curso);
+            $.each(cursos, function (key, value) {
+                var option = $('<option></option>').attr('value', value['fields']['nome']);
+                $('#pesquisa').append(option);
+            })
+
+        }, error: function (data) {
+            console.log(data);
+        },
+    })
 });
