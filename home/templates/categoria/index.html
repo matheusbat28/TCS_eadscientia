@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filtros %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/categoria/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/paginacao/style.css' %}">
+{% endblock %}
+
+{% block title %}Categoria: {{categoria.nome}}{% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<div id="container-categoria">
+    {% for curso in categoria.cursos.all %}
+    <a href="{% url 'assistirVideo' curso.id %}" class="card-categoria">
+        <img src="{{curso.img.url}}" alt="">
+        <div class="info-curso">
+            <h2>{{curso.nome}}</h2>
+            <p class="m-0"><span>Autor: </span>{{curso.autor.get_full_name}}</p>
+            <p class="m-0"><span>Duração: </span>{{curso|duracao_video_in_curso}}</p>
+            <p class="m-0"><span>Data de criação: </span>{{curso.data_criacao|date}}</p>
+            <div class="soliCurso">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+{% include 'parciais/_mensagem.html' %}
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/categoria/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}

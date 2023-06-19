@@ -1,0 +1,62 @@
+body {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    background-color: var(--fundo-color);
+}
+
+#container-categoria {
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-rows: 200px;
+    width: 85%;
+    height: auto;
+}
+
+.card-categoria {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    color: var(--texto-color);
+    text-decoration: none;
+}
+
+.card-categoria:hover {
+    color: var(--texto-color);
+}
+
+.card-categoria img {
+    width: 40%;
+    height: 100%;
+    object-fit: cover;
+    border: 3px solid var(--cor-fundo-alterada-1);
+}
+
+.info-curso {
+    position: relative;
+    width: 40%;
+    height: 100%;
+}
+
+.info-curso p span {
+    font-weight: bold;
+}
+
+.soliCurso {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 5px;
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--cor--fundo--6);
+    box-shadow: var(--sombra--1);
+    border: 2px solid var(--cor--fundo--3);
+    color: #fff;
+}

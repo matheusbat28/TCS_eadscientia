@@ -174,3 +174,7 @@ def criarUsuario(request):
 @login_required
 def curso(request):
     return render(request, 'curso/index.html', {'pagina': 'Cursos a fazer', 'curso_fazer': AcessoCursoUsuario.objects.filter(aluno = request.user)})
+
+def categoria(request, id):
+    categoria = get_object_or_404(Categoria, id=id)
+    return render(request, 'categoria/index.html', {'categoria': categoria})

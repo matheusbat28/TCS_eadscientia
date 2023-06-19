@@ -41,7 +41,7 @@
     <h2>Categoria</h2>
     <div id="categoria-img">
         {% for categoria in categorias %}
-        <a href="" class="card-categoria">
+        <a href="{% url 'categoria' categoria.id %}" class="card-categoria">
             {{ categoria.img|safe }}
             <p>
                 {{ categoria.nome }}
