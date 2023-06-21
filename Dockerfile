@@ -11,12 +11,13 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+COPY templates /app/templates
+COPY staticfiles /app/staticfiles
+
 RUN python manage.py makemigrations
 RUN python manage.py migrate
 RUN python manage.py collectstatic --noinput
 
-COPY templates /app/templates
-COPY staticfiles /app/staticfiles
 
 EXPOSE 8000
 
