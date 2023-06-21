@@ -5,22 +5,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     volumes:
       - .:/app
-      - static_volume:/app/staticfiles
 
   nginx:
     image: nginx
     volumes:
       - ./conf.d:/etc/nginx/conf.d
-      - static_volume:/app/staticfiles
+      - ./staticfiles:/app/staticfiles
     ports:
       - "8080:80"
     depends_on:
       - web
-
-volumes:
-  static_volume:
