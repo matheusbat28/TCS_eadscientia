@@ -2,20 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .forms import FormSolicitacaoMatricula, FormCriacaoUsuario
 from django.contrib import messages
-from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
 from .models import Solicitacao
 from conta.models import Usuario
 from curso.models import Categoria, Curso
 from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
-from django.urls import reverse
 from django.db.models import Q
 from curso.models import AcessoCursoUsuario
-import random
-import string
+from curso.forms import FormSolicitarCurso
+
 
 
 @login_required
@@ -175,6 +170,38 @@ def criarUsuario(request):
 def curso(request):
     return render(request, 'curso/index.html', {'pagina': 'Cursos a fazer', 'curso_fazer': AcessoCursoUsuario.objects.filter(aluno = request.user)})
 
+@login_required
 def categoria(request, id):
     categoria = get_object_or_404(Categoria, id=id)
     return render(request, 'categoria/index.html', {'categoria': categoria})
+
+@login_required
+def solicitarCurso(request, id):
+    curso = get_object_or_404(Curso, id=id)
+    formularioSolicitacaoCurso = FormSolicitarCurso(initial={'aluno': request.user.username, 'curso': curso.nome})
+    
+    if request.method == 'POST':
+        formularioSolicitacaoCurso = FormSolicitarCurso(request.POST)
+        print(formularioSolicitacaoCurso.is_valid())
+        if formularioSolicitacaoCurso.is_valid():
+            retorno = formularioSolicitacaoCurso.save(id)
+            
+            if retorno:
+                messages.success(request, 'Solicitação aprovada')
+                return redirect('solicitarCurso', id)
+            else:
+                messages.error(request, 'erro ao salvar solicitação')
+                return redirect('solicitarCurso', id)
+        else: 
+            json = formularioSolicitacaoCurso.errors.as_json()
+            print(json)
+            if 'aluno' in json:
+                messages.error(request, formularioSolicitacaoCurso.errors['aluno'][0])
+                return redirect('solicitarCurso', id)
+            elif 'curso' in json:
+                messages.error(request, formularioSolicitacaoCurso.errors['curso'][0])
+                return redirect('solicitarCurso', id)   
+            elif 'motivo' in json:
+                messages.error(request, formularioSolicitacaoCurso.errors['motivo'][0])
+                return redirect('solicitarCurso', id)
+    return render(request, 'solicitarCurso/index.html', {'curso': curso, 'formularioSolicitacaoCurso': formularioSolicitacaoCurso})

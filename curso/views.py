@@ -79,7 +79,7 @@ def assistirVideo(request, id):
     else:
         curso = Curso.objects.get(id = id)
         messages.error(request, f'Não tem acesso ao curso {curso.nome}')
-        return redirect('home')
+        return redirect('solicitarCurso', id)
     
 @login_required
 def todoCurso(request):

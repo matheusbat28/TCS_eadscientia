@@ -79,3 +79,14 @@ class AcessoCursoUsuario(models.Model):
         verbose_name = 'acesso de curso aluno'
         verbose_name_plural = 'acessos de cursos alunos'
         
+class SolicitarCurso(models.Model):
+    aluno = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)   
+    curso = models.ForeignKey('curso.Curso', on_delete=models.CASCADE)
+    data_criacao = models.DateTimeField(default=datetime.now())
+    motivo = models.TextField()
+    
+    class Meta:
+        db_table = 'solicitarCurso'
+        verbose_name = 'solicitar o curso'
+        verbose_name_plural = 'solicitações os cursos'
+        

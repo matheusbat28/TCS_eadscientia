@@ -10,5 +10,6 @@ urlpatterns = [
     path('criarUsuario/', views.criarUsuario, name='criarUsuario'),
     path('curso/', views.curso, name='curso'),
     path('categoria/<int:id>/', views.categoria, name='categoria'),
+    path('solicitarCurso/<int:id>/', views.solicitarCurso, name='solicitarCurso'),
     
 ]

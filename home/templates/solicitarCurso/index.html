@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filtros %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/solicitarCurso/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+{% endblock %}
+
+{% block title %} {{curso.nome}} {% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<form id="formulario" class="container-fluid p-0 h-50" method="POST">
+    {% csrf_token %}
+    <div id="area1">
+        <div>
+            <h5>Curso:</h5>
+            {{formularioSolicitacaoCurso.curso}}
+        </div>
+        <div>
+            <h5>Usuário:</h5>
+            {{formularioSolicitacaoCurso.aluno}}
+        </div>
+    </div>
+    <div id="area2">
+        <div>
+            <h5>Motivo:</h5>
+            {{formularioSolicitacaoCurso.motivo}}
+        </div>
+    </div>
+    <div id="area3">
+        <button id="bnt-formulario" type="submit">
+            <div id="carregando-formulario" class="carregando"></div>
+            <h5 id="texto-formulario">Solicitar</h5>
+        </button>
+    </div>
+</form>
+
+
+{% include 'parciais/_mensagem.html' %}
+
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/solicitarCurso/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}

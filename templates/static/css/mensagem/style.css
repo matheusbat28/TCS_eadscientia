@@ -1,4 +1,5 @@
 #mensagem {
+    z-index: 9;
     position: fixed;
     top: 5px;
 }

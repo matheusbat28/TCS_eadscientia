@@ -156,7 +156,7 @@ body::-webkit-scrollbar {
 
 .card-categoria:hover {
     scale: 1.1;
-    transition: 0.5s;   
+    transition: 0.5s;
 }
 
 .card-categoria svg {
@@ -236,6 +236,7 @@ body::-webkit-scrollbar {
 
 #soliCurso {
     position: absolute;
+    z-index: 8;
     display: flex;
     align-items: center;
     justify-content: center;
