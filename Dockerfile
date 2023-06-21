@@ -13,8 +13,7 @@ COPY requirements.txt /app/
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar o código do aplicativo
-COPY meu_projeto /app/
-
+COPY . .
 # Executar migrações
 RUN python manage.py migrate
 
