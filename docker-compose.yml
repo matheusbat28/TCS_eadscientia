@@ -13,11 +13,11 @@ services:
       - static_volume:/app/staticfiles
 
   nginx:
-  image: nginx
-  volumes:
-    - ./conf.d:/etc/nginx/conf.d
-    - static_volume:/app/staticfiles
-  ports:
-    - "8080:80"
-  depends_on:
-    - web
+    image: nginx
+    volumes:
+      - ./conf.d:/etc/nginx/conf.d
+      - static_volume:/app/staticfiles
+    ports:
+      - "8080:80"
+    depends_on:
+      - web
