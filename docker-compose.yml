@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   web:
     build:
@@ -13,7 +11,7 @@ services:
   nginx:
     image: nginx
     volumes:
-      - ./conf.d:/etc/nginx/conf.d
+      - ./nginx.conf:/etc/nginx/conf.d/nginx.conf  # Atualizado para usar o arquivo nginx.conf
       - ./staticfiles:/app/staticfiles
     ports:
       - "8080:80"
