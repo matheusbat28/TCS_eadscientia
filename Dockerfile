@@ -1,27 +1,22 @@
-# Use the official Python base image
+# Imagem base
 FROM python:3.9
 
-# Set environment variables
+# Configurações de ambiente
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set the working directory in the container
+# Diretório de trabalho
 WORKDIR /app
 
-# Copy the requirements file
-COPY requirements.txt .
+# Instalar dependências
+COPY requirements.txt /app/
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install the Python dependencies
-RUN pip install -r requirements.txt
+# Copiar o código do aplicativo
+COPY meu_projeto /app/
 
-# Copy the project code
-COPY . .
+# Executar migrações
+RUN python manage.py migrate
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
-
-# Expose the port
-EXPOSE 8000
-
-# Start Gunicorn as the entrypoint
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Iniciar o aplicativo
+CMD python manage.py runserver 0.0.0.0:8000
