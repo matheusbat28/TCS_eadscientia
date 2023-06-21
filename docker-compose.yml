@@ -14,12 +14,8 @@ services:
   nginx:
     image: nginx
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/
-      - static_volume:/app/static
+      - ./conf.d:/etc/nginx/conf.d
     ports:
       - "8080:80"
     depends_on:
       - web
-
-volumes:
-  static_volume:
