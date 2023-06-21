@@ -14,7 +14,7 @@ services:
   nginx:
     image: nginx
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx.conf:/etc/nginx/conf.d/tcs.conf
     ports:
       - "80:80"
     depends_on:
