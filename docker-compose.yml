@@ -14,7 +14,7 @@ services:
   nginx:
     image: nginx
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/TCS.conf
+      - ./nginx.conf:/etc/nginx/conf.d/
 
     ports:
       - "8080:80"
