@@ -26,7 +26,7 @@ FROM nginx:latest
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Copiar arquivos estáticos do estágio de compilação
-COPY --from=builder /app/static /static
+COPY --from=builder /app/staticfiles /staticfiles
 
 # Expôr a porta 80 para acesso externo
 EXPOSE 80
