@@ -1,5 +1,5 @@
-# Imagem base
-FROM python:3.9
+# Estágio de compilação
+FROM python:3.9 as builder
 
 # Configurações de ambiente
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -9,14 +9,24 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 # Instalar dependências
-COPY requirements.txt /app/
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar o código do aplicativo
 COPY . .
 
-# Executar migrações
+# Executar migrações e coletar arquivos estáticos (se necessário)
 RUN python manage.py migrate
+RUN python manage.py collectstatic --no-input
 
-# Iniciar o aplicativo
-CMD python manage.py runserver 0.0.0.0:8000
+# Estágio de produção
+FROM nginx:latest
+
+# Copiar o arquivo de configuração do Nginx
+COPY nginx/nginx.conf /etc/nginx/nginx.conf
+
+# Copiar arquivos estáticos do estágio de compilação
+COPY --from=builder /app/static /static
+
+# Expôr a porta 80 para acesso externo
+EXPOSE 80
