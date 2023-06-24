@@ -1,19 +1,26 @@
-version: "3"
+version: '3'
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
+    restart: always
     volumes:
-      - ./TCS:/app
+      - ./app:/app
     expose:
       - 8000
+    env_file:
+      - .env
+    command: gunicorn your_project_name.wsgi:application --bind 0.0.0.0:8000
 
   nginx:
     image: nginx:latest
+    restart: always
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    - ./nginx:/etc/nginx/conf.d
+    - ./staticfiles:/app/static
+
     ports:
-      - 8080:80
+      - 80:80
     depends_on:
       - web
