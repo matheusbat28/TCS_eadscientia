@@ -23,6 +23,9 @@ RUN python -m venv venv
 # Ativa o ambiente virtual
 RUN /bin/bash -c "source venv/bin/activate"
 
+# Instala as dependências do projeto
+RUN pip install --no-cache-dir --use-feature=fast-deps -r requirements.txt
+
 # Executa as migrações do Django
 RUN python manage.py migrate
 
