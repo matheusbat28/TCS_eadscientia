@@ -79,6 +79,11 @@ body {
     text-decoration: none;
 }
 
+.dado-progresso a i,
+.controle-curso a i {
+    color: #fff;
+}
+
 .progresso-curso {
     grid: progresso;
 }
