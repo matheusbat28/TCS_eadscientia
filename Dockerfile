@@ -1,26 +1,26 @@
-# Define a imagem base
-FROM python:3.9
+# Use a imagem base Python
+FROM python:3.8
 
-# Configuração do ambiente
-ENV PYTHONUNBUFFERED 1
+# Define o diretório de trabalho dentro do contêiner
+WORKDIR /app
 
-# Diretório de trabalho dentro do contêiner
-WORKDIR /code
+# Copie o arquivo requirements.txt para o diretório de trabalho
+COPY requirements.txt .
 
-# Copia o arquivo requirements.txt para o contêiner
-COPY requirements.txt /code/
-
-# Instala as dependências
+# Instale as dependências do projeto
 RUN pip install -r requirements.txt
 
-# Copia o código fonte para o contêiner
-COPY . /code/
+# Copie todo o código fonte do projeto para o diretório de trabalho
+COPY . .
 
-# Executa as migrações do Django
+# Defina as variáveis de ambiente
+ENV PYTHONUNBUFFERED=1
+
+# Execute o comando para migrar o banco de dados
 RUN python manage.py migrate
 
-# Expõe a porta 8000 para acesso externo
+# Exponha a porta em que o servidor Django estará rodando
 EXPOSE 8000
 
-# Comando para executar o servidor Django
-CMD python manage.py runserver 0.0.0.0:8000
+# Inicie o servidor Django
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
