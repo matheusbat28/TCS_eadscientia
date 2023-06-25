@@ -1,26 +1,36 @@
-# Use a imagem base Python
-FROM python:3.8
+# Imagem base
+FROM python:3.9
 
 # Define o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
-# Copie o arquivo requirements.txt para o diretório de trabalho
+# Copia o arquivo requirements.txt para o contêiner
 COPY requirements.txt .
 
-# Instale as dependências do projeto
-RUN pip install -r requirements.txt
+# Instala as dependências do projeto
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copie todo o código fonte do projeto para o diretório de trabalho
+# Copia o conteúdo do diretório atual para o diretório de trabalho no contêiner
 COPY . .
 
-# Defina as variáveis de ambiente
+# Define as variáveis de ambiente para a execução do Django
+ENV DJANGO_SETTINGS_MODULE=config.settings
 ENV PYTHONUNBUFFERED=1
 
-# Execute o comando para migrar o banco de dados
+# Cria o ambiente virtual
+RUN python -m venv venv
+
+# Ativa o ambiente virtual
+RUN /bin/bash -c "source venv/bin/activate"
+
+# Executa as migrações do Django
 RUN python manage.py migrate
 
-# Exponha a porta em que o servidor Django estará rodando
+# Coleta os arquivos estáticos do Django
+RUN python manage.py collectstatic --no-input
+
+# Expõe a porta do aplicativo (ajuste se necessário)
 EXPOSE 8000
 
-# Inicie o servidor Django
+# Comando para iniciar o aplicativo
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
