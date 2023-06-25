@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load filtros %}
 
 
 {% block css %}
@@ -7,19 +8,48 @@
 <link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
 <link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/paginacao/style.css' %}">
 {% endblock %}
 
-{% block title %}Adicionar Curso{% endblock %}
+{% block title %} Meus curso {% endblock %}
 
 {% block main %}
 {% include 'parciais/_cabecalho.html' %}
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
+<div id="container-curso">
+    {% if curso %}
+    {% for curso in curso %}
+    <div class="card-curso">
+        <img src="{{curso.img.url}}" alt="">
+        <div class="dado-curso">
+            <div class="info-curso">
+                <h3>{{curso.nome}}</h3>
+                <p>{{curso.autor.get_full_name}}</p>
+                <div class="controle-curso">
+                    <a title="Modificar curso" id="continuar" href="">
+                        <i class="fa-solid fa-file-invoice"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="progresso-curso">
+                <div class="container-progressao">
+                    <a class="add" href="">Adicionar Prova</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div id="semResultado">
+        <h4>não possui nenhum curso ...<h4>
+                <a href="{% url 'home' %}" title="ver os curso" href="">ver os curso</a>
+    </div>
+    {% endif %}
+</div>
 
 
-{% include 'parciais/_mensagem.html' %}
 {% endblock %}
 
 {% block js %}

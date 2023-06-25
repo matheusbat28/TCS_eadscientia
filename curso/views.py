@@ -70,7 +70,8 @@ def aprovarCurso(request):
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def meuCurso(request):
-    return render(request, 'meuCurso/index.html')
+    curso = Curso.objects.filter(autor = request.user)
+    return render(request, 'meuCurso/index.html', {'curso': curso})
 
 @login_required
 def assistirVideo(request, id):

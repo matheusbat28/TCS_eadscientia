@@ -1,5 +1,30 @@
 from django.contrib import admin
-from .models import Curso, Video, Capitulo, Categoria, AcessoCursoUsuario, SolicitarCurso
+from .models import Curso, Video, Capitulo, Categoria, AcessoCursoUsuario, SolicitarCurso, Prova, Questao, Alternativa
+
+
+class ProvaAdmin(admin.ModelAdmin):
+    list_display = ('data_criacao', 'duracao')
+    search_fields = ('data_criacao', )
+    list_filter = ('data_criacao', 'duracao')
+    per_page = 10
+    
+admin.site.register(Prova, ProvaAdmin)
+
+class QuestaoAdmin(admin.ModelAdmin):
+    list_display = ('enuciado', 'resposta')
+    search_fields = ('enuciado', )
+    list_filter = ('enuciado',)
+    per_page = 10
+    
+admin.site.register(Questao, QuestaoAdmin)
+
+class AlternativaAdmin(admin.ModelAdmin):
+    list_display = ('texto',)
+    search_fields = ('texto',)
+    list_filter = ('texto',)
+    per_page = 10
+    
+admin.site.register(Alternativa, AlternativaAdmin)
 
 class VideoAdmin(admin.ModelAdmin):
     list_display = ('titulo', 'data_criacao', 'duracao', 'video')
@@ -8,6 +33,7 @@ class VideoAdmin(admin.ModelAdmin):
     per_page = 10
     
 admin.site.register(Video, VideoAdmin)
+
 
 class CapituloAdmin(admin.ModelAdmin):
     list_display = ('titulo',)

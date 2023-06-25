@@ -2,6 +2,44 @@ from django.db import models
 from django.utils import timezone
 from datetime import datetime, timedelta
 
+
+class Alternativa(models.Model):
+    texto = models.CharField(max_length=255)
+    
+    def __str__(self):
+        return self.texto
+    
+    class Meta:
+        db_table = 'alternativa'
+        verbose_name = 'alternativa'
+        verbose_name_plural = 'alternativas'
+
+class Questao(models.Model):
+    enuciado = models.CharField(max_length=250)
+    resposta = models.CharField(max_length=1)
+    alternativas = models.ManyToManyField('curso.Alternativa')
+    
+    def __str__(self):
+        return self.enuciado
+    
+    class Meta:
+        db_table = 'questao'
+        verbose_name = 'questão'
+        verbose_name_plural = 'questões'
+
+class Prova(models.Model):
+    questoes = models.ManyToManyField('curso.Questao')
+    data_criacao = models.DateTimeField(default=timezone.now)
+    duracao = models.TimeField(blank=True, null=True) 
+    
+    def __str__(self):
+        return self.id
+    
+    class Meta:
+        db_table = 'prova'
+        verbose_name = 'prova'
+        verbose_name_plural = 'provas'
+
 class Video(models.Model):
     titulo = models.CharField(max_length=100)
     video = models.CharField(max_length=100)
@@ -39,6 +77,7 @@ class Curso(models.Model):
     capitulos = models.ManyToManyField('curso.Capitulo')
     img = models.ImageField(upload_to='curso/%Y/%m/%d', default='curso/img/curso.png')
     aprovado = models.BooleanField(default=False)
+    prova = models.OneToOneField('curso.Prova', on_delete=models.CASCADE, blank=True, null=True)
     descricao = models.TextField()
     
     
