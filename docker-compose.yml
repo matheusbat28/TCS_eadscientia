@@ -7,17 +7,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8000:8000
-    volumes:
-      - .:/app
-    environment:
-      - PYTHONUNBUFFERED=1
-    command: python manage.py runserver 0.0.0.0:8000
 
   nginx:
     image: nginx:latest
     ports:
       - 8080:80
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - /home/TCS/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       - django
