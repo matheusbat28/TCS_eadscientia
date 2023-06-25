@@ -24,7 +24,7 @@ FROM nginx:latest
 
 # Copia os arquivos estáticos e de configuração do Nginx do estágio de construção
 COPY --from=builder /app/staticfiles /usr/share/nginx/html
-COPY nginx/nginx.conf /etc/nginx/nginx.conf
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expõe a porta 80 para o Nginx
 EXPOSE 80
