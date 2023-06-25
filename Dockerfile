@@ -20,12 +20,6 @@ ENV PYTHONUNBUFFERED=1
 # Cria o ambiente virtual
 RUN python -m venv venv
 
-# Ativa o ambiente virtual
-RUN "source venv/bin/activate"
-
-# Limpa o cache do pip
-RUN pip cache purge
-
 # Instala as dependências do projeto
 RUN pip install --no-cache-dir -r requirements.txt
 
