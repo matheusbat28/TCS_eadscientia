@@ -16,9 +16,6 @@ COPY . .
 # Define as variáveis de ambiente para a execução do Django
 ENV PYTHONUNBUFFERED=1
 
-# Cria o ambiente virtual
-RUN python -m venv venv
-
 # Instala as dependências do projeto
 RUN pip install --no-cache-dir -r requirements.txt
 
