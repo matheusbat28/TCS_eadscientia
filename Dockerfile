@@ -1,31 +1,33 @@
-# Imagem base para o Django
-FROM python:3.9 as django
+# Estágio de construção
+FROM python:3.9 AS builder
 
-# Defina o diretório de trabalho dentro do contêiner
+# Define o diretório de trabalho dentro do contêiner
 WORKDIR /app
 
-# Copie o arquivo requirements.txt para o contêiner
+# Copia o arquivo requirements.txt para o contêiner
 COPY requirements.txt .
 
-# Instale as dependências do projeto
+# Instala as dependências do projeto
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copie o conteúdo do diretório atual para o diretório de trabalho no contêiner
+# Copia o conteúdo do diretório atual para o diretório de trabalho no contêiner
 COPY . .
 
-# Defina as variáveis de ambiente para a execução do Django
-ENV PYTHONUNBUFFERED=1
-
-# Execute as migrações do Django
+# Executa as migrações do Django
 RUN python manage.py migrate
 
 # Coleta os arquivos estáticos do Django
 RUN python manage.py collectstatic --no-input
 
-# Imagem base para o Nginx
+# Estágio de produção
 FROM nginx:latest
 
-# Copie o arquivo de configuração do Nginx para o contêiner
-COPY nginx.conf nginx/nginx.conf
+# Copia os arquivos estáticos e de configuração do Nginx do estágio de construção
+COPY --from=builder /app/staticfiles /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copie os arquivos estáticos do Django do contêiner Django para o diretório do Nginx
+# Expõe a porta 80 para o Nginx
+EXPOSE 80
+
+# Inicia o servidor Nginx
+CMD ["nginx", "-g", "daemon off;"]
