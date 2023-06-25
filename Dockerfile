@@ -14,7 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Define as variáveis de ambiente para a execução do Django
-ENV DJANGO_SETTINGS_MODULE=config.settings
 ENV PYTHONUNBUFFERED=1
 
 # Cria o ambiente virtual
