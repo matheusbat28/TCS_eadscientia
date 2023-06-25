@@ -21,7 +21,7 @@ ENV PYTHONUNBUFFERED=1
 RUN python -m venv venv
 
 # Ativa o ambiente virtual
-RUN /bin/bash -c "source venv/bin/activate"
+RUN "source venv/bin/activate"
 
 # Limpa o cache do pip
 RUN pip cache purge
