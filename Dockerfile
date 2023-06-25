@@ -26,6 +26,6 @@ RUN python manage.py collectstatic --no-input
 FROM nginx:latest
 
 # Copie o arquivo de configuração do Nginx para o contêiner
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY nginx.conf nginx/nginx.conf
 
 # Copie os arquivos estáticos do Django do contêiner Django para o diretório do Nginx
