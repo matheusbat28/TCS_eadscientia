@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    expose:
-      - 8000
     environment:
       - PYTHONUNBUFFERED=1
 
