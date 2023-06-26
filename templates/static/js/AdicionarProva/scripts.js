@@ -2,36 +2,37 @@ var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 
 $('.conteudo-resposta').hide();
 
+function separarDado() {
+
+    $('.caixa-suspensa').each(function () {
+        let pergunta = {
+            'pergunta': $(this).children('.cabecalho-pergunta').children('.titulo-cabecalho-pergunta').children('input').val(),
+            'opcoes': []
+        }
+
+        $(this).find('.conteudo-resposta').children().each(function () {
+            opcao = {
+                'status': $(this).children('.cabecalho-resposta').children('input[type="checkbox"]').is(':checked'),
+                'pegunta': $(this).children('.cabecalho-resposta').children('input[type="text"]').val()
+            }
+
+            pergunta['opcoes'].push(opcao)
+
+        });
+
+        perguntas.push(pergunta)
+    });
+    console.log(perguntas)
+
+
+    return JSON.stringify(perguntas)
+
+}
+
 $(document).ready(function (e) {
 
     perguntas = []
 
-    function separarDado() {
-
-        $('.caixa-suspensa').each(function () {
-            let pergunta = {
-                'pergunta': $(this).children('.cabecalho-pergunta').children('.titulo-cabecalho-pergunta').children('input').val(),
-                'opcoes': []
-            }
-
-            $(this).find('.conteudo-resposta').children().each(function () {
-                opcao = {
-                    'status': $(this).children('.cabecalho-resposta').children('input[type="checkbox"]').is(':checked'),
-                    'pegunta': $(this).children('.cabecalho-resposta').children('input[type="text"]').val()
-                }
-
-                pergunta['opcoes'].push(opcao)
-
-            });
-
-            perguntas.push(pergunta)
-        });
-        console.log(perguntas)
-
-
-        return JSON.stringify(perguntas)
-
-    }
 
     $('#formulario-curso').submit(function (e) {
         e.preventDefault();
@@ -42,6 +43,8 @@ $(document).ready(function (e) {
             data: separarDado(),
             success: function (data) {
                 console.log(data)
+
+                window.location.reload()
             },
             error: function (data) {
                 console.log(data)
