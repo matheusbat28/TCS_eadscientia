@@ -38,15 +38,15 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ~~~
 *Para depois tentar iniciar a venv*
 ~~~
-venv\Scripts\Activate.ps1
+venv/Scripts/Activate.ps1
 ~~~
 *Comado no window (CMD)*
 ~~~
-venv\Scripts\activate.bat
+venv/Scripts/activate.bat
 ~~~
 *Comado no window (Git Bash)*
 ~~~
-. venv\Scripts\activate
+. venv/Scripts/activate
 ~~~
 
 * Na raiz do projeto tem um arquivo chamado requirements.txt (onde tem todas as dependências do projetos)
