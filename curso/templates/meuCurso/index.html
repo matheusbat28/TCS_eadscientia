@@ -34,7 +34,12 @@
             </div>
             <div class="progresso-curso">
                 <div class="container-progressao">
-                    <a class="add" href="">Adicionar Prova</a>
+
+                {% if not curso.prova %}
+                    <a class="add" href="{% url 'adicionarProva' curso.id %}">Adicionar Prova</a>
+                {% else %}
+                    <a class="add" href="">Modificar Prova</a>
+                {% endif %}
 
                 </div>
             </div>

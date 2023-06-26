@@ -7,4 +7,5 @@ urlpatterns = [
     path('meusCursos/', views.meuCurso, name='meusCursos'),
     path('assistirVideo/<int:id>', views.assistirVideo, name='assistirVideo'),
     path('todoCurso/', views.todoCurso, name='todoCurso'),
+    path('adicionarProva/<int:id>', views.adicionarProva, name='adicionarProva'),
 ]

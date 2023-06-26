@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filtros %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/AdicionarProva/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+{% endblock %}
+
+{% block title %} Adicionar prova {% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<form id="formulario-curso" method="POST">
+    {% csrf_token %}
+    <div id="cabecalho-curso">
+        <div id="titulo-curso">
+            <input readonly type="text" placeholder="Titulo do curso:" value="{{ curso.nome }}">
+        </div>
+        <div id="operacao-pergunta">
+            <a id="add-pergunta" title="Adicionar pergunta"><i class="fa-solid fa-plus"></i></a>
+            <button title="Criar pergunta" type="submit" id="btn-criar"><i class="fa-solid fa-check"></i></button>
+        </div>
+    </div>
+    <div id="conteudo-pergunta">
+        <div class="caixa-suspensa">
+            <div class="cabecalho-pergunta">
+                <div class="titulo-cabecalho-pergunta">
+                    <input name="inputNomePergunta" type="text" placeholder="Titulo da Pergunta:">
+                </div>
+                <div class="operacao-cabecalho-resposta">
+                    <i title="Expandir resposta" class="fa-solid fa-caret-down expandir-resposta"></i>
+                    <i title="Adicionar resposta" class="fa-solid fa-plus add-resposta"></i>
+                    <i title="Deletar pergunta" class="fa-solid fa-trash deletar-pergunta"></i>
+                </div>
+            </div>
+            <div class="conteudo-resposta">
+                <div class="resposta-pergunta">
+                    <div class="cabecalho-resposta">
+                        <input type="checkbox">
+                        <input type="text" placeholder="Resposta">
+                    </div>
+                    <div class="deletar-resposta">
+                        <i title="Deletar Resposta" class="fa-solid fa-trash deletar-resposta"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/AdicionarProva/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}

@@ -87,4 +87,18 @@ def todoCurso(request):
     cursos = Curso.objects.filter(aprovado = True)
     cursos_serialized = serializers.serialize('json', cursos)
     return JsonResponse({'status': 200, 'curso': cursos_serialized}, safe=False)
+
+
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+def adicionarProva(request, id):
     
+    if request.method == 'POST':
+        print(request.POST)
+        return JsonResponse({'status': 200, 'mensagem': 'entrou'}, safe=False)
+    if Curso.objects.filter(id=id, autor = request.user).exists():
+        curso = Curso.objects.get(id = id)
+        return render(request, 'AdicionarProva/index.html', {'curso': curso})
+    else:
+        messages.error(request, 'Esse curso não pertece a você')
+        return redirect('home')
