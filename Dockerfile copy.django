@@ -18,16 +18,3 @@ RUN python manage.py migrate
 
 # Coleta os arquivos estáticos do Django
 RUN python manage.py collectstatic --no-input
-
-# Estágio de produção
-FROM nginx:latest
-
-# Copia os arquivos estáticos e de configuração do Nginx do estágio de construção
-COPY --from=builder /app/staticfiles /usr/share/nginx/html
-COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expõe a porta 80 para o Nginx
-EXPOSE 80
-
-# Inicia o servidor Nginx
-CMD ["nginx", "-g", "daemon off;"]

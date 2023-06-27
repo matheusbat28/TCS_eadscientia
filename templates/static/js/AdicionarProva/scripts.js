@@ -1,6 +1,6 @@
 var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 
-$('.conteudo-resposta').hide();
+$('.conteudo-resposta, .carregamento').hide();
 
 function separarDado() {
 
@@ -33,8 +33,10 @@ $(document).ready(function (e) {
 
     perguntas = []
 
-
     $('#formulario-curso').submit(function (e) {
+
+        $('.botao').prop('disabled', true);
+
         e.preventDefault();
         $.ajax({
             url: window.location.href,
@@ -43,11 +45,12 @@ $(document).ready(function (e) {
             data: separarDado(),
             success: function (data) {
                 console.log(data)
-
                 window.location.reload()
+                $('.botao').prop('disabled', false);
             },
             error: function (data) {
                 console.log(data)
+                $('.botao').prop('disabled', false);
             }
         })
     });

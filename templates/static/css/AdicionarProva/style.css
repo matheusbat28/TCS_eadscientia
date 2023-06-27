@@ -115,6 +115,15 @@ body {
     color: #fff;
 }
 
+.carregamento {
+    width: 70%;
+    height: 70%;
+    border-radius: 10px;
+    border: 3px solid var(--cor--fundo--3);
+    border-top: 3px solid var(--cor--fundo--4);
+    animation: is-rotating 1s infinite;
+}
+
 .operacao-cabecalho-resposta {
     display: flex;
     justify-content: center;
@@ -169,7 +178,7 @@ body {
 }
 
 .deletar-resposta {
-    display: flex!important;
+    display: flex !important;
     justify-content: center;
     align-items: center;
     gap: 10px;
