@@ -11,7 +11,7 @@ class Usuario(AbstractUser):
     imagem_perfil = models.ImageField(upload_to='perfil_img/%Y/%m/%d', blank=True, null=True)
 
     def __str__(self):
-        return self.get_full_name()
+        return f'{self.get_full_name()} {self.matricula}'
     
     class Meta:
         db_table = 'usuario'

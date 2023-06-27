@@ -2,7 +2,7 @@
 FROM python:3.8
 
 # Define o diretório de trabalho
-WORKDIR .
+WORKDIR /code
 
 # Copia os arquivos de requisitos para o contêiner
 COPY requirements.txt .

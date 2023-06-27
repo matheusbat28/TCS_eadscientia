@@ -18,72 +18,73 @@
         </div>
     </div>
     <div id="menu-conteudo">
-        <a id="home" class="itens-conteudo" href="{% url 'home' %}"><i class="fa-solid fa-house"></i>
+        <a title="Home" id="home" class="itens-conteudo" href="{% url 'home' %}"><i class="fa-solid fa-house"></i>
             <h3>Home</h3>
         </a>
-        <a id="curso" class="itens-conteudo" href="{% url 'curso' %}"><i class="fa-solid fa-book"></i>
+        <a title="Curso" id="curso" class="itens-conteudo" href="{% url 'curso' %}"><i class="fa-solid fa-book"></i>
             <h3>Cursos</h3>
         </a>
-        <a id="arquivo" class="itens-conteudo" href=""><i class="fa-solid fa-folder"></i>
-            <h3>Arquivos</h3>
-        </a>
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'autor' %}
-        <a class="itens-conteudo"><i class="fa-solid fa-book-medical"></i>
+        <a title="Sessão de criação do curso" class="itens-conteudo"><i class="fa-solid fa-book-medical"></i>
             <h3>Criação Curso</h3>
             <i id="seta-criacao" class="fa-solid fa-angle-down seta-baixo"></i>
         </a>
         <div  class="itens-subconteudo">
             <a href="{% url 'adicionarCurso' %}" class="subconteudo-itens">
-                <i class="fa-solid fa-file-video"></i>
+                <i title="Criar curso" class="fa-solid fa-file-video"></i>
                 <h3>Adicionar Curso</h3>
             </a>
             <a href="{% url 'meusCursos' %}" class="subconteudo-itens">
-                <i class="fa-solid fa-clapperboard"></i>
+                <i title="meus curso criados" class="fa-solid fa-clapperboard"></i>
                 <h3>Meus Curso</h3>
             </a>
         </div>
         {% endif %}
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'administrativo' %}
-        <a class="itens-conteudo"><i class="fa-solid fa-briefcase"></i>
+        <a title="Sessão de administração" class="itens-conteudo"><i class="fa-solid fa-briefcase"></i>
             <h3>Administração</h3>
             <i id="seta-adm" class="fa-solid fa-angle-down seta-baixo"></i>
         </a>
         <div class="itens-subconteudo">
-            <a href="{% url 'criarUsuario' %}" class="subconteudo-itens">
+            <a title="criar usuário" href="{% url 'criarUsuario' %}" class="subconteudo-itens">
                 <i class="fa-solid fa-user-plus"></i>
                 <h3>Usuários</h3>
             </a>
         </div>
         {% endif %}
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'recuso humano' %}
-        <a class="itens-conteudo"><i class="fa-solid fa-id-card-clip"></i>
+        <a title="Sessão de recurso humano" class="itens-conteudo"><i class="fa-solid fa-id-card-clip"></i>
             <h3>RH</h3>
             <i id="seta-rh" class="fa-solid fa-angle-down seta-baixo"></i>
         </a>
         <div class="itens-subconteudo">
-            <a href="{% url 'listarSolicitarMatricula' %}" class="subconteudo-itens">
+            <a title="aprovar as matricula solicitada" href="{% url 'listarSolicitarMatricula' %}" class="subconteudo-itens">
                 <i class="fa-solid fa-check"></i>
                 <h3>aprovar matricula</h3>
             </a>
-            <a href="{% url 'aprovarCurso' %}" class="subconteudo-itens">
+            <a title="aprovar os cursos" href="{% url 'aprovarCurso' %}" class="subconteudo-itens">
                 <i class="fa-solid fa-file-video"></i>
-                <h3>aprovar Curso</h3>
+                <h3>liberar Curso</h3>
+            </a>
+            <a title="liberar o acesso do usuario ao curso" href="" class="subconteudo-itens">
+                <i class="fa-solid fa-check"></i>
+                <h3>acesso curso</h3>
             </a>
         </div>
         {% endif %}
         {% if user|in_grups:'desenvolvedor' or user|in_grups:'gestão' %}
-        <a class="itens-conteudo"><i class="fa-solid fa-bars-progress"></i>
+        <a title="Sessão de gestão" class="itens-conteudo"><i class="fa-solid fa-bars-progress"></i>
             <h3>gestão</h3>
             <i id="seta-gestao" class="fa-solid fa-angle-down seta-baixo"></i>
         </a>
         <div class="itens-subconteudo">
-            <a href="{% url 'solicitacaoMatricula' %}" class="subconteudo-itens">
+            <a title="Solicitar matricula" href="{% url 'solicitacaoMatricula' %}" class="subconteudo-itens">
                 <i class="fa-solid fa-square-plus"></i>
                 <h3>Socilitar matricula</h3>
             </a>
         </div>
         {% endif %}
-        <a id="historico" class="itens-conteudo" href=""><i class="fa-solid fa-paperclip"></i>
+        <a title="Historico" id="historico" class="itens-conteudo" href=""><i class="fa-solid fa-paperclip"></i>
             <h3>Histórico</h3>
         </a>
 

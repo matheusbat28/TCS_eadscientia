@@ -59,7 +59,7 @@ def adicionarCurso(request):
                     
             
         return JsonResponse({'status': 200, 'message': 'Curso adicionado com sucesso!'}, status=200)
-    return render(request, 'adicionarCurso/index.html')
+    return render(request, 'adicionarCurso/index.html', {'pagina': 'Criar curso'})
 
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
@@ -98,7 +98,7 @@ def adicionarProva(request, id):
         return JsonResponse({'status': 200, 'mensagem': 'entrou'}, safe=False)
     if Curso.objects.filter(id=id, autor = request.user).exists():
         curso = Curso.objects.get(id = id)
-        return render(request, 'AdicionarProva/index.html', {'curso': curso})
+        return render(request, 'AdicionarProva/index.html', {'curso': curso, 'pagina': 'Criar avaliação'})
     else:
         messages.error(request, 'Esse curso não pertece a você')
         return redirect('home')
