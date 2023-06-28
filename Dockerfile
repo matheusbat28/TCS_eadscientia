@@ -13,6 +13,9 @@ RUN pip install -r requirements.txt
 # Copia o código do projeto para o contêiner
 COPY . .
 
+# Colete os arquivos estáticos do Django
+RUN python manage.py collectstatic --noinput
+
 # Expõe a porta em que o servidor do Django será executado (opcional)
 EXPOSE 8000
 
