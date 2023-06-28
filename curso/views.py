@@ -94,7 +94,10 @@ def todoCurso(request):
 def adicionarProva(request, id):
     
     if request.method == 'POST':
-        print(request.POST)
+        json = request.POST
+        
+        print(json)        
+        
         return JsonResponse({'status': 200, 'mensagem': 'entrou'}, safe=False)
     if Curso.objects.filter(id=id, autor = request.user).exists():
         curso = Curso.objects.get(id = id)

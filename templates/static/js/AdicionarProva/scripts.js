@@ -3,58 +3,54 @@ var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 $('.conteudo-resposta, .carregamento').hide();
 
 function separarDado() {
+    var perguntas = [];
 
     $('.caixa-suspensa').each(function () {
-        let pergunta = {
+        var pergunta = {
             'pergunta': $(this).children('.cabecalho-pergunta').children('.titulo-cabecalho-pergunta').children('input').val(),
             'opcoes': []
-        }
+        };
 
         $(this).find('.conteudo-resposta').children().each(function () {
-            opcao = {
+            var opcao = {
                 'status': $(this).children('.cabecalho-resposta').children('input[type="checkbox"]').is(':checked'),
-                'pegunta': $(this).children('.cabecalho-resposta').children('input[type="text"]').val()
-            }
+                'pergunta': $(this).children('.cabecalho-resposta').children('input[type="text"]').val()
+            };
 
-            pergunta['opcoes'].push(opcao)
-
+            pergunta['opcoes'].push(opcao);
         });
 
-        perguntas.push(pergunta)
+        perguntas.push(pergunta);
     });
     console.log(perguntas)
 
-
-    return JSON.stringify(perguntas)
-
+    return perguntas;
 }
 
 $(document).ready(function (e) {
-
-    perguntas = []
-
     $('#formulario-curso').submit(function (e) {
-
         $('.botao').prop('disabled', true);
-
         e.preventDefault();
         $.ajax({
             url: window.location.href,
             type: $(this).attr('method'),
             headers: { 'X-CSRFToken': crf_token },
-            data: separarDado(),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            data: JSON.stringify({ perguntas: separarDado() }),
             success: function (data) {
-                console.log(data)
-                window.location.reload()
+                console.log(data);
+                // window.location.reload();
                 $('.botao').prop('disabled', false);
             },
             error: function (data) {
-                console.log(data)
+                console.log(data);
                 $('.botao').prop('disabled', false);
             }
-        })
+        });
     });
 });
+
 
 $(document).on('click', '#add-pergunta', function (e) {
     let caixa_suspensao_html = `<div class="caixa-suspensa">

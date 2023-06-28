@@ -1,20 +1,17 @@
-# Imagem base
-FROM python:3.8
+# Use uma imagem base Python
+FROM python:3.9
 
-# Define o diretório de trabalho
-WORKDIR /code
+# Defina o diretório de trabalho no contêiner
+WORKDIR /app
 
-# Copia os arquivos de requisitos para o contêiner
+# Copie o arquivo de requisitos para o contêiner
 COPY requirements.txt .
 
-# Instala as dependências
+# Instale as dependências do projeto
 RUN pip install -r requirements.txt
 
-# Copia o código do projeto para o contêiner
+# Copie o código do projeto para o contêiner
 COPY . .
 
-# Expõe a porta do servidor Django
-EXPOSE 8000
-
-# Comando para executar o servidor Django
+# Defina o comando de execução padrão
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
