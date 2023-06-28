@@ -4,14 +4,14 @@ FROM python:3.8
 # Define o diretório de trabalho no contêiner
 WORKDIR /code
 
+# Copia o código do projeto para o contêiner
+COPY . .
+
 # Copia o arquivo requirements.txt para o contêiner
 COPY requirements.txt .
 
 # Instala as dependências do projeto
 RUN pip install -r requirements.txt
-
-# Copia o código do projeto para o contêiner
-COPY . .
 
 # Colete os arquivos estáticos do Django
 RUN python manage.py collectstatic --noinput
