@@ -30,6 +30,15 @@
                     <a title="Modificar curso" id="continuar" href="">
                         <i class="fa-solid fa-file-invoice"></i>
                     </a>
+                    {% if curso.aprovado %}
+                    <a class="bg-success" title="Aprovado" id="continuar">
+                        <i class="fa-solid fa-check"></i>
+                    </a>
+                    {% else %}
+                    <a class="bg-warning" title="em a avaliação" id="continuar">
+                        <i class="fa-solid fa-chart-simple"></i>
+                    </a>
+                    {% endif %}
                 </div>
             </div>
             <div class="progresso-curso">
