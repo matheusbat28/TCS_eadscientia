@@ -16,7 +16,7 @@ RUN pip install -r requirements.txt
 # Colete os arquivos estáticos do Django
 RUN python manage.py collectstatic --noinput
 
-# Exponha a porta 8000 para o Gunicorn
+# Exponha a porta 8000 para o Gunicorn (opcional)
 EXPOSE 8000
 
 # Comando para iniciar o Gunicorn
