@@ -16,8 +16,8 @@ RUN pip install -r requirements.txt
 # Colete os arquivos estáticos do Django
 RUN python manage.py collectstatic --noinput
 
-# Expõe a porta em que o servidor do Django será executado (opcional)
+# Exponha a porta 8000 para o Gunicorn
 EXPOSE 8000
 
-# Comando para executar o servidor do Django
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Comando para iniciar o Gunicorn
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
