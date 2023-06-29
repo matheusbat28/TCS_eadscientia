@@ -1,6 +1,6 @@
 from django import template
 from datetime import datetime, time, timedelta
-
+from django.utils import timezone
 
 register = template.Library()
 
@@ -36,8 +36,10 @@ def proc_video_in_curso(curso):
 
 @register.filter
 def falta_dia(data):
-    diferenca = data - datetime.now().replace(tzinfo=data.tzinfo)
-    return f'Falta: {diferenca.days} dias'
+    diff = data - timezone.now()
+    if diff.total_seconds() <= 0:
+            return 'estar acabado'
+    return f'Falta: {diff.days} dias'
 
 @register.filter
 def duracao_video_in_curso(curso):
