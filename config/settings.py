@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'curso',
     'filtros',
     'cpf_field', 
+    'django_apscheduler',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
