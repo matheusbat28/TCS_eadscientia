@@ -1,23 +1,23 @@
-# Usa a imagem base do Python
+# Use uma imagem de Python como base
 FROM python:3.8
 
-# Define o diretório de trabalho no contêiner
+# Define o diretório de trabalho dentro do contêiner
 WORKDIR /code
 
-# Copia o código do projeto para o contêiner
-COPY . .
-
-# Copia o arquivo requirements.txt para o contêiner
+# Copie o arquivo requirements.txt para o diretório de trabalho
 COPY requirements.txt .
 
-# Instala as dependências do projeto
+# Instale as dependências do projeto
 RUN pip install -r requirements.txt
 
-# Colete os arquivos estáticos do Django
+# Copie o restante do código-fonte para o diretório de trabalho
+COPY . .
+
+# Execute o comando para coletar os arquivos estáticos
 RUN python manage.py collectstatic --noinput
 
-# Exponha a porta 8000 para o Gunicorn (opcional)
+# Exponha a porta 8000 para o serviço web
 EXPOSE 8000
 
-# Comando para iniciar o Gunicorn
+# Defina o comando para iniciar o serviço web
 CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
