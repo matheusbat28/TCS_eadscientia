@@ -3,24 +3,17 @@ $(document).ready(function () {
     $('.carregando').hide();
 
     $('#formulario').submit(function (e) {
-        var activeElement = $(document.activeElement);
+        if ($(document.activeElement).attr('id') === 'btnAprovar') {
+            $('#carregando-aprovar').show();
+            $('#texto-aprovar').hide();
+        } else if ($(document.activeElement).attr('id') === 'btnRecusar') {
+            $('#carregando-recusar').show();
+            $('#texto-recusar').hide();
 
-        if (activeElement.attr('id') === 'btnAprovar' || activeElement.attr('id') === 'btnRecusar') {
-            // Desativa todos os botões de aprovar/recusar
-            $('#btnAprovar, #btnRecusar').prop('disabled', true);
-
-            // Mostra a animação de carregamento
-            if (activeElement.attr('id') === 'btnAprovar') {
-                $('#carregando-aprovar').show();
-                $('#texto-aprovar').hide();
-            } else if (activeElement.attr('id') === 'btnRecusar') {
-                $('#carregando-recusar').show();
-                $('#texto-recusar').hide();
-            }
         }
     });
-});
 
+});
 
 
 $(window).on('load', function () {

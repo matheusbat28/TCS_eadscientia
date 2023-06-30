@@ -126,4 +126,24 @@ def deletarCurso(request, id):
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def visualizacaoSolicitacaoCurso(request, id):
     curso = get_object_or_404(Curso, id=id)
-    return render(request, 'visualizacaoSolicitacaoCurso/index.html', {'curso': curso})
+    nome = curso.nome
+    
+    print(request.POST)
+    if request.method == 'POST' and 'btnAprovar' in request.POST:
+        curso.aprovado = True
+        curso.save()
+        messages.success(request, f'o curso {curso.nome} foi aprovado com sucesso ')
+        return redirect('aprovarCurso')
+                    
+    elif request.method == 'POST' and 'btnRecusar' in request.POST:
+        for capitulo in curso.capitulos.all():
+            for video in capitulo.videos.all():
+                video.delete()
+            capitulo.delete()
+        
+        curso.delete()
+    
+        messages.success(request, f'curso {nome} recusado com sucesso')
+        return redirect('aprovarCurso')
+    else:
+        return render(request, 'visualizacaoSolicitacaoCurso/index.html', {'curso': curso})

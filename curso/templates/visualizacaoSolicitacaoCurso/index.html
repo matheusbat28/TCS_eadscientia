@@ -34,24 +34,24 @@
         </div>
         <div>
             <h5>Que solicitou:</h5>
-            <input type="text" name="usario" value="{{ curso.autor.get_full_name }}" readonly>
+            <input type="text" name="usuario" value="{{ curso.autor.get_full_name }}" readonly>
         </div>
     </div>
     <div id="area2">
         <div>
             <h5>Motivo:</h5>
-            <textarea name="motivo" id="" cols="30" rows="10" readonly>
+            <textarea name="motivo" cols="30" rows="10" readonly>
                 {{ curso.descricao }}
                 </textarea>
         </div>
        
     </div>
     <div id="area3">
-        <button id="btnAprovar" name="btnAprovar" class="botao" type="submit">
+        <button id="btnAprovar" name="btnAprovar" type="submit">
             <div id="carregando-aprovar" class="carregando"></div>
             <h5 id="texto-aprovar">Aprovar</h5>
         </button>
-        <button id="btnRecusar" name="btnRecusar" class="botao" type="submit">
+        <button id="btnRecusar" name="btnRecusar" type="submit">
             <div id="carregando-recusar" class="carregando"></div>
             <h5 id="texto-recusar">Recusar</h5>
         </button>
