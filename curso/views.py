@@ -107,7 +107,7 @@ def adicionarProva(request, id):
         return redirect('home')
     
 @login_required
-@user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def deletarCurso(request, id):
     curso = get_object_or_404(Curso, id=id)
     nome = curso.nome
@@ -121,3 +121,9 @@ def deletarCurso(request, id):
     
     messages.success(request, f'curso {nome} recusado com sucesso')
     return redirect('aprovarCurso')
+
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+def visualizacaoSolicitacaoCurso(request, id):
+    curso = get_object_or_404(Curso, id=id)
+    return render(request, 'visualizacaoSolicitacaoCurso/index.html', {'curso': curso})

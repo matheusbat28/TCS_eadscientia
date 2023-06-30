@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filtros %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/visualizacaoSolicitacaoCurso/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+{% endblock %}
+
+{% block title %}Visualização de solicitação de matrícula{% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<form id="formulario" class="container-fluid p-0 h-50" method="POST">
+    {% csrf_token %}
+    <div id="area1">
+        <div>
+            <h5>Curso:</h5>
+            <input type="text" name="nome" value="{{ curso.nome }}" readonly>
+        </div>
+        <div>
+            <h5>duração:</h5>
+            <input type="time" name="duração" value="{{curso|duracao_video_in_curso}}" readonly>
+        </div>
+        <div>
+            <h5>CPF:</h5>
+            <input type="text" name="cpf" value="{{ solicitacao.cpf }}" readonly>
+        </div>
+        <div>
+            <h5>E-mail:</h5>
+            <input type="text" name="email" value="{{ solicitacao.email }}" readonly>
+        </div>
+    </div>
+    <div id="area2">
+        {% if user|in_grups:'desenvolvedor' or user|in_grups:'administrativo' %}
+        <div>
+            <h5>Setor:</h5>
+            <select name="grupo" id="">
+                <option value="0">selecione um grupo</option>
+                {% for grupo in grupos %}
+                <option value="{{ grupo.id }}">{{ grupo.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        {% endif %}
+        <div>
+            <h5>Motivo:</h5>
+            <textarea name="motivo" id="" cols="30" rows="10" readonly>
+                {{ solicitacao.motivo }}
+                </textarea>
+        </div>
+        <div>
+            <h5>Que solicitou:</h5>
+            <input type="text" name="usario" value="{{ solicitacao.usuario.get_full_name }}" readonly>
+        </div>
+    </div>
+    <div id="area3">
+        <button id="btnAprovar" name="btnAprovar" type="submit">
+            <div id="carregando-aprovar" class="carregando"></div>
+            <h5 id="texto-aprovar">Aprovar</h5>
+        </button>
+        <button id="btnRecusar" name="btnRecusar" type="submit">
+            <div id="carregando-recusar" class="carregando"></div>
+            <h5 id="texto-recusar">Recusar</h5>
+        </button>
+    </div>
+</form>
+
+</form>
+
+{% include 'parciais/_mensagem.html' %}
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/visualizacaoSolicitacaoCurso/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}
