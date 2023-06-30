@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 
 class Alternativa(models.Model):
-    texto = models.CharField(max_length=255)
+    texto = models.TextField()
     selecionada = models.BooleanField(default=False)
     
     def __str__(self):

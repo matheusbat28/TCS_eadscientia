@@ -102,7 +102,12 @@ body {
     margin: 0 30px;
 }
 
-.titulo-cabecalho-pergunta input {
+.titulo-cabecalho-pergunta textarea {
+    height: 100px;
+}
+
+.titulo-cabecalho-pergunta input,
+.titulo-cabecalho-pergunta textarea {
     border: none;
     font-weight: bold;
     background-color: transparent;

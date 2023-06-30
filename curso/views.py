@@ -92,6 +92,7 @@ def todoCurso(request):
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def adicionarProva(request, id):
+    curso = get_object_or_404(Curso, id= id)
     
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -120,11 +121,13 @@ def adicionarProva(request, id):
                 )
                 questaodb.alternativas.add(alternativadb)
              
-            prova.questoes.add(questaodb)   
+            prova.questoes.add(questaodb)  
+            
+            curso.prova = prova
+            curso.save()
             
         return JsonResponse({'status': 200, 'message': 'prova criada com suceso'}, safe=False)
     if Curso.objects.filter(id=id, autor = request.user).exists():
-        curso = Curso.objects.get(id = id)
         return render(request, 'AdicionarProva/index.html', {'curso': curso, 'pagina': 'Criar avaliação'})
     else:
         messages.error(request, 'Esse curso não pertece a você')
@@ -135,6 +138,13 @@ def adicionarProva(request, id):
 def deletarCurso(request, id):
     curso = get_object_or_404(Curso, id=id)
     nome = curso.nome
+    
+    if curso.prova:
+        for questao in curso.prova.questoes.all():
+            for alternativa in questao.alternativas.all():
+                alternativa.delete()
+            questao.delete()
+    curso.prova.delete()
     
     for capitulo in curso.capitulos.all():
         for video in capitulo.videos.all():

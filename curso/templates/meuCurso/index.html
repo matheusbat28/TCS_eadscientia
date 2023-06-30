@@ -27,27 +27,31 @@
                 <h3>{{curso.nome}}</h3>
                 <p>{{curso.autor.get_full_name}}</p>
                 <div class="controle-curso">
-                    <a title="Modificar curso" id="continuar" href="">
+                    <a title="Modificar o curso {{ curso.nome }}" id="continuar" href="">
                         <i class="fa-solid fa-file-invoice"></i>
                     </a>
                     {% if curso.aprovado %}
-                    <a class="bg-success" title="Aprovado" id="continuar">
+                    <a class="bg-success" title="curso {{ curso.nome }} foi aprovado" id="continuar">
                         <i class="fa-solid fa-check"></i>
                     </a>
                     {% else %}
-                    <a class="bg-warning" title="em a avaliação" id="continuar">
+                    <a class="bg-warning" title="curso {{ curso.nome }} em a avaliação" id="continuar">
                         <i class="fa-solid fa-chart-simple"></i>
                     </a>
                     {% endif %}
+                    <a href="{% url 'deletarCurso' curso.id %}" class="bg-danger" title="deletar o curso {{ curso.nome }}" id="continuar">
+                        <i class="fa-solid fa-trash"></i>
+                    </a>
                 </div>
             </div>
             <div class="progresso-curso">
                 <div class="container-progressao">
-
+                {% if curso.aprovado %}
                 {% if not curso.prova %}
                     <a class="add" href="{% url 'adicionarProva' curso.id %}">Adicionar Prova</a>
                 {% else %}
                     <a class="add" href="">Modificar Prova</a>
+                {% endif %}
                 {% endif %}
 
                 </div>

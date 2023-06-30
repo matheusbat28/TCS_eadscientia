@@ -304,6 +304,12 @@ body {
         --width--modal: 400px;
     }
 
+    #modal-botao button {
+        margin-right: 0;
+        margin-bottom: 10px;
+
+    }
+
 }
 
 @media screen and (max-width: 500px) {
@@ -319,6 +325,10 @@ body {
 @media screen and (max-width: 400px) {
     :root {
         --width--modal: 350px;
+    }
+
+    #modal-botao {
+        flex-direction: column;
     }
 
 }
