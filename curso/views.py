@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Curso, Capitulo, Video, AcessoCursoUsuario
+from .models import Curso, Capitulo, Video, AcessoCursoUsuario, Prova, Questao, Alternativa
 from conta.models import Usuario
 from .apis import validar_youtube_url, tempo_video_youtube, obter_id_video_youtube
 import json
@@ -105,20 +105,23 @@ def adicionarProva(request, id):
             for altenativa in questao['opcoes']:
                 opcoes.append(altenativa['status'])
                 
-            print(opcoes)
             if not any(opcoes):
                 return JsonResponse({'status': 404, 'message': f'insira pelo menos uma altenativa certa na pergunata {pergunta}'}, safe=False)
                 
+        prova = Prova.objects.create() 
+        for questao in data:
+            questaodb = Questao.objects.create(
+                enuciado = questao['pergunta'].strip()
+            )
+            for altenativa in questao['opcoes']:   
+                alternativadb = Alternativa.objects.create(
+                    texto  = altenativa['pergunta'].strip(),
+                    selecionada = altenativa['status']
+                )
+                questaodb.alternativas.add(alternativadb)
+             
+            prova.questoes.add(questaodb)   
             
-        # for questao in data:
-        #     pregunta = questao['pergunta']
-        #     print(pregunta)
-        #     for altenativa in questao['opcoes']:
-        #         texto = altenativa['pergunta']   
-        #         status = altenativa['status']
-                
-        #         print(f'{texto} {status}') 
-        
         return JsonResponse({'status': 200, 'message': 'prova criada com suceso'}, safe=False)
     if Curso.objects.filter(id=id, autor = request.user).exists():
         curso = Curso.objects.get(id = id)

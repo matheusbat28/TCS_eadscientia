@@ -30,10 +30,10 @@ class Questao(models.Model):
 class Prova(models.Model):
     questoes = models.ManyToManyField('curso.Questao')
     data_criacao = models.DateTimeField(default=timezone.now)
-    duracao = models.TimeField(blank=True, null=True) 
+    duracao = models.DurationField(default=timedelta(hours=1), blank=True, null=True)
     
     def __str__(self):
-        return self.id
+        return str(self.id)
     
     class Meta:
         db_table = 'prova'
