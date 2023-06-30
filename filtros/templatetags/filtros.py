@@ -53,4 +53,10 @@ def duracao_video_in_curso(curso):
                 duracao_timedelta = timedelta(seconds=duracao_segundos)
                 total_duracao += duracao_timedelta
 
-    return total_duracao
+    # Formatar o valor para o formato "00:00:00"
+    horas = total_duracao.seconds // 3600
+    minutos = (total_duracao.seconds // 60) % 60
+    segundos = total_duracao.seconds % 60
+    duracao_formatada = f"{horas:02d}:{minutos:02d}:{segundos:02d}"
+
+    return duracao_formatada

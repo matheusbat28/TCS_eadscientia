@@ -143,13 +143,19 @@ table tr th {
 
 }
 
+table tbody tr td a {
+    margin-right: 5px;
+}
+
 table tbody tr td a:nth-child(1) {
-    padding-right: 8px;
     color: #52d813;
 }
 
 table tbody tr td a:nth-child(2) {
     color: #d81313;
+}
+table tbody tr td a:nth-child(3) {
+    color: var(--cor--fundo--6);
 }
 
 @media screen and (max-width: 1200px) {
