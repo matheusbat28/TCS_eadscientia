@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 
 class Alternativa(models.Model):
     texto = models.CharField(max_length=255)
+    selecionada = models.BooleanField(default=False)
     
     def __str__(self):
         return self.texto
@@ -16,7 +17,6 @@ class Alternativa(models.Model):
 
 class Questao(models.Model):
     enuciado = models.CharField(max_length=250)
-    resposta = models.CharField(max_length=1)
     alternativas = models.ManyToManyField('curso.Alternativa')
     
     def __str__(self):

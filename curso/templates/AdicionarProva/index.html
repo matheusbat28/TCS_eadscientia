@@ -35,7 +35,7 @@
         <div class="caixa-suspensa">
             <div class="cabecalho-pergunta">
                 <div class="titulo-cabecalho-pergunta">
-                    <input name="inputNomePergunta" type="text" placeholder="Titulo da Pergunta:">
+                    <input required name="inputNomePergunta" type="text" placeholder="Titulo da Pergunta:">
                 </div>
                 <div class="operacao-cabecalho-resposta">
                     <i title="Expandir resposta" class="fa-solid fa-caret-down expandir-resposta"></i>
@@ -47,7 +47,7 @@
                 <div class="resposta-pergunta">
                     <div class="cabecalho-resposta">
                         <input type="checkbox">
-                        <input type="text" placeholder="Resposta">
+                        <input required type="text" placeholder="Resposta">
                     </div>
                     <div class="deletar-resposta">
                         <i title="Deletar Resposta" class="fa-solid fa-trash deletar-resposta"></i>
@@ -57,6 +57,9 @@
         </div>
     </div>
 </form>
+
+<div id="mensagem" class="alert " role="alert">
+</div>
 
 {% endblock %}
 

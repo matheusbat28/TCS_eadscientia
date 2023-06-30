@@ -11,7 +11,7 @@ class ProvaAdmin(admin.ModelAdmin):
 admin.site.register(Prova, ProvaAdmin)
 
 class QuestaoAdmin(admin.ModelAdmin):
-    list_display = ('enuciado', 'resposta')
+    list_display = ('enuciado',)
     search_fields = ('enuciado', )
     list_filter = ('enuciado',)
     per_page = 10

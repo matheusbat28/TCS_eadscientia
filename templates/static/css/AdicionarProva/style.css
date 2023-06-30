@@ -199,3 +199,39 @@ body {
 .deletar-resposta input[type="file"]::-webkit-file-upload-button:hover {
     background-color: var(--cor--fundo--4);
 }
+
+#mensagem {
+    top: 70px;
+    right: 5px;
+}
+
+
+
+@media screen and (max-width: 900px) {
+    #formulario-curso {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #formulario-curso {
+        width: 100%;
+    }
+
+    #conteudo-pergunta {
+        width: 100%;
+    }
+
+}
+
+
+@media screen and (max-width: 400px) {
+
+    #titulo-curso input,
+    .cabecalho-pergunta input,
+    .cabecalho-video-capitulo-curso input,
+    .operacao-video-capitulo-curso input {
+        font-size: 0.7rem;
+    }
+
+}

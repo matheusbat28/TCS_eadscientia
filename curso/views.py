@@ -94,11 +94,32 @@ def todoCurso(request):
 def adicionarProva(request, id):
     
     if request.method == 'POST':
-        json = request.POST
+        data = json.loads(request.body)
         
-        print(json)        
+        if data == []:
+            return JsonResponse({'status': 404, 'message': 'insira pelo menos uma questão'}, safe=False)  
         
-        return JsonResponse({'status': 200, 'mensagem': 'entrou'}, safe=False)
+        for questao in data:
+            pergunta = questao['pergunta']
+            opcoes = []
+            for altenativa in questao['opcoes']:
+                opcoes.append(altenativa['status'])
+                
+            print(opcoes)
+            if not any(opcoes):
+                return JsonResponse({'status': 404, 'message': f'insira pelo menos uma altenativa certa na pergunata {pergunta}'}, safe=False)
+                
+            
+        # for questao in data:
+        #     pregunta = questao['pergunta']
+        #     print(pregunta)
+        #     for altenativa in questao['opcoes']:
+        #         texto = altenativa['pergunta']   
+        #         status = altenativa['status']
+                
+        #         print(f'{texto} {status}') 
+        
+        return JsonResponse({'status': 200, 'message': 'prova criada com suceso'}, safe=False)
     if Curso.objects.filter(id=id, autor = request.user).exists():
         curso = Curso.objects.get(id = id)
         return render(request, 'AdicionarProva/index.html', {'curso': curso, 'pagina': 'Criar avaliação'})

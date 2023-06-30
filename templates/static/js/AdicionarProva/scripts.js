@@ -1,6 +1,6 @@
 var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 
-$('.conteudo-resposta, .carregamento').hide();
+$('.conteudo-resposta, .carregamento, #mensagem').hide();
 
 function separarDado() {
     var perguntas = [];
@@ -24,28 +24,35 @@ function separarDado() {
     });
     console.log(perguntas)
 
-    return perguntas;
+    return JSON.stringify(perguntas);
 }
 
 $(document).ready(function (e) {
     $('#formulario-curso').submit(function (e) {
-        $('.botao').prop('disabled', true);
         e.preventDefault();
+        $('#mensagem, #btn-criar i').hide();
+        $('.carregamento').show();
         $.ajax({
             url: window.location.href,
             type: $(this).attr('method'),
             headers: { 'X-CSRFToken': crf_token },
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            data: JSON.stringify({ perguntas: separarDado() }),
+            data: separarDado(),
             success: function (data) {
-                console.log(data);
-                // window.location.reload();
-                $('.botao').prop('disabled', false);
+                if (data.status == 200) {
+                    // window.location.reload()
+                    $('#mensagem').show();
+                    $('#mensagem').html(data.message).addClass('alert-success').removeClass('alert-danger');
+                } else if (data.status == 404) {
+                    $('#mensagem').show();
+                    $('#mensagem').html(data.message).addClass('alert-danger').removeClass('alert-success');
+                }
+
+                $('.carregamento').hide();
+                $('#btn-criar i').show();
+                $('#mensagem').delay(10000).fadeOut('slow');
             },
             error: function (data) {
                 console.log(data);
-                $('.botao').prop('disabled', false);
             }
         });
     });
@@ -56,7 +63,7 @@ $(document).on('click', '#add-pergunta', function (e) {
     let caixa_suspensao_html = `<div class="caixa-suspensa">
     <div class="cabecalho-pergunta">
         <div class="titulo-cabecalho-pergunta">
-            <input name="inputNomePergunta" type="text" placeholder="Titulo da Pergunta:">
+            <input required name="inputNomePergunta" type="text" placeholder="Titulo da Pergunta:">
         </div>
         <div class="operacao-cabecalho-resposta">
             <i title="Expandir resposta" class="fa-solid fa-caret-down expandir-resposta"></i>
@@ -68,7 +75,7 @@ $(document).on('click', '#add-pergunta', function (e) {
         <div class="resposta-pergunta">
             <div class="cabecalho-resposta">
                 <input type="checkbox">
-                <input type="text" placeholder="Resposta:">
+                <input required type="text" placeholder="Resposta:">
             </div>
             <div class="deletar-resposta">
                 <i title="Deletar Resposta" class="fa-solid fa-trash deletar-resposta"></i>
@@ -101,7 +108,7 @@ $(document).on('click', '.add-resposta', function (e) {
     html_img = `<div class="resposta-pergunta">
     <div class="cabecalho-resposta">
         <input type="checkbox">
-        <input type="text" placeholder="Resposta">
+        <input required type="text" placeholder="Resposta">
     </div>
     <div class="deletar-resposta">
         <i title="Deletar Resposta" class="fa-solid fa-trash deletar-resposta"></i>
