@@ -11,14 +11,6 @@ services:
     expose:
       - 8000    
 
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - static_volume:/code/staticfiles
-    command: sh -c "/code/init_certbot.sh"
-    depends_on:
-      - nginx
-
   nginx:
     image: nginx:latest
     ports:
@@ -30,6 +22,14 @@ services:
     depends_on:
       - web
       - certbot
+
+    certbot:
+      image: certbot/certbot
+      volumes:
+        - static_volume:/code/staticfiles
+      command: sh -c "/code/init_certbot.sh"
+      depends_on:
+        - nginx
 
 volumes:
   static_volume:
