@@ -48,7 +48,7 @@ $(document).ready(function (e) {
         $('.carregamento').show();
 
         $.ajax({
-            url: 'curso/adicionarCurso/',
+            url: window.location.href,
             type: $(this).attr('method'),
             headers: { 'X-CSRFToken': crf_token },
             processData: false,
