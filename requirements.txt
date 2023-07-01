@@ -12,6 +12,7 @@ decorator==5.1.1
 deprecation==2.1.0
 Django==4.1.7
 django-apscheduler==0.6.2
+django-cors-headers==4.1.0
 django-cpf==0.1.0
 django-recaptcha==3.0.0
 executing==1.2.0
