@@ -11,7 +11,6 @@ services:
     expose:
       - 8000
 
-
   nginx:
     image: nginx:latest
     ports:
@@ -21,11 +20,10 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-
+      - ./ssl:/etc/nginx/ssl   # Adicionado o volume para os arquivos de certificado SSL
     depends_on:
       - web
 
 volumes:
   static_volume:
   media_volume:
-
