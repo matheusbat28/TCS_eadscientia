@@ -16,6 +16,8 @@ RUN pip install --upgrade pip
 # Copie o restante do código-fonte para o diretório de trabalho
 COPY . .
 
+RUN apt-get update && apt-get install -y git
+
 # Execute o comando git pull para atualizar o código-fonte
 RUN git pull
 
