@@ -18,9 +18,9 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./ssl:/etc/nginx/ssl   # Verifique se o caminho está correto
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - ./ssl:/etc/nginx/ssl   # Adicionado o volume para os arquivos de certificado SSL
     depends_on:
       - web
 
