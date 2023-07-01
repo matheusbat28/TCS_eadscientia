@@ -1,7 +1,7 @@
 version: "3"
 services:
   web:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     command: gunicorn config.wsgi:application --bind 0.0.0.0:8000
@@ -9,9 +9,8 @@ services:
       - static_volume:/code/staticfiles
       - media_volume:/code/media
     expose:
-      - 8000    
+      - 8000
 
-    
   nginx:
     image: nginx:latest
     ports:
@@ -23,8 +22,14 @@ services:
     depends_on:
       - web
 
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - static_volume:/code/staticfiles
+    command: sh -c "/code/setup-ssl.sh"
+    depends_on:
+      - nginx
+
 volumes:
   static_volume:
   media_volume:
-
-
