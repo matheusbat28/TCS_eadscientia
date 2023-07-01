@@ -10,6 +10,8 @@ services:
       - media_volume:/code/media
     expose:
       - 8000
+    networks:
+      - webnet
 
   nginx:
     image: nginx:latest
@@ -21,7 +23,12 @@ services:
       - media_volume:/code/media
     depends_on:
       - web
+    networks:
+      - webnet
 
 volumes:
   static_volume:
   media_volume:
+
+networks:
+  webnet:
