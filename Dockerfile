@@ -10,6 +10,9 @@ COPY requirements.txt .
 # Instale as dependências do projeto
 RUN pip install -r requirements.txt
 
+# Atualize o pip
+RUN pip install --upgrade pip
+
 # Copie o restante do código-fonte para o diretório de trabalho
 COPY . .
 
