@@ -9,30 +9,43 @@ from conta.models import Usuario
 from .apis import validar_youtube_url, tempo_video_youtube, obter_id_video_youtube
 import json
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='autor').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+@csrf_exempt
 def adicionarCurso(request):
     if request.method == 'POST':
+        response = JsonResponse()
+        response["Access-Control-Allow-Origin"] = "*"
+        
         nome_curso = request.POST.get('nome-curso')
         foto_curso = request.FILES.get('inuptFotoCurso')
         capitulos = json.loads(request.POST.get('capitulos'))
         valido = False
         
         if foto_curso is None:
-            return JsonResponse({'status': 404, 'message': 'Insira uma foto para a capa do curso'})
+            response.status_code = 404
+            response.data = {'status': 404, 'message': 'Insira uma foto para a capa do curso'}
+            return response
         elif nome_curso is None:
-            return JsonResponse({'status': 404, 'message': 'Insira uma nome para curso'})
+            response.status_code = 404
+            response.data = {'status': 404, 'message': 'Insira uma nome para curso'}
+            return response
         elif capitulos == []: 
-            return JsonResponse({'status': 404, 'message': 'Insira uma capitulo para o curso'})
+            response.status_code = 404
+            response.data = {'status': 404, 'message': 'Insira uma capitulo para o curso'}
+            return response
         elif capitulos != []:
             for capitulo in capitulos:
                 for video in capitulo['videos']:
                     if not validar_youtube_url(video['url']):
-                        return JsonResponse({'status': 404, 'message': f'a url {video["url"]} do video {video["nome"]} não é uma valida no youtube'}, status=200)
+                        response.status_code = 404
+                        response.data = {'status': 404, 'message': f'a url {video["url"]} do video {video["nome"]} não é uma valida no youtube'}
+                        return response
             valido = True
             
-        if  capitulos != [] and valido:
+        if capitulos != [] and valido:
             curso = Curso.objects.create(
                 nome = nome_curso,
                 autor = request.user,
@@ -55,10 +68,14 @@ def adicionarCurso(request):
                         capitulo_db.videos.add(video_db)
                     curso.capitulos.add(capitulo_db)
             except Exception:
-                return JsonResponse({'status': 404, 'message': 'erro ao gerar o curso'}, status=200)
-                    
+                response.status_code = 404
+                response.data = {'status': 404, 'message': 'erro ao gerar o curso'}
+                return response
             
-        return JsonResponse({'status': 200, 'message': 'Curso adicionado com sucesso!'}, status=200)
+        response.status_code = 200
+        response.data = {'status': 200, 'message': 'Curso adicionado com sucesso!'}
+        return response
+    
     return render(request, 'adicionarCurso/index.html', {'pagina': 'Criar curso'})
 
 @login_required
