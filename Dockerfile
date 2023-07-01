@@ -23,10 +23,10 @@ EXPOSE 8000
 RUN apt-get update && apt-get install -y certbot
 
 # Copie o script de inicialização do Certbot
-COPY setup-ssl.sh /code/setup-ssl.sh
+COPY setup-ssl.sh /setup-ssl.sh
 
 # Defina permissões de execução para o script
-RUN chmod +x /code/setup-ssl.sh
+RUN chmod +x /setup-ssl.sh
 
 # Execute o script de inicialização do Certbot antes de iniciar o serviço web
-CMD ["/code/setup-ssl.sh"]
+CMD ["/setup-ssl.sh"]
