@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y certbot
 COPY init_certbot.sh /code/init_certbot.sh
 
 # Defina permissões de execução para o script
-RUN chmod +x /code/init_certbot.sh
+RUN chmod +x /code/setup-ssl.sh
 
 # Execute o script de inicialização do Certbot antes de iniciar o serviço web
 CMD ["/code/init_certbot.sh"]

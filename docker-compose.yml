@@ -26,7 +26,7 @@ services:
     image: certbot/certbot
     volumes:
       - static_volume:/code/staticfiles
-    command: sh -c "setup-ssl.sh"
+    command: sh -c "/code/setup-ssl.sh"
     depends_on:
       - nginx
 
