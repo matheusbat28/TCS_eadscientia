@@ -16,6 +16,9 @@ RUN pip install --upgrade pip
 # Copie o restante do código-fonte para o diretório de trabalho
 COPY . .
 
+# Execute o comando git pull para atualizar o código-fonte
+RUN git pull
+
 # Execute o comando para coletar os arquivos estáticos
 RUN python manage.py collectstatic --noinput
 
