@@ -33,7 +33,7 @@ $(document).ready(function (e) {
         $('#mensagem, #btn-criar i').hide();
         $('.carregamento').show();
         $.ajax({
-            url: /curso/adicionarCurso/,
+            url: window.location.href,
             type: $(this).attr('method'),
             headers: { 'X-CSRFToken': crf_token },
             data: separarDado(),
