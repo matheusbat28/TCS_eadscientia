@@ -15,22 +15,22 @@ services:
     image: certbot/certbot
     volumes:
       - static_volume:/code/staticfiles
-    command: sh -c "/code/init_certbot.sh"
-    depends_on:
-      - nginx
+    entrypoint: sh -c "sleep 3600"  # Keep the container running indefinitely
 
   nginx:
     image: nginx:latest
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/code/staticfiles
       - media_volume:/code/media
+      - letsencrypt:/etc/letsencrypt
     depends_on:
       - web
-      - certbot
 
 volumes:
   static_volume:
   media_volume:
+  letsencrypt:
