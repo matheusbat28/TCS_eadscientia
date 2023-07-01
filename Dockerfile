@@ -19,5 +19,14 @@ RUN python manage.py collectstatic --noinput
 # Exponha a porta 8000 para o serviço web
 EXPOSE 8000
 
-# Defina o comando para iniciar o serviço web
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Instale o Certbot
+RUN apt-get update && apt-get install -y certbot
+
+# Copie o script de inicialização do Certbot
+COPY init_certbot.sh /code/init_certbot.sh
+
+# Defina permissões de execução para o script
+RUN chmod +x /code/init_certbot.sh
+
+# Execute o script de inicialização do Certbot antes de iniciar o serviço web
+CMD ["/code/init_certbot.sh"]
