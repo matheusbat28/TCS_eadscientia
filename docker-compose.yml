@@ -24,15 +24,6 @@ services:
     depends_on:
       - web
 
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - ./ssl:/etc/letsencrypt
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/conf:/var/www/html
-    depends_on:
-      - web
-    command: certonly --webroot --webroot-path=/var/www/html --email matheusarrow28@gmail.com --agree-tos --no-eff-email -d eadscientia.com.br
 
 volumes:
   static_volume:
