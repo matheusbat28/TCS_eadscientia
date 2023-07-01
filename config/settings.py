@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*', 'localhost', 'eadscientia.com.br']
+ALLOWED_HOSTS = ['*', 'eadscientia.com.br']
 
 RECAPTCHA_PUBLIC_KEY = config('RECAPTCHA_PUBLIC_KEY')
 RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'filtros',
     'cpf_field', 
     'django_apscheduler',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -60,7 +61,29 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware', 
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+
+CORS_ORIGIN_WHITELIST = [
+    'http://eadscientia.com.br',
+    'https://eadscientia.com.br',
+]
+
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+]
+
+CORS_ALLOW_HEADERS = [
+    'Authorization',
+    'Content-Type',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 
 
 
