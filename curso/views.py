@@ -17,7 +17,6 @@ from django.views.decorators.csrf import csrf_exempt
 def adicionarCurso(request):
     if request.method == 'POST':
         response = JsonResponse()
-        response["Access-Control-Allow-Origin"] = "*"
         
         nome_curso = request.POST.get('nome-curso')
         foto_curso = request.FILES.get('inuptFotoCurso')
