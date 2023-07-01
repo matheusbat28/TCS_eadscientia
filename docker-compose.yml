@@ -20,7 +20,7 @@ services:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - ./certbot/conf:/etc/letsencrypt
+      - ./ssl:/etc/letsencrypt
     depends_on:
       - web
 
@@ -29,10 +29,10 @@ services:
     volumes:
       - ./ssl:/etc/letsencrypt
       - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/conf:/var/www/html
     depends_on:
       - web
     command: certonly --webroot --webroot-path=/var/www/html --email matheusarrow28@gmail.com --agree-tos --no-eff-email -d eadscientia.com.br
-
 
 volumes:
   static_volume:
