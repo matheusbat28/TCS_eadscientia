@@ -1,5 +1,5 @@
 # Use uma imagem de Python como base
-FROM python:3.12
+FROM python:latest
 
 # Define o diretório de trabalho dentro do contêiner
 WORKDIR /code
