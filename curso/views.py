@@ -146,7 +146,7 @@ def deletarCurso(request, id):
             for alternativa in questao.alternativas.all():
                 alternativa.delete()
             questao.delete()
-    curso.prova.delete()
+        curso.prova.delete()
     
     for capitulo in curso.capitulos.all():
         for video in capitulo.videos.all():
