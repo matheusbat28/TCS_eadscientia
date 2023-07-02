@@ -188,7 +188,7 @@ def solicitarCurso(request, id):
             
             if retorno:
                 messages.success(request, 'Solicitação aprovada')
-                return redirect('solicitarCurso', id)
+                return redirect('home')
             else:
                 messages.error(request, 'erro ao salvar solicitação')
                 return redirect('solicitarCurso', id)

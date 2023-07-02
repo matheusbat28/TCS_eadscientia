@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from cpf_field.models import CPFField
 from django.utils.timezone import now
-import re
+
 class Usuario(AbstractUser):
 
     email = models.EmailField(unique=True, verbose_name='E-mail', blank=True, null=True)

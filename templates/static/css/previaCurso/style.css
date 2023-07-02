@@ -1,0 +1,317 @@
+body {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--fundo-color);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 0;
+}
+
+#container-curso {
+    margin-top: 90px;
+    width: 85%;
+    height: auto;
+}
+
+#cabecalho-curso {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 80px;
+    animation: cores_fundo 10s infinite;
+    padding: 0 20px;
+
+}
+
+#cabecalho-curso h2 {
+    color: #fff;
+}
+
+#opcao-curso {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 140px;
+}
+
+#menu-video {
+    display: none;
+}
+
+#menu-video i {
+    font-size: 1.8rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.percent-progresso {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    color: var(--cor--fundo--3);
+}
+
+.percent-progresso svg {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    transform: rotate(270deg);
+}
+
+.percent-progresso svg circle {
+    width: 100%;
+    height: 100%;
+    fill: transparent;
+    stroke-width: 4;
+    stroke: #191919;
+    transform: translate(5px, 5px);
+}
+
+.percent-progresso svg circle:nth-child(2) {
+    stroke: var(--cor--fundo--3);
+    stroke-dasharray: 125;
+    stroke-dashoffset: calc(125 - (125 * var(--num)) / 100);
+    opacity: 0;
+    animation: fadeIn 0.5s linear forwards;
+    animation-delay: 1s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+
+.dot {
+    position: absolute;
+    inset: 6px;
+    z-index: 10;
+    transform: rotate(calc(3.6deg * var(--num)));
+    animation: dotAnimado 1s linear forwards;
+}
+
+@keyframes dotAnimado {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(calc(3.6deg*var(--num)));
+    }
+}
+
+.dot::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cor--fundo--3);
+    box-shadow: 0 0 10px var(--cor--fundo--3),
+        0 0 30px var(--cor--fundo--3);
+}
+
+.percent-progresso i {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#opcao-curso a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--cor--fundo--5);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+#corpo-curso {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+#corpo-curso embed {
+    width: 85%;
+    height: 600px;
+    margin-bottom: 30px;
+    box-shadow: var(--sombra--1);
+}
+
+#progresso-curso {
+    width: 20%;
+    height: auto;
+    background-color: var(--fundo-color);
+}
+
+.topico-curso {
+    width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+    border-bottom: 2px solid var(--cor-fundo-alterada-1);
+}
+
+.cabecalho-topico {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    color: var(--texto-color);
+}
+
+.cabecalho-topico i {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.titulo-topico {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 85%;
+    height: 100%;
+
+}
+
+.titulo-topico h6 {
+    font-weight: bold;
+}
+
+.corpo-topico {
+    display: none;
+    width: 100%;
+    height: auto;
+}
+
+.cabecalho-video {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 80px;
+    margin-bottom: 5px;
+}
+
+#cbx_video {
+    border-radius: 50%;
+}
+
+.titulo-video {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+    color: var(--texto-color);
+    cursor: pointer;
+}
+
+.titulo-video h6 {
+    font-weight: bold;
+    color: var(--texto-color);
+}
+
+#desc-curso {
+    width: 80%;
+    color: var(--texto-color);
+}
+
+#id-video {
+    display: none;
+}
+
+#desc-curso p span {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1300px) {
+    #container-curso {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #container-curso {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #container-curso {
+        position: relative;
+    }
+
+    #progresso-curso {
+        position: absolute;
+        right: 0;
+        display: none;
+        width: 300px;
+    }
+
+    #menu-video {
+        width: 30px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #corpo-curso embed {
+        width: 100%;
+        height: 500px;
+        margin-bottom: 30px;
+    }
+
+    #desc-curso {
+        width: 100%;
+    }
+
+    #desc-curso h5 {
+        font-weight: bold;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    #corpo-curso embed {
+        width: 100%;
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    #corpo-curso embed {
+        width: 100%;
+        height: 300px;
+    }
+}

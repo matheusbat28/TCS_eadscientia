@@ -183,3 +183,10 @@ def visualizacaoSolicitacaoCurso(request, id):
         return redirect('aprovarCurso')
     else:
         return render(request, 'visualizacaoSolicitacaoCurso/index.html', {'curso': curso})
+  
+  
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')  
+def previaCurso(request, id):
+    curso = get_object_or_404(Curso, id=id)
+    return render(request, 'previaCurso/index.html', {'curso': curso})
