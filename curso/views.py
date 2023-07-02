@@ -4,12 +4,11 @@ from django.contrib import messages
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Curso, Capitulo, Video, AcessoCursoUsuario, Prova, Questao, Alternativa
+from .models import Curso, Capitulo, Video, AcessoCursoUsuario, Prova, Questao, Alternativa, SolicitarCurso
 from conta.models import Usuario
 from .apis import validar_youtube_url, tempo_video_youtube, obter_id_video_youtube
 import json
 from django.core import serializers
-from django.views.decorators.csrf import csrf_exempt
 
 
 @login_required
@@ -190,3 +189,17 @@ def visualizacaoSolicitacaoCurso(request, id):
 def previaCurso(request, id):
     curso = get_object_or_404(Curso, id=id)
     return render(request, 'previaCurso/index.html', {'curso': curso})
+
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')  
+def acessoCurso(request):
+    solicitacao = SolicitarCurso.objects.all()
+    return render(request, 'acessoCurso/index.html', {'solicitacoes': solicitacao, 'pagina': 'Liberar acesso oa curso'})
+
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+def deletarSolicitacaoCurso(request, id):
+    soilcitacao = get_object_or_404(SolicitarCurso, id=id)
+    soilcitacao.delete()
+    messages.success(request, 'solicitaão recusada com sucesso')
+    return redirect('acessoCurso')

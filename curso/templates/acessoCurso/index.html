@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/acessoCurso/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/paginacao/style.css' %}">
+{% endblock %}
+
+{% block title %}Acesso de aluno ao Curso{% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<form id="campo-pesquisa">
+    <div id="filtro">
+      <div id="quantidade"></div>
+      <button id="limpar" name="btnlimpar" type="submit">Limpar</button>
+    </div>
+    <div id="pequisa">
+      <button title="Pesquisar" name="btnPesquisar" type="submit">
+        <i class="fa-solid fa-search"></i>
+      </button>
+      <input type="text" id="pesquisar" name="pesquisar" placeholder="Pesquisar" />
+    </div>
+  </form>
+
+<table id="tabela" class="container-sm h-auto">
+    <thead>
+        <tr>
+            <th>Curso</th>
+            <th>Aluno</th>
+            <th>Data solociatação</th>
+            <th>Opções</th>
+            
+        </tr>
+    </thead>
+    <div id="paginacao">
+    <tbody id="tabela-corpo">
+        {% for solicitacao in solicitacoes %}
+        <tr>
+            <td>{{solicitacao.curso.nome}}</td>
+            <td>{{solicitacao.aluno.get_full_name}}</td>
+            <td>{{solicitacao.data_termino|date}}</td>
+            <td id="opcoes">
+                <a title="dados solicitacão" href="{% url 'visualizacaoSolicitacaoCurso' solicitacao.id %}"><i class="fa-solid fa-users-viewfinder"></i></a>
+                <a title="deletar solicitacão" href="{% url 'deletarSolicitacaoCurso' solicitacao.id %}"><i class="fa-solid fa-trash-can icons"></i></a>
+                <a title="visualizar curso {{ solicitacao.curso.nome }}" href="{% url 'previaCurso' solicitacao.curso.id %}"><i class="fa-solid fa-play"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </div>
+</table>
+<div id="pagination">
+    <span id="pagina-anterior">&lt;</span>
+    <span id="info-paginas"></span>
+    <span id="pagina-proxima">&gt;</span>
+  </div>
+
+{% include 'parciais/_mensagem.html' %}
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/acessoCurso/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}
