@@ -28,7 +28,7 @@ def count_video_in_curso(curso):
 
 @register.filter
 def proc_video_in_curso(curso):  
-    quant = curso.quantidade_assitido
+    quant = curso.quantidade_assitido.all().count()
     cont = 0
     for video in curso.curso.capitulos.all():
         cont += video.videos.all().count()  
@@ -60,3 +60,9 @@ def duracao_video_in_curso(curso):
     duracao_formatada = f"{horas:02d}:{minutos:02d}:{segundos:02d}"
 
     return duracao_formatada
+
+@register.filter
+def video_assitido(id_video, videos_assistido): 
+    for video in videos_assistido:        
+        if video.video.id == id_video:
+            return True

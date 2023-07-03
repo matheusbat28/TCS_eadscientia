@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Curso, Capitulo, Video, AcessoCursoUsuario, Prova, Questao, Alternativa, SolicitarCurso
+from .models import Curso, Capitulo, Video, AcessoCursoUsuario, Prova, Questao, Alternativa, SolicitarCurso, VideoAssistido
 from conta.models import Usuario
 from .apis import validar_youtube_url, tempo_video_youtube, obter_id_video_youtube
 import json
@@ -76,12 +76,37 @@ def meuCurso(request):
 
 @login_required
 def assistirVideo(request, id):
-    if AcessoCursoUsuario.objects.filter(aluno = request.user, curso = id).exists():
-        return render(request, 'assistirCurso/index.html', {'curso': Curso.objects.get(id = id), 'statusCurso': AcessoCursoUsuario.objects.get(aluno = request.user, curso = id)})
+    curso = get_object_or_404(Curso, id = id)
+    statusCurso = AcessoCursoUsuario.objects.get(aluno = request.user, curso = id)
+    if request.method == 'POST':
+        dataJson = json.loads(request.body)
+        id_video = dataJson['id']
+        status = dataJson['status']
+        
+        if status == True:
+            video = VideoAssistido.objects.create(
+                aluno = request.user,
+                curso = curso,
+                video = Video.objects.get(id = id_video)
+            )
+            
+            statusCurso.quantidade_assitido.add(video)
+        elif status == False:
+            video = VideoAssistido.objects.get(
+                aluno = request.user,
+                video = Video.objects.get(id = id_video),
+                curso = curso,
+            )
+            video.delete()
+        
+        return JsonResponse({'status': 200, 'message': 'sucesso'})
     else:
-        curso = Curso.objects.get(id = id)
-        messages.error(request, f'Não tem acesso ao curso {curso.nome}')
-        return redirect('solicitarCurso', id)
+        if AcessoCursoUsuario.objects.filter(aluno = request.user, curso = id).exists():
+            return render(request, 'assistirCurso/index.html', {'curso': curso, 'statusCurso': statusCurso})
+        else:
+            curso = Curso.objects.get(id = id)
+            messages.error(request, f'Não tem acesso ao curso {curso.nome}')
+            return redirect('solicitarCurso', id)
     
 @login_required
 def todoCurso(request):

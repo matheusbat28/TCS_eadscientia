@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Curso, Video, Capitulo, Categoria, AcessoCursoUsuario, SolicitarCurso, Prova, Questao, Alternativa
+from .models import Curso, Video, Capitulo, Categoria, AcessoCursoUsuario, SolicitarCurso, Prova, Questao, Alternativa, VideoAssistido
 
 
 class ProvaAdmin(admin.ModelAdmin):
@@ -36,7 +36,7 @@ admin.site.register(Video, VideoAdmin)
 
 
 class CapituloAdmin(admin.ModelAdmin):
-    list_display = ('titulo',)
+    list_display = ('id', 'titulo',)
     search_fields = ('titulo',)
     list_filter = ('titulo',)
     per_page = 10
@@ -61,7 +61,7 @@ class CategoriaAdmin(admin.ModelAdmin):
 admin.site.register(Categoria, CategoriaAdmin)
 
 class AcessoCursoUsuarioAdmin(admin.ModelAdmin):
-    list_display = ('aluno', 'curso', 'data_termino', 'quantidade_assitido', 'status_prova')
+    list_display = ('aluno', 'curso', 'data_termino', 'status_prova')
     search_fields = ('aluno', 'curso')
     list_filter = ('aluno', 'curso', 'data_termino')
     per_page = 10
@@ -77,3 +77,11 @@ class SolicitarCursoAdmin(admin.ModelAdmin):
     per_page = 10
     
 admin.site.register(SolicitarCurso, SolicitarCursoAdmin)
+
+class VideoAssistidoAdmin(admin.ModelAdmin):
+    list_display = ('aluno', 'curso', 'data_criacao')
+    search_fields = ('aluno', 'curso')
+    list_filter = ('aluno', 'curso', 'data_criacao')
+    per_page = 10
+
+admin.site.register(VideoAssistido, VideoAssistidoAdmin)

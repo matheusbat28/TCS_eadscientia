@@ -48,7 +48,7 @@ class Video(models.Model):
     autor = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.titulo
+        return f'{self.id} {self.video}'
     
     class Meta:
         db_table = 'video'
@@ -62,7 +62,7 @@ class Capitulo(models.Model):
     autor = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)
       
     def __str__(self):
-        return self.titulo
+        return f'{self.id} {self.titulo}'
     
     class Meta:
         db_table = 'capitulo'
@@ -100,14 +100,28 @@ class Categoria(models.Model):
     class Meta:
         db_table = 'categoria'
         verbose_name = 'categoria'
-        verbose_name_plural = 'categoria'
+        verbose_name_plural = 'categorias'
 
+
+class VideoAssistido(models.Model):
+    aluno = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)   
+    curso = models.ForeignKey('curso.Curso', on_delete=models.CASCADE)
+    video = models.ForeignKey('curso.Video', on_delete=models.CASCADE)
+    data_criacao = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.aluno.get_full_name()
+    
+    class Meta:
+        db_table = 'video assistido'
+        verbose_name = 'video assistido'
+        verbose_name_plural = 'videos assistido'
  
 class AcessoCursoUsuario(models.Model):
     aluno = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)   
     curso = models.ForeignKey('curso.Curso', on_delete=models.CASCADE)
     data_termino = models.DateTimeField(default=datetime.now() + timedelta(days=15))
-    quantidade_assitido = models.IntegerField(default=0, blank=True, null=True)
+    quantidade_assitido = models.ManyToManyField('curso.VideoAssistido', blank=True)
     status_prova = models.BooleanField(default=False)
     
     def __str__(self):
@@ -128,4 +142,5 @@ class SolicitarCurso(models.Model):
         db_table = 'solicitarCurso'
         verbose_name = 'solicitar o curso'
         verbose_name_plural = 'solicitações os cursos'
+        
         

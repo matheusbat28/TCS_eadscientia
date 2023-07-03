@@ -18,7 +18,8 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
-<div id="container-curso">
+<form method="POST" id="container-curso">
+    {% csrf_token %}  
     <div id="cabecalho-curso">
         <h2>{{curso.nome}}</h2>
         <div id="opcao-curso">
@@ -60,15 +61,16 @@
                 </div>
                 <div class="corpo-topico">
                     {% for video in capitulo.videos.all %}
-                    <div class="cabecalho-video">
-                        <input type="checkbox" name="cbx_video" id="cbx_video">
-                        <div class="titulo-video">
-                            <h6>{{ video.titulo }}</h6>
-                            <p><span>duração: </span>{{ video.duracao }} min</p>
-                            <p id="id-video">{{ video.video }}</p>
+                        <div class="cabecalho-video">
+                            <input type="checkbox" name="cbx_video" class="cbx_video" {% if video.id|video_assitido:statusCurso.quantidade_assitido.all %}checked{% endif %} id="cbx_video">
+                            <div class="titulo-video">
+                                <h6>{{ video.titulo }}</h6>
+                                <p><span>duração: </span>{{ video.duracao }} min</p>
+                                <p id="id-video" class="esconder">{{ video.video }}</p>
+                                <p id="id-videoDB" class="esconder">{{ video.id }}</p>
+                            </div>
                         </div>
-                    </div>
-                    {% endfor %}
+                        {% endfor %}
                 </div>
             </div>
             {% endfor %}
@@ -81,7 +83,7 @@
         <p class="m-0"><span>Duração: </span>{{curso|duracao_video_in_curso}}</p>
         <p class="m-0"><span>Data de criação: </span>{{curso.data_criacao|date}}</p>
     </div>
-</div>
+</form>
 
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}
