@@ -76,6 +76,10 @@ def meuCurso(request):
 
 @login_required
 def assistirVideo(request, id):
+    
+    if not AcessoCursoUsuario.objects.filter(aluno = request.user, curso = id).exists():
+            return redirect('solicitarCurso', id)
+          
     curso = get_object_or_404(Curso, id = id)
     statusCurso = AcessoCursoUsuario.objects.get(aluno = request.user, curso = id)
     if request.method == 'POST':
@@ -104,7 +108,6 @@ def assistirVideo(request, id):
         if AcessoCursoUsuario.objects.filter(aluno = request.user, curso = id).exists():
             return render(request, 'assistirCurso/index.html', {'curso': curso, 'statusCurso': statusCurso})
         else:
-            curso = Curso.objects.get(id = id)
             messages.error(request, f'Não tem acesso ao curso {curso.nome}')
             return redirect('solicitarCurso', id)
     
@@ -239,6 +242,7 @@ def visualizacaoSolicitacaoCursoUsuario(request, id):
             aluno = solicitacao.aluno,
             curso = solicitacao.curso
         )
+        solicitacao.delete()
         messages.success(request, 'curso liberado com sucesso')
         return redirect('acessoCurso')
     elif 'btnRecusar' in request.POST and request.method == 'POST':
