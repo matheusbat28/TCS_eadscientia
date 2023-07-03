@@ -250,3 +250,7 @@ def visualizacaoSolicitacaoCursoUsuario(request, id):
         messages.success(request, 'curso recusado com sucesso')
         return redirect('acessoCurso')
     return render(request, 'visualizacaoSolicitacaoCursoUsuario/index.html', {'soilcitacao': solicitacao, 'pagina': 'liberar curso para o usuário'})
+
+@login_required
+def fazerAvaliacao(request, id):
+    return render(request, 'avaliacao/index.html')

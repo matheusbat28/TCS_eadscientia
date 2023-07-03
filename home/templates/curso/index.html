@@ -50,7 +50,7 @@
                             {% if curso.status_prova is True %}
                                 <a id="certificado" title="emitir certificado"><i class="fa-solid fa-scroll"></i></a>
                             {% else %}
-                                <a title="fazer o teste" href=""><i class="fa-solid fa-receipt"></i></i></a>
+                                <a href="{% url 'fazerAvaliacao' curso.id %}" title="fazer o teste" href=""><i class="fa-solid fa-receipt"></i></i></a>
                             {% endif %}
                         {% endif %}
                     </div>

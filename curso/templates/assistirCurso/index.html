@@ -37,7 +37,7 @@
             {% if statusCurso.status_prova is True %}
             <a title="emitir certificado" href=""><i class="fa-solid fa-scroll"></i></a>
             {% else %}
-            <a title="fazer o teste" href=""><i class="fa-solid fa-receipt"></i></i></a>
+            <a title="fazer o teste" href="{% url 'fazerAvaliacao' curso.id %}"><i class="fa-solid fa-receipt"></i></i></a>
             {% endif %}
             {% endif %}
             <div id="menu-video">
