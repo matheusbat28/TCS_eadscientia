@@ -17,6 +17,31 @@
 {% include 'parciais/_menu.html' %}
 {% include 'parciais/_sair.html' %}
 
+<form id="formulario_avaliacao" method="POST">
+    {% csrf_token %}
+    <h2>Avalição</h2>
+    <div id="progresso_time">
+        <div id="barra">        
+        </div>
+        <p>tempo restante: <samp id="temporizador">0{{curso.prova.duracao}}</samp></p>
+    </div>
+    {% for questao in questoes %}
+    <div class="questao">
+        <p class="ms-3 titulo">{{ questao.enuciado }}</p>
+        <p class="id_questao esconder">{{ questao.id }}</p>
+        {% for alternativa in questao.alternativas.all %}
+            <div class="alternativas ms-3">
+                <input type="checkbox" id="box_questao">
+                {{alternativa.texto}}
+                <p class="id_alternativa esconder">{{alternativa.id}}</p>
+            </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <button id="botao" type="submit">Finalizar</button>
+
+</form>
+
 
 {% include 'parciais/_mensagem.html' %}
 {% endblock %}

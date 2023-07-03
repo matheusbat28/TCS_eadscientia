@@ -253,4 +253,46 @@ def visualizacaoSolicitacaoCursoUsuario(request, id):
 
 @login_required
 def fazerAvaliacao(request, id):
-    return render(request, 'avaliacao/index.html')
+    curso = get_object_or_404(Curso, id=id)
+    
+    if not curso.prova:
+        messages.error(request, f'o curso {curso.nome} não tem avaliação') 
+        return redirect('curso')  
+    elif not AcessoCursoUsuario.objects.filter(aluno = request.user, curso = curso).exists():
+        messages.error(request, 'você não tem mais acesso a esse curso') 
+        return redirect('curso')  
+    elif AcessoCursoUsuario.objects.filter(aluno = request.user, curso = curso, status_prova = True).exists():
+        messages.error(request, 'você já passou na prova') 
+        return redirect('curso')  
+    
+    questoes = curso.prova.questoes.all().order_by('?')[:10]
+    acesso  = AcessoCursoUsuario.objects.get(aluno = request.user, curso = curso)
+    
+    if request.method == 'POST':
+        prova = []
+        dataJson = json.loads(request.body)
+
+        for reposta in dataJson:
+            reposta_correta = Questao.objects.get(id= reposta['id_questao']).alternativas.filter(selecionada = True)[0].id
+            
+            for correto in reposta['id_alternativa']:
+                # print(f'{correto} {reposta_correta}')
+                if str(correto) == str(reposta_correta):
+                    prova.append(True)
+                    break
+                else:
+                    prova.append(False)
+                    break
+                    
+        proc_certo = round((prova.count(True) * 100) / len(prova))
+        
+        if proc_certo < 70:
+            print('reprovado')
+        else:
+            print('aprovado')
+            acesso.status_prova = True
+            acesso.save()
+        return JsonResponse({'status': 200, 'message': 'sucesso'})
+        
+    
+    return render(request, 'avaliacao/index.html', {'curso': curso, 'questoes': questoes })
