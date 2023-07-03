@@ -143,4 +143,17 @@ class SolicitarCurso(models.Model):
         verbose_name = 'solicitar o curso'
         verbose_name_plural = 'solicitações os cursos'
         
-        
+class Historico(models.Model):
+    aluno = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE) 
+    curso = models.ForeignKey('curso.Curso', on_delete=models.CASCADE)
+    data_criacao = models.DateTimeField(default=datetime.now())  
+    status_prova = models.BooleanField()
+    procentagem = models.IntegerField() 
+    
+    def __str__(self):
+        return self.aluno.get_full_name()
+    
+    class Meta:
+        db_table = 'historico'
+        verbose_name = 'historico'
+        verbose_name_plural = 'historicos' 

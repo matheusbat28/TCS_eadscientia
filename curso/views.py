@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required, user_passes_test
-from .models import Curso, Capitulo, Video, AcessoCursoUsuario, Prova, Questao, Alternativa, SolicitarCurso, VideoAssistido
+from .models import Curso, Capitulo, Video, AcessoCursoUsuario, Prova, Questao, Alternativa, SolicitarCurso, VideoAssistido, Historico
 from conta.models import Usuario
 from .apis import validar_youtube_url, tempo_video_youtube, obter_id_video_youtube
 import json
@@ -287,12 +287,25 @@ def fazerAvaliacao(request, id):
         proc_certo = round((prova.count(True) * 100) / len(prova))
         
         if proc_certo < 70:
-            print('reprovado')
+            Historico.objects.create(
+                aluno = request.user,
+                curso = curso,
+                status_prova = False,
+                procentagem = int(proc_certo)
+            )
+            messages.error(request, 'você não passou na prova') 
         else:
-            print('aprovado')
+            Historico.objects.create(
+                aluno = request.user,
+                curso = curso,
+                status_prova = True,
+                procentagem = int(proc_certo)
+            )
             acesso.status_prova = True
             acesso.save()
-        return JsonResponse({'status': 200, 'message': 'sucesso'})
+            messages.success(request, 'você  passou na prova') 
+            
+        return redirect('curso') 
         
     
     return render(request, 'avaliacao/index.html', {'curso': curso, 'questoes': questoes })

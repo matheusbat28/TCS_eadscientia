@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Curso, Video, Capitulo, Categoria, AcessoCursoUsuario, SolicitarCurso, Prova, Questao, Alternativa, VideoAssistido
+from .models import Curso, Video, Capitulo, Categoria, AcessoCursoUsuario, SolicitarCurso, Prova, Questao, Alternativa, VideoAssistido, Historico
 
 
 class ProvaAdmin(admin.ModelAdmin):
@@ -85,3 +85,11 @@ class VideoAssistidoAdmin(admin.ModelAdmin):
     per_page = 10
 
 admin.site.register(VideoAssistido, VideoAssistidoAdmin)
+
+class HistoricoAdmin(admin.ModelAdmin):
+    list_display = ('aluno', 'curso', 'data_criacao', 'status_prova')
+    search_fields = ('aluno', 'curso', 'status_prova')
+    list_filter = ('aluno', 'curso', 'status_prova', 'data_criacao')
+    per_page = 10
+
+admin.site.register(Historico, HistoricoAdmin)
