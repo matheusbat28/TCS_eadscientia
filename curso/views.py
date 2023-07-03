@@ -181,7 +181,7 @@ def visualizacaoSolicitacaoCurso(request, id):
         messages.success(request, f'curso {nome} recusado com sucesso')
         return redirect('aprovarCurso')
     else:
-        return render(request, 'visualizacaoSolicitacaoCurso/index.html', {'curso': curso})
+        return render(request, 'visualizacaoSolicitacaoCurso/index.html', {'curso': curso, 'pagina': 'Validar curso'})
   
   
 @login_required
@@ -199,7 +199,25 @@ def acessoCurso(request):
 @login_required
 @user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
 def deletarSolicitacaoCurso(request, id):
-    soilcitacao = get_object_or_404(SolicitarCurso, id=id)
-    soilcitacao.delete()
+    solicitacao = get_object_or_404(SolicitarCurso, id=id)
+    solicitacao.delete()
     messages.success(request, 'solicitaão recusada com sucesso')
     return redirect('acessoCurso')
+
+@login_required
+@user_passes_test(lambda u: u.groups.filter(name='recuso humano').exists() or u.groups.filter(name='administrativo').exists() or u.groups.filter(name='desenvolvedor').exists(), login_url='home')
+def visualizacaoSolicitacaoCursoUsuario(request, id):
+    solicitacao = get_object_or_404(SolicitarCurso, id=id)
+    
+    if 'btnAprovar' in request.POST and request.method == 'POST':
+        AcessoCursoUsuario.objects.create(
+            aluno = solicitacao.aluno,
+            curso = solicitacao.curso
+        )
+        messages.success(request, 'curso liberado com sucesso')
+        return redirect('acessoCurso')
+    elif 'btnRecusar' in request.POST and request.method == 'POST':
+        solicitacao.delete()
+        messages.success(request, 'curso recusado com sucesso')
+        return redirect('acessoCurso')
+    return render(request, 'visualizacaoSolicitacaoCursoUsuario/index.html', {'soilcitacao': solicitacao, 'pagina': 'liberar curso para o usuário'})

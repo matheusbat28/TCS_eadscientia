@@ -8,7 +8,7 @@ from curso.models import Categoria, Curso
 from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
 from django.db.models import Q
-from curso.models import AcessoCursoUsuario
+from curso.models import AcessoCursoUsuario, SolicitarCurso
 from curso.forms import FormSolicitarCurso
 
 
@@ -178,7 +178,11 @@ def categoria(request, id):
 @login_required
 def solicitarCurso(request, id):
     curso = get_object_or_404(Curso, id=id)
+    if SolicitarCurso.objects.filter(aluno = request.user, curso = curso).exists():
+        messages.error(request, 'você já solicitou o acesso a esse curso')
+        return redirect('home')
     formularioSolicitacaoCurso = FormSolicitarCurso(initial={'aluno': request.user.username, 'curso': curso.nome})
+    
     
     if request.method == 'POST':
         formularioSolicitacaoCurso = FormSolicitarCurso(request.POST)

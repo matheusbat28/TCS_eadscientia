@@ -107,7 +107,7 @@ class AcessoCursoUsuario(models.Model):
     aluno = models.ForeignKey('conta.Usuario', on_delete=models.CASCADE)   
     curso = models.ForeignKey('curso.Curso', on_delete=models.CASCADE)
     data_termino = models.DateTimeField(default=datetime.now() + timedelta(days=15))
-    quantidade_assitido = models.IntegerField()
+    quantidade_assitido = models.IntegerField(default=0, blank=True, null=True)
     status_prova = models.BooleanField(default=False)
     
     def __str__(self):

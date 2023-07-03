@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
 {% endblock %}
 
-{% block title %}Visualização de liberação do curso{% endblock %}
+{% block title %}Visualização de liberação do curso ao usuario{% endblock %}
 
 {% block main %}
 {% include 'parciais/_cabecalho.html' %}
@@ -21,27 +21,27 @@
     <div id="area1">
         <div>
             <h5>Curso:</h5>
-            <input type="text" name="curso" value="{{ curso.nome }}" readonly>
+            <input type="text" name="nome" value="{{ soilcitacao.curso.nome }}" readonly>
         </div>
         <div>
             <h5>duração:</h5>
-            <input type="text" name="duracao" value="{{ curso|duracao_video_in_curso }}" readonly>
+            <input type="text" name="duracao" value="{{ soilcitacao.curso|duracao_video_in_curso }}" readonly>
 
         </div>
         <div>
-            <h5>Data criação:</h5>
-            <input type="datetime" name="data" value="{{curso.data_criacao}}" readonly>
+            <h5>Data solicitação:</h5>
+            <input type="datetime" name="data" value="{{soilcitacao.data_criacao}}" readonly>
         </div>
         <div>
-            <h5>Autor:</h5>
-            <input type="text" name="usuario" value="{{ curso.autor.get_full_name }}" readonly>
+            <h5>Que solicitou:</h5>
+            <input type="text" name="usuario" value="{{ soilcitacao.aluno.get_full_name }}" readonly>
         </div>
     </div>
     <div id="area2">
         <div>
             <h5>Motivo:</h5>
             <textarea name="motivo" cols="30" rows="10" readonly>
-                {{ curso.descricao }}
+                {{ soilcitacao.motivo }}
                 </textarea>
         </div>
        
