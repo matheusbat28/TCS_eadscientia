@@ -31,7 +31,7 @@
         <p class="id_questao esconder">{{ questao.id }}</p>
         {% for alternativa in questao.alternativas.all %}
             <div class="alternativas ms-3">
-                <input type="checkbox" id="box_questao">
+                <input type="checkbox" class="box" id="box_questao">
                 {{alternativa.texto}}
                 <p class="id_alternativa esconder">{{alternativa.id}}</p>
             </div>

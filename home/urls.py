@@ -11,5 +11,6 @@ urlpatterns = [
     path('curso/', views.curso, name='curso'),
     path('categoria/<int:id>/', views.categoria, name='categoria'),
     path('solicitarCurso/<int:id>/', views.solicitarCurso, name='solicitarCurso'),
+    path('historico', views.historico, name='historico'),
     
 ]

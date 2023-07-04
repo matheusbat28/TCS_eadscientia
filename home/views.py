@@ -8,7 +8,7 @@ from curso.models import Categoria, Curso
 from django.contrib.auth.models import Group
 from django.core.paginator import Paginator
 from django.db.models import Q
-from curso.models import AcessoCursoUsuario, SolicitarCurso
+from curso.models import AcessoCursoUsuario, SolicitarCurso, Historico
 from curso.forms import FormSolicitarCurso
 
 
@@ -209,3 +209,7 @@ def solicitarCurso(request, id):
                 messages.error(request, formularioSolicitacaoCurso.errors['motivo'][0])
                 return redirect('solicitarCurso', id)
     return render(request, 'solicitarCurso/index.html', {'curso': curso, 'formularioSolicitacaoCurso': formularioSolicitacaoCurso})
+
+def historico(request):
+    historico = Historico.objects.filter( aluno= request.user)
+    return render(request, 'historico/index.html', {'historicos': historico})

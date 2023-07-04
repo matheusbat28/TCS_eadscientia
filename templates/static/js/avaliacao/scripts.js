@@ -1,7 +1,14 @@
 var crf_token = $('[name="csrfmiddlewaretoken"]').attr('value');
 
 $(document).ready(function () {
-    var tempoRestante = 3600;
+    // Verifica se o valor já está armazenado no localStorage
+    if (localStorage.getItem('tempoRestante')) {
+        // Recupera o valor do localStorage
+        tempoRestante = parseInt(localStorage.getItem('tempoRestante'));
+    } else {
+        // Define um valor inicial para tempoRestante
+        tempoRestante = 3600;
+    }
 
     var intervalo = setInterval(function () {
         var horas = Math.floor(tempoRestante / 3600);
@@ -22,7 +29,11 @@ $(document).ready(function () {
         if (tempoRestante < 0) {
             clearInterval(intervalo);
         }
+
+        // Armazena o valor atualizado no localStorage
+        localStorage.setItem('tempoRestante', tempoRestante.toString());
     }, 1000);
+
 
     function separarDado(form) {
         var questoes = [];
@@ -55,12 +66,21 @@ $(document).ready(function () {
             headers: { 'X-CSRFToken': crf_token },
             data: separarDado($(this)),
             success: function (data) {
-                console.log(data);
+                if (data.status === 200) {
+                    window.location.href = data.redirezionar; // Redirecionar para a URL fornecida na resposta JSON
+                }
             },
             error: function (data) {
                 console.log(data);
             },
 
         })
+    })
+
+    $('.box').click(function () {
+        $.each($(this).parent().parent().children('.alternativas'), function (key, value) {
+            $(value).children('#box_questao').prop('checked', false)
+        })
+        $(this).prop('checked', true)
     })
 });

@@ -276,15 +276,23 @@ def fazerAvaliacao(request, id):
             reposta_correta = Questao.objects.get(id= reposta['id_questao']).alternativas.filter(selecionada = True)[0].id
             
             for correto in reposta['id_alternativa']:
-                # print(f'{correto} {reposta_correta}')
                 if str(correto) == str(reposta_correta):
                     prova.append(True)
                     break
                 else:
                     prova.append(False)
                     break
-                    
-        proc_certo = round((prova.count(True) * 100) / len(prova))
+                
+        quantidade_certo = 0
+        
+        for valor in prova:
+            if valor is True:
+                quantidade_certo += 1
+
+        if len(prova) > 0:
+            proc_certo = round((quantidade_certo * 100) / len(prova))
+        else:
+            proc_certo = 0
         
         if proc_certo < 70:
             Historico.objects.create(
@@ -292,8 +300,7 @@ def fazerAvaliacao(request, id):
                 curso = curso,
                 status_prova = False,
                 procentagem = int(proc_certo)
-            )
-            messages.error(request, 'você não passou na prova') 
+            ) 
         else:
             Historico.objects.create(
                 aluno = request.user,
@@ -303,9 +310,8 @@ def fazerAvaliacao(request, id):
             )
             acesso.status_prova = True
             acesso.save()
-            messages.success(request, 'você  passou na prova') 
             
-        return redirect('curso') 
+        return JsonResponse({'status': 200, 'message': 'sucesso', 'redirezionar': redirect('curso').url})
         
     
     return render(request, 'avaliacao/index.html', {'curso': curso, 'questoes': questoes })

@@ -143,6 +143,12 @@ body {
     top: 70px;
     right: 5px;
 }
+.status {
+    font-weight: bold;
+    color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+}
 
 @media screen and (max-width: 1200px) {
 

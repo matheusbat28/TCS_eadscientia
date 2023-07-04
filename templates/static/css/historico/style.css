@@ -17,10 +17,6 @@ body {
     margin-top: 120px;
 }
 
-#tabela-corpo {
-    text-align: center;
-}
-
 #filtro {
     display: flex;
     align-items: center;
@@ -115,10 +111,16 @@ table thead tr th {
     padding: 8px;
 }
 
+#tabela-corpo {
+    text-align: center;
+}
+
 table tr td,
 table tr th {
     padding-left: 10px;
+
 }
+
 
 #opcoes {
     text-align: center;
@@ -147,6 +149,7 @@ table tr th {
 
 }
 
+
 table tbody tr td a {
     margin-right: 5px;
 }
@@ -158,6 +161,7 @@ table tbody tr td a:nth-child(1) {
 table tbody tr td a:nth-child(2) {
     color: #d81313;
 }
+
 table tbody tr td a:nth-child(3) {
     color: var(--cor--fundo--6);
 }

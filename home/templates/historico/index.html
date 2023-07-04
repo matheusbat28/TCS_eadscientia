@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/historico/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/paginacao/style.css' %}">
+{% endblock %}
+
+{% block title %}Histórico{% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+<form id="campo-pesquisa">
+    <div id="filtro">
+      <div id="quantidade"></div>
+      <button id="limpar" name="btnlimpar" type="submit">Limpar</button>
+    </div>
+    <div id="pequisa">
+      <button title="Pesquisar" name="btnPesquisar" type="submit">
+        <i class="fa-solid fa-search"></i>
+      </button>
+      <input type="text" id="pesquisar" name="pesquisar" placeholder="Pesquisar" />
+    </div>
+  </form>
+
+<table id="tabela" class="container-sm h-auto">
+    <thead>
+        <tr>
+            <th>Curso</th>
+            <th>Aluno</th>
+            <th>Porcentagem de acertos</th>
+            <th>Status</th>
+            
+        </tr>
+    </thead>
+    <div id="paginacao">
+    <tbody id="tabela-corpo">
+        {% for historico in historicos %}
+        <tr>
+            <td>{{historico.curso.nome}}</td>
+            <td>{{historico.aluno.get_full_name}}</td>
+            <td>{{historico.procentagem}}%</td>
+            {% if historico.status_prova %}
+            <td><i title="Aprovado" class="fa-solid fa-check text-success"></i></td>
+            {% else %}
+            <td title="Reprovado"><i class="fa-solid fa-xmark text-danger"></i></td>
+            {% endif %}
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+    </div>
+</table>
+<div id="pagination">
+    <span id="pagina-anterior">&lt;</span>
+    <span id="info-paginas"></span>
+    <span id="pagina-proxima">&gt;</span>
+  </div>
+
+{% include 'parciais/_mensagem.html' %}
+{% endblock %}
+
+{% block js %}
+<script defer src="{% static 'js/historico/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}
