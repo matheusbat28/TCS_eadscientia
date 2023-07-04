@@ -39,7 +39,7 @@ $(document).ready(function (e) {
             data: separarDado(),
             success: function (data) {
                 if (data.status == 200) {
-                    // window.location.reload()
+                    window.location.reload()
                     $('#mensagem').show();
                     $('#mensagem').html(data.message).addClass('alert-success').removeClass('alert-danger');
                 } else if (data.status == 404) {

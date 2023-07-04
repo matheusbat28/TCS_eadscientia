@@ -79,6 +79,10 @@ body {
 }
 
 #botao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
     width: 80%;
     border-radius: 5px;
     background-color: #1eb964;
@@ -95,3 +99,4 @@ body {
 .esconder{
     display: none;
 }
+

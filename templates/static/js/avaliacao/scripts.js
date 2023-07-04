@@ -67,7 +67,9 @@ $(document).ready(function () {
             data: separarDado($(this)),
             success: function (data) {
                 if (data.status === 200) {
-                    window.location.href = data.redirezionar; // Redirecionar para a URL fornecida na resposta JSON
+                    window.location.href = data.redirezionar; 
+                } else {
+                    console.log(data)
                 }
             },
             error: function (data) {

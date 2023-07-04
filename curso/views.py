@@ -124,6 +124,10 @@ def todoCurso(request):
 def adicionarProva(request, id):
     curso = get_object_or_404(Curso, id= id)
     
+    if curso.prova:
+        messages.error(request, 'Esse curso já tem uma avaliação')
+        return redirect('curso')
+    
     if request.method == 'POST':
         data = json.loads(request.body)
         
@@ -283,6 +287,7 @@ def fazerAvaliacao(request, id):
                 else:
                     prova.append(False)
                     break
+            
                 
         quantidade_certo = 0
         

@@ -20,11 +20,11 @@
 <form id="formulario_avaliacao" method="POST">
     {% csrf_token %}
     <h2>Avalição</h2>
-    <div id="progresso_time">
+    {% comment %} <div id="progresso_time">
         <div id="barra">        
         </div>
         <p>tempo restante: <samp id="temporizador">0{{curso.prova.duracao}}</samp></p>
-    </div>
+    </div> {% endcomment %}
     {% for questao in questoes %}
     <div class="questao">
         <p class="ms-3 titulo">{{ questao.enuciado }}</p>
@@ -38,7 +38,9 @@
         {% endfor %}
     </div>
     {% endfor %}
-    <button id="botao" type="submit">Finalizar</button>
+    <button id="botao" type="submit">
+        <p class="m-0">Finalizar</p>
+    </button>
 
 </form>
 
