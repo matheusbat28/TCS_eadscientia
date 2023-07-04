@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load filtros %}
+
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/certificado/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/menu/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/sair/style.css' %}">
+<link rel="stylesheet" href="{% static 'css/cabecalho/style.css' %}">
+{% endblock %}
+
+{% block title %} Certificado {% endblock %}
+
+{% block main %}
+{% include 'parciais/_cabecalho.html' %}
+{% include 'parciais/_menu.html' %}
+{% include 'parciais/_sair.html' %}
+
+
+<div id="certificado-container">
+    <div class="header">
+        <img src="{% static 'img/icon.png' %}" alt="Logo da Instituição" class="logo" />
+        <h2>Certificado de Conclusão</h2>
+    </div>
+    <div class="content">
+        <p>Este certificado é concedido a:</p>
+        <h3 class="nome-aluno"> {{ user.get_full_name }}</h3>
+        <p>Pela conclusão do curso:</p>
+        <h4 class="nome-curso">{{ curso.nome }}</h4>
+        <p>Data: {{ data_atual|date }}</p>
+    </div>
+    <div class="footer">
+        <div class="assinaturas">
+
+        </div>
+    </div>
+</div>
+<div class="btn-gerar-pdf">
+    <button id="btn-gerar-pdf">Gerar PDF</button>
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/puppeteer@10.2.0/dist/puppeteer.min.js"></script>
+<script defer src="{% static 'js/certificado/scripts.js' %}"></script>
+<script defer src="{% static 'js/menu/scripts.js' %}"></script>
+{% endblock %}

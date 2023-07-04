@@ -35,7 +35,7 @@
             </div>
             {% if statusCurso|proc_video_in_curso is 100 %}
             {% if statusCurso.status_prova is True %}
-            <a title="emitir certificado" href=""><i class="fa-solid fa-scroll"></i></a>
+            <a title="emitir certificado" href="{% url 'certificado' curso.id %}"><i class="fa-solid fa-scroll"></i></a>
             {% else %}
             <a title="fazer o teste" href="{% url 'fazerAvaliacao' curso.id %}"><i class="fa-solid fa-receipt"></i></i></a>
             {% endif %}

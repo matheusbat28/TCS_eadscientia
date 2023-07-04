@@ -1,0 +1,130 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 2);
+  margin-top: 50px;
+}
+
+label,
+input,
+button {
+  display: block;
+  margin-bottom: 10px;
+}
+
+button {
+  background-color: rgb(5, 139, 5);
+  color: white;
+  padding: 10px;
+  border: 2px solid var(--cor--fundo--3);
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+.btn-gerar-pdf {
+  display: flex;
+  justify-content: center;
+
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#certificado-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 3px solid var(--cor--fundo--3);
+  animation: 20s cores_fundo infinite;
+  border-radius: 10px;
+  background-color: #ecf0f1;
+
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 100px;
+}
+
+h2 {
+  font-size: 32px;
+  margin: 10px 0;
+  color: #00ffbf;
+}
+
+.content {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+}
+
+p {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--cor--fundo--3);
+}
+
+.nome-aluno {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+
+
+}
+
+.nome-curso {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.assinaturas {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.assinatura {
+  margin: 0 20px;
+}
+
+.assinatura-img {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.assinatura-nome {
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+}

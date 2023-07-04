@@ -9,6 +9,7 @@ from conta.models import Usuario
 from .apis import validar_youtube_url, tempo_video_youtube, obter_id_video_youtube
 import json
 from django.core import serializers
+from django.utils import timezone
 
 
 @login_required
@@ -315,3 +316,26 @@ def fazerAvaliacao(request, id):
         
     
     return render(request, 'avaliacao/index.html', {'curso': curso, 'questoes': questoes })
+
+def certificado(request, id):
+    if not AcessoCursoUsuario.objects.filter().exists():
+        messages.error(request, 'você não tem acesso a esse curso')
+        return redirect('curso')
+    curso = get_object_or_404(Curso, id= id)
+    quatidade = 0 
+    quatidade_assitido = AcessoCursoUsuario.objects.get(aluno = request.user, curso= curso).quantidade_assitido.all().count()
+    
+    for video in curso.capitulos.all():
+        quatidade += video.videos.all().count()  
+    porc = round((quatidade_assitido / quatidade) * 100)
+    
+    print(AcessoCursoUsuario.objects.get(aluno = request.user, curso= curso).status_prova)
+    
+    if porc < 70:
+        messages.error(request, 'você não concluiu o curso')
+        return redirect('curso')
+    elif AcessoCursoUsuario.objects.get(aluno = request.user, curso= curso).status_prova == False:
+        messages.error(request, 'você não fez a avaliação do curso')
+        return redirect('curso')
+    data_atual = timezone.now()
+    return render(request, 'certificado/index.html', {'curso': curso, 'data_atual': data_atual})
